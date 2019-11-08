@@ -30,16 +30,16 @@ Needs a function to add and display celestial object to celestial map
 //it consumed 2% of supplies, then check if supplies over 0
 //if successfull all CO's within 2 CP's are added to the map and displayed
 //list of 'celestial artificats' will be passed in also
-function sensor(ship, artifacts){
+function sensor(ship, sartifacts){
 
     removeSupplies(ship);
 
     //this is temporary so I have something to work with
-    var artifacts = [ {type: "Xenon", location: {x: 1, y: 1} },
-    {type: "Celarion", location: {x: 2, y: 4}},
-    {type: "Ryzen", location: {x: 3, y: 2}},
+    let artifacts = [ {type: "Xenon", location: {x: 0, y: 1} },
+    {type: "Celarion", location: {x: 2, y: 2}},
+    {type: "Ryzen", location: {x: 1, y: 2}},
     {type: "astriod", location: {x: 0, y: 0}},
-    {type: "astriod", location: {x: 5, y: 6}},
+    {type: "astriod", location: {x: 3, y: 3}},
     ]
 
     checkArtifacts(ship,artifacts)
@@ -50,9 +50,12 @@ function sensor(ship, artifacts){
 //iterates through list of CO's checking if any are less then 2 away
 function checkArtifacts(ship, artifacts){
 
-    for(artifact in artifacts){
+    for(let i = 0; i < artifacts.length; i++){
+        artifact = artifacts[i];
 
-        if(checkDistance(atrifact) <= 2){
+        if(checkDistance(ship, artifact) <= 2){
+            //console log used for testing
+            console.log(artifact.type + " Appeared on the sensor")
             //displayArtifact(artifact);
             //addArtifact to celestial map
         }
@@ -70,6 +73,7 @@ function checkDistance(ship, artifact){
     let y2 = artifact.location.y;
 
     //returns the distance between ship and the artifact
+    console.log(Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2));
     return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 }
 
