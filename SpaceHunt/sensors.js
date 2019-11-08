@@ -16,6 +16,14 @@ function sensor(ship, artifacts){
 
     removeSupplies(ship);
 
+    var artifacts = [ {type: "Xenon", location: {x: 1, y: 1} },
+    {type: "Celarion", location: {x: 2, y: 4}},
+    {type: "Ryzen", location: {x: 3, y: 2}},
+    {type: "astriod", location: {x: 0, y: 0}},
+    {type: "astriod", location: {x: 5, y: 6}},
+    ]
+
+
     checkArtifacts(ship,artifacts)
    
     return
@@ -24,13 +32,12 @@ function sensor(ship, artifacts){
 //iterates through list of CO's checking if any are less then 2 away
 function checkArtifacts(ship, artifacts){
 
-        //itterate through list of CO's. If any <= 2 away display on map
-        //atrifacts place holder name for CO's
-        //for(artifact in artifacts){
-            //if(checkDistance(ship, artifact))
-                //call display on map fucntion
+    for(artifact in artifacts){
 
-        //}
+        if(checkDistance(atrifact) <= 2){
+            //displayArtifact(artifact);
+        }
+    }
 }
 
 //function to check distance 
