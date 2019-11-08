@@ -15,8 +15,8 @@
 function sensor(ship, artifacts){
 
     removeSupplies(ship);
-    
 
+    checkArtifacts(ship,artifacts)
    
     return
 }
@@ -57,5 +57,4 @@ function removeSupplies(ship){
   //      alert("GAMEOVER");
  //   }
     return
-
 }
