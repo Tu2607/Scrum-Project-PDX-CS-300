@@ -83,7 +83,7 @@ function removeSupplies(ship){
     ship.supplies -= 2;
 
     //checkSupplies function in RunnintOutOfSupplies
-    checkSupplies();
+    ship.checkSupplies();
     //or do this 
 //    if (ship.supplies <= 0){
         //call game over function
