@@ -16,11 +16,15 @@
 			<break>
 			<p>	Starting Location: <input type="text" name="location"></p>
 			<break>
-			<p>	Cheat mode <input type="checkbox" name="GodMode" value = "cheat"></p>
+			<p>	Cheat mode <input type="checkbox" name="GodMode" checked="checked"></p>
 			<break>
-			<p>	Regular mode <input type="checkbox" name="normal" value = "normal"></p>
+			<p>	Regular mode <input type="checkbox" name="normal" checked="checked" ></p>
 			<break>
-			<button type='button' onclick="updateConfig(Config.energy.value,Config.resource.value,Config.GodMode.value,Config.normal.value)"> Submit </button>
+			<p> Random Wormhole <input type="checkbox" name="random" checked="checked"></p>
+			<break>
+			<p>	Fix Wormhole <input type="checkbox" name="fix" checked="checked"></p>
+			<break>
+			<button type='button' onclick="updateConfig(Config.energy.value,Config.resource.value,Config.GodMode.checked,Config.normal.checked,Config.random.checked,Config.fix.checked)"> Submit </button>
 		</form>
 
 	</body>
