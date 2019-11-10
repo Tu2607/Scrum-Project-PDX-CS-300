@@ -10,8 +10,8 @@
 /*------------------------------------------------------------
 Missing Functionality:
 
-- Verables
-Veriable names are just placeholders
+- Variable
+Variable names are just placeholders
 Once ship and artifacts/Celestial Objects are created
 will need to make sure varables work
 
@@ -28,8 +28,11 @@ Needs a function to add and display celestial object to celestial map
 //list of 'celestial artificats' will be passed in also
 function sensor(ship, artifacts){
 
+    //removes supplies, and checks supplies ammount
     removeSupplies(ship);
 
+    //displays celestial objects within 2 Celestial points.
+    //hightlight area scanned
     checkArtifacts(ship,artifacts)
    
     return
