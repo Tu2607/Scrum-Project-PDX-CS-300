@@ -24,7 +24,15 @@
 			<break>
 			<p>	Fix Wormhole <input type="checkbox" name="fix" checked="checked"></p>
 			<break>
-			<button type='button' onclick="updateConfig(Config.energy.value,Config.resource.value,Config.GodMode.checked,Config.normal.checked,Config.random.checked,Config.fix.checked)"> Submit </button>
+			<p> X-Coordinate <input type="range" name="xcord" value="50" min="0" max="225" oninput="xout.value = xcord.value">
+				<output name="xout">50</output>
+			</p>
+			<break>
+			<p> Y-Coordinate <input type="range" name="ycord" value="50" min="0" max="225" oninput="yout.value = ycord.value">
+				<output name="yout">50</output>
+			</p>
+			<break>
+			<button type='button' onclick="updateConfig(Config.energy.value,Config.resource.value,Config.GodMode.checked,Config.normal.checked,Config.random.checked,Config.fix.checked,Config.xcord.value,Config.ycord.value)"> Submit </button>
 		</form>
 
 	</body>

@@ -1,4 +1,4 @@
-function updateConfig (energy,resource,cheat,normal,random,fix){
+function updateConfig (energy,resource,cheat,normal,random,fix,xcord,ycord){
 	energy = eval(energy) + 0;
 	resource = eval(resource) + 0;
 
