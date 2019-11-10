@@ -16,11 +16,11 @@
 			<break>
 			<p>	Starting Location: <input type="text" name="location"></p>
 			<break>
-			<p>	Cheat mode <input type="checkbox" name="cheat"></p>
+			<p>	Cheat mode <input type="checkbox" name="GodMode" value = "cheat"></p>
 			<break>
-			<p>	Regular mode <input type="checkbox" name="normal"></p>
+			<p>	Regular mode <input type="checkbox" name="normal" value = "normal"></p>
 			<break>
-			<button type='button' onclick="updateConfig(Config.energy.value,Config.resource.value)"> Submit </button>
+			<button type='button' onclick="updateConfig(Config.energy.value,Config.resource.value,Config.GodMode.value,Config.normal.value)"> Submit </button>
 		</form>
 
 	</body>
