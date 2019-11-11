@@ -35,7 +35,7 @@ function drawSpace(xSize, ySize, canvas)
 		this.size = xSize;
 	else
 		tihs.size = 0;
-	this.points = size/32;
+	this.point = size/32;
 
 
 	var ctx = canvas.getContext("2d");
@@ -47,13 +47,14 @@ function drawSpace(xSize, ySize, canvas)
 	ctx.fillRect(0, 0, size, size); 
 
 	ctx.strokeStyle = "pink";
-	for(var i = 0; i <= size; i+=points)
+	ctx.lineWidth = 0.5;
+	for(var i = point; i < size; i+=point)
 	{
 		ctx.moveTo(i, 0);
 		ctx.lineTo(i, size);
 		ctx.stroke(); 
 	}
-	for(var i = 0; i <= size; i+=points)
+	for(var i = point; i < size; i+=point)
 	{
 		ctx.moveTo(0, i);
 		ctx.lineTo(size, i);
@@ -85,6 +86,9 @@ function drawPlanet(xPos, yPos, name, color, visible, canvas)
 		ctx.stroke();
 		ctx.fillStyle = grd;
 		ctx.fill();
+		ctx.font = "15px Arial";
+		ctx.fillStyle = "white";
+		ctx.fillText(this.name, xPos, yPos);
 	}
 }
 
