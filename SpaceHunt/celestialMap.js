@@ -31,26 +31,32 @@ function drawSpace(xSize, ySize, canvas)
 {
 	this.xSize = xSize;
 	this.ySize = ySize;
+	if(xSize == ySize)
+		this.size = xSize;
+	else
+		tihs.size = 0;
+	this.points = size/32;
+
 
 	var ctx = canvas.getContext("2d");
-	var grd = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
+	var grd = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
 	grd.addColorStop(0, "grey");
 	grd.addColorStop(1, "black");
 
 	ctx.fillStyle = grd;
-	ctx.fillRect(0, 0, 512, 512); 
+	ctx.fillRect(0, 0, size, size); 
 
 	ctx.strokeStyle = "pink";
-	for(var i = 0; i <= 512; i+=16)
+	for(var i = 0; i <= size; i+=points)
 	{
 		ctx.moveTo(i, 0);
-		ctx.lineTo(i, 512);
+		ctx.lineTo(i, size);
 		ctx.stroke(); 
 	}
-	for(var i = 0; i <= 512; i+=16)
+	for(var i = 0; i <= size; i+=points)
 	{
 		ctx.moveTo(0, i);
-		ctx.lineTo(512, i);
+		ctx.lineTo(size, i);
 		ctx.stroke(); 
 	}
 }
@@ -81,6 +87,7 @@ function drawPlanet(xPos, yPos, name, color, visible, canvas)
 		ctx.fill();
 	}
 }
+
 /*
 // draw a rect
 var canvas = document.getElementById("myCanvas");
