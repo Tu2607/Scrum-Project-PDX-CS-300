@@ -34,6 +34,8 @@
 -->
 
 <script src="SpaceCraftMovement.js"></script>
+<script src="space.js"></script>
+<script src="artifact.js"></script>
 <script src="celestialMap.js"></script>
 
 </head>
@@ -63,9 +65,24 @@ MAKE A MOVE
 
 <script>
 var canvas = document.getElementById("theCanvas");
-var celestialMap = new CelestialMap(canvas.width, canvas.height, canvas);
-celestialMap.drawSpace();
-celestialMap.drawPlanets();
+var space = new Space(canvas.width, canvas.height);
+artifacts = [];
+artifacts.push(new Artifact(32, 32, "eniac", "orange", true));
+artifacts.push(new Artifact(0, 0, "moon", "white", true));
+artifacts.push(new Artifact(256, 128, "celeron", "yellow", true));
+artifacts.push(new Artifact(512, 256, "ryzen", "red", true))
+artifacts.push(new Artifact(480, 480, "xeon", "blue", true))
+artifacts.push(new Artifact(128, 700, "pentium 1", "purple", true));
+artifacts.push(new Artifact(160, 496, "pentium 2", "purple", false));
+artifacts.push(new Artifact(148, 496, "pentium 3", "purple", false));
+artifacts.push(new Artifact(350, 350, "asteroid", "grey", true));
+artifacts.push(new Artifact(150, 450, "asteroid", "grey", true));
+artifacts.push(new Artifact(650, 650, "asteroid", "grey", true));
+artifacts.push(new Artifact(600, 70, "asteroid", "grey", true));
+drawSpace(space, canvas);
+for(var i = 0; i < artifacts.length; i++)
+	drawArtifact(artifacts[i], canvas);
+
 </script>
 </script>
 
