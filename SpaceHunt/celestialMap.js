@@ -5,7 +5,7 @@
 // stores every CP that the ship visits
 // stores every CO that the ship encounters
 
-function celestialMap()
+function CelestialMap(xSize, ySize, canvas)
 {
 	storeCP = function(x, y)
 	{
@@ -25,70 +25,89 @@ function celestialMap()
 	{
 		// returns an array of (coordinate, artifact);
 	}
-}
 
-function drawSpace(xSize, ySize, canvas)
-{
-	this.xSize = xSize;
-	this.ySize = ySize;
-	if(xSize == ySize)
-		this.size = xSize;
-	else
-		tihs.size = 0;
-	this.point = size/32;
-
-
-	var ctx = canvas.getContext("2d");
-	var grd = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-	grd.addColorStop(0, "grey");
-	grd.addColorStop(1, "black");
-
-	ctx.fillStyle = grd;
-	ctx.fillRect(0, 0, size, size); 
-
-	ctx.strokeStyle = "pink";
-	ctx.lineWidth = 0.5;
-	for(var i = point; i < size; i+=point)
+	space = function(xSize, ySize, canvas)
 	{
-		ctx.moveTo(i, 0);
-		ctx.lineTo(i, size);
-		ctx.stroke(); 
-	}
-	for(var i = point; i < size; i+=point)
-	{
-		ctx.moveTo(0, i);
-		ctx.lineTo(size, i);
-		ctx.stroke(); 
-	}
-}
+		this.xSize = xSize;
+		this.ySize = ySize;
+		if(xSize == ySize)
+			this.size = xSize;
+		else
+			this.size = 0;
+		this.point = size/32;
 
-function drawPlanet(xPos, yPos, name, color, visible, canvas)
-{
-	this.xPos = xPos;
-	this.yPos = yPos;
-	this.name = name;
-	this.visible = visible;
-	this.color = color;
-
-	var innerRadius = 4;
-	var outerRadius = 16;
-	var radius = 16;
-	var ctx = canvas.getContext("2d");
-	var grd = ctx.createRadialGradient(xPos, yPos, innerRadius, xPos, yPos, outerRadius);
-
-	if(this.visible == true)
-	{
-		grd.addColorStop(0, color);
+		var ctx = canvas.getContext("2d");
+		var grd = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+		grd.addColorStop(0, "grey");
 		grd.addColorStop(1, "black");
-		ctx.beginPath();
-		ctx.arc(xPos, yPos, radius, 0, 2 * Math.PI);
-		ctx.strokeStyle = "black";
-		ctx.stroke();
+
 		ctx.fillStyle = grd;
-		ctx.fill();
-		ctx.font = "15px Arial";
-		ctx.fillStyle = "white";
-		ctx.fillText(this.name, xPos, yPos);
+		ctx.fillRect(0, 0, size, size); 
+
+		ctx.strokeStyle = "grey";
+		ctx.lineWidth = 0.5;
+		for(var i = point; i < size; i+=point)
+		{
+			ctx.moveTo(i, 0);
+			ctx.lineTo(i, size);
+			ctx.stroke(); 
+		}
+		for(var i = point; i < size; i+=point)
+		{
+			ctx.moveTo(0, i);
+			ctx.lineTo(size, i);
+			ctx.stroke(); 
+		}
+	}
+
+	planet = function(xPos, yPos, name, color, visible, canvas)
+	{
+		this.xPos = xPos;
+		this.yPos = yPos;
+		this.name = name;
+		this.visible = visible;
+		this.color = color;
+
+		var innerRadius = 4;
+		var outerRadius = 16;
+		var radius = 16;
+		var ctx = canvas.getContext("2d");
+		var grd = ctx.createRadialGradient(xPos, yPos, innerRadius, xPos, yPos, outerRadius);
+
+		if(this.visible == true)
+		{
+			grd.addColorStop(0, color);
+			grd.addColorStop(1, "black");
+			ctx.beginPath();
+			ctx.arc(xPos, yPos, radius, 0, 2 * Math.PI);
+			ctx.strokeStyle = "black";
+			ctx.stroke();
+			ctx.fillStyle = grd;
+			ctx.fill();
+			ctx.font = "15px Arial";
+			ctx.fillStyle = "white";
+			ctx.fillText(this.name, xPos, yPos);
+		}
+	}
+
+	CelestialMap.prototype.drawSpace = function()
+	{
+		space(xSize, ySize, canvas);
+	}
+	CelestialMap.prototype.drawPlanets = function()
+	{
+		planet(128, 96, "xeon", "blue", true, canvas);
+		planet(0, 0, "moon", "pink", true, canvas);
+		planet(32, 32, "eniac", "orange", true, canvas);
+		planet(372, 160, "celeron", "yellow", true, canvas);
+		planet(16, 496, "ryzen", "red", true, canvas);
+		planet(256, 480, "pentium1", "purple", true, canvas);
+		planet(256, 480, "pentium2", "purple", false, canvas);
+		planet(256, 480, "pentium3", "purple", false, canvas);
+		planet(256, 480, "pentium4", "purple", false, canvas);
+		planet(256, 480, "pentium5", "purple", false, canvas);
+		planet(256, 480, "pentium6", "purple", false, canvas);
+		planet(256, 480, "pentium7", "purple", false, canvas);
 	}
 }
 
