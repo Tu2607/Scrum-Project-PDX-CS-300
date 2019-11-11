@@ -9,18 +9,19 @@ function CelestialMap(xSize, ySize, canvas)
 {
 	storeCP = function(x, y)
 	{
-		// gets ship location from canvas, store in visited[]
+		// to be invoked on each ship movement
+		// stores coordinates in visitedCoordinates[] 
+		// unload to file
 	}
-	storeCO = function(co, radius)
+
+	storeCO = function(x, y)
 	{
-		// invoked by sensor
-		// gets ship location from canvas, stores in visited[]
-		// makes the CO visible on map
+		// to be invoked by sensor
+		// stores in visitedArtifacts[] (unload to file)
+		// makes the artifact visible on map 
+		// unload to file
 	}
-	getCOatCP = function(x, y)
-	{
-		// returns name of artifact at (x,y);
-	}
+
 	getMap = function()
 	{
 		// returns an array of (coordinate, artifact);
@@ -96,6 +97,8 @@ function CelestialMap(xSize, ySize, canvas)
 	}
 	CelestialMap.prototype.drawPlanets = function()
 	{
+		// loaded from file
+
 		planet(128, 96, "xeon", "blue", true, canvas);
 		planet(0, 0, "moon", "pink", true, canvas);
 		planet(32, 32, "eniac", "orange", true, canvas);
@@ -110,6 +113,7 @@ function CelestialMap(xSize, ySize, canvas)
 		planet(256, 480, "pentium7", "purple", false, canvas);
 	}
 }
+
 
 /*
 // draw a rect
