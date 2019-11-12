@@ -1,7 +1,9 @@
 class Ship {
-  constructor(energy, supplies) {
+  constructor(energy, supplies, x, y) {
     this.energy = energy;
     this.supplies = supplies;
+    this.x = x;
+    this.y = y;
   }
   
   checkSupplies() {
