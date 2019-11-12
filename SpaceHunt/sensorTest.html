@@ -1,0 +1,99 @@
+
+<html>
+
+    <meta charset="UTF-8">
+<head>
+<! --
+//
+// *** 
+// *** JavaScript functions loaded as include files
+// *** Allows each team member to own their own code
+// ***
+//
+-->
+
+<!--
+// *** User Story: SH-3	Running out of energy	Priority: HIGH
+// *** Story: As a player, I want to be notified when I run out of
+// *** energy so I know I have lost the game
+-->
+
+<script src="RunningOutOfEnergy.js"></script>
+
+<!--
+// *** User Story: SH-4	Running out of supplies	Priority: HIGH
+// *** Story: As a player, I want to be notified when I run out of
+// *** supplies so I know I have lost the game
+-->
+
+<script src="RunningOutOfSupplies.js"></script>
+
+<!--
+// *** User Story: SH-1	Spacecraft Movement	Priority: HIGH
+// *** Story: As a player, I want to be able to move my spacecraft 
+// *** 0, 90, 180 or 270 degrees, and a specific distance from my 
+// *** current position so I can visit celestial points in the game space.
+-->
+
+<script src="SpaceCraftMovement.js"></script>
+<script src="space.js"></script>
+<script src="artifact.js"></script>
+<script src="celestialMap.js"></script>
+<script src="sensors.js"></script>
+<script src="classes.js"></script>
+
+
+</head>
+<canvas id="theCanvas" width="768" height="768" style="border:1px solid #000000;">
+</canvas>
+<body>
+<h1>SpaceHunt</h1>
+<form name=UI>
+STATUS
+<p>Current Location: 
+X <input type=text name=xValue size=4>
+Y <input type=text name=yValue size=4>
+<p>
+<p>Energy <input type=text name=energy size=4>
+<p>Supplies <input type=text name=supplies size=4>%
+<p>
+<hr>
+MAKE A MOVE
+<p>Distance <input type=text name=distance size=4>
+<p>
+<input type=button value="0" onclick=moveSpacecraft(0,distance)>
+<input type=button value="90" onclick=moveSpacecraft(90,distance)>
+<input type=button value="180" onclick=moveSpacecraft(180,distance)>
+<input type=button value="270" onclick=moveSpacecraft(270,distance)>
+
+</form>
+
+<script>
+var canvas = document.getElementById("theCanvas");
+var space = new Space(canvas.width, canvas.height);
+var ship = new Ship(100, 100, 0 , 0)
+artifacts = [];
+artifacts.push(new Artifact(32, 32, "eniac", "orange", true));
+artifacts.push(new Artifact(0, 0, "moon", "white", true));
+artifacts.push(new Artifact(256, 128, "celeron", "yellow", true));
+artifacts.push(new Artifact(512, 256, "ryzen", "red", true))
+artifacts.push(new Artifact(480, 480, "xeon", "blue", true))
+artifacts.push(new Artifact(128, 700, "pentium 1", "purple", true));
+artifacts.push(new Artifact(160, 496, "pentium 2", "purple", false));
+artifacts.push(new Artifact(148, 496, "pentium 3", "purple", false));
+artifacts.push(new Artifact(350, 350, "asteroid", "grey", true));
+artifacts.push(new Artifact(150, 450, "asteroid", "grey", true));
+artifacts.push(new Artifact(650, 650, "asteroid", "grey", true));
+artifacts.push(new Artifact(600, 70, "asteroid", "grey", true));
+drawSpace(space, canvas);
+for(var i = 0; i < artifacts.length; i++)
+	drawArtifact(artifacts[i], canvas);
+
+sensor(ship ,artifacts,canvas);
+
+</script>
+</script>
+
+</body>
+
+</html>
