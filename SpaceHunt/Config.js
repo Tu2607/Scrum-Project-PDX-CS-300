@@ -8,19 +8,23 @@ function activeCheat(){
 
 
 
-function updateConfig (energy,resource,cheat,normal,random,fix,xcord,ycord){
-	energy = eval(energy) + 0;
-	resource = eval(resource) + 0;
+//function updateConfig (energy,resource,cheat,normal,random,fix,xcord,ycord){
+function updateConfig(config){
+	var energy = eval(config.energy.value) + 0;
+	var resource = eval(config.energy.value) + 0;
+	var xcord = eval(config.xcord.value) + 0;
+	var ycord = eval(config.ycord.value) + 0;
 
-	if(cheat){
-		// call function to change setting of the game to undying
-		activeCheat();
+	if(config.normal){
+		//does nothing I guess
 	}
 
-	if(normal){
-		alert("You have decided to play normally.");
+	if(config.GodMode){
+		// have a flag that mark the game that turned on the cheat
 	}
 
 	Ship.energy.value = energy;
 	Ship.resource.value = resource;	
+	Ship.x.value = xcord;
+	Ship.y.value = ycord; 
 }
