@@ -1,27 +1,3 @@
-function Space(xSize, ySize)
-{
-	this.xSize = xSize;
-	this.ySize = ySize;
-	this.size = 0;
-	if(xSize == ySize)
-		this.size = xSize;
-
-	this.step = this.size/32;
-
-	return this;
-}
-
-function Artifact(xPos, yPos, name, color, visible)
-{
-	this.xPos = xPos;
-	this.yPos = yPos;
-	this.name = name;
-	this.color = color;
-	this.visible = visible;
-
-	return this;
-}
-
 function drawSpace(space, canvas)
 {
 	var ctx = canvas.getContext("2d");

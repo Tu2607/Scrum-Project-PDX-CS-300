@@ -1,10 +1,20 @@
+function activeCheat(){
+	if(Ship.energy.value < 0){
+		//change setting so that you don't die
+	}
+
+
+}
+
+
+
 function updateConfig (energy,resource,cheat,normal,random,fix,xcord,ycord){
 	energy = eval(energy) + 0;
 	resource = eval(resource) + 0;
 
 	if(cheat){
-		alert("You have actived cheat mode!");
 		// call function to change setting of the game to undying
+		activeCheat();
 	}
 
 	if(normal){
@@ -13,6 +23,4 @@ function updateConfig (energy,resource,cheat,normal,random,fix,xcord,ycord){
 
 	Ship.energy.value = energy;
 	Ship.resource.value = resource;	
-
-
 }
