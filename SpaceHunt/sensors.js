@@ -26,30 +26,34 @@ Needs a function to add and display celestial object to celestial map
 //it consumed 2% of supplies, then check if supplies over 0
 //if successfull all CO's within 2 CP's are added to the map and displayed
 //list of 'celestial artificats' will be passed in also
-function sensor(ship, artifacts){
+function sensor(ship, artifacts, canvas){
 
     //removes supplies, and checks supplies ammount
     removeSupplies(ship);
 
     //displays celestial objects within 2 Celestial points.
     //hightlight area scanned
-    checkArtifacts(ship,artifacts)
+    checkArtifacts(ship,artifacts, canvas)
    
     return
 }
 
 //iterates through list of CO's checking if any are less then 2 away
-function checkArtifacts(ship, artifacts){
+function checkArtifacts(ship, artifacts, canvas){
 
+    //iterate through each object in artifacts
     for(let i = 0; i < artifacts.length; i++){
         artifact = artifacts[i];
 
+        //if distance is <= 2
         if(checkDistance(ship, artifact) <= 2){
-            //console log used for testing
+            //visiblility set to true so next time it will be drawn
+            artifact.visibility = true;
+            //testing
             console.log(artifact.name + " Appeared on the sensor")
-            //ship.display()?
-            //displayArtifact(artifact);
-            //addArtifact to celestial map
+            //draws artifact on map
+            drawArtifact(artifact, canvas);
+            
         }
     }
     return
@@ -61,9 +65,9 @@ function checkDistance(ship, artifact){
 
     //gets the x and y from ship location and artifact
     let x1 = ship.x;
-    let x2 = artifact.x;
+    let x2 = artifact.xPos;
     let y1 = ship.y;
-    let y2 = artifact.y;
+    let y2 = artifact.yPos;
 
     //returns the distance between ship and the artifact
     console.log(Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2));
@@ -74,7 +78,7 @@ function checkDistance(ship, artifact){
 function removeSupplies(ship){
     //Remove 2% supplies
     ship.supplies -= 2;
-
+    //checks if supplies remain
     ship.checkSupplies();
     return
 }
