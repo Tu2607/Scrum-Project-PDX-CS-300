@@ -35,26 +35,29 @@ MAKE A MOVE
 var canvas = document.getElementById("theCanvas");
 
 // data from game config 
-var xPos = 0;
-var yPos = 0;
-var cheat = false;
+var xStart = 0;
+var yStart = 0;
+var cheat = true;
 var energy = 1000;
 var supplies = 100;
 
 // initialize game
-var spaceHunt = new SpaceHunt(canvas.width, canvas.height, cheat, xPos, yPos, energy, supplies);
+var spaceHunt = new SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies);
 
 // draw space
-spaceHunt.drawSpace(canvas);
+//spaceHunt.drawSpace();
 
 // draw all artifacts
-spaceHunt.drawArtifactSet(canvas);
+// spaceHunt.drawArtifactSet();
 
 // sets an artifact to visible
-spaceHunt.show("pentium 1");
+// spaceHunt.show("pentium 1");
 
 // redrawing shows original + newly visible pentium 1 
-spaceHunt.drawArtifactSet(canvas);
+// spaceHunt.drawArtifactSet();
+
+// or simply,
+spaceHunt.draw();
 
 </script>
 </script>

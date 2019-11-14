@@ -43,29 +43,19 @@ Ship.prototype.loseTurn = function()
 	supplies -=2;
 }
 
-Ship.prototype.addVisitedCP = function(cp) 
+function SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies)
 {
-	visitedCP.push(cp);
-}
-
-Ship.prototype.addVisitedArtifact =  function(artifact) 
-{
-	visitedArtifacts.push(artifact);
-}
-
-function SpaceHunt(xSize, ySize, cheat, xStart, yStart, energy, supplies)
-{
+	this.canvas = canvas;
 	this.cheat = cheat;
-	this.space = new Space(xSize, ySize);
+	this.space = new Space(canvas.width, canvas.height);
 	this.ship = new Ship(xStart, yStart, energy, supplies);
 	this.artifactSet = new Array();
-
 
 	this.artifactSet.push(new Artifact(32, 32, "eniac", "orange", true));
 	this.artifactSet.push(new Artifact(0, 0, "moon", "white", true));
 	this.artifactSet.push(new Artifact(256, 128, "celeron", "yellow", true));
-	this.artifactSet.push(new Artifact(512, 256, "ryzen", "red", true))
-	this.artifactSet.push(new Artifact(480, 480, "xeon", "blue", true))
+	this.artifactSet.push(new Artifact(512, 256, "ryzen", "red", true));
+	this.artifactSet.push(new Artifact(480, 480, "xeon", "blue", true));
 
 	if(cheat)
 	{
@@ -98,7 +88,6 @@ function SpaceHunt(xSize, ySize, cheat, xStart, yStart, energy, supplies)
 
 }
 
-
 SpaceHunt.prototype.show = function(name)
 {
 	// searches through artifactSet[] and sets the artifact to visible
@@ -109,14 +98,13 @@ SpaceHunt.prototype.show = function(name)
 			this.artifactSet[i].visible = true;
 			return;
 		}
-
 	}
 }
 
 
-SpaceHunt.prototype.drawSpace = function(canvas)
+SpaceHunt.prototype.drawSpace = function()
 {
-	var ctx = canvas.getContext("2d");
+	var ctx = this.canvas.getContext("2d");
 	var grd = ctx.createRadialGradient(this.space.size/2, this.space.size/2, 0, this.space.size/2, this.space.size/2, this.space.size/2);
 	grd.addColorStop(0, "#504D4C");
 	grd.addColorStop(1, "black");
@@ -149,22 +137,22 @@ SpaceHunt.prototype.drawSpace = function(canvas)
 	}
 }
 
-SpaceHunt.prototype.drawArtifactSet = function(canvas)
+SpaceHunt.prototype.drawArtifactSet = function()
 {
 	for(var i = 0; i < this.artifactSet.length; i++)
 	{
-		this.drawArtifact(canvas, this.artifactSet[i]);
+		this.drawArtifact(this.artifactSet[i]);
 	}
 }
 
-SpaceHunt.prototype.drawArtifact = function(canvas, artifact)
+SpaceHunt.prototype.drawArtifact = function(artifact)
 {
 	if(artifact.visible == true)
 	{
 		var innerRadius = 4;
 		var outerRadius = 16;
 		var radius = 16;
-		var ctx = canvas.getContext("2d");
+		var ctx = this.canvas.getContext("2d");
 		var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
 		grd.addColorStop(0, artifact.color);
 		grd.addColorStop(1, "black");
@@ -197,7 +185,8 @@ SpaceHunt.prototype.drawArtifact = function(canvas, artifact)
 	}
 }
 
-SpaceHunt.prototype.drawShip = function(canvas)
+SpaceHunt.prototype.draw = function()
 {
-
+	this.drawSpace();
+	this.drawArtifactSet();
 }
