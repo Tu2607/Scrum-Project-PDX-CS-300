@@ -27,7 +27,7 @@ Artifact.prototype.show = function()
 	this.visible = true;
 }
 
-function Ship(xPos, yPos, energy, supplies, visitedCP, visitedArtifacts)
+function Ship(xPos, yPos, energy, supplies)
 {
 	this.xPos = xPos;
 	this.yPos = yPos;
