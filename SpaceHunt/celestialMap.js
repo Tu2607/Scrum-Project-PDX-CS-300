@@ -62,7 +62,7 @@ function SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies)
 
 	this.artifactSet.push(new Artifact(32, 32, "eniac", "orange", true));
 	this.artifactSet.push(new Artifact(0, 0, "moon", "white", true));
-	this.artifactSet.push(new Artifact(256, 128, "celeron", "yellow", true));
+	this.artifactSet.push(new Artifact(256, 128, "celeron", "gold", true));
 	this.artifactSet.push(new Artifact(512, 256, "ryzen", "red", true));
 	this.artifactSet.push(new Artifact(480, 480, "xeon", "blue", true));
 
@@ -152,7 +152,7 @@ SpaceHunt.prototype.drawSpace = function()
 		{
 			ctx.beginPath();
 			ctx.moveTo(i, j);
-			ctx.lineTo(i+1, j+1);
+			ctx.lineTo(i+2, j+2);
 			ctx.stroke(); 
 			ctx.closePath();
 		}
@@ -221,7 +221,7 @@ SpaceHunt.prototype.drawArtifact = function(artifact)
 SpaceHunt.prototype.drawTrail = function()
 {
 	var ctx = this.canvas.getContext("2d");
-	ctx.strokeStyle = "white";
+	ctx.strokeStyle = "yellow";
 
 
 	for(var i = 0; i < this.visitedPoints.length - 1; i++)
@@ -239,4 +239,5 @@ SpaceHunt.prototype.draw = function()
 {
 	this.drawSpace();
 	this.drawArtifactSet();
+	this.drawTrail();
 }
