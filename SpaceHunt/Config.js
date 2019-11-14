@@ -26,5 +26,7 @@ function updateConfig(config){
 	Ship.energy.value = energy;
 	Ship.resource.value = resource;	
 	Ship.x.value = xcord;
-	Ship.y.value = ycord; 
+	Ship.y.value = ycord;
+
+	return ship; 
 }
