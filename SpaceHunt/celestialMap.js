@@ -1,3 +1,11 @@
+function Point(xPos, yPos)
+{
+	this.xPos = xPos;
+	this.yPos = yPos;
+
+	return this;
+}
+
 function Space(xSize, ySize)
 {
 	this.xSize = xSize;
@@ -50,6 +58,7 @@ function SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies)
 	this.space = new Space(canvas.width, canvas.height);
 	this.ship = new Ship(xStart, yStart, energy, supplies);
 	this.artifactSet = new Array();
+	this.visitedPoints = new Array();
 
 	this.artifactSet.push(new Artifact(32, 32, "eniac", "orange", true));
 	this.artifactSet.push(new Artifact(0, 0, "moon", "white", true));
@@ -66,10 +75,10 @@ function SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies)
 		this.artifactSet.push(new Artifact(190, 525, "pentium 5", "purple", true));
 		this.artifactSet.push(new Artifact(220, 550, "pentium 6", "purple", true));
 		this.artifactSet.push(new Artifact(240, 625, "pentium 7", "purple", true));
-		this.artifactSet.push(new Artifact(350, 350, "asteroid 1", "grey", true));
-		this.artifactSet.push(new Artifact(150, 450, "asteroid 2", "grey", true));
-		this.artifactSet.push(new Artifact(650, 650, "asteroid 3", "grey", true));
-		this.artifactSet.push(new Artifact(600, 70, "asteroid 4", "grey", true));
+		this.artifactSet.push(new Artifact(350, 350, "asteroid", "grey", true));
+		this.artifactSet.push(new Artifact(150, 450, "asteroid", "grey", true));
+		this.artifactSet.push(new Artifact(650, 650, "asteroid", "grey", true));
+		this.artifactSet.push(new Artifact(600, 70, "asteroid", "grey", true));
 	}
 	else
 	{
@@ -80,10 +89,10 @@ function SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies)
 		this.artifactSet.push(new Artifact(220, 550, "pentium 6", "purple", false));
 		this.artifactSet.push(new Artifact(190, 525, "pentium 5", "purple", false));
 		this.artifactSet.push(new Artifact(240, 625, "pentium 7", "purple", false));
-		this.artifactSet.push(new Artifact(350, 350, "asteroid 1", "grey", false));
-		this.artifactSet.push(new Artifact(150, 450, "asteroid 2", "grey", false));
-		this.artifactSet.push(new Artifact(650, 650, "asteroid 3", "grey", false));
-		this.artifactSet.push(new Artifact(600, 70, "asteroid 4", "grey", false));
+		this.artifactSet.push(new Artifact(350, 350, "asteroid", "grey", false));
+		this.artifactSet.push(new Artifact(150, 450, "asteroid", "grey", false));
+		this.artifactSet.push(new Artifact(650, 650, "asteroid", "grey", false));
+		this.artifactSet.push(new Artifact(600, 70, "asteroid", "grey", false));
 	}
 
 }
@@ -101,6 +110,11 @@ SpaceHunt.prototype.show = function(name)
 	}
 }
 
+SpaceHunt.prototype.mark = function(xPos, yPos)
+{
+	this.visitedPoints.push(new Point(xPos, yPos));
+}
+
 
 SpaceHunt.prototype.drawSpace = function()
 {
@@ -116,23 +130,31 @@ SpaceHunt.prototype.drawSpace = function()
 	ctx.lineWidth = 0.5;
 	for(var i = this.space.step; i < this.space.size; i+=this.space.step)
 	{
+		ctx.beginPath();
 		ctx.moveTo(i, 0);
 		ctx.lineTo(i, this.space.size);
+		ctx.closePath();
 		ctx.stroke(); 
 	}
 	for(var i = this.space.step; i < this.space.size; i+=this.space.step)
 	{
+		ctx.beginPath();
 		ctx.moveTo(0, i);
 		ctx.lineTo(this.space.size, i);
+		ctx.closePath();
 		ctx.stroke(); 
 	}
-	for(var i = 100 * Math.random(); i < this.space.size; i+= (5 * this.space.step * Math.random()))
+
+	ctx.strokeStyle = "white";
+	for(var i = 100 * Math.random(); i < this.space.size; i+= (20 * this.space.step * Math.random()))
 	{
-		for(var j = this.space.step; j < this.space.size; j+= (10 * this.space.step * Math.random()))
+		for(var j = this.space.step; j < this.space.size; j+= (20 * this.space.step * Math.random()))
 		{
+			ctx.beginPath();
 			ctx.moveTo(i, j);
 			ctx.lineTo(i+1, j+1);
 			ctx.stroke(); 
+			ctx.closePath();
 		}
 	}
 }
@@ -149,18 +171,20 @@ SpaceHunt.prototype.drawArtifact = function(artifact)
 {
 	if(artifact.visible == true)
 	{
-		var innerRadius = 4;
-		var outerRadius = 16;
-		var radius = 16;
 		var ctx = this.canvas.getContext("2d");
-		var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
-		grd.addColorStop(0, artifact.color);
-		grd.addColorStop(1, "black");
 
 		if(artifact.name == "asteroid")
 		{
+			var innerRadius = 6;
+			var outerRadius = 12;
+			var radius = 6; 
+			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
+			grd.addColorStop(0, artifact.color);
+			grd.addColorStop(1, "black");
+
 			ctx.beginPath();
 			ctx.ellipse(artifact.xPos, artifact.yPos, innerRadius, outerRadius, Math.random()*Math.PI, 0, 2*Math.PI);
+			ctx.closePath();
 			ctx.strokeStyle = "silver";
 			ctx.stroke();	
 			ctx.fillStyle = grd;
@@ -172,8 +196,17 @@ SpaceHunt.prototype.drawArtifact = function(artifact)
 		}
 		else // it's a planet
 		{
+			var innerRadius = 4;
+			var outerRadius = 14;
+			var radius = 14; 
+
+			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
+			grd.addColorStop(0, artifact.color);
+			grd.addColorStop(1, "black");
+
 			ctx.beginPath();
 			ctx.arc(artifact.xPos, artifact.yPos, radius, 0, 2 * Math.PI);
+			ctx.closePath();
 			ctx.strokeStyle = "black";
 			ctx.stroke();
 			ctx.fillStyle = grd;
@@ -183,6 +216,23 @@ SpaceHunt.prototype.drawArtifact = function(artifact)
 			ctx.fillText(artifact.name, artifact.xPos, artifact.yPos);
 		}
 	}
+}
+
+SpaceHunt.prototype.drawTrail = function()
+{
+	var ctx = this.canvas.getContext("2d");
+	ctx.strokeStyle = "white";
+
+
+	for(var i = 0; i < this.visitedPoints.length - 1; i++)
+	{
+		ctx.beginPath();
+		ctx.moveTo(this.visitedPoints[i].xPos, this.visitedPoints[i].yPos);
+		ctx.lineTo(this.visitedPoints[i+1].xPos, this.visitedPoints[i+1].yPos);
+		ctx.closePath();
+		ctx.stroke(); 
+	}
+	ctx.closePath();
 }
 
 SpaceHunt.prototype.draw = function()

@@ -59,6 +59,17 @@ var spaceHunt = new SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies);
 // or simply,
 spaceHunt.draw();
 
+// on each ship movement
+spaceHunt.mark(0, 0);
+spaceHunt.mark(0, 100);
+spaceHunt.mark(100, 100);
+spaceHunt.mark(100, 200);
+spaceHunt.mark(300, 200);
+spaceHunt.mark(300, 400);
+spaceHunt.mark(400, 400);
+// then draw it
+spaceHunt.drawTrail();
+
 </script>
 </script>
 
