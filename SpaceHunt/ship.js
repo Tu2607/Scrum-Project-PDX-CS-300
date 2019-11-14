@@ -9,12 +9,14 @@ class Ship {
   checkSupplies() {
     if (this.supplies < 1) {
       alert("You've run out of supplies! Game over.");
+      gameOver = True;
     }
   }
   
   checkEnergy() {
     if (this.energy < 1) {
       alert("You've run out of energy! Game over.");
+      gameOver = True;
     }
   }
 }
