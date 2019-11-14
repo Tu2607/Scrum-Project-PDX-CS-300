@@ -1,47 +1,14 @@
 <html>
 
 <head>
-<! --
-//
-// *** 
-// *** JavaScript functions loaded as include files
-// *** Allows each team member to own their own code
-// ***
-//
--->
 
-<!--
-// *** User Story: SH-3	Running out of energy	Priority: HIGH
-// *** Story: As a player, I want to be notified when I run out of
-// *** energy so I know I have lost the game
--->
-
-<script src="RunningOutOfEnergy.js"></script>
-
-<!--
-// *** User Story: SH-4	Running out of supplies	Priority: HIGH
-// *** Story: As a player, I want to be notified when I run out of
-// *** supplies so I know I have lost the game
--->
-
-<script src="RunningOutOfSupplies.js"></script>
-
-<!--
-// *** User Story: SH-1	Spacecraft Movement	Priority: HIGH
-// *** Story: As a player, I want to be able to move my spacecraft 
-// *** 0, 90, 180 or 270 degrees, and a specific distance from my 
-// *** current position so I can visit celestial points in the game space.
--->
-
-<script src="SpaceCraftMovement.js"></script>
-
-<script src="space.js"></script>
-<script src="artifact.js"></script>
 <script src="celestialMap.js"></script>
 
 </head>
+
 <canvas id="theCanvas" width="768" height="768" style="border:1px solid #000000;">
 </canvas>
+
 <body>
 <h1>SpaceHunt</h1>
 <form name=UI>
@@ -66,29 +33,22 @@ MAKE A MOVE
 
 <script>
 var canvas = document.getElementById("theCanvas");
-var space = new Space(canvas.width, canvas.height);
 
-// for example, if the following array was stored somewhere ...
-artifacts = [];
-artifacts.push(new Artifact(32, 32, "eniac", "orange", true));
-artifacts.push(new Artifact(0, 0, "moon", "white", true));
-artifacts.push(new Artifact(256, 128, "celeron", "yellow", true));
-artifacts.push(new Artifact(512, 256, "ryzen", "red", true))
-artifacts.push(new Artifact(480, 480, "xeon", "blue", true))
-artifacts.push(new Artifact(128, 700, "pentium 1", "purple", true));
-artifacts.push(new Artifact(160, 496, "pentium 2", "purple", false));
-artifacts.push(new Artifact(148, 496, "pentium 3", "purple", false));
-artifacts.push(new Artifact(350, 350, "asteroid 1", "grey", true));
-artifacts.push(new Artifact(150, 450, "asteroid 2", "grey", true));
-artifacts.push(new Artifact(650, 650, "asteroid 3", "grey", true));
-artifacts.push(new Artifact(600, 70, "asteroid 4", "grey", true));
+// xSize, ySize, cheat, xStart, yStart, initial energy, initial supplies
+// if cheat == true, draws all artifacts
+var spaceHunt = new SpaceHunt(canvas.width, canvas.height, false);
 
-// then this draws the space
-drawSpace(space, canvas);
+// draws space
+spaceHunt.drawSpace(canvas);
 
-// this iterates through the array and draws the artifacts
-for(var i = 0; i < artifacts.length; i++)
-	drawArtifact(artifacts[i], canvas);
+// draws all artifacts
+spaceHunt.drawArtifactSet(canvas);
+
+// sets an artifact to visible
+spaceHunt.show("pentium 1");
+
+// redraw shows original + newly visible pentium 1 
+spaceHunt.drawArtifactSet(canvas);
 
 </script>
 </script>
