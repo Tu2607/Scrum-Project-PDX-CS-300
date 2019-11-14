@@ -28,5 +28,4 @@ function updateConfig(config){
 	Ship.x.value = xcord;
 	Ship.y.value = ycord;
 
-	return ship; 
 }
