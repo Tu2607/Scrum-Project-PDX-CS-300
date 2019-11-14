@@ -21,11 +21,13 @@ function updateConfig(config){
 
 	if(config.GodMode){
 		// have a flag that mark the game that turned on the cheat
+		activeCheat();
 	}
 
 	Ship.energy.value = energy;
 	Ship.resource.value = resource;	
 	Ship.x.value = xcord;
+
 	Ship.y.value = ycord;
 
 }
