@@ -1,8 +1,7 @@
 <!-- This is the UI for Game Configuration page-->
 <html>
 <head>
-	<script type="text/javascript" src="classes.js"></script>
-	<script type="text/javascript" src="Config.js"></script>
+	<script type="text/javascript" src="ship.js"></script>
 </head>
 
 <center><h1>Game Configuration</h1></center>
@@ -30,12 +29,10 @@
 			<break>
 			<p> Y-Coordinate <input type="range" name="ycord" value="50" min="0" max="225" oninput="yout.value = ycord.value">
 				<output name="yout">50</output>
-			</p>
-			<break>
-			<!-- <button type='button' onclick="updateConfig(Config.energy.value,Config.resource.value,Config.GodMode.checked,Config.normal.checked,Config.random.checked,Config.fix.checked,Config.xcord.value,Config.ycord.value)"> Submit </button> -->
-			<button type='button' onclick="updateConfig(Config)"> Submit </button>
-			<button type='button' onclick="location.href='main.html'"> Return to homepage</button>
+			</p>	
 		</form>
+		<button type='button' onclick="updateConfig(Config)"> Submit </button>
+		<button type='button' onclick="window.open('celestialMap.html','_self',false)"> Return to homepage</button>
 
 	</body>
 </center>

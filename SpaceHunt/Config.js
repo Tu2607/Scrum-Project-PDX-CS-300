@@ -9,6 +9,7 @@ function activeCheat(){
 
 
 //function updateConfig (energy,resource,cheat,normal,random,fix,xcord,ycord){
+	/*
 function updateConfig(config){
 	var energy = eval(config.energy.value) + 0;
 	var resource = eval(config.energy.value) + 0;
@@ -30,4 +31,4 @@ function updateConfig(config){
 
 	Ship.y.value = ycord;
 
-}
+}*/

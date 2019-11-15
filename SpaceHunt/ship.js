@@ -20,32 +20,16 @@ class Ship {
     }
   }
   
-  activeCheat(){
-	if(Ship.energy.value < 0){
-		//change setting so that you don't die
-	}
-  }
+}
 
-//function updateConfig (energy,resource,cheat,normal,random,fix,xcord,ycord){
-  updateConfig(config){
-	var energy = eval(config.energy.value) + 0;
-	var resource = eval(config.energy.value) + 0;
-	var xcord = eval(config.xcord.value) + 0;
-	var ycord = eval(config.ycord.value) + 0;
+function updateConfig(config){
 
-	if(config.normal){
-		//does nothing I guess
-	}
+  var newEnergy = eval(config.energy.value) + 0;
+  var newResource = eval(config.energy.value) + 0;
+  var xcord = eval(config.xcord.value) + 0;
+  var ycord = eval(config.ycord.value) + 0;
 
-	if(config.GodMode){
-		// have a flag that mark the game that turned on the cheat
-		activeCheat();
-	}
 
-	this.energy. = energy;
-	this.resource = resource;	
-	this.x = xcord;
-	this.y = ycord; 
-	
-  }
+  let newShip = new Ship(newEnergy,newResource,xcord,ycord);  //Initialize a new ship object
+
 }
