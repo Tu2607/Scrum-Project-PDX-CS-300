@@ -54,10 +54,12 @@
 				<hr>
 				MAKE A MOVE
 				<p>Distance <input type=text name=distance size=4></p>
-				<input type=button value="0" onclick=spaceHunt.ship.move(0,distance)>
-				<input type=button value="90" onclick=spaceHunt.ship.move(90,distance)>
-				<input type=button value="180" onclick=spaceHunt.ship.move(180,distance)>
-				<input type=button value="270" onclick=moveSpacecraft(270,distance)>
+				<input type=button value="0" onclick="ship.move(0,distance)">
+				<input type=button value="90" onclick="ship.move(90,distance)">
+				<input type=button value="180" onclick="ship.move(180,distance)">
+				<input type=button value="270" onclick="ship.move(270,distance)">
+				<hr>
+				<button type='button' onclick="sensor(ship, artifactSet, canvas);"> Sense </button>
 			</form>
 		</td>
 	</tr>

@@ -54,6 +54,63 @@ function updateConfig(config, canvas, space, ship, cheatMode, artifactSet, visit
 	console.log("artifactSet[10]:", artifactSet[10], "visitedPoints[0]:", visitedPoints[0]);
 }
 
+function sensor(ship, artifactSet, canvas) {
+    console.log(ship.xPos, ship.yPos);
+    console.log(artifactSet[0]);
+    //removes supplies, and checks supplies ammount
+    //removeSupplies(ship);
+
+    //displays celestial objects within 2 Celestial points.
+    //hightlight area scanned
+    checkArtifacts(ship, artifactSet, canvas)
+
+    return;
+}
+
+//iterates through list of CO's checking if any are less then 2 away
+function checkArtifacts(ship, artifactSet, canvas) {
+
+    //iterate through each object in artifacts
+    for(let i = 0; i < artifactSet.length; i++){
+        artifact = artifactSet[i];
+
+        //if distance is <= 2
+        if(checkDistance(ship, artifact) <= 2){
+            //visiblility set to true so next time it will be drawn
+            artifact.visibility = true;
+            //testing
+            console.log(artifact.name + " Appeared on the sensor")
+            //draws artifact on map
+            drawArtifact(canvas, artifact);
+        }
+    }
+    return
+}
+
+//function to check distance 
+//compares artifacts location and players location
+function checkDistance(ship, artifact){
+
+    //gets the x and y from ship location and artifact
+    let x1 = ship.xPos;
+    let x2 = artifact.xPos;
+    let y1 = ship.yPos;
+    let y2 = artifact.yPos;
+
+    //returns the distance between ship and the artifact
+    console.log(Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2));
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+}
+
+//waiting on checkSupplies() to be implimented
+function removeSupplies(ship){
+    //Remove 2% supplies
+    ship.supplies -= 2;
+    //checks if supplies remain
+    ship.checkSupplies();
+    return
+}
+
 function addVisitedPoint(visitedPoints, xPos, yPos)
 {
 	visitedPoints.push(new Point(xPos, yPos));
