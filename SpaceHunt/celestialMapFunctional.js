@@ -206,7 +206,7 @@ function drawTrail(canvas, visitedPoints) {
 	ctx.closePath();
 }
 
-function draw(canvas, space, ship, artifactSet, angle) {
+function draw(canvas, space, artifactSet, angle, visitedPoints) {
 
 	drawSpace(canvas, space);
 	drawArtifactSet(canvas, artifactSet, angle);

@@ -70,11 +70,10 @@ addVisitedPoint(visitedPoints, 100, 200);
 // ... to store visited points
 
 
-draw(canvas, space, ship, artifactSet, angle);
+draw(canvas, space, artifactSet, angle);
 /* which calls these...
-	drawSpace(canvas, space, ship)
+	drawSpace(canvas, space)
 	drawTrail(canvas, visitedPoints);
-	drawArtifact(canvas, artifact, angle);
 	drawArtifactSet(canvas, artifactSet, angle);
 		which calls
 		drawArtifact(canvas, artifact, angle);
