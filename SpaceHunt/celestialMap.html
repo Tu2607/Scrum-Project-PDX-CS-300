@@ -6,16 +6,16 @@
 
 </head>
 
-
 <body>
-	<table>
-		<tr>
-			<td>
+
+<table>
+<tr>
+
+<td>
 <canvas id="theCanvas" width="1024" height="1024" style="border:1px solid #000000;">
 </canvas>
 </td>
-<td>
-	</td>
+
 <td valign="center">
 <h1>SpaceHunt</h1>
 <form name=UI>
@@ -35,7 +35,6 @@ MAKE A MOVE
 <input type=button value="90" onclick=moveSpacecraft(90,distance)>
 <input type=button value="180" onclick=moveSpacecraft(180,distance)>
 <input type=button value="270" onclick=moveSpacecraft(270,distance)>
-
 </form>
 
 <script>
@@ -53,6 +52,7 @@ var energy = 1000;
 var supplies = 100;
 
 // initialize game
+
 var spaceHunt = new SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies);
 
 // set an artifact to visible
@@ -74,9 +74,9 @@ play();
 
 </script>
 </script>
+
 </td>
-<td>
-	</td>
+</tr>
 </body>
 
 </html>
