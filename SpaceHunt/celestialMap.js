@@ -14,7 +14,7 @@ function Space(xSize, ySize)
 	if(xSize == ySize)
 		this.size = xSize;
 
-	this.step = this.size/32;
+	this.step = this.size/128;
 
 	return this;
 }
@@ -45,14 +45,9 @@ function Ship(xPos, yPos, energy, supplies)
 	return this;
 }
 
-Ship.prototype.loseTurn = function() 
-{
-	energy -=2;
-	supplies -=2;
-}
-
 function SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies)
 {
+	this.angle = 0;
 	this.canvas = canvas;
 	this.cheat = cheat;
 	this.space = new Space(canvas.width, canvas.height);
@@ -60,25 +55,25 @@ function SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies)
 	this.artifactSet = new Array();
 	this.visitedPoints = new Array();
 
-	this.artifactSet.push(new Artifact(32, 32, "eniac", "orange", true));
+	this.artifactSet.push(new Artifact(64, 64, "eniac", "orange", true));
 	this.artifactSet.push(new Artifact(0, 0, "moon", "white", true));
-	this.artifactSet.push(new Artifact(256, 128, "celeron", "gold", true));
+	this.artifactSet.push(new Artifact(256, 128, "celeron", "yellow", true));
 	this.artifactSet.push(new Artifact(512, 256, "ryzen", "red", true));
-	this.artifactSet.push(new Artifact(480, 480, "xeon", "blue", true));
+	this.artifactSet.push(new Artifact(576, 576, "xeon", "blue", true));
 
 	if(cheat)
 	{
-		this.artifactSet.push(new Artifact(118, 700, "pentium 1", "purple", true));
-		this.artifactSet.push(new Artifact(128, 600, "pentium 2", "purple", true));
-		this.artifactSet.push(new Artifact(186, 650, "pentium 3", "purple", true));
-		this.artifactSet.push(new Artifact(200, 700, "pentium 4", "purple", true));
-		this.artifactSet.push(new Artifact(190, 525, "pentium 5", "purple", true));
-		this.artifactSet.push(new Artifact(220, 550, "pentium 6", "purple", true));
-		this.artifactSet.push(new Artifact(240, 625, "pentium 7", "purple", true));
-		this.artifactSet.push(new Artifact(350, 350, "asteroid", "grey", true));
-		this.artifactSet.push(new Artifact(150, 450, "asteroid", "grey", true));
-		this.artifactSet.push(new Artifact(650, 650, "asteroid", "grey", true));
-		this.artifactSet.push(new Artifact(600, 70, "asteroid", "grey", true));
+		this.artifactSet.push(new Artifact(704, 704, "pentium 1", "purple", true));
+		this.artifactSet.push(new Artifact(640, 768, "pentium 2", "purple", true));
+		this.artifactSet.push(new Artifact(640, 960, "pentium 3", "purple", true));
+		this.artifactSet.push(new Artifact(768, 640, "pentium 4", "purple", true));
+		this.artifactSet.push(new Artifact(768, 832, "pentium 5", "purple", true));
+		this.artifactSet.push(new Artifact(832, 896, "pentium 6", "purple", true));
+		this.artifactSet.push(new Artifact(832, 768, "pentium 7", "purple", true));
+		this.artifactSet.push(new Artifact(350, 350, "asteroid 1", "grey", true));
+		this.artifactSet.push(new Artifact(150, 450, "asteroid 2", "grey", true));
+		this.artifactSet.push(new Artifact(650, 650, "asteroid 3", "grey", true));
+		this.artifactSet.push(new Artifact(600, 70, "asteroid 4", "grey", true));
 	}
 	else
 	{
@@ -89,10 +84,10 @@ function SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies)
 		this.artifactSet.push(new Artifact(220, 550, "pentium 6", "purple", false));
 		this.artifactSet.push(new Artifact(190, 525, "pentium 5", "purple", false));
 		this.artifactSet.push(new Artifact(240, 625, "pentium 7", "purple", false));
-		this.artifactSet.push(new Artifact(350, 350, "asteroid", "grey", false));
-		this.artifactSet.push(new Artifact(150, 450, "asteroid", "grey", false));
-		this.artifactSet.push(new Artifact(650, 650, "asteroid", "grey", false));
-		this.artifactSet.push(new Artifact(600, 70, "asteroid", "grey", false));
+		this.artifactSet.push(new Artifact(350, 350, "asteroid 1", "grey", false));
+		this.artifactSet.push(new Artifact(150, 450, "asteroid 2", "grey", false));
+		this.artifactSet.push(new Artifact(650, 650, "asteroid 3", "grey", false));
+		this.artifactSet.push(new Artifact(600, 70, "asteroid 4", "grey", false));
 	}
 
 }
@@ -128,7 +123,7 @@ SpaceHunt.prototype.drawSpace = function()
 
 	ctx.strokeStyle = "#572C23";
 	ctx.lineWidth = 0.5;
-	for(var i = this.space.step; i < this.space.size; i+=this.space.step)
+	/*for(var i = 0; i < this.space.size; i+=this.space.step)
 	{
 		ctx.beginPath();
 		ctx.moveTo(i, 0);
@@ -136,7 +131,23 @@ SpaceHunt.prototype.drawSpace = function()
 		ctx.closePath();
 		ctx.stroke(); 
 	}
-	for(var i = this.space.step; i < this.space.size; i+=this.space.step)
+	for(var i = 0; i < this.space.size; i+=this.space.step)
+	{
+		ctx.beginPath();
+		ctx.moveTo(0, i);
+		ctx.lineTo(this.space.size, i);
+		ctx.closePath();
+		ctx.stroke(); 
+	}*/
+	for(var i = 0; i < this.space.size; i+= 8 *this.space.step)
+	{
+		ctx.beginPath();
+		ctx.moveTo(i, 0);
+		ctx.lineTo(i, this.space.size);
+		ctx.closePath();
+		ctx.stroke(); 
+	}
+	for(var i = 0; i < this.space.size; i+= 8 * this.space.step)
 	{
 		ctx.beginPath();
 		ctx.moveTo(0, i);
@@ -145,6 +156,7 @@ SpaceHunt.prototype.drawSpace = function()
 		ctx.stroke(); 
 	}
 
+/*
 	ctx.strokeStyle = "white";
 	for(var i = 100 * Math.random(); i < this.space.size; i+= (20 * this.space.step * Math.random()))
 	{
@@ -152,11 +164,12 @@ SpaceHunt.prototype.drawSpace = function()
 		{
 			ctx.beginPath();
 			ctx.moveTo(i, j);
-			ctx.lineTo(i+2, j+2);
+			ctx.lineTo(i+3, j+3);
 			ctx.stroke(); 
 			ctx.closePath();
 		}
 	}
+*/	
 }
 
 SpaceHunt.prototype.drawArtifactSet = function()
@@ -173,10 +186,18 @@ SpaceHunt.prototype.drawArtifact = function(artifact)
 	{
 		var ctx = this.canvas.getContext("2d");
 
-		if(artifact.name == "asteroid")
+		if(artifact.name == "meteor shower")
+		{
+
+		}
+		else if(artifact.name == "black hole")
+		{
+
+		}
+		else if(artifact.name.startsWith("asteroid"))
 		{
 			var innerRadius = 6;
-			var outerRadius = 12;
+			var outerRadius = 16;
 			var radius = 6; 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
 			grd.addColorStop(0, artifact.color);
@@ -190,15 +211,11 @@ SpaceHunt.prototype.drawArtifact = function(artifact)
 			ctx.fillStyle = grd;
 			ctx.fill();
 		}
-		else if(artifact.name == "meteor shower")
-		{
-
-		}
 		else // it's a planet
 		{
-			var innerRadius = 4;
-			var outerRadius = 14;
-			var radius = 14; 
+			var innerRadius = 0;
+			var outerRadius = 18 + 8 * Math.abs(Math.cos(this.angle));
+			var radius = 24; 
 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
 			grd.addColorStop(0, artifact.color);
@@ -215,13 +232,14 @@ SpaceHunt.prototype.drawArtifact = function(artifact)
 			ctx.fillStyle = "white";
 			ctx.fillText(artifact.name, artifact.xPos, artifact.yPos);
 		}
+		this.angle += Math.PI / 1600;
 	}
 }
 
 SpaceHunt.prototype.drawTrail = function()
 {
 	var ctx = this.canvas.getContext("2d");
-	ctx.strokeStyle = "yellow";
+	ctx.strokeStyle = " #f9e79f";
 
 
 	for(var i = 0; i < this.visitedPoints.length - 1; i++)
@@ -240,4 +258,35 @@ SpaceHunt.prototype.draw = function()
 	this.drawSpace();
 	this.drawArtifactSet();
 	this.drawTrail();
+}
+
+
+function animate()
+{
+	// draw everything
+	spaceHunt.draw();
+	// all the time
+	requestAnimationFrame(animate);
+}
+
+function play()
+{
+	// button press calculates from input and calls 
+	// ship.move(to xPos, and yPos)
+
+	// ship.mark(its xPos, and yPos)	
+	// ship.loseTurn()
+	// check if xPos and yPos have an artifact around
+	// if on xPos, yPos - damage
+
+	// button press to use sensor 
+	// ship.sensor(spaceHunt.artifactSet)
+
+
+
+
+	// what should be will be drawn and animated again, and again and ag
+	animate();
+
+	// check supplies, gameOver = true if out 
 }

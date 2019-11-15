@@ -6,10 +6,17 @@
 
 </head>
 
-<canvas id="theCanvas" width="768" height="768" style="border:1px solid #000000;">
-</canvas>
 
 <body>
+	<table>
+		<tr>
+			<td>
+<canvas id="theCanvas" width="1024" height="1024" style="border:1px solid #000000;">
+</canvas>
+</td>
+<td>
+	</td>
+<td valign="center">
 <h1>SpaceHunt</h1>
 <form name=UI>
 STATUS
@@ -33,6 +40,10 @@ MAKE A MOVE
 
 <script>
 var canvas = document.getElementById("theCanvas");
+var requestAnimationFrame = window.requestAnimationFrame || 
+                            window.mozRequestAnimationFrame || 
+                            window.webkitRequestAnimationFrame || 
+                            window.msRequestAnimationFrame;
 
 // data from game config 
 var xStart = 0;
@@ -44,22 +55,12 @@ var supplies = 100;
 // initialize game
 var spaceHunt = new SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies);
 
-// draw space
-//spaceHunt.drawSpace();
+// set an artifact to visible
+spaceHunt.show("pentium 1");
 
-// draw all artifacts
-// spaceHunt.drawArtifactSet();
 
-// sets an artifact to visible
-// spaceHunt.show("pentium 1");
-
-// redrawing shows original + newly visible pentium 1 
-// spaceHunt.drawArtifactSet();
-
-// or simply,
-spaceHunt.draw();
-
-// on each ship movement
+// ship should call after each move 
+// mark(its xPos, its yPos)
 spaceHunt.mark(0, 0);
 spaceHunt.mark(0, 100);
 spaceHunt.mark(100, 100);
@@ -67,12 +68,15 @@ spaceHunt.mark(100, 200);
 spaceHunt.mark(300, 200);
 spaceHunt.mark(300, 400);
 spaceHunt.mark(400, 400);
-// then draw it
-spaceHunt.drawTrail();
+// ... to store visited points
+
+play();
 
 </script>
 </script>
-
+</td>
+<td>
+	</td>
 </body>
 
 </html>
