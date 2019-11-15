@@ -32,4 +32,6 @@ function updateConfig(config){
 
   let newShip = new Ship(newEnergy,newResource,xcord,ycord);  //Initialize a new ship object
 
+  return newShip;
+
 }
