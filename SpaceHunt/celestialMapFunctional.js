@@ -84,7 +84,7 @@ function buildArtifactSet(cheatMode, artifactSet)
 	}
 }
 
-function drawSpace(canvas, space, ship)
+function drawSpace(canvas, space)
 {
 	var ctx = canvas.getContext("2d");
 	var grd = ctx.createRadialGradient(space.size/2, space.size/2, 0, space.size/2, space.size/2, space.size/2);
@@ -130,13 +130,13 @@ function drawSpace(canvas, space, ship)
 	}
 }
 
-function drawArtifactSet(canvas, artifactSet, angle) {
+function drawArtifactSet(canvas, artifactSet) {
 	for(var i = 0; i < artifactSet.length; i++) {
-		drawArtifact(canvas, artifactSet[i], angle);
+		drawArtifact(canvas, artifactSet[i]);
 	}
 }
 
-function drawArtifact(canvas, artifact, angle)
+function drawArtifact(canvas, artifact)
 {
 	if(artifact.visibility)
 	{
@@ -170,7 +170,7 @@ function drawArtifact(canvas, artifact, angle)
 		else // it's a planet
 		{
 			var innerRadius = 0;
-			var outerRadius = 18 + 8 * Math.abs(Math.cos(angle));
+			var outerRadius = 24;
 			var radius = 24; 
 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
@@ -206,22 +206,10 @@ function drawTrail(canvas, visitedPoints) {
 	ctx.closePath();
 }
 
-function draw(canvas, space, artifactSet, angle, visitedPoints) {
+function draw(canvas, space, artifactSet, visitedPoints) {
 
 	drawSpace(canvas, space);
-	drawArtifactSet(canvas, artifactSet, angle);
+	drawArtifactSet(canvas, artifactSet);
 	drawTrail(canvas, visitedPoints);
 }
 
-
-/*
-function animate()
-{
-	var angle = 0;
-	// draw everything
-	draw(context, space, ship, artifactSet, angle);
-	// all the time
-	angle += Math.PI / 1500;
-	requestAnimationFrame(animate);
-}
-*/

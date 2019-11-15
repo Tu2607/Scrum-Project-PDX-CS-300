@@ -2,8 +2,6 @@
 
 <head>
 
-<canvas id="theCanvas" width="1024" height="1024">
-</canvas>
 <script src="celestialMapFunctional.js"></script>
 
 </head>
@@ -11,31 +9,32 @@
 <body>
 
 <table>
+
 <tr>
-
-<td>
-
-</td>
+	<td>
+		<canvas id="theCanvas" width="1024" height="1024"></canvas>
+	</td>
 
 <td valign="center">
+
 <h1>SpaceHunt</h1>
 <form name=UI>
-STATUS
-<p>Current Location: 
-X <input type=text name=xValue size=4>
-Y <input type=text name=yValue size=4>
-<p>
-<p>Energy <input type=text name=energy size=4>
-<p>Supplies <input type=text name=supplies size=4>%
-<p>
-<hr>
-MAKE A MOVE
-<p>Distance <input type=text name=distance size=4>
-<p>
-<input type=button value="0" onclick=moveSpacecraft(0,distance)>
-<input type=button value="90" onclick=moveSpacecraft(90,distance)>
-<input type=button value="180" onclick=moveSpacecraft(180,distance)>
-<input type=button value="270" onclick=moveSpacecraft(270,distance)>
+	STATUS
+	<p>Current Location: 
+	X <input type=text name=xValue size=4>
+	Y <input type=text name=yValue size=4>
+	<p>
+	<p>Energy <input type=text name=energy size=4>
+	<p>Supplies <input type=text name=supplies size=4>%
+	<p>
+	<hr>
+	MAKE A MOVE
+	<p>Distance <input type=text name=distance size=4>
+	<p>
+	<input type=button value="0" onclick=moveSpacecraft(0,distance)>
+	<input type=button value="90" onclick=moveSpacecraft(90,distance)>
+	<input type=button value="180" onclick=moveSpacecraft(180,distance)>
+	<input type=button value="270" onclick=moveSpacecraft(270,distance)>
 </form>
 
 <script>
@@ -49,7 +48,6 @@ var supplies = 100;
 
 var artifactSet = new Array();
 var visitedPoints = new Array();
-var angle = 0;
 var canvas = document.getElementById("theCanvas");
 var space = new Space(canvas.width, canvas.height);
 var ship = new Ship(xStart, yStart, energy, supplies);
@@ -70,14 +68,7 @@ addVisitedPoint(visitedPoints, 100, 200);
 // ... to store visited points
 
 
-draw(canvas, space, artifactSet, angle, visitedPoints);
-/* which calls these...
-	drawSpace(canvas, space)
-	drawTrail(canvas, visitedPoints);
-	drawArtifactSet(canvas, artifactSet, angle);
-		which calls
-		drawArtifact(canvas, artifact, angle);
-*/
+draw(canvas, space, artifactSet, visitedPoints);
 
 </script>
 </script>
