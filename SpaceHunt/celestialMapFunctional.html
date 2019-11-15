@@ -51,10 +51,6 @@ var visitedPoints = new Array();
 var canvas = document.getElementById("theCanvas");
 var space = new Space(canvas.width, canvas.height);
 var ship = new Ship(xStart, yStart, energy, supplies);
-var requestAnimationFrame = window.requestAnimationFrame || 
-                            window.mozRequestAnimationFrame || 
-                            window.webkitRequestAnimationFrame || 
-                            window.msRequestAnimationFrame;
 
 buildArtifactSet(cheat, artifactSet);
 

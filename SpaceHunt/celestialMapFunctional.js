@@ -1,5 +1,4 @@
 
-// object definitions
 
 class Point {
 	constructor(xPos, yPos) {
@@ -40,7 +39,20 @@ class Artifact {
 }
 
 
-// functions
+function updateConfig(config, canvas, space, ship, cheatMode, artifactSet, visitedPoints) {
+	artifactSet = new Array();
+	visitedPoints = new Array();
+	space = new Space(canvas.width, canvas.height);
+	ship = new Ship(eval(config.xout.value), eval(config.yout.value), eval(config.energy.value), eval(config.supplies.value));
+	buildArtifactSet(config.cheatMode.checked, artifactSet);
+	addVisitedPoint(visitedPoints, 0, 0)
+	draw(canvas, space, artifactSet, visitedPoints);
+
+	console.log("canvas width:", canvas.width, "canvas.height:", canvas.height);
+	console.log("space xSize:", space.xSize, "space ySize:", space.ySize);
+	console.log("ship.xPos:", ship.xPos, "ship.yPos:", ship.yPos, "ship.energy:", ship.energy, "ship.supplies:", ship.supplies);
+	console.log("artifactSet[10]:", artifactSet[10], "visitedPoints[0]:", visitedPoints[0]);
+}
 
 function addVisitedPoint(visitedPoints, xPos, yPos)
 {
@@ -169,9 +181,9 @@ function drawArtifact(canvas, artifact)
 		}
 		else // it's a planet
 		{
-			var innerRadius = 0;
+			var innerRadius = 4;
 			var outerRadius = 24;
-			var radius = 24; 
+			var radius = 20; 
 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
 			grd.addColorStop(0, artifact.color);
