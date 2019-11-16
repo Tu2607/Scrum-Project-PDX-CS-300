@@ -1,0 +1,49 @@
+
+
+.grid-container{
+    display: grid;
+    background-color: #43464B;
+    column-gap: 20px;
+    grid-template-areas: 
+    'title title'
+    'map output'
+    'map command';
+    padding: 10px;
+    float: left;
+}
+
+.board {
+    grid-area: map;
+    border-width: 5px;
+}
+
+.display {
+    grid-area: output;
+    width: 100%;
+    border-width: 5px;
+    text-align: left;
+}
+
+.menu {
+    grid-area: command;
+    background-color: ivory;
+    border-width: 5px;
+}
+
+
+h1 {
+    font-family: "Times New Roman";
+    font-size: 40px;
+    font-weight: bold;
+}
+body, html{
+    height: 100%;
+    margin: 20;
+    background-color: darkorchid;
+}
+textarea{
+    resize: none;
+    border: 2px solid black;
+    text-align: left;
+
+}
