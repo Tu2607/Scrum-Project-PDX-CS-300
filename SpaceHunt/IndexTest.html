@@ -37,6 +37,8 @@
     
 <body>
 
+
+
     <h1>SpaceHunt</h1>
     <p></p>
     <div class="grid-container">
@@ -70,18 +72,18 @@
             <!--Config Tab-->
             <div id="Config" class="tabcontent">
                 <form name="config">
-                    <p> Energy: <input type="text" name="energy"> </p>
+                    <p> Energy: <input type="text" name="energy" value="100"> </p>
                     <break>
-                    <p> Supplies: <input type="text" name="supplies"></p>
+                    <p> Supplies: <input type="text" name="supplies" value="100"></p>
                     <break>
                     <p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
                     <break>
-                    <p> Starting X-Cord <input type="range" name="xCord" value="0" min="0" max="127" oninput="xout.value = xCord.value">
-                        <output name="xout"> 0 </output>
+                    <p> Starting X-Cord <input type="range" name="xCord" value="12" min="0" max="127" oninput="xout.value = xCord.value">
+                        <output name="xout"> 12 </output>
                     </p>
                     <break>
-                    <p> Starting Y-Cord <input type="range" name="yCord" value="0" min="0" max="127" oninput="yout.value = yCord.value">
-                        <output name="yout"> 0 </output>
+                    <p> Starting Y-Cord <input type="range" name="yCord" value="12" min="0" max="127" oninput="yout.value = yCord.value">
+                        <output name="yout"> 12 </output>
                     </p>	
                 </form>
 			    <button type='button' onclick="updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints); return false"> Submit </button>
@@ -179,6 +181,9 @@
             document.getElementById(tab).style.display = "block";
             evt.currentTarget.className += " active";
         }
+    </script>
+    <script>
+        window.onload = updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints)
     </script>
 
 
