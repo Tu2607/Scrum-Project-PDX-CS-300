@@ -3,14 +3,14 @@
 .grid-container{
     display: grid;
     background-color: #43464B;
-    column-gap: 20px;
+    column-gap: 10px;
     grid-template-areas: 
     'title title title'
     'map map output'
     'map map command'
     'footer footer footer';
 
-    padding: 10px;
+    padding: 5px;
     float: left;
 }
 
@@ -21,7 +21,6 @@
 
 .display {
     grid-area: output;
-    width: 100%;
     border-width: 5px;
     text-align: left;
 }
@@ -32,6 +31,39 @@
     border-width: 5px;
 }
 
+/*
+.tab-menu {
+    overflow: hidden;
+    border: 1px solid black;
+    background-color: slategrey;
+}
+  
+.tab-menu button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+  
+.tab-menu button:hover {
+    background-color: steelblue;
+}
+  
+.tab-menu button.active {
+    background-color: steelblue;
+}
+  
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+*/
 
 h1 {
     font-family: "Times New Roman";
@@ -48,4 +80,44 @@ textarea{
     border: 2px solid black;
     text-align: left;
 
+}
+
+
+
+
+/* Style the tab */
+.tab-menu {
+  overflow: hidden;
+  border: 1px solid black;
+  background-color: slategrey;
+}
+
+/* Style the buttons inside the tab */
+.tab-menu button {
+  background-color: inherit;
+ 
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab-menu button:hover {
+  background-color: steelblue;
+}
+
+/* Create an active/current tablink class */
+.tab-menu button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
 }

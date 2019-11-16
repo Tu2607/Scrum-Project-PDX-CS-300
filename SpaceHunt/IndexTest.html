@@ -15,36 +15,132 @@
             </canvas>
         </div>
     <div class="display">
-        <form name="output">
-            <textarea id="display" name="text-output" readonly="true" rows="20">
-            LOG:
+            <form name="output">
+                <textarea id="display" name="text-output" readonly="true" rows="20">
+                LOG:
+                </textarea>
+            </form>
+        </div>
+        <div class="menu">
+            <div class="tab-menu">
+            <button class="tablinks" id="main" onclick="nextTab(event, 'Play')">Play</button>
+                <button class="tablinks" onclick="nextTab(event, 'Config')">Config</button>
+                </div>
 
-            </textarea>
+                <div id="Play" class="tabcontent">
+                <h3>Play</h3>            
+                    <form name=UI>
+                    STATUS
+                    <p>Location: 
+                    X <input type=text name=xValue size=4>
+                    Y <input type=text name=yValue size=4>
+                    <p>
+                    <p>Energy <input type=text name=energy size=4>
+                    <p>Supplies <input type=text name=supplies size=4>%
+                    <p>
+                    <hr>
+                    MAKE A MOVE
+                    <p>Distance <input type=text name=distance size=4>
+                    <p>
+                    <p><input type=button value="0" size="3" onclick=moveSpacecraft(0,distance)></p>
+                    <input type=button value="90" size="3" onclick=moveSpacecraft(90,distance)>
+                    <input type=text value="Distance" maxlength="3" size="3" >
+                    <input type=button value="180" size="3" onclick=moveSpacecraft(180,distance)>
+                    <p><input type=button value="270"  size="3" onclick=moveSpacecraft(270,distance)></p>
+                    </form>
+                </div>
 
-        </form>
+                <div id="Config" class="tabcontent">
+
+                    <form name="Config">
+                        Location: 
+                        <input type="text" name="xPos" size="3" maxlength="3" value="X">
+                        <input type="text" name="yPos" size="3" maxlength="3" value="Y">
+                        <br>
+                        Energy: 
+                        <input type="text" name="energy" maxlength="5"> 
+                        <br>
+                        Resource: 
+                        <input type="text" name="resource" maxlength="5">
+                        <br>
+                        Cheat mode 
+                        <input type="checkbox" name="GodMode" checked="checked">
+                        <br>
+                        Regular mode 
+                        <input type="checkbox" name="normal" checked="checked" >
+                        <br>
+                        Random Wormhole 
+                        <input type="radio" name="wormhole" >
+                        <br>
+                        Fix Wormhole 
+                        <input type="radio" name="wormhole" >
+                    </form>
+            <button type='button' onclick="updateConfig(Config)"> Submit </button>
+                </div>
+
+                <script>
+                    document.getElementById("main").click();
+                    function nextTab(evt, tab) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(tab).style.display = "block";
+                    evt.currentTarget.className += " active";
+                    }
+                </script>
+        <!--
+            <div class="tab-menu">
+        <button class="link" onclick="change-tab(event, 'Play')">Play</button>
+        <button class="link" onclick="change-tab(event, 'Config')">Config</button>
+        </div>
+        <div id="Play" class="tabcontent">
+            <form name=UI>
+                STATUS
+                <p>Location: 
+                X <input type=text name=xValue size=4>
+                Y <input type=text name=yValue size=4>
+                <p>
+                <p>Energy <input type=text name=energy size=4>
+                <p>Supplies <input type=text name=supplies size=4>%
+                <p>
+                <hr>
+                MAKE A MOVE
+                <p>Distance <input type=text name=distance size=4>
+                <p>
+                <p><input type=button value="0" size="3" onclick=moveSpacecraft(0,distance)></p>
+                <input type=button value="90" size="3" onclick=moveSpacecraft(90,distance)>
+                <input type=text value="Distance" maxlength="3" size="3" >
+                <input type=button value="180" size="3" onclick=moveSpacecraft(180,distance)>
+                <p><input type=button value="270"  size="3" onclick=moveSpacecraft(270,distance)></p>
+            </form>
+        </div>
+        <div id="Config" class="tabcontent">
+            Test
+        
+        </div>
     </div>
-    <div class="menu">
-        <form name=UI>
-            STATUS
-            <p>Location: 
-            X <input type=text name=xValue size=4>
-            Y <input type=text name=yValue size=4>
-            <p>
-            <p>Energy <input type=text name=energy size=4>
-            <p>Supplies <input type=text name=supplies size=4>%
-            <p>
-            <hr>
-            MAKE A MOVE
-            <p>Distance <input type=text name=distance size=4>
-            <p>
-            <p><input type=button value="0" size="3" onclick=moveSpacecraft(0,distance)></p>
-            <input type=button value="90" size="3" onclick=moveSpacecraft(90,distance)>
-            <input type=text value="Distance" maxlength="3" size="3" >
-            <input type=button value="180" size="3" onclick=moveSpacecraft(180,distance)>
-            <p><input type=button value="270"  size="3" onclick=moveSpacecraft(270,distance)></p>
-
-        </form>
-    </div>
+    <script>
+    function change-tab(evt, tab-name){
+        var i, tabcontent,tablinks;
+        tabcontent = document.getElementByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++){
+            tabcontent[i].style.display = "none"
+        }
+        tabcontent = document.getElementByClassName("link");
+        for (i = 0; i < link.length; i++){
+            tablinks[i].className = tablinks[i].className.replace("active","");
+        }
+        document.getElementById(tab).style.display = "block";
+        evt.currentTarget.className += "active";
+    }
+    -->
+    </script>
     <script>
     var canvas = document.getElementById("theCanvas");
 
