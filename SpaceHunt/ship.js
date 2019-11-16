@@ -64,7 +64,7 @@ class Ship {
   // Use Supplies
   useSupplies(amount)
   {
-    this.suplies -= amount
+    this.supplies -= amount
   }
   
 
