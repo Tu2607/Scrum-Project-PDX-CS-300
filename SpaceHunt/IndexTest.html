@@ -9,10 +9,17 @@
     <h1>SpaceHunt</h1>
     <p></p>
     <div class="grid-container">
+
+
+        <!--Map--> 
         <div class ="board">
             <canvas id="theCanvas" width="768" height="768" style="border:1px solid #000000;">
             </canvas>
         </div>
+
+
+
+        <!--Log Screen-->
         <div class="display">
             <form name="output">
                 <textarea id="display" name="text-output" alight="left" readonly="true" rows="20">
@@ -20,13 +27,15 @@
                 </textarea>
             </form>
         </div>
+
+
+
         <div class="menu">
             <div class="tab-menu">
                 <button class="tablinks" id="main" onclick="nextTab(event, 'Play')">Play</button>
                 <button class="tablinks" onclick="nextTab(event, 'Config')">Config</button>
             </div>
             <div id="Play" class="tabcontent">
-                <div class="inner-grid-container"> 
                     <div class="status">
                         <form name="UI">
                         STATUS
@@ -54,8 +63,9 @@
                     <div class="action-grid">
                         <input type="button" value="Sensor" size="4">
                     </div> 
+            </div>
                     <div id="Config" class="tabcontent">
-                        <form name="Config">
+                        <form name="options">
                             <p>Location:
                             <input type="text" name="xPos" size="3" maxlength="3" value="X">
                             <input type="text" name="yPos" size="3" maxlength="3" value="Y">
@@ -78,9 +88,8 @@
                             <p>Fix Wormhole
                             <input type="radio" name="wormhole" >
                             </p>
-                            <button type='button' onclick="updateConfig(Config)"> Submit </button>
+                            <input type='button' value="Submti" onclick="updateConfig(Config)">
                         </form>
-                    </div>
                 </div>
             </div>
         </div>
