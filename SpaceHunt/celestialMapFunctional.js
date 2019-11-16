@@ -39,24 +39,30 @@ class Artifact {
 }
 
 
-function updateConfig(config, canvas, space, ship, cheatMode, artifactSet, visitedPoints) {
+function updateConfig(config, UI, canvas, space, ship, cheatMode, artifactSet, visitedPoints) {
 	artifactSet = new Array();
 	visitedPoints = new Array();
 	space = new Space(canvas.width, canvas.height);
-	ship = new Ship(eval(config.xout.value), eval(config.yout.value), eval(config.energy.value), eval(config.supplies.value));
+	ship = new Ship(8 * eval(config.xout.value), 8 * eval(config.yout.value), eval(config.energy.value), eval(config.supplies.value));
 	buildArtifactSet(config.cheatMode.checked, artifactSet);
-	addVisitedPoint(visitedPoints, 0, 0)
+	addVisitedPoint(visitedPoints, ship.xPos, ship.yPos);
 	draw(canvas, space, artifactSet, visitedPoints);
 
-	console.log("canvas width:", canvas.width, "canvas.height:", canvas.height);
-	console.log("space xSize:", space.xSize, "space ySize:", space.ySize);
-	console.log("ship.xPos:", ship.xPos, "ship.yPos:", ship.yPos, "ship.energy:", ship.energy, "ship.supplies:", ship.supplies);
-	console.log("artifactSet[10]:", artifactSet[10], "visitedPoints[0]:", visitedPoints[0]);
+	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
+}
+
+function updateStatus(UI, xPos, yPos, energy, supplies)
+{
+	UI.xValue.value = xPos;
+	UI.yValue.value = yPos;
+	UI.energy.value = energy;
+	UI.supplies.value = supplies;
+
 }
 
 function sensor(ship, artifactSet, canvas) {
     console.log(ship.xPos, ship.yPos);
-    console.log(artifactSet[0]);
+
     //removes supplies, and checks supplies ammount
     //removeSupplies(ship);
 

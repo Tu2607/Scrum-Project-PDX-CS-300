@@ -8,8 +8,9 @@
 	var energy = 1000;
 	var supplies = 100;
 
+	// maybe session storage for these ?
 	var artifactSet = [];
-	var visitedPoints = []; 
+	var visitedPoints = [];
 	var space;
 	var ship;
     </script>
@@ -27,14 +28,14 @@
 				<p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
 				<break>
 				<p> Starting X-Cord <input type="range" name="xCord" value="50" min="0" max="127" oninput="xout.value = xCord.value">
-					<output name="xout"> </output>
+					<output name="xout"> 0 </output>
 				</p>
 				<break>
 				<p> Starting Y-Cord <input type="range" name="yCord" value="0" min="0" max="127" oninput="yout.value = yCord.value">
-					<output name="yout"> </output>
+					<output name="yout"> 0 </output>
 				</p>	
 			</form>
-			<button type='button' onclick="updateConfig(config, canvas, space, ship, cheat, artifactSet, visitedPoints);"> Submit </button>
+			<button type='button' onclick="updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints); return false"> Submit </button>
 		</td>
 
 		<td>
@@ -59,7 +60,7 @@
 				<input type=button value="180" onclick="ship.move(180,distance)">
 				<input type=button value="270" onclick="ship.move(270,distance)">
 				<hr>
-				<button type='button' onclick="sensor(ship, artifactSet, canvas);"> Sense </button>
+				<button type='button' onclick="sensor(UI, artifactSet, canvas);"> Sense </button>
 			</form>
 		</td>
 	</tr>
