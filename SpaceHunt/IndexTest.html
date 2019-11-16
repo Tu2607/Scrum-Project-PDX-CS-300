@@ -2,8 +2,8 @@
     <meta charset="UTF-8">
 <head>
     <link rel="stylesheet" href="style.css">
-    <script src="celestialMap.js"></script
-    <script src="sensors.js"></script
+    <script src="celestialMap.js"></script>
+    <script src="sensors.js"></script>
 </head>
     
 <body>
@@ -38,6 +38,32 @@
                 <button class="tablinks" onclick="nextTab(event, 'Config')">Config</button>
             </div>
 
+            <!--Config Tab-->
+            <div id="Config" class="tabcontent">
+                <form name="options">
+                    <p>Location:
+                    <input type="text" id="input-xPos" name="xPos" size="3" maxlength="3" value="12">
+                    <input type="text" id="input-yPos" name="yPos" size="3" maxlength="3" value="12">
+                    </p>
+                    <p>Energy:
+                    <input type="text" id="input-energy" name="energy" size="5" value="1000"> 
+                    </p>
+                    <p>Supplies:
+                    <input type="text" id="input-supplies" name="supplies" size="5" value="100" >
+                    </p>
+                    <p>Cheat mode
+                    <input type="checkbox" id="input-mode" name="mode" >
+                    </p>
+                    <p>Random Wormhole
+                    <input type="radio" id="input-wormhole-random" name="wormhole" >
+                    </p>
+                    <p>Fix Wormhole
+                    <input type="radio" id="input-wormhole-fixed" name="wormhole" >
+                    </p>
+                    <input type='button' id="input-config" value="Submti" onclick="updateConfig(Config)">
+                </form>
+            </div>
+
 
             <!--Play Tab-->
             <div id="Play" class="tabcontent">
@@ -46,6 +72,8 @@
                         <form name="UI">
                         STATUS
                         <br>
+                        <!--Displays Ships stats from .js file-->
+	                    <!--use in ship document.getElementById("coords").innerHTML = "Location: (" + this.xPos+ "," + this.yPos + ")";-->
                         <p id="coords"></p>
                         <p id="energy"></p>
                         <p id="supplies"></p>
@@ -71,34 +99,6 @@
 
 
 
-            <!--Config Tab-->
-            <div id="Config" class="tabcontent">
-                <form name="options">
-                    <p>Location:
-                    <input type="text" name="xPos" size="3" maxlength="3" value="X">
-                    <input type="text" name="yPos" size="3" maxlength="3" value="Y">
-                    </p>
-                    <p>Energy:
-                    <input type="text" name="energy" size="5"> 
-                    </p>
-                    <p>Resource:
-                    <input type="text" name="resource" size="5" >
-                    </p>
-                    <p>Cheat mode
-                    <input type="checkbox" name="GodMode" checked="checked">
-                    </p>
-                    <p>Regular mode
-                    <input type="checkbox" name="normal" checked="checked" >
-                    </p>
-                    <p>Random Wormhole
-                    <input type="radio" name="wormhole" >
-                    </p>
-                    <p>Fix Wormhole
-                    <input type="radio" name="wormhole" >
-                    </p>
-                    <input type='button' value="Submti" onclick="updateConfig(Config)">
-                </form>
-            </div>
             
 
         </div>
