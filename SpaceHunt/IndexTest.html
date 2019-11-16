@@ -1,11 +1,10 @@
 <html>
-
+    <meta charset="UTF-8">
 <head>
     <link rel="stylesheet" href="style.css">
-    <script src="celestialMap.js"></script>
+    <script src="celestialMap.js"></script
 </head>
-
-
+    
 <body>
     <h1>SpaceHunt</h1>
     <p></p>
@@ -14,126 +13,134 @@
             <canvas id="theCanvas" width="768" height="768" style="border:1px solid #000000;">
             </canvas>
         </div>
-    <div class="display">
+        <div class="display">
             <form name="output">
-                <textarea id="display" name="text-output" readonly="true" rows="20">
-                LOG:
+                <textarea id="display" name="text-output" alight="left" readonly="true" rows="20">
+                Log:
                 </textarea>
             </form>
         </div>
         <div class="menu">
             <div class="tab-menu">
-            <button class="tablinks" id="main" onclick="nextTab(event, 'Play')">Play</button>
+                <button class="tablinks" id="main" onclick="nextTab(event, 'Play')">Play</button>
                 <button class="tablinks" onclick="nextTab(event, 'Config')">Config</button>
-                </div>
-
-                <div id="Play" class="tabcontent">
-                    <form name=UI>
-                    STATUS
+            </div>
+            <div id="Play" class="tabcontent">
+                <div class="inner-grid-container"> 
+                    <div class="status">
+                        <form name="UI">
+                        STATUS
+                        <br>
+                        <p>Location (X,Y): 
+                        <input type="text" name="xValue" size="3">
+                        <input type="text" name="yValue" size="3">
+                        </p>
+                        <p>Energy <input type="text" name="energy" size="5"></p>
+                        <p>Supplies <input type="text" name="supplies" size="5">%</p>
+                        </form>
+                    
+                    </div>
                     <br>
-                    <p>Location (X,Y): 
-                    <input type=text name=xValue size=3>
-                    <input type=text name=yValue size=3>
-                    </p>
-                    <p>Energy <input type=text name=energy size=5></p>
-                    <p>Supplies <input type=text name=supplies size=5>%</p>
-                    <br>
-                    MAKE A MOVE
-                    <p align="center"><input type=button class="move" value="90" size="3" onclick=moveSpacecraft(90,distance)></p>
-                    <p align="center"><input type=button  value="180" size="3" onclick=moveSpacecraft(180,distance)>
-                    <input type=text value="Distance" maxlength="3" size="4" >
-                    <input type=button value="0" size="3" onclick=moveSpacecraft(0,distance)></p>
-                    <p align="center"><input type=button value="270"  size="3" onclick=moveSpacecraft(270,distance)></p>
-                    </form>
+                    <div class="moves-grid">
+                        MAKE A MOVE
+                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="moveSpacecraft(90,distance)">
+                        </p>
+                        <p align="center"><input type="button"  value="180" size="3" onclick="moveSpacecraft(180,distance)">
+                        <input type="text" value="Distance" maxlength="3" size="4" >
+                        <input type="button" value="0" size="3" onclick="moveSpacecraft(0,distance)">
+                        </p>
+                        <p align="center"><input type="button" value="270"  size="3" onclick="moveSpacecraft(270,distance)"></p>
+                    </div>
+                    <div class="action-grid">
+                        <input type="button" value="Sensor" size="4">
+                    </div> 
+                    <div id="Config" class="tabcontent">
+                        <form name="Config">
+                            <p>Location:
+                            <input type="text" name="xPos" size="3" maxlength="3" value="X">
+                            <input type="text" name="yPos" size="3" maxlength="3" value="Y">
+                            </p>
+                            <p>Energy:
+                            <input type="text" name="energy" size="5"> 
+                            </p>
+                            <p>Resource:
+                            <input type="text" name="resource" size="5" >
+                            </p>
+                            <p>Cheat mode
+                            <input type="checkbox" name="GodMode" checked="checked">
+                            </p>
+                            <p>Regular mode
+                            <input type="checkbox" name="normal" checked="checked" >
+                            </p>
+                            <p>Random Wormhole
+                            <input type="radio" name="wormhole" >
+                            </p>
+                            <p>Fix Wormhole
+                            <input type="radio" name="wormhole" >
+                            </p>
+                            <button type='button' onclick="updateConfig(Config)"> Submit </button>
+                        </form>
+                    </div>
                 </div>
-
-                <div id="Config" class="tabcontent">
-
-                    <form name="Config">
-                        <p>Location:
-                        <input type="text" name="xPos" size="3" maxlength="3" value="X">
-                        <input type="text" name="yPos" size="3" maxlength="3" value="Y">
-                        </p>
-                        <p>Energy:
-                        <input type="text" name="energy" size="5"> 
-                        </p>
-                        <p>Resource:
-                        <input type="text" name="resource" size="5" >
-                        </p>
-                        <p>Cheat mode
-                        <input type="checkbox" name="GodMode" checked="checked">
-                        </p>
-                        <p>Regular mode
-                        <input type="checkbox" name="normal" checked="checked" >
-                        </p>
-                        <p>Random Wormhole
-                        <input type="radio" name="wormhole" >
-                        </p>
-                        <p>Fix Wormhole
-                        <input type="radio" name="wormhole" >
-                        </p>
-                    </form>
-            <button type='button' onclick="updateConfig(Config)"> Submit </button>
-                </div>
-
-                <script>
-                    document.getElementById("main").click();
-                    function nextTab(evt, tab) {
-                    var i, tabcontent, tablinks;
-                    tabcontent = document.getElementsByClassName("tabcontent");
-                    for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                    }
-                    tablinks = document.getElementsByClassName("tablinks");
-                    for (i = 0; i < tablinks.length; i++) {
-                        tablinks[i].className = tablinks[i].className.replace(" active", "");
-                    }
-                    document.getElementById(tab).style.display = "block";
-                    evt.currentTarget.className += " active";
-                    }
-                </script>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("main").click();
+        function nextTab(evt, tab) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tab).style.display = "block";
+        evt.currentTarget.className += " active";
+        }
     </script>
     <script>
-    var canvas = document.getElementById("theCanvas");
+        var canvas = document.getElementById("theCanvas");
 
-    // data from game config 
-    var xStart = 0;
-    var yStart = 0;
-    var cheat = true;
-    var energy = 1000;
-    var supplies = 100;
+        // data from game config 
+        var xStart = 0;
+        var yStart = 0;
+        var cheat = true;
+        var energy = 1000;
+        var supplies = 100;
 
-    // initialize game
-    var spaceHunt = new SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies);
+        // initialize game
+        var spaceHunt = new SpaceHunt(canvas, cheat, xStart, yStart, energy, supplies);
 
-    // draw space
-    //spaceHunt.drawSpace();
+        // draw space
+        //spaceHunt.drawSpace();
 
-    // draw all artifacts
-    // spaceHunt.drawArtifactSet();
+        // draw all artifacts
+        // spaceHunt.drawArtifactSet();
 
-    // sets an artifact to visible
-    // spaceHunt.show("pentium 1");
+        // sets an artifact to visible
+        // spaceHunt.show("pentium 1");
 
-    // redrawing shows original + newly visible pentium 1 
-    // spaceHunt.drawArtifactSet();
+        // redrawing shows original + newly visible pentium 1 
+        // spaceHunt.drawArtifactSet();
 
-    // or simply,
-    spaceHunt.draw();
+        // or simply,
+        spaceHunt.draw();
 
-    // on each ship movement
-    spaceHunt.mark(0, 0);
-    spaceHunt.mark(0, 100);
-    spaceHunt.mark(100, 100);
-    spaceHunt.mark(100, 200);
-    spaceHunt.mark(300, 200);
-    spaceHunt.mark(300, 400);
-    spaceHunt.mark(400, 400);
-    // then draw it
-    spaceHunt.drawTrail();
+        // on each ship movement
+        spaceHunt.mark(0, 0);
+        spaceHunt.mark(0, 100);
+        spaceHunt.mark(100, 100);
+        spaceHunt.mark(100, 200);
+        spaceHunt.mark(300, 200);
+        spaceHunt.mark(300, 400);
+        spaceHunt.mark(400, 400);
+        // then draw it
+        spaceHunt.drawTrail();
 
     </script>
-
 </body>
 
 </html>
