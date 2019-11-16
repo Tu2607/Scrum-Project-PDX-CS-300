@@ -39,16 +39,31 @@ class Artifact {
 }
 
 
-function updateConfig(config, UI, canvas, space, ship, cheatMode, artifactSet, visitedPoints) {
+function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints) {
+
 	artifactSet = new Array();
 	visitedPoints = new Array();
 	space = new Space(canvas.width, canvas.height);
 	ship = new Ship(8 * eval(config.xout.value), 8 * eval(config.yout.value), eval(config.energy.value), eval(config.supplies.value));
 	buildArtifactSet(config.cheatMode.checked, artifactSet);
 	addVisitedPoint(visitedPoints, ship.xPos, ship.yPos);
-	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);
+
+	// save
+	sessionStorage.setItem("cheat", cheat);
+	sessionStorage.setItem("xPos", ship.xPos);
+	sessionStorage.setItem("yPos", ship.yPos);
+	sessionStorage.setItem("energy", ship.energy);
+	sessionStorage.setItem("supplies", ship.supplies);
+	sessionStorage.setItem("artifactSet", JSON.stringify(artifactSet));
+	sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+	sessionStorage.setItem("space", JSON.stringify(space));
+	sessionStorage.setItem("ship", JSON.stringify(ship));
+
+	var temp = JSON.parse(sessionStorage.getItem("artifactSet"));
 
 	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
+
+	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);
 }
 
 function updateStatus(UI, xPos, yPos, energy, supplies)
@@ -60,7 +75,11 @@ function updateStatus(UI, xPos, yPos, energy, supplies)
 
 }
 
-function sensor(ship, artifactSet, canvas) {
+function sensor(canvas) {
+
+	var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+
     console.log(ship.xPos, ship.yPos);
 
     //removes supplies, and checks supplies ammount
@@ -114,7 +133,7 @@ function removeSupplies(ship){
     ship.supplies -= 2;
     //checks if supplies remain
     ship.checkSupplies();
-    return
+    return;
 }
 
 function addVisitedPoint(visitedPoints, xPos, yPos)
@@ -138,24 +157,25 @@ function buildArtifactSet(cheatMode, artifactSet)
 		artifactSet.push(new Artifact(768, 832, "pentium 5", "purple", true));
 		artifactSet.push(new Artifact(832, 896, "pentium 6", "purple", true));
 		artifactSet.push(new Artifact(832, 768, "pentium 7", "purple", true));
-		artifactSet.push(new Artifact(350, 350, "asteroid 1", "grey", true));
-		artifactSet.push(new Artifact(150, 450, "asteroid 2", "grey", true));
-		artifactSet.push(new Artifact(650, 650, "asteroid 3", "grey", true));
-		artifactSet.push(new Artifact(600, 70, "asteroid 4", "grey", true));
+		artifactSet.push(new Artifact(344, 344, "asteroid 1", "grey", true));
+		artifactSet.push(new Artifact(152, 448, "asteroid 2", "grey", true));
+		artifactSet.push(new Artifact(648, 648, "asteroid 3", "grey", true));
+		artifactSet.push(new Artifact(600, 72, "asteroid 4", "grey", true));
 	}
 	else
 	{
-		artifactSet.push(new Artifact(118, 700, "pentium 1", "purple", false));
-		artifactSet.push(new Artifact(128, 600, "pentium 2", "purple", false));
-		artifactSet.push(new Artifact(186, 650, "pentium 3", "purple", false));
-		artifactSet.push(new Artifact(200, 700, "pentium 4", "purple", false));
-		artifactSet.push(new Artifact(220, 550, "pentium 6", "purple", false));
-		artifactSet.push(new Artifact(190, 525, "pentium 5", "purple", false));
-		artifactSet.push(new Artifact(240, 625, "pentium 7", "purple", false));
-		artifactSet.push(new Artifact(350, 350, "asteroid 1", "grey", false));
-		artifactSet.push(new Artifact(150, 450, "asteroid 2", "grey", false));
-		artifactSet.push(new Artifact(650, 650, "asteroid 3", "grey", false));
-		artifactSet.push(new Artifact(600, 70, "asteroid 4", "grey", false));
+		artifactSet.push(new Artifact(704, 704, "pentium 1", "purple", false));
+		artifactSet.push(new Artifact(640, 768, "pentium 2", "purple", false));
+		artifactSet.push(new Artifact(640, 960, "pentium 3", "purple", false));
+		artifactSet.push(new Artifact(768, 640, "pentium 4", "purple", false));
+		artifactSet.push(new Artifact(768, 832, "pentium 5", "purple", false));
+		artifactSet.push(new Artifact(832, 896, "pentium 6", "purple", false));
+		artifactSet.push(new Artifact(832, 896, "pentium 5", "purple", false));
+		artifactSet.push(new Artifact(832, 768, "pentium 7", "purple", false));
+		artifactSet.push(new Artifact(344, 344, "asteroid 1", "grey", false));
+		artifactSet.push(new Artifact(152, 448, "asteroid 2", "grey", false));
+		artifactSet.push(new Artifact(648, 648, "asteroid 3", "grey", false));
+		artifactSet.push(new Artifact(600, 72, "asteroid 4", "grey", false));
 	}
 }
 
@@ -206,6 +226,9 @@ function drawSpace(canvas, space)
 }
 
 function drawArtifactSet(canvas, artifactSet) {
+
+	var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
+
 	for(var i = 0; i < artifactSet.length; i++) {
 		drawArtifact(canvas, artifactSet[i]);
 	}
@@ -285,16 +308,16 @@ function drawShip(canvas, xPos, yPos) {
 
 	var ctx = canvas.getContext("2d");
 	ctx.strokeStyle = "pink";
-	ctx.lineWidth = 4;
+	ctx.lineWidth = 5;
 
 	ctx.beginPath();
-	ctx.moveTo(xPos - 8, yPos - 8);
-	ctx.lineTo(xPos + 8, yPos + 8);
+	ctx.moveTo(xPos - 16, yPos - 16);
+	ctx.lineTo(xPos + 16, yPos + 16);
 	ctx.closePath();
 	ctx.stroke(); 
 	ctx.beginPath();
-	ctx.moveTo(xPos + 8, yPos - 8);
-	ctx.lineTo(xPos - 8, yPos + 8);
+	ctx.moveTo(xPos + 16, yPos - 16);
+	ctx.lineTo(xPos - 16, yPos + 16);
 	ctx.closePath();
 	ctx.stroke(); 
 }

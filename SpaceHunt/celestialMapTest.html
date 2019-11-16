@@ -7,12 +7,36 @@
 	var cheat = false;
 	var energy = 1000;
 	var supplies = 100;
-
-	// maybe session storage for these ?
 	var artifactSet = [];
 	var visitedPoints = [];
 	var space;
 	var ship;
+
+
+	// save
+	sessionStorage.setItem("xPos", xStart);
+	sessionStorage.setItem("yPos", yStart);
+	sessionStorage.setItem("cheatMode", cheat);
+	sessionStorage.setItem("energy", energy);
+	sessionStorage.setItem("supplies", supplies);
+	sessionStorage.setItem("artifactSet", JSON.stringify(artifactSet));
+	sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+	sessionStorage.setItem("space", JSON.stringify(space));
+	sessionStorage.setItem("ship", JSON.stringify(ship));
+
+
+  	// Retrieve
+  	/*
+	sessionStorage.getItem("xPos");
+	sessionStorage.getItem("yPos");
+	sessionStorage.getItem("cheatMode");
+	sessionStorage.getItem("energy");
+	sessionStorage.getItem("supplies");
+	JSON.parse(sessionStorage.getItem("artifactSet"));
+	JSON.parse(sessionStorage.getItem("artifactSet"));
+	sessionStorage.getItem("space");
+	sessionStorage.getItem("ship");
+	*/
     </script>
 </head>
 <body>
@@ -60,7 +84,7 @@
 				<input type=button value="180" onclick="ship.move(180,distance)">
 				<input type=button value="270" onclick="ship.move(270,distance)">
 				<hr>
-				<button type='button' onclick="// sensor(ship, artifactSet, canvas); // use UI form data instead ?"> Sense </button>
+				<button type='button' onclick="sensor(canvas);"> Sense </button>
 			</form>
 		</td>
 	</tr>
