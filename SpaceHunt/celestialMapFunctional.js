@@ -59,8 +59,6 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 	sessionStorage.setItem("space", JSON.stringify(space));
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 
-	var temp = JSON.parse(sessionStorage.getItem("artifactSet"));
-
 	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
 
 	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);
@@ -83,7 +81,7 @@ function sensor(canvas) {
     console.log(ship.xPos, ship.yPos);
 
     //removes supplies, and checks supplies ammount
-    //removeSupplies(ship);
+    removeSupplies(ship);
 
     //displays celestial objects within 2 Celestial points.
     //hightlight area scanned
@@ -131,6 +129,7 @@ function checkDistance(ship, artifact){
 function removeSupplies(ship){
     //Remove 2% supplies
     ship.supplies -= 2;
+	sessionStorage.setItem("ship", JSON.stringify(ship));
     //checks if supplies remain
     ship.checkSupplies();
     return;
