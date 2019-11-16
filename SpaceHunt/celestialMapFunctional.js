@@ -81,7 +81,7 @@ function sensor(canvas) {
     console.log(ship.xPos, ship.yPos);
 
     //removes supplies, and checks supplies ammount
-    removeSupplies(ship);
+    //removeSupplies(ship);
 
     //displays celestial objects within 2 Celestial points.
     //hightlight area scanned
