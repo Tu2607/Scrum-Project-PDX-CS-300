@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <script src="ship.js"></script>
+    <script>
+      
+      // One Dimensional Array
+      var cosmos = new Array(10)
+
+      // Create 2D Array using 1D array
+      for(var i = 0; i < cosmos.length; ++i)
+      {
+        cosmos[i] = new Array(10)
+      }
+      // Initialize Array
+      var box = 0
+
+      for(var i = 0; i < cosmos.length; ++i)
+      {
+        for(var j = 0; j < cosmos.length; ++j)
+        {
+          cosmos[i][j] = box 
+        }
+      }
+
+      // Create a Ship with 100 Energy 100 Supplies at coords 2,2
+      var firefly = new Ship(100, 100, 2, 2)
+      </script>
+
+  <h1> Ship Movement Test </h1>
+  
+
+  <button onclick="firefly.move(90,1)">Up</button>
+  <br>
+  <button onclick="firefly.move(180,1)">Left</button>
+  <button onclick="firefly.move(0,1)">Right</button>
+  <br>
+    <button onclick="firefly.move(270,1)">Down</button>
+<br>
+<br>
+<br>
+  <button onclick="firefly.status()">Status</button>
+  </body>
+</html>
