@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="style.css">
     <script src="celestialMap.js"></script
+    <script src="sensors.js"></script
 </head>
     
 <body>
@@ -30,28 +31,29 @@
 
 
 
+        <!--Play/Config tab setup-->
         <div class="menu">
             <div class="tab-menu">
                 <button class="tablinks" id="main" onclick="nextTab(event, 'Play')">Play</button>
                 <button class="tablinks" onclick="nextTab(event, 'Config')">Config</button>
             </div>
+
+
+            <!--Play Tab-->
             <div id="Play" class="tabcontent">
-                    <div class="status">
+                <div class="inner-grid-container">
+                    <div class="status-grid">
                         <form name="UI">
                         STATUS
                         <br>
-                        <p>Location (X,Y): 
-                        <input type="text" name="xValue" size="3">
-                        <input type="text" name="yValue" size="3">
-                        </p>
-                        <p>Energy <input type="text" name="energy" size="5"></p>
-                        <p>Supplies <input type="text" name="supplies" size="5">%</p>
+                        <p id="coords"></p>
+                        <p id="energy"></p>
+                        <p id="supplies"></p>
                         </form>
-                    
                     </div>
-                    <br>
+                <br>
                     <div class="moves-grid">
-                        MAKE A MOVE
+                        <p>MAKE A MOVE</p>
                         <p align="center"><input type="button" class="move" value="90" size="3" onclick="moveSpacecraft(90,distance)">
                         </p>
                         <p align="center"><input type="button"  value="180" size="3" onclick="moveSpacecraft(180,distance)">
@@ -61,61 +63,74 @@
                         <p align="center"><input type="button" value="270"  size="3" onclick="moveSpacecraft(270,distance)"></p>
                     </div>
                     <div class="action-grid">
-                        <input type="button" value="Sensor" size="4">
+                        <p>COMMANDS</p>
+                        <input type="button" value="Sensor" size="4" onclick="sensor(ship, artifacts, canvas)">
                     </div> 
-            </div>
-                    <div id="Config" class="tabcontent">
-                        <form name="options">
-                            <p>Location:
-                            <input type="text" name="xPos" size="3" maxlength="3" value="X">
-                            <input type="text" name="yPos" size="3" maxlength="3" value="Y">
-                            </p>
-                            <p>Energy:
-                            <input type="text" name="energy" size="5"> 
-                            </p>
-                            <p>Resource:
-                            <input type="text" name="resource" size="5" >
-                            </p>
-                            <p>Cheat mode
-                            <input type="checkbox" name="GodMode" checked="checked">
-                            </p>
-                            <p>Regular mode
-                            <input type="checkbox" name="normal" checked="checked" >
-                            </p>
-                            <p>Random Wormhole
-                            <input type="radio" name="wormhole" >
-                            </p>
-                            <p>Fix Wormhole
-                            <input type="radio" name="wormhole" >
-                            </p>
-                            <input type='button' value="Submti" onclick="updateConfig(Config)">
-                        </form>
                 </div>
             </div>
+
+
+
+            <!--Config Tab-->
+            <div id="Config" class="tabcontent">
+                <form name="options">
+                    <p>Location:
+                    <input type="text" name="xPos" size="3" maxlength="3" value="X">
+                    <input type="text" name="yPos" size="3" maxlength="3" value="Y">
+                    </p>
+                    <p>Energy:
+                    <input type="text" name="energy" size="5"> 
+                    </p>
+                    <p>Resource:
+                    <input type="text" name="resource" size="5" >
+                    </p>
+                    <p>Cheat mode
+                    <input type="checkbox" name="GodMode" checked="checked">
+                    </p>
+                    <p>Regular mode
+                    <input type="checkbox" name="normal" checked="checked" >
+                    </p>
+                    <p>Random Wormhole
+                    <input type="radio" name="wormhole" >
+                    </p>
+                    <p>Fix Wormhole
+                    <input type="radio" name="wormhole" >
+                    </p>
+                    <input type='button' value="Submti" onclick="updateConfig(Config)">
+                </form>
+            </div>
+            
+
         </div>
+
+
     </div>
+
+
+
     <script>
         document.getElementById("main").click();
+
         function nextTab(evt, tab) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(tab).style.display = "block";
-        evt.currentTarget.className += " active";
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tab).style.display = "block";
+            evt.currentTarget.className += " active";
         }
     </script>
     <script>
         var canvas = document.getElementById("theCanvas");
 
         // data from game config 
-        var xStart = 0;
-        var yStart = 0;
+        var xStart = 12;
+        var yStart = 12;
         var cheat = true;
         var energy = 1000;
         var supplies = 100;
