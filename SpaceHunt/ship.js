@@ -19,7 +19,73 @@ class Ship {
       gameOver = True;
     }
   }
-  
+
+  // ***************************************
+  // ************ Ship Movement ************
+  // ***************************************
+  moveUp(distance)
+  {
+    this.y += distance
+
+    // Update Energy and Supplies
+    useEnergy(10 * distance)
+    useSupplies(2)
+
+    // Check Energy and Supplies
+    checkEnergy() 
+    checkSupplies()
+  }
+
+  moveLeft(distance)  
+  {
+    this.x += distance
+    
+    // Update Energy and Supplies
+    useEnergy(10 * distance)
+    useSupplies(2)
+
+    // Check Energy and Supplies
+    checkEnergy() 
+    checkSupplies()
+  }
+    
+  moveDown(distance)
+  {
+    this.y -= distance
+
+    // Update Energy and Supplies
+    useEnergy(10 * distance)
+    useSupplies(2)
+
+    // Check Energy and Supplies
+    checkEnergy() 
+    checkSupplies()
+  }
+
+  moveLeft(distance)
+  {
+    this.y -= distance
+
+    // Update Energy and Supplies
+    useEnergy(10 * distance)
+    useSupplies(2)
+
+    // Check Energy and Supplies
+    checkEnergy() 
+    checkSupplies()
+  }
+
+  // Use Energy
+  useEnergy(amount)
+  {
+    this.energy -= amount
+  }
+
+  // Use Supplies
+  useSupplies(amount)
+  {
+    this.suplies -= amount
+  }
 }
 
 function updateConfig(config){
