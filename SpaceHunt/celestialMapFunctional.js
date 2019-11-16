@@ -46,7 +46,7 @@ function updateConfig(config, UI, canvas, space, ship, cheatMode, artifactSet, v
 	ship = new Ship(8 * eval(config.xout.value), 8 * eval(config.yout.value), eval(config.energy.value), eval(config.supplies.value));
 	buildArtifactSet(config.cheatMode.checked, artifactSet);
 	addVisitedPoint(visitedPoints, ship.xPos, ship.yPos);
-	draw(canvas, space, artifactSet, visitedPoints);
+	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);
 
 	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
 }
@@ -281,10 +281,29 @@ function drawTrail(canvas, visitedPoints) {
 	ctx.closePath();
 }
 
-function draw(canvas, space, artifactSet, visitedPoints) {
+function drawShip(canvas, xPos, yPos) {
+
+	var ctx = canvas.getContext("2d");
+	ctx.strokeStyle = "pink";
+	ctx.lineWidth = 4;
+
+	ctx.beginPath();
+	ctx.moveTo(xPos - 8, yPos - 8);
+	ctx.lineTo(xPos + 8, yPos + 8);
+	ctx.closePath();
+	ctx.stroke(); 
+	ctx.beginPath();
+	ctx.moveTo(xPos + 8, yPos - 8);
+	ctx.lineTo(xPos - 8, yPos + 8);
+	ctx.closePath();
+	ctx.stroke(); 
+}
+
+function draw(canvas, space, artifactSet, visitedPoints, xPos, yPos) {
 
 	drawSpace(canvas, space);
 	drawArtifactSet(canvas, artifactSet);
 	drawTrail(canvas, visitedPoints);
+	drawShip(canvas, xPos, yPos);
 }
 

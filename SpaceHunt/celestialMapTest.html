@@ -27,7 +27,7 @@
 				<break>
 				<p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
 				<break>
-				<p> Starting X-Cord <input type="range" name="xCord" value="50" min="0" max="127" oninput="xout.value = xCord.value">
+				<p> Starting X-Cord <input type="range" name="xCord" value="0" min="0" max="127" oninput="xout.value = xCord.value">
 					<output name="xout"> 0 </output>
 				</p>
 				<break>
@@ -60,7 +60,7 @@
 				<input type=button value="180" onclick="ship.move(180,distance)">
 				<input type=button value="270" onclick="ship.move(270,distance)">
 				<hr>
-				<button type='button' onclick="sensor(UI, artifactSet, canvas);"> Sense </button>
+				<button type='button' onclick="// sensor(ship, artifactSet, canvas); // use UI form data instead ?"> Sense </button>
 			</form>
 		</td>
 	</tr>
