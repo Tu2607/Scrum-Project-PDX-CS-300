@@ -1,4 +1,6 @@
 
+/*allows responsive grid-view */
+* { box-sizing: border-box;}
 
 .grid-container{
     display: grid;
@@ -27,43 +29,39 @@
 
 .menu {
     grid-area: command;
-    background-color: ivory;
+    background-color: slategrey;
     border-width: 5px;
 }
 
-/*
-.tab-menu {
-    overflow: hidden;
-    border: 1px solid black;
-    background-color: slategrey;
+.inner-grid-container{
+    display: grid;
+    grid-template-areas: 
+    'status status'
+    'moves actions'
+    'moves actions';
+    text-align: center;
+    
+
 }
-  
-.tab-menu button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
+
+form input .text{
+    background-color: slategray;
 }
-  
-.tab-menu button:hover {
-    background-color: steelblue;
+.status-grid {
+    grid-area: status;
+    border-width: 1;
 }
-  
-.tab-menu button.active {
-    background-color: steelblue;
+
+.move-grid {
+    grid-area: moves;
+    border-width: 1em;
+    border-color: black;
 }
-  
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
+.action-grid {
+    grid-area: actions;
+    border-width: 1em;
+    border-color: black;
 }
-*/
 
 h1 {
     font-family: "Times New Roman";
@@ -79,16 +77,16 @@ textarea{
     resize: none;
     border: 2px solid black;
     text-align: left;
+    width: 300;
 
 }
 
 
-
-
 /* Style the tab */
 .tab-menu {
-  overflow: hidden;
-  border: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
   background-color: slategrey;
 }
 
@@ -99,7 +97,7 @@ textarea{
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 5px 5px;
   transition: 0.3s;
   font-size: 17px;
 }
@@ -111,13 +109,15 @@ textarea{
 
 /* Create an active/current tablink class */
 .tab-menu button.active {
-  background-color: #ccc;
+  background-color: steelblue;
 }
 
 /* Style the tab content */
 .tabcontent {
   display: none;
   padding: 6px 12px;
-  border: 1px solid #ccc;
+  border: 0px solid black;
   border-top: none;
+  height: 300px;
+  width: 300px;
 }
