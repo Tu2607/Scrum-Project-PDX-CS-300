@@ -5,9 +5,11 @@
     background-color: #43464B;
     column-gap: 20px;
     grid-template-areas: 
-    'title title'
-    'map output'
-    'map command';
+    'title title title'
+    'map map output'
+    'map map command'
+    'footer footer footer';
+
     padding: 10px;
     float: left;
 }
