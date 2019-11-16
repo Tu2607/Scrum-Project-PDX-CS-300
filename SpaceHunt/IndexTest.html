@@ -64,10 +64,28 @@
                 </form>
             </div>
 
+            <script>
+                function updateConfig(){
+                    //send location information to ship
+                    //send Energy info to ship
+                    //send Supplies info to ship
+                    
+                    //unsure about next 2 
+                    //Send mode to ship?
+                    //send wormhole status to map?
+
+                    //update map
+                }
+            </script>
+
 
             <!--Play Tab-->
             <div id="Play" class="tabcontent">
                 <div class="inner-grid-container">
+
+
+
+                    <!--Status Block-->
                     <div class="status-grid">
                         <form name="UI">
                         STATUS
@@ -80,6 +98,11 @@
                         </form>
                     </div>
                 <br>
+
+
+
+
+                    <!--Movement and Command block-->
                     <div class="moves-grid">
                         <p>MAKE A MOVE</p>
                         <p align="center"><input type="button" class="move" value="90" size="3" onclick="moveSpacecraft(90,distance)">
@@ -108,6 +131,7 @@
 
 
 
+    <!--Script to get play and config tabs to switch-->
     <script>
         document.getElementById("main").click();
 
@@ -125,6 +149,10 @@
             evt.currentTarget.className += " active";
         }
     </script>
+
+
+
+    <!--game script-->
     <script>
         var canvas = document.getElementById("theCanvas");
 
