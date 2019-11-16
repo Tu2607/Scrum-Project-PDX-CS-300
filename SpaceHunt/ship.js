@@ -23,56 +23,36 @@ class Ship {
   // ***************************************
   // ************ Ship Movement ************
   // ***************************************
-  moveUp(distance)
+  move(angle, distance)
   {
-    this.y += distance
+    // Random Worm Hole Case
 
-    // Update Energy and Supplies
-    useEnergy(10 * distance)
-    useSupplies(2)
-
-    // Check Energy and Supplies
-    checkEnergy() 
-    checkSupplies()
-  }
-
-  moveLeft(distance)  
-  {
-    this.x += distance
     
-    // Update Energy and Supplies
-    useEnergy(10 * distance)
-    useSupplies(2)
+    // Fixed Worm Hole Case
 
-    // Check Energy and Supplies
-    checkEnergy() 
-    checkSupplies()
-  }
-    
-  moveDown(distance)
-  {
-    this.y -= distance
+    // Up
+    if(angle == 90)
+      this.y += distance
 
-    // Update Energy and Supplies
-    useEnergy(10 * distance)
-    useSupplies(2)
+    // Down
+    else if(angle == 270)
+      this.y -= distance
 
-    // Check Energy and Supplies
-    checkEnergy() 
-    checkSupplies()
-  }
+    // Left
+    else if(angle == 180)
+      this.x -= distance
 
-  moveLeft(distance)
-  {
-    this.y -= distance
+    // Right
+    else
+      this.x += distance
 
     // Update Energy and Supplies
-    useEnergy(10 * distance)
-    useSupplies(2)
+    this.useSupplies(2)
+    this.useEnergy(10 * distance)
 
     // Check Energy and Supplies
-    checkEnergy() 
-    checkSupplies()
+    this.checkEnergy() 
+    this.checkSupplies()
   }
 
   // Use Energy
@@ -85,6 +65,17 @@ class Ship {
   useSupplies(amount)
   {
     this.suplies -= amount
+  }
+  
+
+  // ********************************
+  // Functions for Testing Purposes
+  // ********************************
+  status()
+  {
+    console.log('Position: ' + this.x + " , " + this.y)
+    console.log('Energy: ' + this.energy)
+    console.log('Supplies: ' + this.supplies)
   }
 }
 
