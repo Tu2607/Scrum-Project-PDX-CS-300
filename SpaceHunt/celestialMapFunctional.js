@@ -144,8 +144,8 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 
 function updateStatus(UI, xPos, yPos, energy, supplies)
 {
-	UI.xValue.value = xPos;
-	UI.yValue.value = yPos;
+	UI.xValue.value = xPos/8;
+	UI.yValue.value = yPos/8;
 	UI.energy.value = energy;
 	UI.supplies.value = supplies;
 
