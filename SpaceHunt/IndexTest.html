@@ -14,10 +14,9 @@
         var space;
         var ship;
 
-
         // save
-        sessionStorage.setItem("xPos", xStart);
-        sessionStorage.setItem("yPos", yStart);
+        //sessionStorage.setItem("xPos", xStart);
+        //sessionStorage.setItem("yPos", yStart);
         sessionStorage.setItem("cheatMode", cheat);
         sessionStorage.setItem("energy", energy);
         sessionStorage.setItem("supplies", supplies);
@@ -137,14 +136,16 @@
 
                     <!--Movement and Command block-->
                     <div class="moves-grid">
+                        <form name="movementUI">
                         <p>MAKE A MOVE</p>
-                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="moveSpacecraft(90,distance)">
+                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="move(UI, canvas, 90, eval(movementUI.distance.value)); return false;">
                         </p>
-                        <p align="center"><input type="button"  value="180" size="3" onclick="moveSpacecraft(180,distance)">
-                        <input type="text" value="Distance" maxlength="3" size="4" >
-                        <input type="button" value="0" size="3" onclick="moveSpacecraft(0,distance)">
+                        <p align="center"><input type="button"  value="180" size="3" onclick="move(UI, canvas, 180, eval(movementUI.distance.value)); return false;">
+                        <input type="text" name=distance value=10 maxlength="3" size="4" >
+                        <input type="button" value="0" size="3" onclick="move(UI, canvas, 0, eval(movementUI.distance.value)); return false;">
                         </p>
-                        <p align="center"><input type="button" value="270"  size="3" onclick="moveSpacecraft(270,distance)"></p>
+                        <p align="center"><input type="button" value="270"  size="3" onclick="move(UI, canvas, 270, eval(movementUI.distance.value)); return false;"></p>
+                        </form>
                     </div>
                     <div class="action-grid">
                         <p>COMMANDS</p>
@@ -185,7 +186,6 @@
     <script>
         window.onload = updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints)
     </script>
-
 
 
 </body>

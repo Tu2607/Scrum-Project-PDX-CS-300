@@ -38,6 +38,84 @@ class Artifact {
   }
 }
 
+function checkSupplies(ship) {
+	if (ship.supplies < 1) {
+		alert("You've run out of supplies! Game over.");
+		//gameOver = True;
+	}
+}
+
+function checkEnergy(ship) {
+	if (ship.energy< 1) {
+		alert("You've run out of energy! Game over.");
+		//gameOver = True;
+	}
+}
+
+// ***************************************
+// ************ Ship Movement ************
+// ***************************************
+function move(UI, canvas, angle, distance)
+{
+	var space = JSON.parse(sessionStorage.getItem("space"));
+	var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
+	var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+
+	// Random Worm Hole Case
+
+
+	// Fixed Worm Hole Case
+
+
+	// Up
+	if(angle == 90)
+		ship.yPos -= distance*8
+
+	// Down
+	else if(angle == 270)
+		ship.yPos += distance*8
+
+	// Left
+	else if(angle == 180)
+		ship.xPos -= distance*8
+
+	// Right
+	else
+		ship.xPos += distance*8
+
+
+	// Update Energy and Supplies
+	useSupplies(ship, 2)
+	useEnergy(ship, 0.1 * distance)
+
+	// Check Energy and Supplies
+	checkEnergy(ship) 
+	checkSupplies(ship)
+
+
+	addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+    sessionStorage.setItem("ship", JSON.stringify(ship));
+    sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+
+	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
+
+	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);
+}
+
+// Use Energy
+function useEnergy(ship, amount)
+{
+	ship.energy -= amount
+    sessionStorage.setItem("energy", ship.energy);
+}
+
+// Use Supplies
+function useSupplies(ship, amount)
+{
+	ship.supplies -= amount
+    sessionStorage.setItem("supplies", ship.supplies);
+}
 
 function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints) {
 
@@ -322,10 +400,19 @@ function drawShip(canvas, xPos, yPos) {
 }
 
 function draw(canvas, space, artifactSet, visitedPoints, xPos, yPos) {
+	
+	console.log(xPos, yPos);
+
+//	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+//	canvas.getContext("2d").save();
+//	canvas.getContext("2d").translate(xPos-100, yPos-100);
+//	canvas.getContext("2d").scale(3, 3);
 
 	drawSpace(canvas, space);
 	drawArtifactSet(canvas, artifactSet);
 	drawTrail(canvas, visitedPoints);
 	drawShip(canvas, xPos, yPos);
+
+	canvas.getContext("2d").restore();
 }
 
