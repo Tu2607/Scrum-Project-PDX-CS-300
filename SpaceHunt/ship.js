@@ -1,3 +1,103 @@
+
+
+
+// Original code commented out below
+
+
+class Ship { 
+  constructor(xPos, yPos, energy, supplies) {
+    this.xPos = xPos;
+    this.yPos = yPos;
+    this.energy = energy;
+    this.supplies = supplies;
+  }
+}
+
+
+function checkSupplies(ship) {
+  if (ship.supplies < 1) {
+    alert("You've run out of supplies! Game over.");
+    //gameOver = True;
+  }
+}
+
+function checkEnergy(ship) {
+  if (ship.energy< 1) {
+    alert("You've run out of energy! Game over.");
+    //gameOver = True;
+  }
+}
+
+// ***************************************
+// ************ Ship Movement ************
+// ***************************************
+function move(UI, canvas, angle, distance)
+{
+  var space = JSON.parse(sessionStorage.getItem("space"));
+  var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
+  var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
+  var ship = JSON.parse(sessionStorage.getItem("ship"));
+
+  // Random Worm Hole Case
+
+
+  // Fixed Worm Hole Case
+
+
+  // Up
+  if(angle == 90)
+    ship.yPos -= distance*8
+
+  // Down
+  else if(angle == 270)
+    ship.yPos += distance*8
+
+  // Left
+  else if(angle == 180)
+    ship.xPos -= distance*8
+
+  // Right
+  else
+    ship.xPos += distance*8
+
+
+  // Update Energy and Supplies
+  useSupplies(ship, 2)
+  useEnergy(ship, distance)
+
+  // Check Energy and Supplies
+  checkEnergy(ship) 
+  checkSupplies(ship)
+
+
+  addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+    sessionStorage.setItem("ship", JSON.stringify(ship));
+    sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+
+  updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
+
+  draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);
+}
+
+// Use Energy
+function useEnergy(ship, amount)
+{
+  ship.energy -= amount
+    sessionStorage.setItem("energy", ship.energy);
+}
+
+// Use Supplies
+function useSupplies(ship, amount)
+{
+  ship.supplies -= amount
+    sessionStorage.setItem("supplies", ship.supplies);
+}
+
+
+
+
+
+/* 
 class Ship {
   constructor(energy, supplies, x, y) {
     this.energy = energy;
@@ -92,3 +192,4 @@ function updateConfig(config){
   return newShip;
 
 }
+*/

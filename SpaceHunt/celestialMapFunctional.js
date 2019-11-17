@@ -87,7 +87,7 @@ function move(UI, canvas, angle, distance)
 
 	// Update Energy and Supplies
 	useSupplies(ship, 2)
-	useEnergy(ship, 0.1 * distance)
+	useEnergy(ship, distance)
 
 	// Check Energy and Supplies
 	checkEnergy(ship) 
@@ -153,7 +153,7 @@ function updateStatus(UI, xPos, yPos, energy, supplies)
 
 function sensor(canvas) {
 
-	var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
+	var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
 	var ship = JSON.parse(sessionStorage.getItem("ship"));
 
     console.log(ship.xPos, ship.yPos);
@@ -163,17 +163,17 @@ function sensor(canvas) {
 
     //displays celestial objects within 2 Celestial points.
     //hightlight area scanned
-    checkArtifacts(ship, artifactSet, canvas)
+    checkArtifacts(ship, artifacts, canvas)
 
     return;
 }
 
 //iterates through list of CO's checking if any are less then 2 away
-function checkArtifacts(ship, artifactSet, canvas) {
+function checkArtifacts(ship, artifacts, canvas) {
 
     //iterate through each object in artifacts
-    for(let i = 0; i < artifactSet.length; i++){
-        artifact = artifactSet[i];
+    for(let i = 0; i < artifacts.length; i++){
+        artifact = artifacts[i];
 
         //if distance is <= 2
         if(checkDistance(ship, artifact) <= 2){
@@ -205,11 +205,14 @@ function checkDistance(ship, artifact){
 
 //waiting on checkSupplies() to be implimented
 function removeSupplies(ship){
+
     //Remove 2% supplies
     ship.supplies -= 2;
 	sessionStorage.setItem("ship", JSON.stringify(ship));
+
     //checks if supplies remain
     ship.checkSupplies();
+    
     return;
 }
 
