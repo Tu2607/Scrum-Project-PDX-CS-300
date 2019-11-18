@@ -9,7 +9,7 @@
     <script src="sensors.js"></script>
     <script src="draw.js"></script>
     <script>
-    var xStart = 0;
+        var xStart = 0;
         var yStart = 0;
         var cheat = false;
         var energy = 1000;
@@ -18,6 +18,7 @@
         var visitedPoints = [];
         var space;
         var ship;
+        var wormhole; //checking this with everyone
 
         // save
         //sessionStorage.setItem("xPos", xStart);
@@ -29,6 +30,7 @@
         sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
         sessionStorage.setItem("space", JSON.stringify(space));
         sessionStorage.setItem("ship", JSON.stringify(ship));
+        sessionStorage.setItem("wormhole",JSON.stringify(wormhole))
     </script>
 
 
@@ -81,6 +83,8 @@
                     <break>
                     <p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
                     <break>
+                    <p> Random Wormhole <input type="checkbox" name="random" checked="checked"></p>
+                    <break>
                     <p> Starting X-Cord <input type="range" name="xCord" value="12" min="0" max="127" oninput="xout.value = xCord.value">
                         <output name="xout"> 12 </output>
                     </p>
@@ -89,7 +93,7 @@
                         <output name="yout"> 12 </output>
                     </p>	
                 </form>
-			    <button type='button' onclick="updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints); return false"> Submit </button>
+			    <button type='button' onclick="updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints, wormhole); return false"> Submit </button>
             </div>
 
 

@@ -2,7 +2,7 @@
 // Original code commented out below
 
 
-function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints) {
+function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints, wormhole) {
 
 	artifactSet = new Array();
 	visitedPoints = new Array();
@@ -11,6 +11,13 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 	buildArtifactSet(config.cheatMode.checked, artifactSet);
 	addVisitedPoint(visitedPoints, ship.xPos, ship.yPos);
 
+	if(config.random){
+		var x = Math.floor(Math.random()*101);	// 101 mean the maximum number is 100
+		var y = Math.floor(Math.random()*101);	
+		wormhole = new Wormhole(x,y);
+	} else {
+		wormhole = new Wormhole(0,0);
+	}
 	// save
 	sessionStorage.setItem("cheat", cheat);
 	sessionStorage.setItem("xPos", ship.xPos);
@@ -24,7 +31,7 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 
 	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
 
-	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);
+	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);  //Tu's note: I'll add in the wormhole
 }
 
 
@@ -36,7 +43,7 @@ function updateStatus(UI, xPos, yPos, energy, supplies) {
 
 }
 
-
+function blackhole(UI)
 
 
 /*
