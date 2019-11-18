@@ -36,6 +36,7 @@ function sensor(canvas) {
 //iterates through list of CO's checking if any are less then 2 away
 function checkArtifacts(ship, artifacts, canvas) {
 
+
     //iterate through each object in artifacts
     for(let i = 0; i < artifacts.length; i++){
         artifact = artifacts[i];
@@ -46,11 +47,12 @@ function checkArtifacts(ship, artifacts, canvas) {
             artifact.visibility = true;
             //testing
             console.log(artifact.name + " Appeared on the sensor")
-            //draws artifact on map
-            drawArtifact(canvas, artifact);
         }
     }
-    return
+	
+    //draws artifact on map
+	sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
+	drawArtifactSet(canvas, artifacts);
 }
 
 //function to check distance 
