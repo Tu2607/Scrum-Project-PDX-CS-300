@@ -71,17 +71,12 @@ function checkDistance(ship, artifact){
 function removeSupplies(ship){
 
     //Remove 2% supplies
-<<<<<<< HEAD
-    ship.supplies -= 2;
-    sessionStorage.setItem("ship", JSON.stringify(ship));
-=======
     //ship.supplies -= 2;
     useSupplies(ship, 2);
     sensorStatus(ship.supplies);
->>>>>>> bdc18f056fbf292bdf439c1542392f4a4e2bbdd6
 
     //checks if supplies remain
-    ship.checkSupplies();
+    checkSupplies(ship);
     
     return;
 }
