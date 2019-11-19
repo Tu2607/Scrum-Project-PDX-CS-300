@@ -2,22 +2,15 @@
 // Original code commented out below
 
 
-function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints, wormhole) {
+function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints) {
 
 	artifactSet = new Array();
 	visitedPoints = new Array();
 	space = new Space(canvas.width, canvas.height);
-	ship = new Ship(8 * eval(config.xout.value), 8 * eval(config.yout.value), eval(config.energy.value), eval(config.supplies.value));
+	ship = new Ship(8 * eval(config.xout.value), 8 * eval(config.yout.value), eval(config.energy.value), eval(config.supplies.value),eval(config.credits.value));
 	buildArtifactSet(config.cheatMode.checked, artifactSet);
 	addVisitedPoint(visitedPoints, ship.xPos, ship.yPos);
 
-	if(config.random){
-		var x = Math.floor(Math.random()*101);	// 101 mean the maximum number is 100
-		var y = Math.floor(Math.random()*101);	
-		wormhole = new Wormhole(x,y);
-	} else if(config.fix){
-		wormhole = new Wormhole(50,50);
-	}
 	// save
 	sessionStorage.setItem("cheat", cheat);
 	sessionStorage.setItem("xPos", ship.xPos);
@@ -29,18 +22,18 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 	sessionStorage.setItem("space", JSON.stringify(space));
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 
-	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
+	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
-	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos, wormhole);  //Tu's note: I'll add in the wormhole
+	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);  //Tu's note: I'll add in the wormhole
 }
 
 
-function updateStatus(UI, xPos, yPos, energy, supplies) {
+function updateStatus(UI, xPos, yPos, energy, supplies, credits) {
 	UI.xValue.value = xPos/8;
 	UI.yValue.value = yPos/8;
 	UI.energy.value = energy;
 	UI.supplies.value = supplies;
-
+	UI.credits.value = credits;
 }
 /*
 function blackhole(UI)

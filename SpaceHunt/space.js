@@ -17,13 +17,6 @@ class Space {
 	}
 }
 
-class Wormhole{
-	constructor(xPos, yPos){
-		this.xPos = xPos;
-		this.yPos = yPos;
-	}
-}
-
 
 function addVisitedPoint(visitedPoints, xPos, yPos)
 {

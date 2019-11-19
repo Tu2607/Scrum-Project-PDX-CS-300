@@ -5,11 +5,12 @@
 
 
 class Ship { 
-  constructor(xPos, yPos, energy, supplies) {
+  constructor(xPos, yPos, energy, supplies, credits) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.energy = energy;
     this.supplies = supplies;
+    this.credits = credits;
   }
 }
 
@@ -38,18 +39,12 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
   var ship = JSON.parse(sessionStorage.getItem("ship"));
 
-
-  // Random Worm Hole Case
-  if(config.random){
-    if(ship.yPos > space.ySize && ship.yPos < 0 && ship.xPos > space.xSize && ship.xPos < 0){
+  if(ship.yPos > space.ySize && ship.yPos < 0 && ship.xPos > space.xSize && ship.xPos < 0){
+    // Random Worm Hole Case
+    if(config.random){
       ship.yPos = Math.floor(Math.random()*(space.ySize+1));    
       ship.xPos = Math.floor(Math.random()*(space.xSize+1));   
-    }  
-  }
-
-  // Fixed Worm Hole Case
-  if(config.fixed){
-    if(ship.yPos > space.ySize && ship.xPos > space.xSize){
+    } else if (config.fixed){   //Fixed worm hole case
       ship.yPos = 50;
       ship.xPos = 50;
     }
