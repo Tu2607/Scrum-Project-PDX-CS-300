@@ -31,7 +31,7 @@ function checkEnergy(ship) {
 // ***************************************
 // ************ Ship Movement ************
 // ***************************************
-function move(UI, canvas, angle, distance, config, wormhole) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
+function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
   var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
@@ -42,7 +42,7 @@ function move(UI, canvas, angle, distance, config, wormhole) // Tu's note: Pass 
   // Random Worm Hole Case
   if(config.random){
     if(ship.yPos > space.ySize && ship.xPos > space.xSize){
-      ship.yPos = Math.floor(Math.random()*(space.ySize+1));    //The number 100 is just arbitrary and subject to changes
+      ship.yPos = Math.floor(Math.random()*(space.ySize+1));    
       ship.xPos = Math.floor(Math.random()*(space.xSize+1));   
     }  
   }
@@ -50,8 +50,8 @@ function move(UI, canvas, angle, distance, config, wormhole) // Tu's note: Pass 
   // Fixed Worm Hole Case
   if(config.fixed){
     if(ship.yPos > space.ySize && ship.xPos > space.xSize){
-      ship.yPos = wormhole.yPos;
-      ship.xPos = wormhole.xPos;
+      ship.yPos = 50;
+      ship.xPos = 50;
     }
   }
 
