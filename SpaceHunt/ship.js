@@ -39,6 +39,7 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
   var ship = JSON.parse(sessionStorage.getItem("ship"));
 
+  //Check if the ship is out of bound, then check the wormhole behavior.
   if(ship.yPos > space.ySize && ship.yPos < 0 && ship.xPos > space.xSize && ship.xPos < 0){
     // Random Worm Hole Case
     if(config.random.checked){

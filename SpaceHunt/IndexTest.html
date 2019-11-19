@@ -84,9 +84,9 @@
                     <break>
                     <p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
                     <break>
-                    <p> Random Wormhole <input type="checkbox" name="random" checked="checked"></p>
+                    <p> Random Wormhole Behavior <input type="checkbox" name="random" checked="checked"></p>
                     <break>
-                    <p> Fixed Wormhole <input type="checkbox" name="fixed" checked="checked"></p>
+                    <p> Fixed Wormhole Behavior <input type="checkbox" name="fixed" checked="checked"></p>
                     <break>
                     <p> Starting X-Cord <input type="range" name="xCord" value="12" min="0" max="127" oninput="xout.value = xCord.value">
                         <output name="xout"> 12 </output>
@@ -152,13 +152,13 @@
                     <div class="moves-grid">
                         <form name="movementUI">
                         <p>MAKE A MOVE</p>
-                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="move(UI, canvas, 90, eval(movementUI.distance.value)); return false;">
+                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="move(UI, canvas, 90, eval(movementUI.distance.value),config); return false;">
                         </p>
-                        <p align="center"><input type="button"  value="180" size="3" onclick="move(UI, canvas, 180, eval(movementUI.distance.value)); return false;">
+                        <p align="center"><input type="button"  value="180" size="3" onclick="move(UI, canvas, 180, eval(movementUI.distance.value),config); return false;">
                         <input type="text" name=distance value=10 maxlength="3" size="4" >
-                        <input type="button" value="0" size="3" onclick="move(UI, canvas, 0, eval(movementUI.distance.value)); return false;">
+                        <input type="button" value="0" size="3" onclick="move(UI, canvas, 0, eval(movementUI.distance.value),config); return false;">
                         </p>
-                        <p align="center"><input type="button" value="270"  size="3" onclick="move(UI, canvas, 270, eval(movementUI.distance.value)); return false;"></p>
+                        <p align="center"><input type="button" value="270"  size="3" onclick="move(UI, canvas, 270, eval(movementUI.distance.value),config); return false;"></p>
                         </form>
                     </div>
                     <div class="action-grid">
