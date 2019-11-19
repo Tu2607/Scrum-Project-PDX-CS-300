@@ -7,8 +7,8 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 	artifactSet = new Array();
 	visitedPoints = new Array();
 	/* For the max size*/
-	canvas.width = eval(config.xMax.value);
-	canvas.height = eval(config.yMax.value);
+	//canvas.width = eval(config.xMax.value);
+	//canvas.height = eval(config.yMax.value);
 
 	space = new Space(canvas.width, canvas.height);
 	ship = new Ship(8 * eval(config.xout.value), 8 * eval(config.yout.value), eval(config.energy.value), eval(config.supplies.value),eval(config.credits.value));
