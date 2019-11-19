@@ -21,11 +21,8 @@ function sensor(canvas) {
     var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
     var ship = JSON.parse(sessionStorage.getItem("ship"));
 
-    console.log(ship.xPos, ship.yPos);
-
     //removes supplies, and checks supplies ammount
-    //removeSupplies(ship);
-
+    removeSupplies(ship);
     //displays celestial objects within 2 Celestial points.
     //hightlight area scanned
     checkArtifacts(ship, artifacts, canvas)
@@ -76,6 +73,7 @@ function removeSupplies(ship){
     //Remove 2% supplies
     //ship.supplies -= 2;
     useSupplies(ship, 2);
+    sensorStatus(ship.supplies);
 
     //checks if supplies remain
     checkSupplies(ship);

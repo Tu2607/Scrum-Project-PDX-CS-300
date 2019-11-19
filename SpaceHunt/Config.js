@@ -35,6 +35,13 @@ function updateStatus(UI, xPos, yPos, energy, supplies, credits) {
 	UI.supplies.value = supplies;
 	UI.credits.value = credits;
 }
+
+//updates supplies in status
+//used in sensor
+function sensorStatus(supplies){
+	UI.supplies.value = supplies;
+}
+
 /*
 function blackhole(UI)
 
