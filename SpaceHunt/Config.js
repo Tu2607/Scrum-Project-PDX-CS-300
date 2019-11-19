@@ -11,7 +11,7 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 	//canvas.height = eval(config.yMax.value);
 
 	space = new Space(canvas.width, canvas.height);
-	ship = new Ship(8 * eval(config.xout.value), 8 * eval(config.yout.value), eval(config.energy.value), eval(config.supplies.value),eval(config.credits.value));
+	ship = new Ship(8 * eval(config.xout.value), 8 * (128 - eval(config.yout.value)), eval(config.energy.value), eval(config.supplies.value),eval(config.credits.value));
 	buildArtifactSet(config.cheatMode.checked, artifactSet);
 	addVisitedPoint(visitedPoints, ship.xPos, ship.yPos);
 
