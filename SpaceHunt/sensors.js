@@ -20,9 +20,12 @@ function sensor(canvas) {
 
     var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
     var ship = JSON.parse(sessionStorage.getItem("ship"));
+    var cheat = JSON.parse(sessionStorage.getItem("cheatMode"));
 
     //removes supplies, and checks supplies ammount
-    removeSupplies(ship);
+    if(cheat == false){
+        removeSupplies(ship);
+    }
     //displays celestial objects within 2 Celestial points.
     //hightlight area scanned
     checkArtifacts(ship, artifacts, canvas)
