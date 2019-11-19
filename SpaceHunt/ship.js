@@ -36,7 +36,6 @@ function getRandom(min,max){
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-
 function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
@@ -48,8 +47,8 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
   if(ship.yPos > space.ySize || ship.yPos <= 0 || ship.xPos > space.xSize || ship.xPos <= 0){
     // Random Worm Hole Case
     if(config.wormhole.value == "random"){
-      ship.yPos = getRandom(0,(space.xSize+1)) * 8;    
-      ship.xPos = getRandom(0,(space.xSize+1)) * 8;
+      ship.yPos = getRandom(0,(space.xSize+1));    
+      ship.xPos = getRandom(0,(space.xSize+1));
     } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
       ship.yPos = 50;
       ship.xPos = 50;
