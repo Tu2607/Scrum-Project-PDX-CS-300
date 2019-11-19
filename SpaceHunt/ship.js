@@ -97,6 +97,7 @@ function useEnergy(ship, amount)
 {
   ship.energy -= amount
     sessionStorage.setItem("energy", ship.energy);
+    sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
 // Use Supplies
@@ -104,6 +105,7 @@ function useSupplies(ship, amount)
 {
   ship.supplies -= amount
     sessionStorage.setItem("supplies", ship.supplies);
+    sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
 
