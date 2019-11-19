@@ -141,7 +141,13 @@ function drawShip(canvas, xPos, yPos) {
 	ctx.stroke(); 
 }
 
-function draw(canvas, space, artifactSet, visitedPoints, xPos, yPos) {
+function drawWormhole(canvas,wormhole){
+	var ctx = canvas.getContext("2d");
+	
+
+}
+
+function draw(canvas, space, artifactSet, visitedPoints, xPos, yPos, wormhole) {
 	
 	console.log(xPos, yPos);
 
@@ -154,6 +160,7 @@ function draw(canvas, space, artifactSet, visitedPoints, xPos, yPos) {
 	drawArtifactSet(canvas, artifactSet);
 	drawTrail(canvas, visitedPoints);
 	drawShip(canvas, xPos, yPos);
+	drawWormhole(canvas,wormhole);
 
 	canvas.getContext("2d").restore();
 }
