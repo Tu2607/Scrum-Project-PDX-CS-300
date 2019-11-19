@@ -208,7 +208,7 @@
 
     	canvas.addEventListener('mousemove', function(evt) {
     		var mousePos = getMousePos(canvas, evt);
-    		var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(mousePos.y/8);
+    		var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
     		writeMessage(canvas, message);
     	}, false);
 
