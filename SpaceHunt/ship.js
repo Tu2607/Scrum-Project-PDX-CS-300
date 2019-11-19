@@ -71,16 +71,16 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
   useSupplies(ship, 2)
   useEnergy(ship, distance)
 
-if(config.cheatMode == false) {
-  // Check Energy and Supplies
-  checkEnergy(ship) 
-  checkSupplies(ship)
-}
+  if(config.cheatMode.checked == false) {
+    // Check Energy and Supplies
+    checkEnergy(ship) 
+    checkSupplies(ship)
+  }
 
 
   addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
-    sessionStorage.setItem("ship", JSON.stringify(ship));
-    sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+  sessionStorage.setItem("ship", JSON.stringify(ship));
+  sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
 
   updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
 

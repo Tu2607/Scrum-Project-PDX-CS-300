@@ -152,13 +152,13 @@
                     <div class="moves-grid">
                         <form name="movementUI">
                         <p>MAKE A MOVE</p>
-                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="move(UI, canvas, 90, eval(movementUI.distance.value)); return false;">
+                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="move(UI, canvas, 90, eval(movementUI.distance.value), config); return false;">
                         </p>
-                        <p align="center"><input type="button"  value="180" size="3" onclick="move(UI, canvas, 180, eval(movementUI.distance.value)); return false;">
+                        <p align="center"><input type="button"  value="180" size="3" onclick="move(UI, canvas, 180, eval(movementUI.distance.value), config); return false;">
                         <input type="text" name=distance value=10 maxlength="3" size="4" >
-                        <input type="button" value="0" size="3" onclick="move(UI, canvas, 0, eval(movementUI.distance.value)); return false;">
+                        <input type="button" value="0" size="3" onclick="move(UI, canvas, 0, eval(movementUI.distance.value), config); return false;">
                         </p>
-                        <p align="center"><input type="button" value="270"  size="3" onclick="move(UI, canvas, 270, eval(movementUI.distance.value)); return false;"></p>
+                        <p align="center"><input type="button" value="270"  size="3" onclick="move(UI, canvas, 270, eval(movementUI.distance.value), config); return false;"></p>
                         </form>
                     </div>
                     <div class="action-grid">
