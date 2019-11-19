@@ -41,7 +41,7 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
 
   // Random Worm Hole Case
   if(config.random){
-    if(ship.yPos > space.ySize && ship.xPos > space.xSize){
+    if(ship.yPos > space.ySize && ship.yPos < 0 && ship.xPos > space.xSize && ship.xPos < 0){
       ship.yPos = Math.floor(Math.random()*(space.ySize+1));    
       ship.xPos = Math.floor(Math.random()*(space.xSize+1));   
     }  
