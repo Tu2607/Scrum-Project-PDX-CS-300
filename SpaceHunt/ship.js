@@ -77,8 +77,8 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
       ship.yPos = Math.floor(getRandom(0,15) * 8);    
       ship.xPos = Math.floor(getRandom(0,15) * 8);
     } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
-      ship.yPos = 50;
-      ship.xPos = 50;
+      ship.yPos = 50 * 8;
+      ship.xPos = 50 * 8;
     }
   }
 
