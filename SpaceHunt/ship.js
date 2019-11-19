@@ -74,7 +74,7 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
 
   // Update Energy and Supplies
   useSupplies(ship, 2)
-  useEnergy(ship, distance)
+  useEnergy(ship, distance * 10)
 
   if(config.cheatMode.checked == false) {
     // Check Energy and Supplies
