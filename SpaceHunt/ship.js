@@ -71,9 +71,11 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
   useSupplies(ship, 2)
   useEnergy(ship, distance)
 
+if(config.cheatMode == false) {
   // Check Energy and Supplies
   checkEnergy(ship) 
   checkSupplies(ship)
+}
 
 
   addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
