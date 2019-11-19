@@ -71,7 +71,7 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
     checkSupplies(ship)
   }
   //This is the case where the user move out of bounds and activated the wormhole behavior
-  if(ship.yPos > space.ySize || ship.yPos <= 0 || ship.xPos > space.xSize || ship.xPos <= 0){
+  if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
     // Random Worm Hole Case
     if(config.wormhole.value == "random"){
       ship.yPos = getRandom(0,15) * 8;    
