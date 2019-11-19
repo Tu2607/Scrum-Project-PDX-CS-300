@@ -91,14 +91,14 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
 function useEnergy(ship, amount)
 {
   ship.energy -= amount
-  sessionStorage.setItem("ship", JSON.stringify(ship));
+    sessionStorage.setItem("energy", ship.energy);
 }
 
 // Use Supplies
 function useSupplies(ship, amount)
 {
   ship.supplies -= amount
-  sessionStorage.setItem("ship", JSON.stringify(ship));
+    sessionStorage.setItem("supplies", ship.supplies);
 }
 
 
