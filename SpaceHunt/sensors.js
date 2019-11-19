@@ -70,17 +70,15 @@ function checkDistance(ship, artifact){
     return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 }
 
-//waiting on checkSupplies() to be implimented
+//waiting on checkSupplies() to be implimented   BRUH NOTE: checkSupplies() and useSupplies() have been implemented
 function removeSupplies(ship){
 
     //Remove 2% supplies
-    ship.supplies -= 2;
-    sessionStorage.setItem("ship", JSON.stringify(ship));
+    //ship.supplies -= 2;
+    useSupplies(ship, 2);
 
     //checks if supplies remain
-    ship.checkSupplies();
-    
-    return;
+    checkSupplies(ship);
 }
 
 
