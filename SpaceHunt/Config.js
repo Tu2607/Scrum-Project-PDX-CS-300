@@ -42,11 +42,11 @@ function updateStatus(UI, xPos, yPos, energy, supplies) {
 	UI.supplies.value = supplies;
 
 }
-
+/*
 function blackhole(UI)
 
 
-/*
+
 function activeCheat(){
 	if(Ship.energy.value < 0){
 		//change setting so that you don't die
