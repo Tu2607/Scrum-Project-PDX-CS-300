@@ -16,7 +16,7 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 		var y = Math.floor(Math.random()*101);	
 		wormhole = new Wormhole(x,y);
 	} else {
-		wormhole = new Wormhole(0,0);
+		wormhole = new Wormhole(50,50);
 	}
 	// save
 	sessionStorage.setItem("cheat", cheat);
