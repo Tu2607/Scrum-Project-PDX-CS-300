@@ -47,8 +47,8 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
   if(ship.yPos > space.ySize || ship.yPos <= 0 || ship.xPos > space.xSize || ship.xPos <= 0){
     // Random Worm Hole Case
     if(config.wormhole.value == "random"){
-      ship.yPos = getRandom(0,(space.xSize+1));    
-      ship.xPos = getRandom(0,(space.xSize+1));
+      ship.yPos = getRandom(0,15) * 8;    
+      ship.xPos = getRandom(0,15) * 8;
     } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
       ship.yPos = 50;
       ship.xPos = 50;
