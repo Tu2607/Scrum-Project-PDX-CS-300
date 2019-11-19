@@ -95,6 +95,12 @@
                     <p> Starting Y-Cord <input type="range" name="yCord" value="12" min="0" max="127" oninput="yout.value = yCord.value">
                         <output name="yout"> 12 </output>
                     </p>	
+                    <p> Max Size X<input type="range" name="xMax" value="128" min="0" max="127" oninput="xMaxOut.value = xMax.value">
+                        <output name="xMaxOut"> 127 </output>
+                    </p>
+                    <p>  Max Size Y<input type="range" name="yMax" value="128" min="0" max="127" oninput="yMaxOut.value = yMax.value">
+                        <output name="yMaxOut"> 127 </output>
+                    </p>
                 </form>
 			    <button type='button' onclick="updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints); return false"> Submit </button>
             </div>
