@@ -84,17 +84,23 @@
                     <break>
                     <p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
                     <break>
-                    <p> Random Wormhole <input type="checkbox" name="random" checked="checked"></p>
+                    <p> Random Wormhole <input type="radio" name="wormhole" value="random" checked="checked"/></p>
                     <break>
-                    <p> Fixed Wormhole <input type="checkbox" name="fixed" checked="checked"></p>
+                    <p> Fixed Wormhole <input type="radio" name="wormhole" value="fixed"/></p>
                     <break>
-                    <p> Starting X-Cord <input type="range" name="xCord" value="12" min="0" max="127" oninput="xout.value = xCord.value">
+                    <p> Starting X-Cord <input type="range" name="xCord" value="12" min="0" max="128" oninput="xout.value = xCord.value">
                         <output name="xout"> 12 </output>
                     </p>
                     <break>
-                    <p> Starting Y-Cord <input type="range" name="yCord" value="12" min="0" max="127" oninput="yout.value = yCord.value">
+                    <p> Starting Y-Cord <input type="range" name="yCord" value="12" min="0" max="128" oninput="yout.value = yCord.value">
                         <output name="yout"> 12 </output>
                     </p>	
+                    <p> Max Size X<input type="range" name="xMax" value="128" min="0" max="128" oninput="xMaxOut.value = xMax.value">
+                        <output name="xMaxOut"> 128 </output>
+                    </p>
+                    <p>  Max Size Y<input type="range" name="yMax" value="128" min="0" max="128" oninput="yMaxOut.value = yMax.value">
+                        <output name="yMaxOut"> 128 </output>
+                    </p>
                 </form>
 			    <button type='button' onclick="updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints); return false"> Submit </button>
             </div>
@@ -121,26 +127,6 @@
                             
                             <hr>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <br>
-                        <!--Displays Ships stats from .js file-->
-	                    <!--use in ship document.getElementById("coords").innerHTML = "Location: (" + this.xPos+ "," + this.yPos + ")";-->
-                        <p id="coords"></p>
-                        <p id="energy"></p>
-                        <p id="supplies"></p>
-                        <p id="credit"></p>
                         </form>
                     </div>
                 <br>

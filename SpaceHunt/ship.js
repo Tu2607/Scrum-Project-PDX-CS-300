@@ -32,6 +32,10 @@ function checkEnergy(ship) {
 // ***************************************
 // ************ Ship Movement ************
 // ***************************************
+function getRandom(min,max){
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
@@ -39,16 +43,6 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
   var ship = JSON.parse(sessionStorage.getItem("ship"));
 
-  if(ship.yPos > space.ySize && ship.yPos < 0 && ship.xPos > space.xSize && ship.xPos < 0){
-    // Random Worm Hole Case
-    if(config.random.checked){
-      ship.yPos = Math.floor(Math.random()*(space.ySize+1));    
-      ship.xPos = Math.floor(Math.random()*(space.xSize+1));   
-    } else if (config.fixed.checked){   //Fixed worm hole case
-      ship.yPos = 50;
-      ship.xPos = 50;
-    }
-  }
 
   // Up
   if(angle == 90)
@@ -69,12 +63,23 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
 
   // Update Energy and Supplies
   useSupplies(ship, 2)
-  useEnergy(ship, distance)
+  useEnergy(ship, distance * 10)
 
   if(config.cheatMode.checked == false) {
     // Check Energy and Supplies
     checkEnergy(ship) 
     checkSupplies(ship)
+  }
+  //This is the case where the user move out of bounds and activated the wormhole behavior
+  if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
+    // Random Worm Hole Case
+    if(config.wormhole.value == "random"){
+      ship.yPos = getRandom(0,15) * 8;    
+      ship.xPos = getRandom(0,15) * 8;
+    } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
+      ship.yPos = 50;
+      ship.xPos = 50;
+    }
   }
 
 
