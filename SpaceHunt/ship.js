@@ -87,7 +87,7 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
   sessionStorage.setItem("ship", JSON.stringify(ship));
   sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
 
-  updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
+  updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
   draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);
 }
