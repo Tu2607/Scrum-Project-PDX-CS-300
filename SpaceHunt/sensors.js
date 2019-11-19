@@ -42,7 +42,7 @@ function checkArtifacts(ship, artifacts, canvas) {
         artifact = artifacts[i];
 
         //if distance is <= 2
-        if(checkDistance(ship, artifact) <= 2){
+        if(checkDistance(ship, artifact) <= 2*8){
             //visiblility set to true so next time it will be drawn
             artifact.visibility = true;
             //testing
