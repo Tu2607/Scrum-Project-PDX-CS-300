@@ -31,18 +31,29 @@ function checkEnergy(ship) {
 // ***************************************
 // ************ Ship Movement ************
 // ***************************************
-function move(UI, canvas, angle, distance)
+function move(UI, canvas, angle, distance, config, wormhole) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
   var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
   var ship = JSON.parse(sessionStorage.getItem("ship"));
+  
 
   // Random Worm Hole Case
-
+  if(config.random){
+    if(ship.yPos == wormhole.yPos && ship.xPos == wormhole.xPos){
+      ship.yPos = Math.floor(Math.random()*101);    //The number 100 is just arbitrary and subject to changes
+      ship.xPos = Math.floor(Math.random()*101);   
+    }  
+  }
 
   // Fixed Worm Hole Case
-
+  if(config.fixed){
+    if(ship.yPos == wormhole.yPos && ship.xPos == wormhole.xPos){
+      ship.yPos = wormhole.yPos;
+      ship.xPos = wormhole.xPos;
+    }
+  }
 
   // Up
   if(angle == 90)

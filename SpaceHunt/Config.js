@@ -15,7 +15,7 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 		var x = Math.floor(Math.random()*101);	// 101 mean the maximum number is 100
 		var y = Math.floor(Math.random()*101);	
 		wormhole = new Wormhole(x,y);
-	} else {
+	} else if(config.fix){
 		wormhole = new Wormhole(50,50);
 	}
 	// save
@@ -31,7 +31,7 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 
 	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies);
 
-	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);  //Tu's note: I'll add in the wormhole
+	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos, wormhole);  //Tu's note: I'll add in the wormhole
 }
 
 
