@@ -142,19 +142,25 @@ function drawShip(canvas, xPos, yPos) {
 }
 
 
-function draw(canvas, space, artifactSet, visitedPoints, xPos, yPos) {
+function draw(canvas) {
 	
-	console.log(xPos, yPos);
+	var space = JSON.parse(sessionStorage.getItem("space"));
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+	var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
+	var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
 //	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 //	canvas.getContext("2d").save();
 //	canvas.getContext("2d").translate(xPos-100, yPos-100);
 //	canvas.getContext("2d").scale(3, 3);
 
+	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+	canvas.getContext("2d").save();
+
 	drawSpace(canvas, space);
 	drawArtifactSet(canvas, artifactSet);
 	drawTrail(canvas, visitedPoints);
-	drawShip(canvas, xPos, yPos);
+	drawShip(canvas, ship.xPos, ship.yPos);
 	
 
 	canvas.getContext("2d").restore();

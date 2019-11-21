@@ -1,7 +1,4 @@
 
-// Original code commented out below
-
-
 //sensors.js
 //Sensors shows nearby celestial objects
 
@@ -16,11 +13,11 @@
 //it consumed 2% of supplies, then check if supplies over 0
 //if successfull all CO's within 2 CP's are added to the map and displayed
 //list of 'celestial artificats' will be passed in also
-function sensor(canvas) {
+function sensor(canvas, artifacts, ship, cheat) {
 
-    var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
+    //use the most recent status of game
     var ship = JSON.parse(sessionStorage.getItem("ship"));
-    var cheat = JSON.parse(sessionStorage.getItem("cheatMode"));
+    var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
 
     //removes supplies, and checks supplies ammount
     if(cheat == false){
@@ -50,8 +47,10 @@ function checkArtifacts(ship, artifacts, canvas) {
         }
     }
 	
-    //draws artifact on map
+    //in case the visibility of any arfifacts were set to true, save it
 	sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
+
+    //draws artifact on map
 	drawArtifactSet(canvas, artifacts);
 }
 

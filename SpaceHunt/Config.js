@@ -1,8 +1,7 @@
 
-// Original code commented out below
+// TU's ORIGINAL CODE BELOW
 
-
-function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visitedPoints) {
+function updateConfig(canvas, space, ship, cheat, artifactSet, visitedPoints) {
 
 	artifactSet = new Array();
 	visitedPoints = new Array();
@@ -10,29 +9,36 @@ function updateConfig(config, UI, canvas, space, ship, cheat, artifactSet, visit
 	//canvas.width = eval(config.xMax.value);
 	//canvas.height = eval(config.yMax.value);
 
+	//create the environment from inputs
+	//the size of the game
 	space = new Space(canvas.width, canvas.height);
+
+	//the ship's starting coordinates and status 
 	ship = new Ship(8 * eval(config.xout.value), 8 * (128 - eval(config.yout.value)), eval(config.energy.value), eval(config.supplies.value),eval(config.credits.value));
+
+	//set the visibility of artifacts (true if cheat mode checked)
 	buildArtifactSet(config.cheatMode.checked, artifactSet);
+
+	//add the starting coordinates of ship as visited
 	addVisitedPoint(visitedPoints, ship.xPos, ship.yPos);
 
-	// save
+	//save this new game enviroment 
+	//(make sure to update if you change the game state)
 	sessionStorage.setItem("cheat", cheat);
-	sessionStorage.setItem("xPos", ship.xPos);
-	sessionStorage.setItem("yPos", ship.yPos);
-	sessionStorage.setItem("energy", ship.energy);
-	sessionStorage.setItem("supplies", ship.supplies);
-	sessionStorage.setItem("artifactSet", JSON.stringify(artifactSet));
-	sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
 	sessionStorage.setItem("space", JSON.stringify(space));
 	sessionStorage.setItem("ship", JSON.stringify(ship));
+	sessionStorage.setItem("artifactSet", JSON.stringify(artifactSet));
+	sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
 
-	updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+	//fill the status fields (UI on index)
+	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
-	draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);  //Tu's note: I'll add in the wormhole
+	draw(canvas);  //Tu's note: I'll add in the wormhole
 }
 
 
-function updateStatus(UI, xPos, yPos, energy, supplies, credits) {
+//updates status fields (on index page) with game status
+function updateStatus(xPos, yPos, energy, supplies, credits) {
 	UI.xValue.value = xPos/8;
 	UI.yValue.value = 128 -(yPos/8);
 	UI.energy.value = energy;
@@ -45,6 +51,7 @@ function updateStatus(UI, xPos, yPos, energy, supplies, credits) {
 function sensorStatus(supplies){
 	UI.supplies.value = supplies;
 }
+
 
 /*
 function blackhole(UI)

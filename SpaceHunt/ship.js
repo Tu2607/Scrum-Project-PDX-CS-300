@@ -1,8 +1,5 @@
 
-
-
-// Original code commented out below
-
+// MICHAEL's ORIGINAL CODE BELOW
 
 class Ship { 
   constructor(xPos, yPos, energy, supplies, credits) {
@@ -13,7 +10,6 @@ class Ship {
     this.credits = credits;
   }
 }
-
 
 function checkSupplies(ship) {
   if (ship.supplies < 1) {
@@ -36,12 +32,12 @@ function getRandom(min,max){
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
+function move(canvas, angle, distance) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
+  var ship = JSON.parse(sessionStorage.getItem("ship"));
   var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
-  var ship = JSON.parse(sessionStorage.getItem("ship"));
 
 
   // Up
@@ -65,11 +61,13 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
   useSupplies(ship, 2)
   useEnergy(ship, distance * 10)
 
+  //if cheat mode enabled, don't check so don't die
   if(config.cheatMode.checked == false) {
     // Check Energy and Supplies
     checkEnergy(ship) 
     checkSupplies(ship)
   }
+
   //This is the case where the user move out of bounds and activated the wormhole behavior
   if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
     // Random Worm Hole Case
@@ -82,30 +80,32 @@ function move(UI, canvas, angle, distance, config) // Tu's note: Pass in config 
     }
   }
 
-
+  //save the point just relocated to
   addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+
+  //save state
   sessionStorage.setItem("ship", JSON.stringify(ship));
   sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
 
-  updateStatus(UI, ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+  //update the status fields with these changes
+  updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
-  draw(canvas, space, artifactSet, visitedPoints, ship.xPos, ship.yPos);
+  //finally, draw
+  draw(canvas);
 }
 
 // Use Energy
 function useEnergy(ship, amount)
 {
   ship.energy -= amount
-    sessionStorage.setItem("energy", ship.energy);
-    sessionStorage.setItem("ship", JSON.stringify(ship));
+  sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
 // Use Supplies
 function useSupplies(ship, amount)
 {
   ship.supplies -= amount
-    sessionStorage.setItem("supplies", ship.supplies);
-    sessionStorage.setItem("ship", JSON.stringify(ship));
+  sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
 
