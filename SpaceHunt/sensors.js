@@ -33,6 +33,7 @@ function sensor() {
     //hightlight area scanned
     checkArtifacts(ship, artifacts)
 
+    draw();
     return;
 }
 
@@ -55,9 +56,6 @@ function checkArtifacts(ship, artifacts) {
 	
     //in case the visibility of any arfifacts were set to true, save state
 	sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
-
-    //finally
-    draw();
 }
 
 //function to check distance 

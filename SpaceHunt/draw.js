@@ -89,7 +89,8 @@ function drawArtifact(artifact)
 		else // it's a planet
 		{
 			var innerRadius = 4;
-			var outerRadius = 20 + 16 * Math.abs(Math.cos(animateAngle));
+			//var outerRadius = 20 + 16 * Math.abs(Math.cos(animateAngle));
+			var outerRadius = 20;
 			var radius = 20; 
 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
@@ -159,8 +160,6 @@ function draw() {
 	drawShip();
 
 	canvas.getContext("2d").restore();
-
-	animateAngle += Math.PI/64;
 
 	requestAnimationFrame(draw);
 }
