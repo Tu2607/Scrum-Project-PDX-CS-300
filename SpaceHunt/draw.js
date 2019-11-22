@@ -1,5 +1,9 @@
-function drawSpace(canvas, space)
+function drawSpace()
 {
+	var space = JSON.parse(sessionStorage.getItem("space"));
+
+	console.log(space.xSize, " ", space.ySize);
+
 	var ctx = canvas.getContext("2d");
 	var grd = ctx.createRadialGradient(space.size/2, space.size/2, 0, space.size/2, space.size/2, space.size/2);
 	grd.addColorStop(0, "#504D4C");
@@ -44,16 +48,16 @@ function drawSpace(canvas, space)
 	}
 }
 
-function drawArtifactSet(canvas, artifactSet) {
+function drawArtifactSet() {
 
 	var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
 
 	for(var i = 0; i < artifactSet.length; i++) {
-		drawArtifact(canvas, artifactSet[i]);
+		drawArtifact(artifactSet[i]);
 	}
 }
 
-function drawArtifact(canvas, artifact)
+function drawArtifact(artifact)
 {
 	if(artifact.visibility)
 	{
@@ -108,7 +112,9 @@ function drawArtifact(canvas, artifact)
 	}
 }
 
-function drawTrail(canvas, visitedPoints) {
+function drawTrail() {
+
+	var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
 	var ctx = canvas.getContext("2d");
 	ctx.strokeStyle = " #f9e79f";
@@ -123,32 +129,29 @@ function drawTrail(canvas, visitedPoints) {
 	ctx.closePath();
 }
 
-function drawShip(canvas, xPos, yPos) {
+function drawShip() {
+
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
 
 	var ctx = canvas.getContext("2d");
 	ctx.strokeStyle = "pink";
 	ctx.lineWidth = 5;
 
 	ctx.beginPath();
-	ctx.moveTo(xPos - 16, yPos - 16);
-	ctx.lineTo(xPos + 16, yPos + 16);
+	ctx.moveTo(ship.xPos - 16, ship.yPos - 16);
+	ctx.lineTo(ship.xPos + 16, ship.yPos + 16);
 	ctx.closePath();
 	ctx.stroke(); 
 	ctx.beginPath();
-	ctx.moveTo(xPos + 16, yPos - 16);
-	ctx.lineTo(xPos - 16, yPos + 16);
+	ctx.moveTo(ship.xPos + 16, ship.yPos - 16);
+	ctx.lineTo(ship.xPos - 16, ship.yPos + 16);
 	ctx.closePath();
 	ctx.stroke(); 
 }
 
 
-function draw(canvas) {
+function draw() {
 	
-	var space = JSON.parse(sessionStorage.getItem("space"));
-	var ship = JSON.parse(sessionStorage.getItem("ship"));
-	var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
-	var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
-
 //	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 //	canvas.getContext("2d").save();
 //	canvas.getContext("2d").translate(xPos-100, yPos-100);
@@ -157,10 +160,10 @@ function draw(canvas) {
 	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 	canvas.getContext("2d").save();
 
-	drawSpace(canvas, space);
-	drawArtifactSet(canvas, artifactSet);
-	drawTrail(canvas, visitedPoints);
-	drawShip(canvas, ship.xPos, ship.yPos);
+	drawSpace();
+	drawArtifactSet();
+	drawTrail();
+	drawShip();
 	
 
 	canvas.getContext("2d").restore();

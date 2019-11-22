@@ -1,7 +1,7 @@
 
 // TU's ORIGINAL CODE BELOW
 
-function updateConfig(canvas, space, ship, cheat, artifactSet, visitedPoints) {
+function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 
 	artifactSet = new Array();
 	visitedPoints = new Array();
@@ -11,12 +11,12 @@ function updateConfig(canvas, space, ship, cheat, artifactSet, visitedPoints) {
 
 	//create the environment from inputs
 	//the size of the game
-	space = new Space(canvas.width, canvas.height);
+	space = new Space(8 * eval(config.xMaxOut.value), 8 * eval(config.yMaxOut.value));
 
 	//the ship's starting coordinates and status 
-	ship = new Ship(8 * eval(config.xout.value), 8 * (128 - eval(config.yout.value)), eval(config.energy.value), eval(config.supplies.value),eval(config.credits.value));
+	ship = new Ship(8 * eval(config.xout.value), 8 * (eval(config.xMaxOut.value) - eval(config.yout.value)), eval(config.energy.value), eval(config.supplies.value), eval(config.credits.value));
 
-	//set the visibility of artifacts (true if cheat mode checked)
+	//set the visibility of artifacts (true for all if cheat mode checked)
 	buildArtifactSet(config.cheatMode.checked, artifactSet);
 
 	//add the starting coordinates of ship as visited
@@ -24,7 +24,6 @@ function updateConfig(canvas, space, ship, cheat, artifactSet, visitedPoints) {
 
 	//save this new game enviroment 
 	//(make sure to update if you change the game state)
-	sessionStorage.setItem("cheat", cheat);
 	sessionStorage.setItem("space", JSON.stringify(space));
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 	sessionStorage.setItem("artifactSet", JSON.stringify(artifactSet));
@@ -33,14 +32,14 @@ function updateConfig(canvas, space, ship, cheat, artifactSet, visitedPoints) {
 	//fill the status fields (UI on index)
 	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
-	draw(canvas);  //Tu's note: I'll add in the wormhole
+	draw();  //Tu's note: I'll add in the wormhole
 }
 
 
 //updates status fields (on index page) with game status
 function updateStatus(xPos, yPos, energy, supplies, credits) {
-	UI.xValue.value = xPos/8;
-	UI.yValue.value = 128 -(yPos/8);
+	UI.xValue.value = xPos/8
+	UI.yValue.value = (eval(config.yMaxOut.value)*8 - yPos)/8;
 	UI.energy.value = energy;
 	UI.supplies.value = supplies;
 	UI.credits.value = credits;

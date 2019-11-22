@@ -25,14 +25,15 @@ function checkEnergy(ship) {
   }
 }
 
-// ***************************************
-// ************ Ship Movement ************
-// ***************************************
 function getRandom(min,max){
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function move(canvas, angle, distance) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
+
+// ***************************************
+// ************ Ship Movement ************
+// ***************************************
+function move(angle, distance) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
   var ship = JSON.parse(sessionStorage.getItem("ship"));
@@ -90,14 +91,18 @@ function move(canvas, angle, distance) // Tu's note: Pass in config to check wor
   //update the status fields with these changes
   updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
-  //finally, draw
-  draw(canvas);
+  console.log(ship.xPos, ship.yPos);
+
+  //finally
+  draw();
 }
 
 // Use Energy
 function useEnergy(ship, amount)
 {
   ship.energy -= amount
+
+  //save ship since energy val updated
   sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
@@ -105,6 +110,8 @@ function useEnergy(ship, amount)
 function useSupplies(ship, amount)
 {
   ship.supplies -= amount
+
+  //save ship since supplies val updated
   sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 

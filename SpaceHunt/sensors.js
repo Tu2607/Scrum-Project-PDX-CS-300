@@ -13,25 +13,31 @@
 //it consumed 2% of supplies, then check if supplies over 0
 //if successfull all CO's within 2 CP's are added to the map and displayed
 //list of 'celestial artificats' will be passed in also
-function sensor(canvas, artifacts, ship, cheat) {
+function sensor() {
 
     //use the most recent status of game
     var ship = JSON.parse(sessionStorage.getItem("ship"));
     var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
 
     //removes supplies, and checks supplies ammount
-    if(cheat == false){
+    if(config.cheatMode.checked == false){
         removeSupplies(ship);
+    }
+    else {
+        //Remove 2% supplies
+        //ship.supplies -= 2;
+        useSupplies(ship, 2);
+        sensorStatus(ship.supplies);
     }
     //displays celestial objects within 2 Celestial points.
     //hightlight area scanned
-    checkArtifacts(ship, artifacts, canvas)
+    checkArtifacts(ship, artifacts)
 
     return;
 }
 
 //iterates through list of CO's checking if any are less then 2 away
-function checkArtifacts(ship, artifacts, canvas) {
+function checkArtifacts(ship, artifacts) {
 
 
     //iterate through each object in artifacts
@@ -47,11 +53,11 @@ function checkArtifacts(ship, artifacts, canvas) {
         }
     }
 	
-    //in case the visibility of any arfifacts were set to true, save it
+    //in case the visibility of any arfifacts were set to true, save state
 	sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
 
-    //draws artifact on map
-	drawArtifactSet(canvas, artifacts);
+    //finally
+    draw();
 }
 
 //function to check distance 
