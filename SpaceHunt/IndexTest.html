@@ -23,7 +23,7 @@
         var ship = new Ship(xStart, yStart, energy, supplies, credits);
         var wormhole; //checking this with everyone
 
-        //var animateAngle = 0;
+        var animateAngle = 0;
         var requestAnimationFrame = window.requestAnimationFrame || 
                             window.mozRequestAnimationFrame || 
                             window.webkitRequestAnimationFrame || 
@@ -64,6 +64,9 @@
                 <textarea id="display" name="text-output" alight="left" readonly="true" rows="20">
                 Log:
                 </textarea>
+                <p></p>
+                <p></p>
+                <canvas id="mouseCanvas" width="120" height="40"></canvas>
             </form>
         </div>
 
@@ -136,6 +139,17 @@
                         </form>
                     </div>
                 <br>
+
+                <script>
+
+                var mouseCanvas = document.getElementById('mouseCanvas');
+
+                canvas.addEventListener('mousemove', function(evt) {
+                    var mousePos = getMousePos(canvas, evt);
+                    var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
+                    writeMessage(mouseCanvas, message);}, false);
+
+                </script>
 
 
 
@@ -219,34 +233,6 @@
     <script>
         window.onload = updateConfig(space, ship, artifactSet, visitedPoints)
     </script>
-
-
-    <script>
-        /*
-        function writeMessage(canvas, message) {
-            var context = canvas.getContext('2d');
-            context.clearRect(450, 0, 125, 30);
-            context.font = '18pt Calibri';
-            context.fillStyle = 'black';
-            context.fillText(message, 450, 25);
-        }
-        var canvas = document.getElementById('canvas');
-        var context = canvas.getContext('2d');
-        canvas.addEventListener('mousemove', function(evt) {
-            var mousePos = getMousePos(canvas, evt);
-            var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
-            writeMessage(canvas, message);
-        }, false);
-        function getMousePos(canvas, evt) {
-            var rect = canvas.getBoundingClientRect();
-            return {
-                x: evt.clientX - rect.left,
-                y: evt.clientY - rect.top
-            };
-        }
-        */
-    </script>
-
 
 
 </body>

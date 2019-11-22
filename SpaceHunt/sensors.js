@@ -33,7 +33,6 @@ function sensor() {
     //hightlight area scanned
     checkArtifacts(ship, artifacts)
 
-    draw();
     return;
 }
 

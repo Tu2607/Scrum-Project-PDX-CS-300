@@ -89,8 +89,8 @@ function drawArtifact(artifact)
 		else // it's a planet
 		{
 			var innerRadius = 4;
-			//var outerRadius = 20 + 16 * Math.abs(Math.cos(animateAngle));
-			var outerRadius = 20;
+			var outerRadius = 20 + 16 * Math.abs(Math.cos(animateAngle));
+			//var outerRadius = 20;
 			var radius = 20; 
 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
@@ -161,5 +161,26 @@ function draw() {
 
 	canvas.getContext("2d").restore();
 
+	animateAngle += Math.PI/100;
+
 	requestAnimationFrame(draw);
 }
+
+
+function writeMessage(canvas, message) {
+	var context = canvas.getContext('2d');
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.font = '20pt Arial';
+	context.fillStyle = 'black';
+	context.fillText(message, 20, 20);
+}
+
+function getMousePos(canvas, evt) {
+	var rect = canvas.getBoundingClientRect();
+	return {
+		x: evt.clientX - rect.left,
+		y: evt.clientY - rect.top
+	};
+}
+
+

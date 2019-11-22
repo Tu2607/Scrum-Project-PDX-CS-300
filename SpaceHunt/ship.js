@@ -30,6 +30,73 @@ function getRandom(min,max){
 }
 
 
+// to be called on each step of move
+function checkCollision(ship, artifacts)
+{
+    for(var i = 0; i < artifacts.length; i++){
+        artifact = artifacts[i];
+
+        //if distance is = 0
+        if(checkDistance(ship, artifact) = 0){
+
+        	artifact.visibility = true;
+
+	        //lose supplies
+	        //lose health
+        }
+    }
+  sessionStorage.setItem("ship", JSON.stringify(ship));
+  sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
+}
+
+
+// to be called at the end of a series of moves
+function checkOrbit(ship)
+{
+    for(var i = 0; i < artifacts.length; i++){
+        artifact = artifacts[i];
+
+        //if distance is = 1
+        if(checkDistance(ship, artifact) = 1*8){
+
+        	artifact.visibility = true;
+            alert("You're close to " + artifact.name + ", get in orbit?");
+
+            if(true)
+            {
+	            ship.inOrbit = true;
+				useEnergy(ship, 10);
+	            //disable movement buttons
+	            //enable as 'de-orbit' button
+	            //enable land button
+            }
+        }
+    }
+  sessionStorage.setItem("ship", JSON.stringify(ship));
+  sessionStorage.setItem("artifactSet", JSON.stringify(artifactSet));
+}
+
+
+// can be called if de-orbit button is enabled
+function leaveOrbit()
+{
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+
+	ship.inOrbit = false;
+	useEnergy(ship, 10);
+	//enable movement buttons
+	//enable as 'orbit' button
+
+  	//if cheat mode enabled, don't check so don't die
+  	if(config.cheatMode.checked == false) {
+
+	    checkEnergy(ship) 
+	}
+
+	sessionStorage.setItem("ship", JSON.stringify(ship));
+}
+
+
 // ***************************************
 // ************ Ship Movement ************
 // ***************************************
@@ -92,9 +159,6 @@ function move(angle, distance) // Tu's note: Pass in config to check wormhole ch
   updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
   console.log(ship.xPos, ship.yPos);
-
-  //finally
-  draw();
 }
 
 // Use Energy
