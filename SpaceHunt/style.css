@@ -121,3 +121,16 @@ textarea{
   height: 400px;
   width: 400px;
 }
+
+#admintabhidden {
+    display: none;;
+}
+#copanel {
+    display: none;;
+}
+
+#admintabshown {
+    display: block;
+}
+#passwordEntry {
+}

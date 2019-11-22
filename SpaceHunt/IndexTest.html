@@ -42,8 +42,13 @@
 
 
     <h1>SpaceHunt</h1>
+
+
+
     <p></p>
+
     <div class="grid-container">
+    
 
 
         <!--Map--> 
@@ -69,7 +74,9 @@
             <div class="tab-menu">
                 <button class="tablinks" id="main" onclick="nextTab(event, 'Play')">Play</button>
                 <button class="tablinks" onclick="nextTab(event, 'Config')">Config</button>
+                <button class="tablinks" onclick="nextTab(event, 'Admin')">Admin</button>
             </div>
+
 
             <!--Config Tab-->
             <div id="Config" class="tabcontent">
@@ -102,6 +109,7 @@
                 </form>
 			    <button type='button' onclick="updateConfig(space, ship, artifactSet, visitedPoints); return false"> Submit </button>
             </div>
+
 
 
             <!--Play Tab-->
@@ -153,12 +161,39 @@
             </div>
 
 
+            <div id="Admin" class="tabcontent">
+              <form name="admin">
+                    <div id="copanel">
+                        <p> Password Good</p>
+
+                    </div>
+
+                </form>
+            </div>
+
+            <script>
+                function login(){
+                    if(document.getElementById('password').value == "ADMIN"){
+                        alert("YAY");
+                        document.getElementById('passwordEntry').setAttribute("id", "admintabhidden");
+                        document.getElementById('copanel').setAttribute("id", "admintabshown");
+                    }
+                    else{
+                        alert("WRONG!")
+                    }
+                }
+            </script>
+
 
             
 
         </div>
 
 
+    </div>
+    <div id="passwordEntry" align="right"> 
+        Enter Password: <input type="Password" id="password">
+        <button onclick="login()">Submit</button>
     </div>
 
 
