@@ -2,8 +2,6 @@ function drawSpace()
 {
 	var space = JSON.parse(sessionStorage.getItem("space"));
 
-	console.log(space.xSize, " ", space.ySize);
-
 	var ctx = canvas.getContext("2d");
 	var grd = ctx.createRadialGradient(space.size/2, space.size/2, 0, space.size/2, space.size/2, space.size/2);
 	grd.addColorStop(0, "#504D4C");
@@ -91,7 +89,7 @@ function drawArtifact(artifact)
 		else // it's a planet
 		{
 			var innerRadius = 4;
-			var outerRadius = 24;
+			var outerRadius = 20 + 16 * Math.abs(Math.cos(animateAngle));
 			var radius = 20; 
 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
@@ -152,11 +150,6 @@ function drawShip() {
 
 function draw() {
 	
-//	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-//	canvas.getContext("2d").save();
-//	canvas.getContext("2d").translate(xPos-100, yPos-100);
-//	canvas.getContext("2d").scale(3, 3);
-
 	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 	canvas.getContext("2d").save();
 
@@ -164,7 +157,10 @@ function draw() {
 	drawArtifactSet();
 	drawTrail();
 	drawShip();
-	
 
 	canvas.getContext("2d").restore();
+
+	animateAngle += Math.PI/64;
+
+	requestAnimationFrame(draw);
 }
