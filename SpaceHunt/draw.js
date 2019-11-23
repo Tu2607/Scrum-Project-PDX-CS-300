@@ -11,7 +11,7 @@ function drawSpace()
 	ctx.fillRect(0, 0, space.size, space.size); 
 
 	ctx.strokeStyle = "#572C23";
-	ctx.lineWidth = 0.5;
+	ctx.lineWidth = 0.2;
 	for(var i = 0; i < space.size; i+=space.step)
 	{
 		ctx.beginPath();

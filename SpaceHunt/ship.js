@@ -135,12 +135,6 @@ function move(angle, distance) // Tu's note: Pass in config to check wormhole ch
   var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
-  // if an object has same CP as ship
-  // should be called on every CP move
-  checkCollision(ship);
-  // if an object is within 1 CP, a
-  // shoud be called after a series of CP moves
-  checkOrbitRange(ship);
 
   // Up
   if(angle == 90)
@@ -184,6 +178,13 @@ function move(angle, distance) // Tu's note: Pass in config to check wormhole ch
 
   //save the point just relocated to
   addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+  
+  // if an object has same CP as ship
+  // should be called on every CP move
+  checkCollision(ship);
+  // if an object is within 1 CP, a
+  // shoud be called after a series of CP moves
+  checkOrbitRange(ship);
 
   //save state
   sessionStorage.setItem("ship", JSON.stringify(ship));
