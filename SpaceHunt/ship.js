@@ -49,6 +49,7 @@ function checkCollision(ship)
 		    alert("BOOM BANG CRASH!");
         }
     }
+
   sessionStorage.setItem("ship", JSON.stringify(ship));
   sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
 }
@@ -67,16 +68,17 @@ function checkOrbitRange(ship)
 
         	artifact.visibility = true;
 
-            alert("You're close to " + artifact.name + ", you may enter orbit");
+          alert("You're close to " + artifact.name + ", you may enter orbit");
 
 	        //enable orbit button
 
-            //disable movement buttons
+          //disable movement buttons
 
         }
     }
+
   sessionStorage.setItem("ship", JSON.stringify(ship));
-  sessionStorage.setItem("artifactSet", JSON.stringify(artifactSet));
+  sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
 }
 
 
@@ -94,7 +96,7 @@ function enterOrbit()
     //enable land button
 
     ship.inOrbit = true;
-	useEnergy(ship, 10);
+    useEnergy(ship, 10);
 
   	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -138,7 +140,7 @@ function move(angle, distance) // Tu's note: Pass in config to check wormhole ch
   checkCollision(ship);
   // if an object is within 1 CP, a
   // shoud be called after a series of CP moves
-  //checkOrbitRange(ship);
+  checkOrbitRange(ship);
 
   // Up
   if(angle == 90)
