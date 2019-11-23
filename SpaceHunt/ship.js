@@ -30,20 +30,23 @@ function getRandom(min,max){
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-
+//FOR TESTING COLLISION/ORBIT/LANDING ON PLANET
 // to be called on each step of move
-function checkCollision(ship, artifacts)
+function checkCollision(ship)
 {
+	var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
+
     for(var i = 0; i < artifacts.length; i++){
         artifact = artifacts[i];
 
         //if distance is = 0
-        if(checkDistance(ship, artifact) = 0){
+        if(checkDistance(ship, artifact) == 0){
 
         	artifact.visibility = true;
 
-	        //lose supplies
 	        //lose health
+
+		    alert("BOOM BANG CRASH!");
         }
     }
   sessionStorage.setItem("ship", JSON.stringify(ship));
@@ -52,29 +55,48 @@ function checkCollision(ship, artifacts)
 
 
 // to be called at the end of a series of moves
-function checkOrbit(ship)
+function checkOrbitRange(ship)
 {
+	var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
+
     for(var i = 0; i < artifacts.length; i++){
         artifact = artifacts[i];
 
         //if distance is = 1
-        if(checkDistance(ship, artifact) = 1*8){
+        if(checkDistance(ship, artifact) == 1*8){
 
         	artifact.visibility = true;
-            alert("You're close to " + artifact.name + ", get in orbit?");
 
-            if(true)
-            {
-	            ship.inOrbit = true;
-				      useEnergy(ship, 10);
-	            //disable movement buttons
-	            //enable as 'de-orbit' button
-	            //enable land button
-            }
+            alert("You're close to " + artifact.name + ", you may enter orbit");
+
+	        //enable orbit button
+
+            //disable movement buttons
+
         }
     }
   sessionStorage.setItem("ship", JSON.stringify(ship));
   sessionStorage.setItem("artifactSet", JSON.stringify(artifactSet));
+}
+
+
+// can be called if orbit button is enabled
+function enterOrbit()
+{
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+
+  	//if cheat mode enabled, don't check so don't die
+  	if(config.cheatMode.checked == false) {
+
+  		checkEnergy(ship);
+  	}
+
+    //enable land button
+
+    ship.inOrbit = true;
+	useEnergy(ship, 10);
+
+  	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
 
@@ -83,16 +105,19 @@ function leaveOrbit()
 {
 	var ship = JSON.parse(sessionStorage.getItem("ship"));
 
-	ship.inOrbit = false;
-	useEnergy(ship, 10);
-	//enable movement buttons
-	//enable as 'orbit' button
 
   	//if cheat mode enabled, don't check so don't die
   	if(config.cheatMode.checked == false) {
 
 	    checkEnergy(ship) 
 	}
+
+	ship.inOrbit = false;
+	useEnergy(ship, 10);
+
+	//enable movement buttons
+	//enable 'orbit' button
+	//disable land button
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -108,6 +133,12 @@ function move(angle, distance) // Tu's note: Pass in config to check wormhole ch
   var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
+  // if an object has same CP as ship
+  // should be called on every CP move
+  checkCollision(ship);
+  // if an object is within 1 CP, a
+  // shoud be called after a series of CP moves
+  //checkOrbitRange(ship);
 
   // Up
   if(angle == 90)
@@ -159,7 +190,7 @@ function move(angle, distance) // Tu's note: Pass in config to check wormhole ch
   //update the status fields with these changes
   updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
-  console.log(ship.xPos, ship.yPos);
+
 }
 
 // Use Energy
