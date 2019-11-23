@@ -2,12 +2,13 @@
 // MICHAEL's ORIGINAL CODE BELOW
 
 class Ship { 
-  constructor(xPos, yPos, energy, supplies, credits) {
+  constructor(xPos, yPos, energy, supplies, credits, orbit) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.energy = energy;
     this.supplies = supplies;
     this.credits = credits;
+    this.inOrbit = orbit;
   }
 }
 
@@ -65,7 +66,7 @@ function checkOrbit(ship)
             if(true)
             {
 	            ship.inOrbit = true;
-				useEnergy(ship, 10);
+				      useEnergy(ship, 10);
 	            //disable movement buttons
 	            //enable as 'de-orbit' button
 	            //enable land button

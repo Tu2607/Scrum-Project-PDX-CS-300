@@ -132,18 +132,31 @@ function drawShip() {
 
 	var ship = JSON.parse(sessionStorage.getItem("ship"));
 
+	var x;
+	var y;
+
+	if(ship.inOrbit)
+	{
+		x = ship.xPos + 50 * Math.cos(animateAngle);
+		y = ship.yPos + 50 * Math.sin(animateAngle);
+	}
+	else
+	{
+		x = ship.xPos + 10 * Math.cos(animateAngle);
+		y = ship.yPos + 10 * Math.sin(animateAngle);
+	}
 	var ctx = canvas.getContext("2d");
 	ctx.strokeStyle = "pink";
 	ctx.lineWidth = 5;
 
 	ctx.beginPath();
-	ctx.moveTo(ship.xPos - 16, ship.yPos - 16);
-	ctx.lineTo(ship.xPos + 16, ship.yPos + 16);
+	ctx.moveTo(x - 16, y - 16);
+	ctx.lineTo(x + 16, y + 16);
 	ctx.closePath();
 	ctx.stroke(); 
 	ctx.beginPath();
-	ctx.moveTo(ship.xPos + 16, ship.yPos - 16);
-	ctx.lineTo(ship.xPos - 16, ship.yPos + 16);
+	ctx.moveTo(x + 16, y - 16);
+	ctx.lineTo(x - 16, y + 16);
 	ctx.closePath();
 	ctx.stroke(); 
 }

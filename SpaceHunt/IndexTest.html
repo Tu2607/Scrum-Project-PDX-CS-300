@@ -17,10 +17,11 @@
         var energy = 1000;
         var supplies = 100;
         var credits = 100;
+        var orbit = false;
         var artifactSet = [];
         var visitedPoints = [];
         var space = new Space(xSize, ySize);
-        var ship = new Ship(xStart, yStart, energy, supplies, credits);
+        var ship = new Ship(xStart, yStart, energy, supplies, credits, orbit);
         var wormhole; //checking this with everyone
 
         var animateAngle = 0;
