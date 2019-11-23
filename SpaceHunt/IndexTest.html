@@ -145,10 +145,46 @@
 
                 var mouseCanvas = document.getElementById('mouseCanvas');
 
+                // listen for mouse position on main canvas
                 canvas.addEventListener('mousemove', function(evt) {
                     var mousePos = getMousePos(canvas, evt);
                     var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
                     writeMessage(mouseCanvas, message);}, false);
+
+				// gets CP pointed at by mouse on main canvas 
+				function getMousePos(canvas, evt) {
+					var rect = canvas.getBoundingClientRect();
+					return {
+						x: evt.clientX - rect.left,
+						y: evt.clientY - rect.top
+					};
+				}
+
+				// writes the coordinates pointed at by mouse on to mouseCanvas
+				function writeMessage(canvas, message) {
+					var context = canvas.getContext('2d');
+					context.clearRect(0, 0, canvas.width, canvas.height);
+					context.font = '20pt Arial';
+					context.fillStyle = 'black';
+					context.fillText(message, 10, 20);
+				}
+
+				// listen for keypress, call move function
+                window.addEventListener('keydown', doKeyDown, false);
+                function doKeyDown(e){
+                	if(e.keyCode == 68 || e.keyCode == 39){ // d or right arrow : 0
+                		move(0, eval(movementUI.distance.value));
+                	}
+                	else if(e.keyCode == 87 || e.keyCode == 38){ // w or up arrow : 90
+                		move(90, eval(movementUI.distance.value));
+                	}
+                	else if(e.keyCode == 65 || e.keyCode == 37){ // a or left arrow : 180
+                		move(180, eval(movementUI.distance.value));
+                	}	
+                	else if(e.keyCode == 83 || e.keyCode == 40){ // s or up arrow : 270
+                		move(270, eval(movementUI.distance.value));
+                	}
+                }
 
                 </script>
 
