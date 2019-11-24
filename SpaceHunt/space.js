@@ -17,7 +17,7 @@ class Space {
 	}
 }
 
-class BaxMax {
+class BadMax {
 	constructor(xPos, yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;

@@ -135,7 +135,7 @@ function checkBadMax(ship,BadMax)
 // ***************************************
 // ************ Ship Movement ************
 // ***************************************
-function move(angle, distance,BadMax) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
+function move(angle, distance,BadMax) 
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
   var ship = JSON.parse(sessionStorage.getItem("ship"));
