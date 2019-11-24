@@ -122,17 +122,29 @@ function leaveOrbit()
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
+function checkBadMax(ship,BadMax)
+{
+  if(ship.yPos == BadMax.yPos && ship.xPos == BadMax.xPos){
+    ship.credits = ship.credits - 10;
+  }
+
+  sessionStorage.setItem("ship",JSON.stringify(ship));
+}
+
 
 // ***************************************
 // ************ Ship Movement ************
 // ***************************************
-function move(angle, distance) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
+function move(angle, distance,BadMax) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
   var ship = JSON.parse(sessionStorage.getItem("ship"));
   var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
+  //Randomize BadMax Movement before each movement
+  BadMax.xPos = Math.floor(getRandom(0,15)*8);
+  BadMax.yPos = Math.floor(getRandom(0,15)*8);
 
   // Up
   if(angle == 90)
@@ -183,6 +195,10 @@ function move(angle, distance) // Tu's note: Pass in config to check wormhole ch
   // if an object is within 1 CP, a
   // shoud be called after a series of CP moves
   checkOrbitRange(ship);
+
+  //Check if the ship has the same CP as BadMax
+  //Called aafter every move
+  checkBadMax(ship,BadMax);
 
   //save state
   sessionStorage.setItem("ship", JSON.stringify(ship));
