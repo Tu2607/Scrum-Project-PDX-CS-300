@@ -146,8 +146,8 @@ function move(angle, distance,BadMax)
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
   //Randomize BadMax Movement before each movement
-  BadMax.xPos = Math.floor(getRandom(0,15)*8);
-  BadMax.yPos = Math.floor(getRandom(0,15)*8);
+  BadMax.xPos = Math.floor(getRandom(0,20)*8);
+  BadMax.yPos = Math.floor(getRandom(0,20)*8);
 
   // Up
   if(angle == 90)
