@@ -23,8 +23,9 @@
         var space = new Space(xSize, ySize);
         var ship = new Ship(xStart, yStart, energy, supplies, credits, orbit);
         //var wormhole; //checking this with everyone
+
         //BadMax is initialized randomly with range from 5 to 20. The range is subject to change.
-        var BadMax = new BadMax(xStart, yStart);
+        var Badmax = new BadMax(xStart, yStart);
 
         var animateAngle = 0;
         var requestAnimationFrame = window.requestAnimationFrame || 
@@ -195,13 +196,13 @@
                     <div class="moves-grid">
                         <form name="movementUI">
                         <p>MAKE A MOVE</p>
-                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="move(90, eval(movementUI.distance.value),BadMax); return false;">
+                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="move(90, eval(movementUI.distance.value),Badmax); return false;">
                         </p>
-                        <p align="center"><input type="button"  value="180" size="3" onclick="move(180, eval(movementUI.distance.value),BadMax); return false;">
+                        <p align="center"><input type="button"  value="180" size="3" onclick="move(180, eval(movementUI.distance.value),Badmax); return false;">
                         <input type="text" name=distance value=10 maxlength="3" size="4" >
-                        <input type="button" value="0" size="3" onclick="move(0, eval(movementUI.distance.value),BadMax); return false;">
+                        <input type="button" value="0" size="3" onclick="move(0, eval(movementUI.distance.value),Badmax); return false;">
                         </p>
-                        <p align="center"><input type="button" value="270"  size="3" onclick="move(270, eval(movementUI.distance.value),BadMax); return false;"></p>
+                        <p align="center"><input type="button" value="270"  size="3" onclick="move(270, eval(movementUI.distance.value),Badmax); return false;"></p>
                         </form>
                     </div>
                     <div class="action-grid">
