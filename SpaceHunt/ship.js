@@ -57,12 +57,18 @@ function checkCollision(ship)
 // to be called at the end of a series of moves
 function checkOrbitRange(ship)
 {
+    //disable orbit button (in case it was enabled from prior movement)
+    document.getElementById('orbitButton').disabled = true;
+    //disable land button (in case it was enabled from prior movement)
+	document.getElementById('landButton').disabled = true;
+    //disable lift-off button (in case it was enabled from prior movement)
+	document.getElementById('liftOffButton').disabled = true;
+
 	var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
 
     for(var i = 0; i < artifacts.length; i++){
         artifact = artifacts[i];
 
-        // TODO: disable orbit button
 
         //if ship position is 1 CP from artifact
         if(checkDistance(ship, artifact) == 1*8){
@@ -74,12 +80,15 @@ function checkOrbitRange(ship)
           if(!artifact.name.startsWith("ast")){
 
             alert("You're close to " + artifact.name + ", you may enter orbit");
-            // TODO: enable orbit button
+            //enable orbit button
+	        document.getElementById('orbitButton').disabled = false;
           }
           else {
             alert("You're close to " + artifact.name + ", you may land");
+            //enable land button
+			document.getElementById('landButton').disabled = false;
+
             // TODO: disable movement buttons
-            // TODO: enable orbit button
           }
         }
     }
@@ -99,7 +108,14 @@ function enterOrbit()
   		checkEnergy(ship);
   	}
 
-    // TODO: enable land button
+    //enable land button
+	document.getElementById('landButton').disabled = false;
+    //disable orbit button (because already in orbit)
+    document.getElementById('orbitButton').disabled = true;
+    //enabled deorbit button 
+    document.getElementById('deorbitButton').disabled = false;
+
+    // TODO: disable movement buttons
 
     ship.inOrbit = true;
     useEnergy(ship, 10);
@@ -123,13 +139,63 @@ function leaveOrbit()
 
 	ship.inOrbit = false;
 	useEnergy(ship, 10);
-  useSupplies(ship, 2);
+  	useSupplies(ship, 2);
 
-  //disable land button
-	//enable movement buttons
-	//enable 'orbit' button
+  	//disable land button
+	document.getElementById('landButton').disabled = true;
+
+	//enable orbit button (because still in orbit range)
+	document.getElementById('orbitButton').disabled = false;
+
+    //disable deorbit button
+    document.getElementById('deorbitButton').disabled = true;
+
+	// TODO: enable movement buttons
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
+}
+
+// can be called if ship is in orbit
+function landOnPlanet()
+{
+    //disable deorbit button
+    document.getElementById('deorbitButton').disabled = true;
+
+    //disable land button
+    document.getElementById('landButton').disabled = true;
+
+    //enable lift-ff button
+    document.getElementById('liftOffButton').disabled = false;
+
+  	//if cheat mode enabled, don't check so don't die
+  	if(config.cheatMode.checked == false) {
+
+	    checkEnergy(ship) 
+	}
+
+    // TODO: land code (game play)
+    // TODO: animation (maybe)
+}
+
+// can be called if ship is on a planet
+function liftOffPlanet()
+{
+    //enable deorbit button
+    document.getElementById('deorbitButton').disabled = false;
+
+    //enable land button
+    document.getElementById('landButton').disabled = false;
+
+    //disable lift-off button 
+	document.getElementById('liftOffButton').disabled = true;
+
+  	//if cheat mode enabled, don't check so don't die
+  	if(config.cheatMode.checked == false) {
+
+	    checkEnergy(ship) 
+	}
+	
+    // TODO: animation (maybe)
 }
 
 //Check if the ship's position is the same as the BadMax position
