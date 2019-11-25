@@ -212,21 +212,40 @@
                 </div>
             </div>
 
-
+            <!--Admin Panel-->
             <div id="Admin" class="tabcontent">
               <form name="admin">
                     <div id="copanel">
-                        <p> Password Good</p>
+                    <form id="coconfig">
+                            <p> Celestial Object Positions: </p>
+                            <p>Eniac:     X <input type=text name="xeniac" size=4> Y <input type=text name="yeniac" size=4></p>
+                            <p>Moon:      X <input type=text name="xmoon" size=4> Y <input type=text name="ymoon" size=4></p>
+                            <p>Celeron:   X <input type=text name="xceleron" size=4> Y <input type=text name="yceleron" size=4></p>
+                            <p>Ryzen:     X <input type=text name="xryzen" size=4> Y <input type=text name="yryzen" size=4></p>
+                            <p>Xeon:      X <input type=text name="xxeon" size=4> Y <input type=text name="yxeon" size=4></p>
+                            <p>Pentium 1: X <input type=text name="xpenium1" size=4> Y <input type=text name="ypentium1" size=4></p>
+                            <p>Pentium 2: X <input type=text name="xpenium2" size=4> Y <input type=text name="ypentium2" size=4></p>
+                            <p>Pentium 3: X <input type=text name="xpenium3" size=4> Y <input type=text name="ypentium3" size=4></p>
+                            <p>Pentium 4: X <input type=text name="xpenium4" size=4> Y <input type=text name="ypentium4" size=4></p>
+                            <p>Pentium 5: X <input type=text name="xpenium5" size=4> Y <input type=text name="ypentium5" size=4></p>
+                            <p>Pentium 6: X <input type=text name="xpenium6" size=4> Y <input type=text name="ypentium6" size=4></p>
+                            <p>Pentium 7: X <input type=text name="xpenium7" size=4> Y <input type=text name="ypentium7" size=4></p>
+                            <p>Astriod 1: X <input type=text name="xastriod1" size=4> Y <input type=text name="yastriod1" size=4></p>
+                            <p>Astriod 2: X <input type=text name="xastriod2" size=4> Y <input type=text name="yastriod2" size=4></p>
+                            <p>Astriod 3: X <input type=text name="xastriod3" size=4> Y <input type=text name="yastriod3" size=4></p>
+                            <p>Astriod 4: X <input type=text name="xastriod4" size=4> Y <input type=text name="yastriod4" size=4></p>
+                        </form>
+			            <button type='button' onclick="updateartifacts(coconfig); return false"> Submit </button>
 
                     </div>
 
                 </form>
             </div>
 
+            <!--Script to lock admin panel-->
             <script>
                 function login(){
                     if(document.getElementById('password').value == "ADMIN"){
-                        alert("YAY");
                         document.getElementById('passwordEntry').setAttribute("id", "admintabhidden");
                         document.getElementById('copanel').setAttribute("id", "admintabshown");
                     }
@@ -237,7 +256,7 @@
             </script>
 
         </div>
-
+        <!--Password Entry Field-->
         <div class="footer">
         <div id="passwordEntry" align="right"> 
             Enter Password: <input type="Password" id="password">
