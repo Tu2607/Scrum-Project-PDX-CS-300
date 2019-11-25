@@ -194,6 +194,40 @@
                 	}
                     e.preventDefault();
                 }
+                /*
+                window.addEventListener('keydown', doKeyDown, false);
+                window.addEventListener('keyup', doKeyUp, false);
+
+                var keys = [];
+
+                function doKeyDown(e){
+                    // store an entry for every key pressed
+                    keys[e.keyCode] = true;
+
+                    if(keys[68] || keys[39]){ // d or right arrow : 0
+                        move(0, eval(movementUI.distance.value), Badmax);
+                        document.getElementById('aoow').play();
+                    }
+                    else if(keys[87] || keys[38]){ // w or up arrow : 90
+                        move(90, eval(movementUI.distance.value), Badmax);
+                        document.getElementById('aoow').play();
+                    }
+                    else if(keys[65] || keys[37]){ // a or left arrow : 180
+                        move(180, eval(movementUI.distance.value), Badmax);
+                        document.getElementById('aoow').play();
+                    }   
+                    else if(keys[83] || keys[40]){ // s or up arrow : 270
+                        move(270, eval(movementUI.distance.value), Badmax);
+                        document.getElementById('aoow').play();
+                    }
+                    e.preventDefault();
+                }
+
+                function doKeyUp(e){
+                    // mark keys that were released
+                    keys[e.keyCode] = false;
+                }
+                */
 
                 </script>
 
