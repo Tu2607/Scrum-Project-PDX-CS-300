@@ -37,14 +37,15 @@ function checkCollision(ship)
     for(var i = 0; i < artifacts.length; i++){
         artifact = artifacts[i];
 
-        //if distance is = 0
+        //if ship position is same position as artifact
         if(checkDistance(ship, artifact) == 0){
 
+          //set to visibible - drawings will show it now
         	artifact.visibility = true;
 
-	        //lose health
+	        // TODO: lose health
 
-		    alert("BOOM BANG CRASH!");
+		      alert("BOOM BANG CRASH!");
         }
     }
 
@@ -61,17 +62,25 @@ function checkOrbitRange(ship)
     for(var i = 0; i < artifacts.length; i++){
         artifact = artifacts[i];
 
-        //if distance is = 1
+        // TODO: disable orbit button
+
+        //if ship position is 1 CP from artifact
         if(checkDistance(ship, artifact) == 1*8){
 
-        	artifact.visibility = true;
+          //set to visibible - drawings will show it now
+          artifact.visibility = true;
 
-          alert("You're close to " + artifact.name + ", you may enter orbit");
+          //only planets can be orbited and only if within 1 CP
+          if(!artifact.name.startsWith("ast")){
 
-	        //enable orbit button
-
-          //disable movement buttons
-
+            alert("You're close to " + artifact.name + ", you may enter orbit");
+            // TODO: enable orbit button
+          }
+          else {
+            alert("You're close to " + artifact.name + ", you may land");
+            // TODO: disable movement buttons
+            // TODO: enable orbit button
+          }
         }
     }
 
@@ -85,16 +94,16 @@ function enterOrbit()
 {
 	var ship = JSON.parse(sessionStorage.getItem("ship"));
 
-  	//if cheat mode enabled, don't check so don't die
+  	//if cheat mode enabled - don't check so don't die
   	if(config.cheatMode.checked == false) {
-
   		checkEnergy(ship);
   	}
 
-    //enable land button
+    // TODO: enable land button
 
     ship.inOrbit = true;
     useEnergy(ship, 10);
+    useSupplies(ship, 2);
 
   	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -114,10 +123,11 @@ function leaveOrbit()
 
 	ship.inOrbit = false;
 	useEnergy(ship, 10);
+  useSupplies(ship, 2);
 
+  //disable land button
 	//enable movement buttons
 	//enable 'orbit' button
-	//disable land button
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }

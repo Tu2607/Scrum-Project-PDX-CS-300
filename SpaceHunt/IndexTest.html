@@ -174,16 +174,16 @@
                 window.addEventListener('keydown', doKeyDown, false);
                 function doKeyDown(e){
                 	if(e.keyCode == 68 || e.keyCode == 39){ // d or right arrow : 0
-                		move(0, eval(movementUI.distance.value));
+                		move(0, eval(movementUI.distance.value), Badmax);
                 	}
                 	else if(e.keyCode == 87 || e.keyCode == 38){ // w or up arrow : 90
-                		move(90, eval(movementUI.distance.value));
+                		move(90, eval(movementUI.distance.value), Badmax);
                 	}
                 	else if(e.keyCode == 65 || e.keyCode == 37){ // a or left arrow : 180
-                		move(180, eval(movementUI.distance.value));
+                		move(180, eval(movementUI.distance.value), Badmax);
                 	}	
                 	else if(e.keyCode == 83 || e.keyCode == 40){ // s or up arrow : 270
-                		move(270, eval(movementUI.distance.value));
+                		move(270, eval(movementUI.distance.value), Badmax);
                 	}
                 }
 
