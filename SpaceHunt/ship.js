@@ -84,9 +84,9 @@ function checkOrbitRange(ship)
 	        document.getElementById('orbitButton').disabled = false;
           }
           else {
-            alert("You're close to " + artifact.name + ", you may land");
-            //enable land button
-			document.getElementById('landButton').disabled = false;
+            alert("You're close to " + artifact.name + ", you can mine it");
+
+            // TODO: enable mine button
 
             // TODO: disable movement buttons
           }
@@ -121,6 +121,9 @@ function enterOrbit()
     useEnergy(ship, 10);
     useSupplies(ship, 2);
 
+  	//update the status fields with these changes
+  	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+
   	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
@@ -129,7 +132,6 @@ function enterOrbit()
 function leaveOrbit()
 {
 	var ship = JSON.parse(sessionStorage.getItem("ship"));
-
 
   	//if cheat mode enabled, don't check so don't die
   	if(config.cheatMode.checked == false) {
@@ -143,14 +145,15 @@ function leaveOrbit()
 
   	//disable land button
 	document.getElementById('landButton').disabled = true;
-
 	//enable orbit button (because still in orbit range)
 	document.getElementById('orbitButton').disabled = false;
-
     //disable deorbit button
     document.getElementById('deorbitButton').disabled = true;
 
 	// TODO: enable movement buttons
+
+  	//update the status fields with these changes
+  	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -162,10 +165,8 @@ function landOnPlanet()
 
     //disable deorbit button
     document.getElementById('deorbitButton').disabled = true;
-
     //disable land button
     document.getElementById('landButton').disabled = true;
-
     //enable lift-ff button
     document.getElementById('liftOffButton').disabled = false;
 
@@ -175,8 +176,15 @@ function landOnPlanet()
 	    checkEnergy(ship) 
 	}
 
+	ship.inOrbit = false;
+	useEnergy(ship, 10);
+  	useSupplies(ship, 2);
+
     // TODO: land code (game play)
     // TODO: animation (maybe)
+
+  	//update the status fields with these changes
+  	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -188,10 +196,8 @@ function liftOffPlanet()
 
     //enable deorbit button
     document.getElementById('deorbitButton').disabled = false;
-
     //enable land button
     document.getElementById('landButton').disabled = false;
-
     //disable lift-off button 
 	document.getElementById('liftOffButton').disabled = true;
 
@@ -201,8 +207,15 @@ function liftOffPlanet()
 	    checkEnergy(ship) 
 	}
 
+	ship.inOrbit = true;
+	useEnergy(ship, 10);
+  	useSupplies(ship, 2);
+
     // TODO: animation (maybe)
-    
+
+  	//update the status fields with these changes
+  	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+  	
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
