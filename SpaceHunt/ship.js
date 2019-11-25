@@ -122,12 +122,14 @@ function leaveOrbit()
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
+//Check if the ship's position is the same as the BadMax position
 function checkBadMax(ship,BadMax)
 {
   if(ship.yPos == BadMax.yPos && ship.xPos == BadMax.xPos){
+    //Deduct credits if both the ship and Badmax are at the same x,y coords
     ship.credits = ship.credits - 10;
   }
-
+  //Save the ship information 
   sessionStorage.setItem("ship",JSON.stringify(ship));
 }
 
@@ -197,7 +199,7 @@ function move(angle, distance,BadMax)
   checkOrbitRange(ship);
 
   //Check if the ship has the same CP as BadMax
-  //Called aafter every move
+  //Called after every move
   checkBadMax(ship,BadMax);
 
   //save state
