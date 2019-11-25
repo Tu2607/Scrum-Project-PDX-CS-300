@@ -39,7 +39,7 @@ textarea{
     resize: none;
     border: 2px solid black;
     text-align: left;
-    width: 300;
+    width: 330;
 
 }
 input[type="text"]{
@@ -47,24 +47,24 @@ input[type="text"]{
 }
 
 
+.grid-container{
+
+    padding: 10px;
+    display: grid;
+    grid-auto-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+    'title title'
+    'map map'
+    'map map'
+    'command output'
+    'footer footer';
+
+    float: left;
+}
+
+@media screen and (min-width: 1324px) {
     .grid-container{
         display: grid;
-        background-color: #43464B;
-        grid-auto-columns: 1fr 1fr 1fr;
-        grid-template-areas: 
-        'title title'
-        'map map'
-        'map map'
-        'command output'
-        'footer footer';
-
-        float: left;
-    }
-
-@media screen and (min-width: 1454px) {
-    .grid-container{
-        display: grid;
-        background-color: #43464B;
         grid-auto-columns: 1fr 1fr auto;
         grid-auto-rows: auto auto;
         grid-template-areas: 
@@ -77,12 +77,19 @@ input[type="text"]{
     }
 }
 
+.title {
+    grid-area: title;
+    background: rgb(0, 0, 0,) transparent;
+    text-align: center;
+}
+
 .board {
     grid-area: map;
 }
 
 .display {
     width: 100%;
+        background: #43464B;
     grid-area: output;
     border-width: 5px;
     text-align: left;
@@ -90,6 +97,7 @@ input[type="text"]{
 
 .menu {
     grid-area: command;
+        background: #43464B;
     background-color: slategrey;
     border-width: 5px;
 }
