@@ -158,6 +158,8 @@ function leaveOrbit()
 // can be called if ship is in orbit
 function landOnPlanet()
 {
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+
     //disable deorbit button
     document.getElementById('deorbitButton').disabled = true;
 
@@ -175,11 +177,15 @@ function landOnPlanet()
 
     // TODO: land code (game play)
     // TODO: animation (maybe)
+
+	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
 // can be called if ship is on a planet
 function liftOffPlanet()
 {
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+
     //enable deorbit button
     document.getElementById('deorbitButton').disabled = false;
 
@@ -194,8 +200,10 @@ function liftOffPlanet()
 
 	    checkEnergy(ship) 
 	}
-	
+
     // TODO: animation (maybe)
+    
+	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
 
 //Check if the ship's position is the same as the BadMax position
