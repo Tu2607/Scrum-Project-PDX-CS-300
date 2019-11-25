@@ -67,8 +67,7 @@
                 Log:
                 </textarea>
                 <p></p>
-                <p></p>
-                <canvas id="mouseCanvas" width="120" height="40"></canvas>
+                <canvas id="mouseCanvas" width="300" height="200"></canvas>
             </form>
         </div>
 
@@ -165,9 +164,9 @@
 				function writeMessage(canvas, message) {
 					var context = canvas.getContext('2d');
 					context.clearRect(0, 0, canvas.width, canvas.height);
-					context.font = '20pt Arial';
+					context.font = '40pt Audiowide';
 					context.fillStyle = 'black';
-					context.fillText(message, 10, 20);
+					context.fillText(message, 50, 100);
 				}
 
 				// listen for keypress, call move function
@@ -193,6 +192,7 @@
                 		move(270, eval(movementUI.distance.value), Badmax);
                         document.getElementById('aoow').play();
                 	}
+                    e.preventDefault();
                 }
 
                 </script>
