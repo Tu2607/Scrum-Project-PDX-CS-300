@@ -5,6 +5,48 @@
     margin: 0px;
     padding: 0px;
 }
+
+
+html{
+    font-family: 'Audiowide', serif;
+    font-size: 21px;
+
+}
+
+body {
+    margin: 1rem;
+    height: 100vh;
+
+    background: rgb(0,34,38);
+    background: 
+    linear-gradient( to bottom right, rgb(44, 44, 44), transparent),
+    repeating-linear-gradient(45deg, rgb(49, 49, 49) 0%, rgb(49, 49, 49) 5%, transparent 5%, transparent 6%),
+    rgb(87,31,78) repeating-linear-gradient(-45deg, rgb(49, 49, 49) 0%, rgb(49, 49, 49) 5%, transparent 5%, transparent 6%);
+    background: linear-gradient(45deg, rgba(0,34,38,1) 0%, rgba(64,29,91,1) 49%, rgba(19,7,36,1) 100%);
+}
+
+h1 {
+    font-family: 'Bungee', sans-serif;
+    font-size: 4.235rem;
+    padding: 0px;
+    margin-top: 0px;
+
+}
+
+
+
+textarea{
+    resize: none;
+    border: 2px solid black;
+    text-align: left;
+    width: 300;
+
+}
+input[type="text"]{
+    font-family: 'Audiowide', sans-serif;
+}
+
+
     .grid-container{
         display: grid;
         background-color: #43464B;
@@ -24,6 +66,7 @@
         display: grid;
         background-color: #43464B;
         grid-auto-columns: 1fr 1fr auto;
+        grid-auto-rows: auto auto;
         grid-template-areas: 
         'title title title'
         'map map output'
@@ -74,10 +117,11 @@ form input .text{
     border-width: 1;
 }
 
-.move-grid {
+.moves-grid {
     grid-area: moves;
     border-width: 1em;
     border-color: black;
+    
 }
 .action-grid {
     grid-area: actions;
@@ -123,50 +167,36 @@ form input .text{
   border: 0px solid black;
   border-top: none;
   height: 400px;
-  width: 250px;
+  width: auto;
+  
 }
 
 #admintabhidden {
-    display: none;;
+    display: none;
 }
 #copanel {
-    display: none;;
+    display: none;
 }
 
 #admintabshown {
     display: block;
+    font-size: 13;
 }
 
-
-html{
-    font-family: 'Audiowide', serif;
-    font-size: 21px;
-
-}
-
-body {
-    margin: 1rem;
-    height: 100vh;
-    background: 
-    linear-gradient( to bottom right, rgb(44, 44, 44), transparent),
-    repeating-linear-gradient(45deg, rgb(49, 49, 49) 0%, rgb(49, 49, 49) 5%, transparent 5%, transparent 6%),
-    rgb(87,31,78) repeating-linear-gradient(-45deg, rgb(49, 49, 49) 0%, rgb(49, 49, 49) 5%, transparent 5%, transparent 6%);
-}
-
-h1 {
-    font-family: 'Bungee', sans-serif;
-    font-size: 4.235rem;
-    padding: 0px;
-    margin-top: 0px;
-
-}
-
-
-
-textarea{
-    resize: none;
-    border: 2px solid black;
-    text-align: left;
-    width: 300;
-
+.move {
+    text-align: center;
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+	background-color:#768d87;
+	border:1px solid #566963;
+	cursor:pointer;
+    color:#ffffff;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight:bold;
+	padding: 4px 5px;
+	text-decoration:none;
+    text-shadow:0px -1px 0px #2b665e;
 }
