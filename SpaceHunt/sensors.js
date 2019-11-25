@@ -68,7 +68,7 @@ function checkDistance(ship, artifact){
     let y2 = artifact.yPos;
 
     //returns the distance between ship and the artifact
-    console.log(Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2));
+    //console.log(Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2));
     return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 }
 
