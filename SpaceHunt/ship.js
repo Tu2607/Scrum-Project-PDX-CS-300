@@ -127,7 +127,8 @@ function checkBadMax(ship,BadMax)
 {
   if(ship.yPos == BadMax.yPos && ship.xPos == BadMax.xPos){
     //Deduct credits if both the ship and Badmax are at the same x,y coords
-    ship.credits = ship.credits - 10;
+    ship.credits -= 10;
+    alert("You got robbed boi! Sincerely from the BadMax crew.");
   }
   //Save the ship information 
   sessionStorage.setItem("ship",JSON.stringify(ship));
@@ -200,6 +201,8 @@ function move(angle, distance,BadMax)
 
   //Check if the ship has the same CP as BadMax
   //Called after every move
+  //BadMax.xPos = ship.xPos;  //  TESTING PURPOSE, UNCOMMENT TO TEST CREDIT DECREASE PROPERLY
+  //BadMax.yPos = ship.yPos;  //  TESTING PURPOSE, UNCOMMENT TO TEST CREDIT DECREASE PROPERLY
   checkBadMax(ship,BadMax);
 
   //save state
