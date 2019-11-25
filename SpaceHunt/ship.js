@@ -1,13 +1,12 @@
 
-// MICHAEL's ORIGINAL CODE BELOW
-
 class Ship { 
-  constructor(xPos, yPos, energy, supplies, credits) {
+  constructor(xPos, yPos, energy, supplies, credits, orbit) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.energy = energy;
     this.supplies = supplies;
     this.credits = credits;
+    this.inOrbit = orbit;
   }
 }
 
@@ -29,17 +28,126 @@ function getRandom(min,max){
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+//FOR TESTING COLLISION/ORBIT/LANDING ON PLANET
+// to be called on each step of move
+function checkCollision(ship)
+{
+	var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
+
+    for(var i = 0; i < artifacts.length; i++){
+        artifact = artifacts[i];
+
+        //if distance is = 0
+        if(checkDistance(ship, artifact) == 0){
+
+        	artifact.visibility = true;
+
+	        //lose health
+
+		    alert("BOOM BANG CRASH!");
+        }
+    }
+
+  sessionStorage.setItem("ship", JSON.stringify(ship));
+  sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
+}
+
+
+// to be called at the end of a series of moves
+function checkOrbitRange(ship)
+{
+	var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
+
+    for(var i = 0; i < artifacts.length; i++){
+        artifact = artifacts[i];
+
+        //if distance is = 1
+        if(checkDistance(ship, artifact) == 1*8){
+
+        	artifact.visibility = true;
+
+          alert("You're close to " + artifact.name + ", you may enter orbit");
+
+	        //enable orbit button
+
+          //disable movement buttons
+
+        }
+    }
+
+  sessionStorage.setItem("ship", JSON.stringify(ship));
+  sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
+}
+
+
+// can be called if orbit button is enabled
+function enterOrbit()
+{
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+
+  	//if cheat mode enabled, don't check so don't die
+  	if(config.cheatMode.checked == false) {
+
+  		checkEnergy(ship);
+  	}
+
+    //enable land button
+
+    ship.inOrbit = true;
+    useEnergy(ship, 10);
+
+  	sessionStorage.setItem("ship", JSON.stringify(ship));
+}
+
+
+// can be called if de-orbit button is enabled
+function leaveOrbit()
+{
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+
+
+  	//if cheat mode enabled, don't check so don't die
+  	if(config.cheatMode.checked == false) {
+
+	    checkEnergy(ship) 
+	}
+
+	ship.inOrbit = false;
+	useEnergy(ship, 10);
+
+	//enable movement buttons
+	//enable 'orbit' button
+	//disable land button
+
+	sessionStorage.setItem("ship", JSON.stringify(ship));
+}
+
+//Check if the ship's position is the same as the BadMax position
+function checkBadMax(ship,BadMax)
+{
+  if(ship.yPos == BadMax.yPos && ship.xPos == BadMax.xPos){
+    //Deduct credits if both the ship and Badmax are at the same x,y coords
+    ship.credits -= 10;
+    alert("You got robbed boi! Sincerely from the BadMax crew.");
+  }
+  //Save the ship information 
+  sessionStorage.setItem("ship",JSON.stringify(ship));
+}
+
 
 // ***************************************
 // ************ Ship Movement ************
 // ***************************************
-function move(angle, distance) // Tu's note: Pass in config to check wormhole checkbox and wormhole for coordinates
+function move(angle, distance,BadMax) 
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
   var ship = JSON.parse(sessionStorage.getItem("ship"));
   var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
+  //Randomize BadMax Movement before each movement
+  BadMax.xPos = Math.floor(getRandom(0,15)*8);
+  BadMax.yPos = Math.floor(getRandom(0,15)*8);
 
   // Up
   if(angle == 90)
@@ -83,6 +191,19 @@ function move(angle, distance) // Tu's note: Pass in config to check wormhole ch
 
   //save the point just relocated to
   addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+  
+  // if an object has same CP as ship
+  // should be called on every CP move
+  checkCollision(ship);
+  // if an object is within 1 CP, a
+  // shoud be called after a series of CP moves
+  checkOrbitRange(ship);
+
+  //Check if the ship has the same CP as BadMax
+  //Called after every move
+  //BadMax.xPos = ship.xPos;  //  TESTING PURPOSE, UNCOMMENT TO TEST CREDIT DECREASE PROPERLY
+  //BadMax.yPos = ship.yPos;  //  TESTING PURPOSE, UNCOMMENT TO TEST CREDIT DECREASE PROPERLY
+  checkBadMax(ship,BadMax);
 
   //save state
   sessionStorage.setItem("ship", JSON.stringify(ship));
@@ -91,10 +212,7 @@ function move(angle, distance) // Tu's note: Pass in config to check wormhole ch
   //update the status fields with these changes
   updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
-  console.log(ship.xPos, ship.yPos);
 
-  //finally
-  draw();
 }
 
 // Use Energy
@@ -114,104 +232,3 @@ function useSupplies(ship, amount)
   //save ship since supplies val updated
   sessionStorage.setItem("ship", JSON.stringify(ship));
 }
-
-
-
-
-
-/* 
-class Ship {
-  constructor(energy, supplies, x, y) {
-    this.energy = energy;
-    this.supplies = supplies;
-    this.x = x;
-    this.y = y;
-  }
-  
-  checkSupplies() {
-    if (this.supplies < 1) {
-      alert("You've run out of supplies! Game over.");
-      gameOver = True;
-    }
-  }
-  
-  checkEnergy() {
-    if (this.energy < 1) {
-      alert("You've run out of energy! Game over.");
-      gameOver = True;
-    }
-  }
-
-  // ***************************************
-  // ************ Ship Movement ************
-  // ***************************************
-  move(angle, distance)
-  {
-    // Random Worm Hole Case
-
-    
-    // Fixed Worm Hole Case
-
-    // Up
-    if(angle == 90)
-      this.y += distance
-
-    // Down
-    else if(angle == 270)
-      this.y -= distance
-
-    // Left
-    else if(angle == 180)
-      this.x -= distance
-
-    // Right
-    else
-      this.x += distance
-
-    // Update Energy and Supplies
-    this.useSupplies(2)
-    this.useEnergy(10 * distance)
-
-    // Check Energy and Supplies
-    this.checkEnergy() 
-    this.checkSupplies()
-  }
-
-  // Use Energy
-  useEnergy(amount)
-  {
-    this.energy -= amount
-  }
-
-  // Use Supplies
-  useSupplies(amount)
-  {
-    this.supplies -= amount
-  }
-  
-
-  // ********************************
-  // Functions for Testing Purposes
-  // ********************************
-  status()
-  {
-    console.log('Position: ' + this.x + " , " + this.y)
-    console.log('Energy: ' + this.energy)
-    console.log('Supplies: ' + this.supplies)
-  }
-}
-
-function updateConfig(config){
-
-  var newEnergy = eval(config.energy.value) + 0;
-  var newResource = eval(config.energy.value) + 0;
-  var xcord = eval(config.xcord.value) + 0;
-  var ycord = eval(config.ycord.value) + 0;
-
-
-  let newShip = new Ship(newEnergy,newResource,xcord,ycord);  //Initialize a new ship object
-
-  return newShip;
-
-}
-*/

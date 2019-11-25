@@ -17,6 +17,12 @@ class Space {
 	}
 }
 
+class BadMax {
+	constructor(xPos, yPos) {
+		this.xPos = xPos;
+		this.yPos = yPos;
+	}
+}
 
 function addVisitedPoint(visitedPoints, xPos, yPos)
 {

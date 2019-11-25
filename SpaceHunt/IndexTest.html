@@ -17,11 +17,15 @@
         var energy = 1000;
         var supplies = 100;
         var credits = 100;
+        var orbit = false;
         var artifactSet = [];
         var visitedPoints = [];
         var space = new Space(xSize, ySize);
-        var ship = new Ship(xStart, yStart, energy, supplies, credits);
-        var wormhole; //checking this with everyone
+        var ship = new Ship(xStart, yStart, energy, supplies, credits, orbit);
+        //var wormhole; //checking this with everyone
+
+        //BadMax is initialized randomly with range from 5 to 20. The range is subject to change.
+        var Badmax = new BadMax(xStart, yStart);
 
         var animateAngle = 0;
         var requestAnimationFrame = window.requestAnimationFrame || 
@@ -29,8 +33,6 @@
                             window.webkitRequestAnimationFrame || 
                             window.msRequestAnimationFrame;
     </script>
-
-
 
 
 
@@ -64,6 +66,9 @@
                 <textarea id="display" name="text-output" alight="left" readonly="true" rows="20">
                 Log:
                 </textarea>
+                <p></p>
+                <p></p>
+                <canvas id="mouseCanvas" width="120" height="40"></canvas>
             </form>
         </div>
 
@@ -137,6 +142,53 @@
                     </div>
                 <br>
 
+                <script>
+
+                var mouseCanvas = document.getElementById('mouseCanvas');
+
+                // listen for mouse position on main canvas
+                canvas.addEventListener('mousemove', function(evt) {
+                    var mousePos = getMousePos(canvas, evt);
+                    var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
+                    writeMessage(mouseCanvas, message);}, false);
+
+				// gets CP pointed at by mouse on main canvas 
+				function getMousePos(canvas, evt) {
+					var rect = canvas.getBoundingClientRect();
+					return {
+						x: evt.clientX - rect.left,
+						y: evt.clientY - rect.top
+					};
+				}
+
+				// writes the coordinates pointed at by mouse on to mouseCanvas
+				function writeMessage(canvas, message) {
+					var context = canvas.getContext('2d');
+					context.clearRect(0, 0, canvas.width, canvas.height);
+					context.font = '20pt Arial';
+					context.fillStyle = 'black';
+					context.fillText(message, 10, 20);
+				}
+
+				// listen for keypress, call move function
+                window.addEventListener('keydown', doKeyDown, false);
+                function doKeyDown(e){
+                	if(e.keyCode == 68 || e.keyCode == 39){ // d or right arrow : 0
+                		move(0, eval(movementUI.distance.value));
+                	}
+                	else if(e.keyCode == 87 || e.keyCode == 38){ // w or up arrow : 90
+                		move(90, eval(movementUI.distance.value));
+                	}
+                	else if(e.keyCode == 65 || e.keyCode == 37){ // a or left arrow : 180
+                		move(180, eval(movementUI.distance.value));
+                	}	
+                	else if(e.keyCode == 83 || e.keyCode == 40){ // s or up arrow : 270
+                		move(270, eval(movementUI.distance.value));
+                	}
+                }
+
+                </script>
+
 
 
 
@@ -144,13 +196,13 @@
                     <div class="moves-grid">
                         <form name="movementUI">
                         <p>MAKE A MOVE</p>
-                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="move(90, eval(movementUI.distance.value)); return false;">
+                        <p align="center"><input type="button" class="move" value="90" size="3" onclick="move(90, eval(movementUI.distance.value),Badmax); return false;">
                         </p>
-                        <p align="center"><input type="button"  value="180" size="3" onclick="move(180, eval(movementUI.distance.value)); return false;">
+                        <p align="center"><input type="button"  value="180" size="3" onclick="move(180, eval(movementUI.distance.value),Badmax); return false;">
                         <input type="text" name=distance value=10 maxlength="3" size="4" >
-                        <input type="button" value="0" size="3" onclick="move(0, eval(movementUI.distance.value)); return false;">
+                        <input type="button" value="0" size="3" onclick="move(0, eval(movementUI.distance.value),Badmax); return false;">
                         </p>
-                        <p align="center"><input type="button" value="270"  size="3" onclick="move(270, eval(movementUI.distance.value)); return false;"></p>
+                        <p align="center"><input type="button" value="270"  size="3" onclick="move(270, eval(movementUI.distance.value),Badmax); return false;"></p>
                         </form>
                     </div>
                     <div class="action-grid">
@@ -219,34 +271,6 @@
     <script>
         window.onload = updateConfig(space, ship, artifactSet, visitedPoints)
     </script>
-
-
-    <script>
-        /*
-        function writeMessage(canvas, message) {
-            var context = canvas.getContext('2d');
-            context.clearRect(450, 0, 125, 30);
-            context.font = '18pt Calibri';
-            context.fillStyle = 'black';
-            context.fillText(message, 450, 25);
-        }
-        var canvas = document.getElementById('canvas');
-        var context = canvas.getContext('2d');
-        canvas.addEventListener('mousemove', function(evt) {
-            var mousePos = getMousePos(canvas, evt);
-            var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
-            writeMessage(canvas, message);
-        }, false);
-        function getMousePos(canvas, evt) {
-            var rect = canvas.getBoundingClientRect();
-            return {
-                x: evt.clientX - rect.left,
-                y: evt.clientY - rect.top
-            };
-        }
-        */
-    </script>
-
 
 
 </body>
