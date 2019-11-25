@@ -148,7 +148,7 @@ function checkBadMax(ship,BadMax)
 // ***************************************
 // ************ Ship Movement ************
 // ***************************************
-function move(angle, distance,BadMax) 
+function move(angle, distance, BadMax) 
 {
   var space = JSON.parse(sessionStorage.getItem("space"));
   var ship = JSON.parse(sessionStorage.getItem("ship"));
@@ -156,43 +156,46 @@ function move(angle, distance,BadMax)
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
   //Randomize BadMax Movement before each movement
-  BadMax.xPos = Math.floor(getRandom(0,20)*8);
-  BadMax.yPos = Math.floor(getRandom(0,20)*8);
+  BadMax.xPos = getRandom(1,2)*8;
+  BadMax.yPos = getRandom(1,2)*8;
 
   // Up
   if(angle == 90)
-    ship.yPos -= distance*8
+    ship.yPos -= distance*8;
 
   // Down
   else if(angle == 270)
-    ship.yPos += distance*8
+    ship.yPos += distance*8;
 
   // Left
   else if(angle == 180)
-    ship.xPos -= distance*8
+    ship.xPos -= distance*8;
 
   // Right
   else
-    ship.xPos += distance*8
+    ship.xPos += distance*8;
 
 
   // Update Energy and Supplies
-  useSupplies(ship, 2)
-  useEnergy(ship, distance * 10)
+  useSupplies(ship, 2);
+  useEnergy(ship, distance * 10);
 
   //if cheat mode enabled, don't check so don't die
   if(config.cheatMode.checked == false) {
     // Check Energy and Supplies
-    checkEnergy(ship) 
-    checkSupplies(ship)
+    checkEnergy(ship);
+    checkSupplies(ship);
   }
 
   //This is the case where the user move out of bounds and activated the wormhole behavior
   if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
     // Random Worm Hole Case
     if(config.wormhole.value == "random"){
-      ship.yPos = Math.floor(getRandom(0,15) * 8);    
-      ship.xPos = Math.floor(getRandom(0,15) * 8);
+      //ship.yPos = Math.floor(getRandom(0,15) * 8);    
+      //ship.xPos = Math.floor(getRandom(0,15) * 8);
+
+      ship.yPos = getRandom(1,2) * 8;    
+      ship.xPos = getRandom(1,2) * 8;
     } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
       ship.yPos = 50 * 8;
       ship.xPos = 50 * 8;

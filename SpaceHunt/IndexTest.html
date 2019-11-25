@@ -25,7 +25,6 @@
         var ship = new Ship(xStart, yStart, energy, supplies, credits, orbit);
         //var wormhole; //checking this with everyone
 
-        //BadMax is initialized randomly with range from 5 to 20. The range is subject to change.
         var Badmax = new BadMax(xStart, yStart);
 
         var animateAngle = 0;
@@ -175,18 +174,22 @@
                 window.addEventListener('keydown', doKeyDown, false);
                 function doKeyDown(e){
                 	if(e.keyCode == 68 || e.keyCode == 39){ // d or right arrow : 0
+
                 		move(0, eval(movementUI.distance.value), Badmax);
                         document.getElementById('aoow').play();
                 	}
                 	else if(e.keyCode == 87 || e.keyCode == 38){ // w or up arrow : 90
+
                 		move(90, eval(movementUI.distance.value), Badmax);
                         document.getElementById('aoow').play();
                 	}
                 	else if(e.keyCode == 65 || e.keyCode == 37){ // a or left arrow : 180
+
                 		move(180, eval(movementUI.distance.value), Badmax);
                         document.getElementById('aoow').play();
                 	}	
                 	else if(e.keyCode == 83 || e.keyCode == 40){ // s or up arrow : 270
+
                 		move(270, eval(movementUI.distance.value), Badmax);
                         document.getElementById('aoow').play();
                 	}
