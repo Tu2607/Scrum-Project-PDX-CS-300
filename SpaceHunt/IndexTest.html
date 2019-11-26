@@ -50,12 +50,14 @@
 
     <div class="grid-container">
         <h1 class="title">SpaceHunt</h1>
+        <h6 class="title">Press the 'Start' button in the command panel to play!</h6>
     
 
 
         <!--Map--> 
         <div class ="board">
         	<canvas id="canvas" width="1024" height="1024"></canvas>
+            
         </div>
 
 
@@ -253,6 +255,8 @@
                         <p></p>
                         <input type="button" class="move" value="Land" size="8" id="landButton" disabled="true" onclick="landOnPlanet()">
                         <input type="button" class="move" value="Lift-off" size="8" id="liftOffButton" disabled="true" onclick="liftOffPlanet()">
+                        <p></p>
+			            <input type='button' class="move" value="Start"onclick="updateConfig(space, ship, artifactSet, visitedPoints); return false"> 
                     </div> 
                 </div>
             </div>
@@ -262,25 +266,25 @@
               <form name="admin">
                     <div id="copanel">
                     <form id="artifactPanel">
-                            <p> Celestial Object Positions: </p>
-                            <p>Eniac:     X <input type=text name="xeniac"  size=4> Y <input type=text name="yeniac" value="25" size=4></p>
-                            <p>Moon:      X <input type=text name="xmoon" size=4> Y <input type=text name="ymoon" size=4></p>
-                            <p>Celeron:   X <input type=text name="xceleron" size=4> Y <input type=text name="yceleron" size=4></p>
-                            <p>Ryzen:     X <input type=text name="xryzen" size=4> Y <input type=text name="yryzen" size=4></p>
-                            <p>Xeon:      X <input type=text name="xxeon" size=4> Y <input type=text name="yxeon" size=4></p>
-                            <p>Pentium 1: X <input type=text name="xpenium1" size=4> Y <input type=text name="ypentium1" size=4></p>
-                            <p>Pentium 2: X <input type=text name="xpenium2" size=4> Y <input type=text name="ypentium2" size=4></p>
-                            <p>Pentium 3: X <input type=text name="xpenium3" size=4> Y <input type=text name="ypentium3" size=4></p>
-                            <p>Pentium 4: X <input type=text name="xpenium4" size=4> Y <input type=text name="ypentium4" size=4></p>
-                            <p>Pentium 5: X <input type=text name="xpenium5" size=4> Y <input type=text name="ypentium5" size=4></p>
-                            <p>Pentium 6: X <input type=text name="xpenium6" size=4> Y <input type=text name="ypentium6" size=4></p>
-                            <p>Pentium 7: X <input type=text name="xpenium7" size=4> Y <input type=text name="ypentium7" size=4></p>
-                            <p>Astriod 1: X <input type=text name="xastriod1" size=4> Y <input type=text name="yastriod1" size=4></p>
-                            <p>Astriod 2: X <input type=text name="xastriod2" size=4> Y <input type=text name="yastriod2" size=4></p>
-                            <p>Astriod 3: X <input type=text name="xastriod3" size=4> Y <input type=text name="yastriod3" size=4></p>
-                            <p>Astriod 4: X <input type=text name="xastriod4" size=4> Y <input type=text name="yastriod4" size=4></p>
-                        </form>
-			            <button type='button' onclick="buildArtifactSet(true,artifactSet); return false"> Submit </button>
+                        <p> Celestial Object Positions: </p>
+                        <p>Eniac:     X <input type=text name="xeniac" value="64" size=4> Y <input type=text name="yeniac" value="64" size=4></p>
+                        <p>Moon:      X <input type=text name="xmoon" value="0" size=4> Y <input type=text name="ymoon" value="0" size=4></p>
+                        <p>Celeron:   X <input type=text name="xceleron" value="256" size=4> Y <input type=text name="yceleron" value="128" size=4></p>
+                        <p>Ryzen:     X <input type=text name="xryzen" value="512" size=4> Y <input type=text name="yryzen" value="256" size=4></p>
+                        <p>Xeon:      X <input type=text name="xxeon" value="576" size=4> Y <input type=text name="yxeon" value="576" size=4></p>
+                        <p>Pentium 1: X <input type=text name="xpentium1" value="704" size=4> Y <input type=text name="ypentium1" value="704" size=4></p>
+                        <p>Pentium 2: X <input type=text name="xpentium2" value="640" size=4> Y <input type=text name="ypentium2" value="768" size=4></p>
+                        <p>Pentium 3: X <input type=text name="xpentium3" value="640" size=4> Y <input type=text name="ypentium3" value="960" size=4></p>
+                        <p>Pentium 4: X <input type=text name="xpentium4" value="768" size=4> Y <input type=text name="ypentium4" value="640" size=4></p>
+                        <p>Pentium 5: X <input type=text name="xpentium5" value="768" size=4> Y <input type=text name="ypentium5" value="832" size=4></p>
+                        <p>Pentium 6: X <input type=text name="xpentium6" value="832" size=4> Y <input type=text name="ypentium6" value="896" size=4></p>
+                        <p>Pentium 7: X <input type=text name="xpentium7" value="832" size=4> Y <input type=text name="ypentium7" value="768" size=4></p>
+                        <p>Astriod 1: X <input type=text name="xasteroid1" value="344" size=4> Y <input type=text name="yasteroid1" value="344" size=4></p>
+                        <p>Astriod 2: X <input type=text name="xasteroid2" value="152" size=4> Y <input type=text name="yasteroid2" value="448" size=4></p>
+                        <p>Astriod 3: X <input type=text name="xasteroid3" value="648" size=4> Y <input type=text name="yasteroid3" value="648" size=4></p>
+                        <p>Astriod 4: X <input type=text name="xasteroid4" value="600" size=4> Y <input type=text name="yasteroid4" value="72" size=4></p>
+                    </form>
+                    <!--<button type='button' onclick="updateartifacts(coconfig); return false"> Submit </button>-->        
 
                         <script>
                         </script>
@@ -344,7 +348,8 @@
 
 
 
-        window.onload = updateConfig(space, ship, artifactSet, visitedPoints)
+         window.onload = buildArtifacts(artifactSet);
+
     </script>
 
 

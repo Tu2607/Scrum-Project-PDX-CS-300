@@ -16,7 +16,13 @@ function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 	ship = new Ship(8 * eval(config.xout.value), 8 * (eval(config.mapSize.value) - eval(config.yout.value)), eval(config.energy.value), eval(config.supplies.value), eval(config.credits.value), false);
 
 	//set the visibility of artifacts (true for all if cheat mode checked)
-	buildArtifactSet(config.cheatMode.checked, artifactSet);
+	buildArtifacts(artifactSet);
+	if(config.cheatMode.checked) {
+        for(let i = 0; i < artifactSet.length; i++){
+           artifactSet[i].visibility = true;
+       }
+    }
+
 
 	//add the starting coordinates of ship as visited
 	addVisitedPoint(visitedPoints, ship.xPos, ship.yPos);
