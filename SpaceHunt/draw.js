@@ -15,7 +15,7 @@ function draw() {
 	{
 		drawSpace();
 		drawArtifactSet();
-		//drawTrail();
+		drawTrail();
 		drawShip();
 	}
 
@@ -166,24 +166,31 @@ function drawTrail() {
 function drawShip() {
 
 	var ship = JSON.parse(sessionStorage.getItem("ship"));
+	var ctx = canvas.getContext("2d");
+	var img = new Image();
+	img.src = "./oldSpice.png";
+
 	var x;
 	var y;
 
 	if(ship.inOrbit)
 	{
-		x = ship.xPos + 50 * Math.cos(animateAngle);
-		y = ship.yPos + 50 * Math.sin(animateAngle);
+		x = ship.xPos + 40 * Math.cos(animateAngle);
+		y = ship.yPos + 60 * Math.sin(animateAngle);
+		ctx.drawImage(img, x-40, y-40, 80, 80)
+	}
+	else if(ship.onLand)	
+	{
+		x = ship.xPos;
+		y = ship.yPos;
+		ctx.drawImage(img, x-40, y-40, 50, 50)
 	}
 	else
 	{
-		x = ship.xPos + 8 * Math.cos(animateAngle);
-		y = ship.yPos + 8 * Math.sin(animateAngle);
+		x = ship.xPos + 12 * Math.cos(animateAngle);
+		y = ship.yPos + 12 * Math.sin(animateAngle);
+		ctx.drawImage(img, x-40, y-40, 80, 80)
 	}
-	var ctx = canvas.getContext("2d");
-
-	var img = new Image();
-	img.src = "./oldSpice.png";
-	ctx.drawImage(img, x-40, y-40, 80, 80)
 }
 
 

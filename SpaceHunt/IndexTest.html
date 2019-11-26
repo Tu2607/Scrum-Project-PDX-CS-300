@@ -19,10 +19,11 @@
         var supplies = 100;
         var credits = 100;
         var orbit = false;
+        var land = false;
         var artifactSet = [];
         var visitedPoints = [];
         var space = new Space(xSize, ySize);
-        var ship = new Ship(xStart, yStart, energy, supplies, credits, orbit);
+        var ship = new Ship(xStart, yStart, energy, supplies, credits, orbit, land);
         //var wormhole; //checking this with everyone
 
         var Badmax = new BadMax(xStart, yStart);

@@ -1,12 +1,13 @@
 
 class Ship { 
-  constructor(xPos, yPos, energy, supplies, credits, orbit) {
+  constructor(xPos, yPos, energy, supplies, credits, orbit, land) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.energy = energy;
     this.supplies = supplies;
     this.credits = credits;
     this.inOrbit = orbit;
+    this.onLand = land;
   }
 }
 
@@ -62,9 +63,9 @@ function checkOrbitRange(ship)
     //disable orbit button (in case it was enabled from prior movement)
     document.getElementById('orbitButton').disabled = true;
     //disable land button (in case it was enabled from prior movement)
-	document.getElementById('landButton').disabled = true;
+    document.getElementById('landButton').disabled = true;
     //disable lift-off button (in case it was enabled from prior movement)
-	document.getElementById('liftOffButton').disabled = true;
+    document.getElementById('liftOffButton').disabled = true;
 
 	var artifacts = JSON.parse(sessionStorage.getItem("artifactSet"));
 
@@ -83,7 +84,7 @@ function checkOrbitRange(ship)
 
             alert("You're close to " + artifact.name + ", you may enter orbit");
             //enable orbit button
-	        document.getElementById('orbitButton').disabled = false;
+            document.getElementById('orbitButton').disabled = false;
           }
           else {
             alert("You're close to " + artifact.name + ", you can mine it");
@@ -111,7 +112,7 @@ function enterOrbit()
   	}
 
     //enable land button
-	document.getElementById('landButton').disabled = false;
+    document.getElementById('landButton').disabled = false;
     //disable orbit button (because already in orbit)
     document.getElementById('orbitButton').disabled = true;
     //enabled deorbit button 
@@ -143,19 +144,19 @@ function leaveOrbit()
 
 	ship.inOrbit = false;
 	useEnergy(ship, 10);
-  	useSupplies(ship, 2);
+  useSupplies(ship, 2);
 
-  	//disable land button
-	document.getElementById('landButton').disabled = true;
+  //disable land button
+  document.getElementById('landButton').disabled = true;
 	//enable orbit button (because still in orbit range)
 	document.getElementById('orbitButton').disabled = false;
-    //disable deorbit button
-    document.getElementById('deorbitButton').disabled = true;
+  //disable deorbit button
+  document.getElementById('deorbitButton').disabled = true;
 
 	// TODO: enable movement buttons
 
-  	//update the status fields with these changes
-  	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+  //update the status fields with these changes
+  pdateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -179,14 +180,15 @@ function landOnPlanet()
 	}
 
 	ship.inOrbit = false;
+  ship.onLand = true;
 	useEnergy(ship, 10);
-  	useSupplies(ship, 2);
+  useSupplies(ship, 2);
 
-    // TODO: land code (game play)
-    // TODO: animation (maybe)
+  // TODO: land code (game play)
+  // TODO: animation (maybe)
 
-  	//update the status fields with these changes
-  	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+	//update the status fields with these changes
+	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -201,22 +203,22 @@ function liftOffPlanet()
     //enable land button
     document.getElementById('landButton').disabled = false;
     //disable lift-off button 
-	document.getElementById('liftOffButton').disabled = true;
+  	document.getElementById('liftOffButton').disabled = true;
 
   	//if cheat mode enabled, don't check so don't die
   	if(config.cheatMode.checked == false) {
-
 	    checkEnergy(ship) 
-	}
+    }
 
+  ship.onLand = false;
 	ship.inOrbit = true;
 	useEnergy(ship, 10);
-  	useSupplies(ship, 2);
+  useSupplies(ship, 2);
 
-    // TODO: animation (maybe)
+  // TODO: animation (maybe)
 
-  	//update the status fields with these changes
-  	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+	//update the status fields with these changes
+	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
   	
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -271,9 +273,9 @@ function move(angle, distance, BadMax)
 
   //if cheat mode enabled, don't check so don't die
   if(config.cheatMode.checked == false) {
-    // Check Energy and Supplies
-    checkEnergy(ship);
-    checkSupplies(ship);
+  // Check Energy and Supplies
+  checkEnergy(ship);
+  checkSupplies(ship);
   }
 
   //This is the case where the user move out of bounds and activated the wormhole behavior
@@ -294,10 +296,10 @@ function move(angle, distance, BadMax)
   //save the point just relocated to
   addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
   
-  // if an object has same CP as ship
+  // check if an object has same CP as ship
   // should be called on every CP move
   checkCollision(ship);
-  // if an object is within 1 CP, a
+  // check if an object is within 1 CP
   // shoud be called after a series of CP moves
   checkOrbitRange(ship);
 
