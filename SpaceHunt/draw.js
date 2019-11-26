@@ -191,8 +191,6 @@ function drawShip() {
 // start screen called by windows.onload
 function drawSplashScreen()
 {
-	var space = JSON.parse(sessionStorage.getItem("space"));
-
 	var ctx = canvas.getContext("2d");
 	var grd = ctx.createRadialGradient(space.size/2, space.size/2, 0, space.size/2, space.size/2, space.size/2);
 	grd.addColorStop(0, "black");
