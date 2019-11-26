@@ -104,11 +104,8 @@
                     <p> Starting Y-Cord <input type="range" name="yCord" value="12" min="0" max="128" oninput="yout.value = yCord.value">
                         <output name="yout"> 12 </output>
                     </p>	
-                    <p> Max Size X<input type="range" name="xMax" value="128" min="0" max="128" oninput="xMaxOut.value = xMax.value">
-                        <output name="xMaxOut"> 128 </output>
-                    </p>
-                    <p>  Max Size Y<input type="range" name="yMax" value="128" min="0" max="128" oninput="yMaxOut.value = yMax.value">
-                        <output name="yMaxOut"> 128 </output>
+                    <p> Map Size<input type="range" name="mapSize" value="100" min="0" max="128" oninput="mapSizeOut.value = mapSize.value">
+                        <output name="mapSizeOut"> 128 </output>
                     </p>
                 </form>
 			    <button type='button' onclick="updateConfig(space, ship, artifactSet, visitedPoints); return false"> Submit </button>
