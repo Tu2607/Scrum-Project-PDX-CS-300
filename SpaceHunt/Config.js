@@ -37,6 +37,7 @@ function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 	//fill the status fields (UI on index)
 	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
+	gameOver = false;
 	draw();  //Tu's note: I'll add in the wormhole
 }
 

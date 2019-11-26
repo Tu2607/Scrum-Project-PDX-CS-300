@@ -13,14 +13,16 @@ class Ship {
 function checkSupplies(ship) {
   if (ship.supplies < 1) {
     alert("You've run out of supplies! Game over.");
-    //gameOver = True;
+    gameOver = true;
+    drawSplashScreen();
   }
 }
 
 function checkEnergy(ship) {
   if (ship.energy< 1) {
     alert("You've run out of energy! Game over.");
-    //gameOver = True;
+    gameOver = true;
+    drawSplashScreen();
   }
 }
 

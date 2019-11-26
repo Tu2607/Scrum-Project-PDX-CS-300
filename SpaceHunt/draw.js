@@ -5,14 +5,21 @@
 function draw() {
 	
 	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-	canvas.getContext("2d").save();
+	//canvas.getContext("2d").save();
 
-	drawSpace();
-	drawArtifactSet();
-	//drawTrail();
-	drawShip();
+	if(gameOver)
+	{
+		drawSplashScreen();
+	}
+	else
+	{
+		drawSpace();
+		drawArtifactSet();
+		//drawTrail();
+		drawShip();
+	}
 
-	canvas.getContext("2d").restore();
+	//canvas.getContext("2d").restore();
 
 	// since this function is called repeatedly
 	// a changing value is needed to differentiate frames
@@ -177,4 +184,19 @@ function drawShip() {
 	var img = new Image();
 	img.src = "./oldSpice.png";
 	ctx.drawImage(img, x-40, y-40, 80, 80)
+}
+
+
+
+// start screen called by windows.onload
+function drawSplashScreen()
+{
+	var space = JSON.parse(sessionStorage.getItem("space"));
+
+	var ctx = canvas.getContext("2d");
+	var grd = ctx.createRadialGradient(space.size/2, space.size/2, 0, space.size/2, space.size/2, space.size/2);
+	grd.addColorStop(0, "black");
+	grd.addColorStop(0, "black");
+	ctx.fillStyle = grd;
+	ctx.fillRect(0, 0, space.size, space.size); 
 }

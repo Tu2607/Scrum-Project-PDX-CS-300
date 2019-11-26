@@ -27,6 +27,7 @@
 
         var Badmax = new BadMax(xStart, yStart);
 
+        var gameOver = false;
         var animateAngle = 0;
         var requestAnimationFrame = window.requestAnimationFrame || 
                             window.mozRequestAnimationFrame || 
@@ -240,7 +241,7 @@
                         <p align="center"><button type="button" class="move" value="90" onclick="move(90, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">90</button>
                         </p>
                         <p align="center"><button type="button" class="move"  value="180"  onclick="move(180, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">180</button>
-                                          <input type="text" name=distance value=1 maxlength="3" size="4" >
+                                          <input type="text" name=distance value=1 maxlength="3" size="4" style="text-align: center">
                                           <button type="button" class="move" value="0"  onclick="move(0, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">0</button>
                         </p>
                         <p align="center"><button type="button" class="move" value="270" onclick="move(270, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">270</button></p>
@@ -346,9 +347,14 @@
             return Math.floor(num);
         }
 
+        function initialize()
+        {
+            //drawSpace();
+            drawSplashScreen();
+            buildArtifacts(artifactSet);
+        }
 
-
-         window.onload = buildArtifacts(artifactSet);
+         window.onload = initialize();
 
     </script>
 
