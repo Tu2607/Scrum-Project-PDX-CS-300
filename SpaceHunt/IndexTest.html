@@ -104,7 +104,7 @@
                     <p> Starting Y-Cord <input type="range" name="yCord" value="12" min="0" max="128" oninput="yout.value = yCord.value">
                         <output name="yout"> 12 </output>
                     </p>	
-                    <p> Map Size<input type="range" name="mapSize" value="100" min="0" max="128" oninput="mapSizeOut.value = mapSize.value">
+                    <p> Map Size<input type="range" name="mapSize" value="128" min="0" max="128" oninput="mapSizeOut.value = mapSize.value">
                         <output name="mapSizeOut"> 128 </output>
                     </p>
                 </form>
@@ -189,7 +189,7 @@
                 		move(270, eval(movementUI.distance.value), Badmax);
                         document.getElementById('aoow').play();
                 	}
-                    e.preventDefault();
+                    //e.preventDefault();
                 }
                 /*
                 window.addEventListener('keydown', doKeyDown, false);
@@ -261,9 +261,9 @@
             <div id="Admin" class="tabcontent">
               <form name="admin">
                     <div id="copanel">
-                    <form id="coconfig">
+                    <form id="artifactPanel">
                             <p> Celestial Object Positions: </p>
-                            <p>Eniac:     X <input type=text name="xeniac" size=4> Y <input type=text name="yeniac" size=4></p>
+                            <p>Eniac:     X <input type=text name="xeniac"  size=4> Y <input type=text name="yeniac" value="25" size=4></p>
                             <p>Moon:      X <input type=text name="xmoon" size=4> Y <input type=text name="ymoon" size=4></p>
                             <p>Celeron:   X <input type=text name="xceleron" size=4> Y <input type=text name="yceleron" size=4></p>
                             <p>Ryzen:     X <input type=text name="xryzen" size=4> Y <input type=text name="yryzen" size=4></p>
@@ -280,7 +280,10 @@
                             <p>Astriod 3: X <input type=text name="xastriod3" size=4> Y <input type=text name="yastriod3" size=4></p>
                             <p>Astriod 4: X <input type=text name="xastriod4" size=4> Y <input type=text name="yastriod4" size=4></p>
                         </form>
-			            <button type='button' onclick="updateartifacts(coconfig); return false"> Submit </button>
+			            <button type='button' onclick="buildArtifactSet(true,artifactSet); return false"> Submit </button>
+
+                        <script>
+                        </script>
 
                     </div>
 
@@ -333,6 +336,14 @@
         }
     </script>
     <script>
+        //creates a random integer between 0 and 128
+        function rNum(){
+            let num =Math.random()*128;
+            return Math.floor(num);
+        }
+
+
+
         window.onload = updateConfig(space, ship, artifactSet, visitedPoints)
     </script>
 
