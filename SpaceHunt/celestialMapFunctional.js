@@ -66,7 +66,19 @@ function move(UI, canvas, angle, distance)
 
 
 	// Fixed Worm Hole Case
-
+	
+	//We must check for collision as the ship moves
+	//To do this we can loop 'distance' times and check
+	//each coordinate point
+	// if(angle == 90)
+	//	 var i;
+	//	 for (i=0; i<distance; ++i) {
+	//		 ship.yPos -= 8
+	//		 addVisitedPoint(...)
+	//		 checkCollision() ?
+	//	 }
+	//Something like this, these are just notes for me
+	//to refer to when I come back to this with more time
 
 	// Up
 	if(angle == 90)
@@ -203,7 +215,6 @@ function checkDistance(ship, artifact){
     return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 }
 
-//waiting on checkSupplies() to be implimented
 function removeSupplies(ship){
 
     //Remove 2% supplies
