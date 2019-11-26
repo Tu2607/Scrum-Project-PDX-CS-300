@@ -239,13 +239,13 @@
                     <div class="moves-grid">
                         <form name="movementUI">
                         <p>MOVE</p>
-                        <p align="center"><button type="button" class="move" value="90" onclick="move(90, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">90</button>
+                        <p align="center"><button type="button" class="move" value="90" id="up" disabled="false" onclick="move(90, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">90</button>
                         </p>
-                        <p align="center"><button type="button" class="move"  value="180"  onclick="move(180, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">180</button>
-                                          <input type="text" name=distance value=1 maxlength="3" size="4" style="text-align: center">
-                                          <button type="button" class="move" value="0"  onclick="move(0, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">0</button>
+                        <p align="center"><button type="button" class="move"  value="180" id="left" disabled="false" onclick="move(180, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">180</button>
+                                          <input type="text" name=distance value=1 maxlength="3" size="4" id="distance" disabled="false" style="text-align: center">
+                                          <button type="button" class="move" value="0" disabled="false" id="right" onclick="move(0, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">0</button>
                         </p>
-                        <p align="center"><button type="button" class="move" value="270" onclick="move(270, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">270</button></p>
+                        <p align="center"><button type="button" class="move" value="270" disabled="false" id="down" onclick="move(270, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">270</button></p>
                         </form>
                     </div>
                     <div class="action-grid">

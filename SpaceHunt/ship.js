@@ -56,6 +56,23 @@ function checkCollision(ship)
   sessionStorage.setItem("artifactSet", JSON.stringify(artifacts));
 }
 
+function disableMoveButtons()
+{
+    document.getElementById('up').disabled = true;
+    document.getElementById('down').disabled = true;
+    document.getElementById('left').disabled = true;
+    document.getElementById('right').disabled = true;
+    document.getElementById('distance').disabled = true;
+}
+function enableMoveButtons()
+{
+    document.getElementById('up').disabled = false;
+    document.getElementById('down').disabled = false;
+    document.getElementById('left').disabled = false;
+    document.getElementById('right').disabled = false;
+    document.getElementById('distance').disabled = false;
+}
+
 
 // to be called at the end of a series of moves
 function checkOrbitRange(ship)
@@ -118,7 +135,8 @@ function enterOrbit()
     //enabled deorbit button 
     document.getElementById('deorbitButton').disabled = false;
 
-    // TODO: disable movement buttons
+    //disable movement buttons
+    disableMoveButtons()
 
     ship.inOrbit = true;
     useEnergy(ship, 10);
@@ -153,7 +171,8 @@ function leaveOrbit()
   //disable deorbit button
   document.getElementById('deorbitButton').disabled = true;
 
-	// TODO: enable movement buttons
+	//enable movement buttons
+  enbleMoveButtons();
 
   //update the status fields with these changes
   pdateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
