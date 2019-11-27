@@ -172,10 +172,10 @@ function leaveOrbit()
   document.getElementById('deorbitButton').disabled = true;
 
 	//enable movement buttons
-  enbleMoveButtons();
+  enableMoveButtons();
 
   //update the status fields with these changes
-  pdateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+  updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
