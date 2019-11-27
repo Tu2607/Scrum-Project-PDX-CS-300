@@ -1,46 +1,50 @@
-/*  ***********************************************
-    saveGame.js
 
-    Allows a user to save and load their game.
-    These functions store and load game object variables where the player left off.
-*/
-
-function saveGame(ship)
-{
-  console.log(localStorage)
-  console.log("Saving Game Settings...")
-  var game =
-  {
-    // Ship Settings
-    shipXpos: ship.xPos ,
-    shipYpos: ship.yPos ,
-    shipEnergy: ship.energy ,
-    shipSupplies: ship.supplies ,
-    shipCredits: ship.credits ,
-    shipInOrbit: ship.inOrbit ,
-    shipOnLand: ship.onLand 
+/*  *******************************************************
+Save Ship Settings
+    ******************************************************* */
+function saveGame() {
+  if (typeof (Storage) !== "undefined") {
+    // Code for localStorage
+    console.log('Local Storage Supported\n\n')
   }
+  else {
+    // No web storage Support.
+    console.log('Local Storage Not Supported')
+  }
+  console.log("Saving Game Settings...\n\n")
 
-  localStorage.setItem('saveGame', JSON.stringify(game))
-  console.log("Your Game Was Successfully Saved")
+  // Copy Session Storage over to Local Storage
+  localStorage.setItem('shipState', sessionStorage.getItem("ship")) 
+  localStorage.setItem('spaceState', sessionStorage.getItem("space")) 
+  localStorage.setItem('artifactState', sessionStorage.getItem("artifactSet")) 
+  localStorage.setItem('visitedState', sessionStorage.getItem("visitedPoints"))
+ 
+  console.log("Your Game Was Successfully Saved\n\n")
+}
+
+function loadGame()
+{
+  console.log("Loading Your Game...\n\n")
+  
+  // Copy Local Storage over to Session Storage
+  sessionStorage.setItem('ship', localStorage.getItem('shipState'))
+  sessionStorage.setItem('space', localStorage.getItem('spaceState'))
+  sessionStorage.setItem('artifactSet', localStorage.getItem('artifactState'))
+  sessionStorage.setItem('visitedPoints', localStorage.getItem('visitedState'))
+
+  console.log("Your Game Was Successfully Loaded!\n\n")
+}
+
+// Print Functions for Testing Local Storage and Session Storage
+
+function printLocalStorage()
+{
+  console.log("\n\nLocalStorage")
   console.log(localStorage)
 }
 
-function loadGame(ship)
+function printSessionStorage()
 {
-  console.log(ship)
-  console.log("Loading Your Game...")
-  var game = JSON.parse(localStorage.getItem('saveGame'))
-
-  ship.xPos = game.shipXpos
-  ship.yPos = game.shipYpos
-  ship.energy = game.shipEnergy
-  ship.supplies = game.shipSupplies
-  ship.inOrbit = game.shipInOrbit
-  ship.onLand = game.shipOnLand
-
-  console.log("Your Game Was Successfully Loaded!")
-  console.log(ship)
-
-  //return ship
+  console.log("\n\nSession Storage")
+  console.log(sessionStorage)
 }

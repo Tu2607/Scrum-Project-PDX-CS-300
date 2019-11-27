@@ -264,12 +264,15 @@
                 </div>
             </div>
 
+
 	    <!--Game Save/Load-->
             <div class="action-grid">
               <p> Save/Load Progess </p>
-              <input type="button"
-              value="Save Game" onclick="saveGame(ship)">
-              <input type="button" value="Load Game" onclick="loadGame(ship)">
+              <input type="button" value="Save Game" onclick="saveGame()">
+              <input type="button" value="Load Game" onclick="loadGame()"></br>
+              <input type="button" value="Local Storage" onclick="printLocalStorage()">
+              <input type="button" value="Session Storage" onclick="printSessionStorage()">
+              <input type="button" value="Clear Storage" onclick="localStorage.clear()">
             </div>
 
             <!--Admin Panel-->
