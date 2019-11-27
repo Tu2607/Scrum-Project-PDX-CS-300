@@ -7,6 +7,7 @@
 
 function saveGame(ship)
 {
+  console.log(localStorage)
   console.log("Saving Game Settings...")
   var game =
   {
@@ -22,6 +23,7 @@ function saveGame(ship)
 
   localStorage.setItem('saveGame', JSON.stringify(game))
   console.log("Your Game Was Successfully Saved")
+  console.log(localStorage)
 }
 
 function loadGame(ship)
