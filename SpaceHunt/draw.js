@@ -41,23 +41,64 @@ function drawSplashScreen()
 	ctx.fillStyle = grd;
 	ctx.fillRect(0, 0, space.size, space.size); 
 
+	if(!gameOver)
+	{
+		let fontSize = 150; //* Math.abs(Math.sin(animateAngle));
+		ctx.font = fontSize + "px Bungee";
+		ctx.fillStyle = "pink";
+		ctx.fillText("SPACEHUNT", 50, 400);
+	}
+	else
+	{
+		let fontSize = 150;
+		ctx.font = fontSize + "px Bungee";
+		ctx.fillStyle = "pink";
+		ctx.fillText("GAME OVER!", 40, 200);
+	}
+
 	var img = new Image();
 	img.src = "./oldSpice.png";
 
 	x = ship.xPos + 12 * Math.cos(animateAngle);
 	y = ship.yPos + 12 * Math.sin(animateAngle);
-	ctx.drawImage(img, 400, 500, 500*Math.abs(Math.sin(animateAngle)), 500*Math.abs(Math.sin(animateAngle)))
+	ctx.drawImage(img, 400, 500, 500*Math.tan(animateAngle), 500*Math.tan(animateAngle));
 
-
-
-	animateAngle += Math.PI/500;
-
-	if(!gameOver && Math.sin(animateAngle) > 0.9)
+	if(!gameOver && Math.sin(animateAngle) > 0.99)
+	{
+		ctx.font = "25px Bungee";
+		ctx.fillStyle = "white";
+		ctx.fillText("Press the 'Start' button in the command panel to play!", 150, 500);
 		return;
+	}
 	else if(gameOver && Math.sin(animateAngle) > 0)
 		return;
 
+	animateAngle += Math.PI/500;
 	requestAnimationFrame(drawSplashScreen);
+}
+function drawBadmax()
+{
+
+	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+	var ctx = canvas.getContext("2d");
+
+	var img = new Image();
+	img.src = "./badmax.png";
+
+	ctx.drawImage(img, 20, 200, 600, 600);
+	let fontSize = 50;
+	ctx.font = fontSize + "px Bungee";
+	ctx.fillStyle = "white";
+	ctx.fillText("You got robbed boi!", 10, 200);
+	ctx.fillText("Sincerely, from the BadMax crew", 20, 300);
+
+	animateAngle += 0.000001/99999999;
+	
+	if(Math.sin(animateAngle) > 0.99999){
+		return;
+	}
+	requestAnimationFrame(drawBadmax);
 }
 
 // loads space and draws black/grey gradient with grid

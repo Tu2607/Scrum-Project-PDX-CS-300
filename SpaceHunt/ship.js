@@ -259,6 +259,8 @@ function chanceEvent(ship)
 
   if(chance > 0.95){
     ship.credits -= 10;
+    //animateAngle = 0;
+    //drawBadmax();
     alert("You just got robbed boi! Sincerely from the BadMax crew.");
   }
 
