@@ -254,6 +254,18 @@ function checkBadMax(ship,BadMax)
   sessionStorage.setItem("ship",JSON.stringify(ship));
 }
 
+function chanceEvent(ship)
+{
+  var chance = (getRandom(1,10)/10);
+
+  if(chance > 0.9){
+    ship.credits -= 10;
+    alert("You just got robbed boi! Sincerely from the BadMax crew.");
+  }
+
+  sessionStorage.setItem("ship",JSON.stringify(ship));
+}
+
 
 // ***************************************
 // ************ Ship Movement ************
@@ -266,8 +278,8 @@ function move(angle, distance, BadMax)
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
   //Randomize BadMax Movement before each movement
-  BadMax.xPos = getRandom(1,2)*8;
-  BadMax.yPos = getRandom(1,2)*8;
+  //BadMax.xPos = getRandom(1,2)*8;
+  //BadMax.yPos = getRandom(1,2)*8;
 
   // Up
   if(angle == 90)
@@ -303,8 +315,8 @@ function move(angle, distance, BadMax)
     if(config.wormhole.value == "random"){
       //ship.yPos = Math.floor(getRandom(0,15) * 8);    
       //ship.xPos = Math.floor(getRandom(0,15) * 8);
-
-      ship.yPos = getRandom(1,2) * 8;    
+      
+      ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
       ship.xPos = getRandom(1,2) * 8;
     } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
       ship.yPos = 50 * 8;
@@ -324,9 +336,9 @@ function move(angle, distance, BadMax)
 
   //Check if the ship has the same CP as BadMax
   //Called after every move
-  //BadMax.xPos = ship.xPos;  //  TESTING PURPOSE, UNCOMMENT TO TEST CREDIT DECREASE PROPERLY
-  //BadMax.yPos = ship.yPos;  //  TESTING PURPOSE, UNCOMMENT TO TEST CREDIT DECREASE PROPERLY
-  checkBadMax(ship,BadMax);
+  //checkBadMax(ship,BadMax);
+
+  chanceEvent(ship);
 
   //save state
   sessionStorage.setItem("ship", JSON.stringify(ship));
