@@ -7,17 +7,10 @@ function draw() {
 	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 	//canvas.getContext("2d").save();
 
-	if(gameOver)
-	{
-		drawSplashScreen();
-	}
-	else
-	{
-		drawSpace();
-		drawArtifactSet();
-		drawTrail();
-		drawShip();
-	}
+	drawSpace();
+	drawArtifactSet();
+	drawTrail();
+	drawShip();
 
 	//canvas.getContext("2d").restore();
 
@@ -25,9 +18,47 @@ function draw() {
 	// a changing value is needed to differentiate frames
 	animateAngle += Math.PI/100;
 
-	requestAnimationFrame(draw);
+	if(!gameOver)
+	{
+		requestAnimationFrame(draw);
+	}
+	else
+	{
+		window.cancelAnimationFrame(draw);
+		animateAngle = -1;
+		drawSplashScreen();
+	}
 }
 
+// start screen called by windows.onload
+function drawSplashScreen()
+{
+	var ctx = canvas.getContext("2d");
+	var grd = ctx.createRadialGradient(space.size/2, space.size/2, space.size, space.size/2, space.size/2, space.size/2 * Math.abs(Math.sin(animateAngle)));
+	grd.addColorStop(0, "purple");
+	grd.addColorStop(1, "black");
+
+	ctx.fillStyle = grd;
+	ctx.fillRect(0, 0, space.size, space.size); 
+
+	var img = new Image();
+	img.src = "./oldSpice.png";
+
+	x = ship.xPos + 12 * Math.cos(animateAngle);
+	y = ship.yPos + 12 * Math.sin(animateAngle);
+	ctx.drawImage(img, 400, 500, 500*Math.abs(Math.sin(animateAngle)), 500*Math.abs(Math.sin(animateAngle)))
+
+
+
+	animateAngle += Math.PI/500;
+
+	if(!gameOver && Math.sin(animateAngle) > 0.9)
+		return;
+	else if(gameOver && Math.sin(animateAngle) > 0)
+		return;
+
+	requestAnimationFrame(drawSplashScreen);
+}
 
 // loads space and draws black/grey gradient with grid
 // grid is every 32 pixels (first two loops), again at every 256 pixels (last two loops)
@@ -195,13 +226,3 @@ function drawShip() {
 
 
 
-// start screen called by windows.onload
-function drawSplashScreen()
-{
-	var ctx = canvas.getContext("2d");
-	var grd = ctx.createRadialGradient(space.size/2, space.size/2, 0, space.size/2, space.size/2, space.size/2);
-	grd.addColorStop(0, "black");
-	grd.addColorStop(0, "black");
-	ctx.fillStyle = grd;
-	ctx.fillRect(0, 0, space.size, space.size); 
-}
