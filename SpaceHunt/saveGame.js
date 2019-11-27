@@ -32,6 +32,10 @@ function loadGame()
   sessionStorage.setItem('artifactSet', localStorage.getItem('artifactState'))
   sessionStorage.setItem('visitedPoints', localStorage.getItem('visitedState'))
 
+  //update the status fields with loaded game data
+
+  updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+
   console.log("Your Game Was Successfully Loaded!\n\n")
 }
 
