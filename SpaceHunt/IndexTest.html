@@ -8,6 +8,7 @@
     <script src="artifact.js"></script>
     <script src="sensors.js"></script>
     <script src="draw.js"></script>
+    <script src="saveGame.js"></script>
     <audio id="aoow" src="michael_aaow.mp3" preload="auto"></audio>
     <script>
         var xSize = 1024;
@@ -261,6 +262,14 @@
 			            <input type='button' class="move" value="Start"onclick="updateConfig(space, ship, artifactSet, visitedPoints); return false"> 
                     </div> 
                 </div>
+            </div>
+
+	    <!--Game Save/Load-->
+            <div class="action-grid">
+              <p> Save/Load Progess </p>
+              <input type="button"
+              value="Save Game" onclick="saveGame(ship)">
+              <input type="button" value="Load Game" onclick="loadGame(ship)">
             </div>
 
             <!--Admin Panel-->
