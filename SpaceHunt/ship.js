@@ -28,7 +28,8 @@ function checkEnergy(ship) {
 }
 
 function getRandom(min,max){
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  //return Math.floor(Math.random() * (max - min + 1) + min);
+  return (Math.random() * (max - min + 1) + min);
 }
 
 //FOR TESTING COLLISION/ORBIT/LANDING ON PLANET
@@ -256,9 +257,9 @@ function checkBadMax(ship,BadMax)
 
 function chanceEvent(ship)
 {
-  var chance = (getRandom(1,10)/10);
+  var chance = (1/getRandom(1,10));
 
-  if(chance > 0.9){
+  if(chance > 0.95){
     ship.credits -= 10;
     alert("You just got robbed boi! Sincerely from the BadMax crew.");
   }
