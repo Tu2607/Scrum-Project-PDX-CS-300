@@ -10,6 +10,7 @@ function draw() {
 	drawSpace();
 	drawArtifactSet();
 	drawTrail();
+	drawStats();
 	drawShip();
 
 	//canvas.getContext("2d").restore();
@@ -30,7 +31,7 @@ function draw() {
 	}
 }
 
-// start screen called by windows.onload
+// start screen called by windows.onload and when game over
 function drawSplashScreen()
 {
 	var ctx = canvas.getContext("2d");
@@ -45,12 +46,13 @@ function drawSplashScreen()
 	var img = new Image();
 	img.src = "./oldSpice.png";
 
+	//ship zooms past
 	x = ship.xPos + 12 * Math.cos(animateAngle);
 	y = ship.yPos + 12 * Math.sin(animateAngle);
 	ctx.drawImage(img, 400, 500, 500*Math.tan(animateAngle), 500*Math.tan(animateAngle));
 	ctx.restore();
 
-	if(!gameOver)
+	if(!gameOver) // intro screen
 	{
 		let fontSize = 150; //* Math.abs(Math.sin(animateAngle));
 		ctx.font = fontSize + "px Bungee";
@@ -58,28 +60,41 @@ function drawSplashScreen()
 		ctx.fillText("SPACEHUNT", 50, 400);
 		//ctx.fillText("SPACEHUNT", 50* Math.abs(Math.cos(animateAngle)), 400* Math.abs(Math.sin(animateAngle)));
 	}
-	else
+	else // game over screen
 	{
 		let fontSize = 150;
 		ctx.font = fontSize + "px Bungee";
 		ctx.fillStyle = "pink";
 		ctx.fillText("GAME OVER!", 40, 200);
+		//fontSize = 20;
+		//ctx.font = fontSize + "px Bungee";
+		//ctx.fillText("drifting ... into ... nothing", 50, 400);
+		//ctx.fillText("drifting ... into ... nothing", 50* Math.abs(Math.cos(animateAngle)), 400* Math.abs(Math.cos(animateAngle)));
+		disableMoveButtons();
 	}
 
 
-	if(!gameOver && Math.sin(animateAngle) > 0.99)
+	if(!gameOver && Math.sin(animateAngle) > 0.99) // as soon as the intro screen is done - draw the subtitle
 	{
 		ctx.font = "25px Bungee";
 		ctx.fillStyle = "white";
 		ctx.fillText("Press the 'Start' button in the command panel to play!", 150, 500);
 		return;
 	}
-	else if(gameOver && Math.sin(animateAngle) > 0)
+	else if(gameOver && Math.sin(animateAngle) > 0) // as soon as 'game over' screen is done - draw the game as it looked (not animated)
+	{
+		drawSpace();
+		drawArtifactSet();
+		drawTrail();
+		drawStats();
+		drawShip();
 		return;
+	}
 
 	animateAngle += Math.PI/500;
 	requestAnimationFrame(drawSplashScreen);
 }
+
 function drawBadmax()
 {
 
@@ -104,6 +119,45 @@ function drawBadmax()
 		return;
 	}
 	requestAnimationFrame(drawBadmax);
+}
+
+function drawStats()
+{
+	var ctx = canvas.getContext("2d");
+
+	let fontSize = 20;
+	ctx.font = fontSize + "px Bungee";
+	ctx.fillStyle = "silver";
+	ctx.fillText("ENERGY", 10, 1000);
+	ctx.fillText("SUPPLIES", 240, 1000);
+	ctx.fillText("CREDITS", 500, 1000);
+	ctx.fillText("HEALTH", 750, 1000);
+
+	ctx.fillStyle = "red";
+	if(UI.energy.value > -1)
+	{
+		ctx.fillRect(100, 985, UI.energy.value, 10); 
+	}
+	if(UI.supplies.value > -1)
+	{
+		ctx.fillRect(350, 985, UI.supplies.value, 10); 
+	}
+	if(UI.credits.value > -1)
+	{
+		ctx.fillRect(600, 985, UI.credits.value, 10); 
+	}
+	/*
+	if(UI.health.value > -1)
+	{
+		ctx.fillRect(840, 985, 110, 10); 
+	}
+	*/
+	/*
+	ctx.fillRect(100, 985, 110, 10); 
+	ctx.fillRect(350, 985, 110, 10); 
+	ctx.fillRect(600, 985, 110, 10); 
+	ctx.fillRect(840, 985, 110, 10); 
+	*/
 }
 
 // loads space and draws black/grey gradient with grid
