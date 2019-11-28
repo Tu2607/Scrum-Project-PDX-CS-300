@@ -41,12 +41,22 @@ function drawSplashScreen()
 	ctx.fillStyle = grd;
 	ctx.fillRect(0, 0, space.size, space.size); 
 
+	ctx.save();
+	var img = new Image();
+	img.src = "./oldSpice.png";
+
+	x = ship.xPos + 12 * Math.cos(animateAngle);
+	y = ship.yPos + 12 * Math.sin(animateAngle);
+	ctx.drawImage(img, 400, 500, 500*Math.tan(animateAngle), 500*Math.tan(animateAngle));
+	ctx.restore();
+
 	if(!gameOver)
 	{
 		let fontSize = 150; //* Math.abs(Math.sin(animateAngle));
 		ctx.font = fontSize + "px Bungee";
 		ctx.fillStyle = "pink";
 		ctx.fillText("SPACEHUNT", 50, 400);
+		//ctx.fillText("SPACEHUNT", 50* Math.abs(Math.cos(animateAngle)), 400* Math.abs(Math.sin(animateAngle)));
 	}
 	else
 	{
@@ -56,12 +66,6 @@ function drawSplashScreen()
 		ctx.fillText("GAME OVER!", 40, 200);
 	}
 
-	var img = new Image();
-	img.src = "./oldSpice.png";
-
-	x = ship.xPos + 12 * Math.cos(animateAngle);
-	y = ship.yPos + 12 * Math.sin(animateAngle);
-	ctx.drawImage(img, 400, 500, 500*Math.tan(animateAngle), 500*Math.tan(animateAngle));
 
 	if(!gameOver && Math.sin(animateAngle) > 0.99)
 	{
@@ -91,11 +95,11 @@ function drawBadmax()
 	ctx.font = fontSize + "px Bungee";
 	ctx.fillStyle = "white";
 	ctx.fillText("You got robbed boi!", 10, 200);
-	ctx.fillText("Sincerely, from the BadMax crew", 20, 300);
+	ctx.fillText("Sincerely, from the BadMax crew", 20, 800);
 
-	animateAngle += 0.000001/99999999;
+	animateAngle += Math.PI/5000000;
 	
-	if(Math.sin(animateAngle) > 0.99999){
+	if(Math.sin(animateAngle) > 0.999){
 		return;
 	}
 	requestAnimationFrame(drawBadmax);

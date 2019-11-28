@@ -38,6 +38,7 @@ function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
 	gameOver = false;
+	enableMoveButtons();
 	draw();  //Tu's note: I'll add in the wormhole
 }
 

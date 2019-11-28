@@ -259,9 +259,11 @@ function chanceEvent(ship)
 
   if(chance > 0.95){
     ship.credits -= 10;
-    //animateAngle = 0;
-    //drawBadmax();
-    alert("You just got robbed boi! Sincerely from the BadMax crew.");
+    animateAngle = -4;
+    disableMoveButtons();
+    drawBadmax();
+    //alert("You just got robbed boi! Sincerely from the BadMax crew.");
+    enableMoveButtons();
   }
 
   sessionStorage.setItem("ship",JSON.stringify(ship));
