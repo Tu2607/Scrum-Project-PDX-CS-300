@@ -100,6 +100,7 @@ function drawBadmax()
 	animateAngle += Math.PI/5000000;
 	
 	if(Math.sin(animateAngle) > 0.999){
+	    enableMoveButtons();
 		return;
 	}
 	requestAnimationFrame(drawBadmax);

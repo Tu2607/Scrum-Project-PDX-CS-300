@@ -257,11 +257,16 @@ function chanceEvent(ship)
 
   if(chance > 0.95){
     ship.credits -= 10;
+
+    //for drawing
     animateAngle = -4;
+
+    //because we don't want movement while badmax notification is happening
     disableMoveButtons();
+    //the drawBadmax() function enables movement after it finishes
+
     drawBadmax();
     //alert("You just got robbed boi! Sincerely from the BadMax crew.");
-    enableMoveButtons();
   }
 
   sessionStorage.setItem("ship",JSON.stringify(ship));
