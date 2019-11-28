@@ -61,7 +61,6 @@ function disableMoveButtons()
     document.getElementById('down').disabled = true;
     document.getElementById('left').disabled = true;
     document.getElementById('right').disabled = true;
-    document.getElementById('distance').disabled = true;
 }
 function enableMoveButtons()
 {
@@ -69,7 +68,6 @@ function enableMoveButtons()
     document.getElementById('down').disabled = false;
     document.getElementById('left').disabled = false;
     document.getElementById('right').disabled = false;
-    document.getElementById('distance').disabled = false;
 }
 
 

@@ -145,7 +145,7 @@
                         <p align="center"><button type="button" class="move" value="90" id="up" disabled="false" onclick="move(90, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">90</button>
                         </p>
                         <p align="center"><button type="button" class="move"  value="180" id="left" disabled="false" onclick="move(180, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">180</button>
-                                          <input type="text" name=distance value=1 maxlength="3" size="4" id="distance" disabled="false" style="text-align: center">
+                                          <input type="text" name=distance value=1 maxlength="3" size="4" id="distance" style="text-align: center">
                                           <button type="button" class="move" value="0" disabled="false" id="right" onclick="move(0, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">0</button>
                         </p>
                         <p align="center"><button type="button" class="move" value="270" disabled="false" id="down" onclick="move(270, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">270</button></p>
@@ -278,8 +278,12 @@
 		// listen for keypress, call move function
         window.addEventListener('keydown', doKeyDown, false);
         function doKeyDown(e){
-        	if(movementUI.distance.disabled == true)
+
+            // check if movement is disabled due to gameplay
+            // only one needs to be checked out of the four
+        	if(movementUI.up.disabled == true)
         		return;
+            
         	if(e.keyCode == 68 || e.keyCode == 39){ // d or right arrow : 0
 
         		move(0, eval(movementUI.distance.value), Badmax);
