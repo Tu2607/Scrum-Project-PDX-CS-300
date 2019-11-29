@@ -4,6 +4,7 @@ CS300 Fall 2019
 Space HuntSave Ship Settings
 
 Main Functions
+showSaveLoad() reveals the Save Load Menu Buttons.
 saveGame() copies data from Session Storage into Local Storage.
 loadGame() copies data from Local Storage into Session Storage.
 clearGame() erases all Local Storage data.
@@ -13,6 +14,13 @@ printSessionStorage() displays Session Storage Data in the Console Log
 printLocalStorage() displays Local Storage Data in the Console Log
 **********************************************************************/
 
+
+function showSaveLoad()
+{
+  // By default, the save load menu buttons are set to hidden.
+  // This is prevent players from saving data before the game even starts
+  document.getElementById("saveLoadMenu").style.visibility = "visible";
+}
 
 function saveGame() 
 {

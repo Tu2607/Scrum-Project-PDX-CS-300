@@ -162,16 +162,15 @@
                         <input type="button" class="move" value="Land" size="8" id="landButton" disabled="true" onclick="landOnPlanet()">
                         <input type="button" class="move" value="Lift-off" size="8" id="liftOffButton" disabled="true" onclick="liftOffPlanet()">
                         <p></p>
-			            <input type='button' class="move" value="Start"onclick="updateConfig(space, ship, artifactSet, visitedPoints); return false"> 
+			<input type='button' class="move" value="Start"onclick="updateConfig(space, ship, artifactSet, visitedPoints); showSaveLoad(); this.disabled=true"> 
                     </div> 
                 </div>
             </div>
 
 
             <!--Game Save/Load-->
-            <div class="action-grid">
+            <div id="saveLoadMenu" class="action-grid" visibility="hidden">
               <p align="center"> Save/Load Game 
-              <br />
               <input type="button" class="move" value="Save" onclick="saveGame()">
               <input type="button" class="move" value="Load" onclick="loadGame()">
               <input type="button" class="move" value="Clear" onclick="clearGame()">
@@ -368,6 +367,8 @@
             context.fillText(message, 50, 100);
 		}
 
+        // Hide the Save Game Button
+        document.getElementById("saveLoadMenu").style.visibility = "hidden"
     </script>
 
 
