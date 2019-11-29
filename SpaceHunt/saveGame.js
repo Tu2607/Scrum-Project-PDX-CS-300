@@ -51,7 +51,7 @@ function saveGame()
 function loadGame()
 {
   // Check That there is Local Storage Data
-  if(localStorage)
+  if(localStorage === null)
   {
     // If Local Storage is null, the player has no Saved Game Data to Load
     window.alert('You do not have a Saved Game!')
