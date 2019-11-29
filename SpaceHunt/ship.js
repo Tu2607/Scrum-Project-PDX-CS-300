@@ -1,13 +1,14 @@
 
 class Ship { 
-  constructor(xPos, yPos, energy, supplies, credits, orbit, land) {
+  constructor(xPos, yPos, energy, supplies, credits, inOrbit, nearBy, onLand) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.energy = energy;
     this.supplies = supplies;
     this.credits = credits;
-    this.inOrbit = orbit;
-    this.onLand = land;
+    this.inOrbit = inOrbit;
+    this.nearBy = nearBy;
+    this.onLand = onLand;
   }
 }
 
@@ -44,6 +45,8 @@ function checkCollision(ship)
 
           //set to visibible - drawings will show it now
         	artifact.visibility = true;
+
+          ship.nearBy = artifact.name;
 
 	        // TODO: lose health
 
@@ -92,6 +95,8 @@ function checkOrbitRange(ship)
 
           //set to visibible - drawings will show it now
           artifact.visibility = true;
+
+          ship.nearBy = artifact.name;
 
           //only planets can be orbited and only if within 1 CP
           if(!artifact.name.startsWith("ast")){
@@ -196,12 +201,14 @@ function landOnPlanet()
 	}
 
 	ship.inOrbit = false;
-  ship.onLand = true;
+  ship.onLand = ship.nearBy;
 	useEnergy(ship, 10);
   useSupplies(ship, 2);
 
   // TODO: land code (game play)
-  // TODO: animation (maybe)
+  sessionStorage.setItem("ship", JSON.stringify(ship));
+  landPlay()
+  ship = JSON.parse(sessionStorage.getItem("ship"));
 
 	//update the status fields with these changes
 	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
@@ -226,7 +233,7 @@ function liftOffPlanet()
 	    checkEnergy(ship) 
     }
 
-  ship.onLand = false;
+  ship.onLand = "";
 	ship.inOrbit = true;
 	useEnergy(ship, 10);
   useSupplies(ship, 2);
@@ -329,6 +336,9 @@ function move(angle, distance, BadMax)
       ship.xPos = 50 * 8;
     }
   }
+
+  ship.nearBy = "";
+  ship.onLand = "";
 
   //save the point just relocated to
   addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)

@@ -19,12 +19,13 @@
         var energy = 1000;
         var supplies = 100;
         var credits = 100;
-        var orbit = false;
-        var land = false;
+        var inOrbit = false;
+        var nearBy = "";
+        var onLand = "";
         var artifactSet = [];
         var visitedPoints = [];
         var space = new Space(xSize, ySize);
-        var ship = new Ship(xStart, yStart, energy, supplies, credits, orbit, land);
+        var ship = new Ship(xStart, yStart, energy, supplies, credits, inOrbit, nearBy, onLand);
         //var wormhole; //checking this with everyone
 
         var Badmax = new BadMax(xStart, yStart);
@@ -360,11 +361,11 @@
 
 		// writes the coordinates pointed at by mouse on to mouseCanvas
 		function writeMessage(canvas, message) {
-			var context = canvas.getContext('2d');
-			context.clearRect(0, 0, canvas.width, canvas.height);
-			context.font = '40pt Audiowide';
-			context.fillStyle = 'black';
-			context.fillText(message, 50, 100);
+            var context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.font = '40pt Audiowide';
+            context.fillStyle = 'black';
+            context.fillText(message, 50, 100);
 		}
 
     </script>

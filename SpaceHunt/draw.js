@@ -25,16 +25,37 @@ function draw() {
 	}
 	else
 	{
-		window.cancelAnimationFrame(draw);
+		// do spash screen draw/animation
 		animateAngle = -1;
 		drawSplashScreen();
+		return;
 	}
+}
+
+function landPlay()
+{
+	console.log("doing land play");
+	/*
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+
+	var ctx = mouseCanvas.getContext("2d");
+	ctx.fillRect(0, 0, mouseCanvas.width, mouseCanvas.height); 
+
+	let fontSize = 20;
+	ctx.font = fontSize + "px Bungee";
+	ctx.fillStyle = "silver";
+	ctx.fillText("ENERGY", 10, 10);
+
+	sessionStorage.setItem("ship",JSON.stringify(ship));
+	*/
 }
 
 // start screen called by windows.onload and when game over
 function drawSplashScreen()
 {
 	var ctx = canvas.getContext("2d");
+
+	//purple/black border zooms in
 	var grd = ctx.createRadialGradient(space.size/2, space.size/2, space.size, space.size/2, space.size/2, space.size/2 * Math.abs(Math.sin(animateAngle)));
 	grd.addColorStop(0, "purple");
 	grd.addColorStop(1, "black");
@@ -42,23 +63,23 @@ function drawSplashScreen()
 	ctx.fillStyle = grd;
 	ctx.fillRect(0, 0, space.size, space.size); 
 
-	ctx.save();
 	var img = new Image();
 	img.src = "./oldSpice.png";
 
 	//ship zooms past
-	x = ship.xPos + 12 * Math.cos(animateAngle);
-	y = ship.yPos + 12 * Math.sin(animateAngle);
 	ctx.drawImage(img, 400, 500, 500*Math.tan(animateAngle), 500*Math.tan(animateAngle));
-	ctx.restore();
 
 	if(!gameOver) // intro screen
 	{
-		let fontSize = 150; //* Math.abs(Math.sin(animateAngle));
+		let fontSize = 150; 
+		//let fontSize = 150 * Math.sin(animateAngle);
 		ctx.font = fontSize + "px Bungee";
 		ctx.fillStyle = "pink";
 		ctx.fillText("SPACEHUNT", 50, 400);
-		//ctx.fillText("SPACEHUNT", 50* Math.abs(Math.cos(animateAngle)), 400* Math.abs(Math.sin(animateAngle)));
+		//ctx.fillText("SPACE", 50, 400);
+		//ctx.fillText("HUNT", 550, 400);
+		//ctx.fillText("SPACE", 50* Math.sin(animateAngle), 400* Math.sin(animateAngle));
+		//ctx.fillText("HUNT", 550* Math.sin(animateAngle), 400* Math.sin(animateAngle));
 	}
 	else // game over screen
 	{
@@ -105,12 +126,15 @@ function drawBadmax()
 	var img = new Image();
 	img.src = "./badmax.png";
 
+	drawSpace();
 	ctx.drawImage(img, 20, 200, 600, 600);
 	let fontSize = 50;
 	ctx.font = fontSize + "px Bungee";
 	ctx.fillStyle = "white";
-	ctx.fillText("You got robbed boi!", 10, 200);
+	ctx.fillText("Robbed, -10 credits!", 10, 200);
 	ctx.fillText("Sincerely, from the BadMax crew", 20, 800);
+	drawShip();
+	drawStats();
 
 	animateAngle += Math.PI/5000000;
 	
@@ -129,27 +153,62 @@ function drawStats()
 	ctx.font = fontSize + "px Bungee";
 	ctx.fillStyle = "silver";
 	ctx.fillText("ENERGY", 10, 1000);
-	ctx.fillText("SUPPLIES", 240, 1000);
-	ctx.fillText("CREDITS", 500, 1000);
-	ctx.fillText("HEALTH", 750, 1000);
+	ctx.fillText("SUPPLIES", 266, 1000);
+	ctx.fillText("CREDITS", 522, 1000);
+	ctx.fillText("HEALTH", 778, 1000);
 
-	ctx.fillStyle = "red";
 	if(UI.energy.value > -1)
 	{
-		ctx.fillRect(100, 985, UI.energy.value, 10); 
+		if(UI.energy.value < 101)
+		{
+			ctx.fillStyle = "red";
+			ctx.fillRect(100, 985, UI.energy.value, 10); 
+		}
+		else
+		{
+			ctx.fillStyle = "green";
+			ctx.fillText("GOOD", 100, 1000);
+		}
 	}
 	if(UI.supplies.value > -1)
 	{
-		ctx.fillRect(350, 985, UI.supplies.value, 10); 
+		if(UI.supplies.value < 101)
+		{
+			ctx.fillStyle = "red";
+			ctx.fillRect(376, 985, UI.supplies.value, 10); 
+		}
+		else
+		{
+			ctx.fillStyle = "green";
+			ctx.fillText("GOOD", 376, 1000);
+		}
 	}
 	if(UI.credits.value > -1)
 	{
-		ctx.fillRect(600, 985, UI.credits.value, 10); 
+		if(UI.credits.value < 101)
+		{
+			ctx.fillStyle = "red";
+			ctx.fillRect(622, 985, UI.credits.value, 10); 
+		}
+		else
+		{
+			ctx.fillStyle = "green";
+			ctx.fillText("GOOD", 622, 1000);
+		}
 	}
 	/*
 	if(UI.health.value > -1)
 	{
-		ctx.fillRect(840, 985, 110, 10); 
+		if(UI.health.value < 101)
+		{
+			ctx.fillStyle = "red";
+			ctx.fillRect(868, 985, 110, 10); 
+		}
+		else
+		{
+			ctx.fillStyle = "green";
+			ctx.fillText("GOOD", 868, 1000);
+		}
 	}
 	*/
 	/*
@@ -233,15 +292,16 @@ function drawArtifact(artifact)
 		}
 		else if(artifact.name.startsWith("asteroid"))
 		{
-			var innerRadius = 6;
-			var outerRadius = 16;
-			var radius = 6; 
+			var innerRadius = 8;
+			var outerRadius = 24;
+			var radius = 8; 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
 			grd.addColorStop(0, artifact.color);
 			grd.addColorStop(1, "black");
 
 			ctx.beginPath();
-			ctx.ellipse(artifact.xPos, artifact.yPos, innerRadius, outerRadius, Math.random()*Math.PI, 0, 2*Math.PI);
+			ctx.ellipse(artifact.xPos, artifact.yPos, innerRadius, outerRadius, animateAngle, 0, 2*Math.PI);
+			//ctx.ellipse(artifact.xPos, artifact.yPos, innerRadius, outerRadius, Math.random()*Math.PI, 0, 2*Math.PI);
 			ctx.closePath();
 			ctx.strokeStyle = "silver";
 			ctx.stroke();	
@@ -250,10 +310,10 @@ function drawArtifact(artifact)
 		}
 		else // it's a planet
 		{
-			var innerRadius = 4;
-			var outerRadius = 20 + 20 * Math.abs(Math.cos(animateAngle));
-			//var outerRadius = 20;
-			var radius = 20; 
+			var innerRadius = 6;
+			var outerRadius = 30 + 20 * Math.abs(Math.sin(animateAngle));
+			//var outerRadius = 30;
+			var radius = 30; 
 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
 			grd.addColorStop(0, artifact.color);
@@ -320,7 +380,7 @@ function drawShip() {
 	{
 		x = ship.xPos + 12 * Math.cos(animateAngle);
 		y = ship.yPos + 12 * Math.sin(animateAngle);
-		ctx.drawImage(img, x-40, y-40, 80, 80)
+		ctx.drawImage(img, x-40, y-40, 100, 100)
 	}
 }
 

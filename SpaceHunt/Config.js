@@ -13,7 +13,7 @@ function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 	space = new Space(8*eval(config.mapSize.value), 8*eval(config.mapSize.value));
 
 	//the ship's starting coordinates and status 
-	ship = new Ship(8 * eval(config.xout.value), 8 * (eval(config.mapSize.value) - eval(config.yout.value)), eval(config.energy.value), eval(config.supplies.value), eval(config.credits.value), false, false);
+	ship = new Ship(8 * eval(config.xout.value), 8 * (eval(config.mapSize.value) - eval(config.yout.value)), eval(config.energy.value), eval(config.supplies.value), eval(config.credits.value), false, "", "");
 
 	//set the visibility of artifacts (true for all if cheat mode checked)
 	buildArtifacts(artifactSet);
