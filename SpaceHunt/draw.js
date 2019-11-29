@@ -167,7 +167,7 @@ function drawStats()
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText("GOOD", 100, 1000);
+			ctx.fillText(" ENERGETIC", 100, 1000);
 		}
 	}
 	if(UI.supplies.value > -1)
@@ -180,7 +180,7 @@ function drawStats()
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText("GOOD", 376, 1000);
+			ctx.fillText(" ENOUGH", 376, 1000);
 		}
 	}
 	if(UI.credits.value > -1)
@@ -193,7 +193,7 @@ function drawStats()
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText("GOOD", 622, 1000);
+			ctx.fillText(" PLENTY", 622, 1000);
 		}
 	}
 	/*
