@@ -46,6 +46,7 @@ function saveGame()
     localStorage.setItem('visitedState', sessionStorage.getItem("visitedPoints"))
  
     console.log("Your Game Was Successfully Saved\n\n")
+    printLocalStorage()
   }
   
   else 
@@ -59,7 +60,7 @@ function saveGame()
 function loadGame()
 {
   // Check That there is Local Storage Data
-  if(localStorage === null)
+  if(localStorage === null || localStorage.length === 0)
   {
     // If Local Storage is null, the player has no Saved Game Data to Load
     window.alert('You do not have a Saved Game!')
@@ -91,6 +92,7 @@ function loadGame()
       updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
       alert("Game Loaded!\nHave Fun!")
+      printLocalStorage()
       console.log("Your Game Was Successfully Loaded!\n\n")
     }
   }
@@ -111,6 +113,7 @@ function clearGame()
   {
     localStorage.clear()
     alert("Save Data has been destroyed")
+    printLocalStorage()
   }
 }
 
