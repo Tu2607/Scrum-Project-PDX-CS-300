@@ -36,6 +36,15 @@
                             window.mozRequestAnimationFrame || 
                             window.webkitRequestAnimationFrame || 
                             window.msRequestAnimationFrame;
+
+        // Create an Array for the 3 Save Game Slots
+        var saveList = new Array(3)
+        
+        for(var i=0; i<saveList.length;++i)
+        {
+          saveList[i] = new gameData
+        }
+
     </script>
 
 </head>
@@ -162,20 +171,52 @@
                         <input type="button" class="move" value="Land" size="8" id="landButton" disabled="true" onclick="landOnPlanet()">
                         <input type="button" class="move" value="Lift-off" size="8" id="liftOffButton" disabled="true" onclick="liftOffPlanet()">
                         <p></p>
-			<input type='button' class="move" value="Start"onclick="updateConfig(space, ship, artifactSet, visitedPoints); showSaveLoad(); this.disabled=true"> 
+			<input type='button' class="move" value="Start"onclick="updateConfig(space, ship, artifactSet, visitedPoints); showSaveLoad(3); this.disabled=true"> 
                     </div> 
                 </div>
             </div>
 
 
-            <!--Game Save/Load-->
+	    <!--Game Save/Load-->
             <div id="saveLoadMenu" class="action-grid" visibility="hidden">
-              <p align="center"> Save/Load Game 
-              <input type="button" class="move" value="Save" onclick="saveGame()">
-              <input type="button" class="move" value="Load" onclick="loadGame()">
-              <input type="button" class="move" value="Clear" onclick="clearGame()">
+              <p align="center"> Save/Load Game</p>
+              <p align="left">
+
+              <!--Save Slot 1-->
+              1.
+              <input id='saveSlot1' type='text' value='change me'>
+              <br />
+              <input type ='button' class='move' value='save' onclick='saveList[0].saveGame(1)'>
+
+              <input type='button' class='move' value='load' onclick='saveList[0].loadGame()'>
+              
+              <input type='button' class='move' value='delete' onclick='saveList[0].clearGame(1)'>
+              <br />
+              
+              <!--Save Slot 2-->
+              2.
+              <input id='saveSlot2' type='text' value='change me'>
+              <br />
+              <input type ='button' class='move' value='save' onclick='saveList[1].saveGame(2)'>
+
+              <input type='button' class='move' value='load' onclick='saveList[1].loadGame()'>
+              
+              <input type='button' class='move' value='delete' onclick='saveList[1].clearGame(2)'>
+              <br />
+              
+             <!--Save Slot 3-->
+              3.
+              <input id='saveSlot3' type='text' value='change me'>
+              <br />
+              <input type ='button' class='move' value='save' onclick='saveList[2].saveGame(3)'>
+
+              <input type='button' class='move' value='load' onclick='saveList[2].loadGame()'>
+              
+              <input type='button' class='move' value='delete' onclick='saveList[2].clearGame(3)'>
+              <br />
               </p>
             </div>
+
 
             <!--Admin Panel-->
             <div id="Admin" class="tabcontent">
