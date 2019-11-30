@@ -291,16 +291,11 @@ function move(angle, distance, BadMax)
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
   // Up
-  if(angle == 90) {
-    var i
-    for (i=0; i<distance; ++i) {
-      ship.yPos -= 8
-      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
-      checkCollision(ship)
-    }
-  }
+  if(angle == 90)
+    ship.yPos -= distance*8;
 
   // Down
+<<<<<<< HEAD
   else if(angle == 270) {
     var i
     for (i=0; i<distance; ++i) {
@@ -329,6 +324,19 @@ function move(angle, distance, BadMax)
       checkCollision(ship)
     }
   }
+=======
+  else if(angle == 270)
+    ship.yPos += distance*8;
+
+  // Left
+  else if(angle == 180)
+    ship.xPos -= distance*8;
+
+  // Right
+  else
+    ship.xPos += distance*8;
+
+>>>>>>> parent of 14b46a2... correcting movement
 
   // Update Energy and Supplies
   useSupplies(ship, 2);
