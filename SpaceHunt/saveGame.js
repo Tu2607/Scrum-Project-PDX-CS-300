@@ -24,8 +24,10 @@ function showSaveLoad(count)
   // Activate All Save Slots  
   for(var i=1; i<=count; ++i)
   {
-    if(document.getElementById('saveSlot'+i).value === 'changeMe')
-      document.getElementById('saveSlot'+i).value = 'Empty'
+    if(document.getElementById('saveSlot'+i).value === 'change me')
+    {
+      document.getElementById('saveSlot'+i).value = 'empty'
+    }
   }
 }
 
