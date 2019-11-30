@@ -295,11 +295,45 @@ function move(angle, distance, BadMax)
   //BadMax.yPos = getRandom(1,2)*8;
 
   // Up
-  if(angle == 90)
-    ship.yPos -= distance*8;
+  if(angle == 90) {
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.yPos -= 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+    }
+  }
 
   // Down
-  else if(angle == 270)
+  else if(angle == 270) {
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.yPos += 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+    }
+  }
+
+  // Left
+  else if(angle == 180) {
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.xPos -= 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+    }
+  }
+
+  // Right
+  else {
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.xPos += 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+    }
+  }
+
     ship.yPos += distance*8;
 
   // Left
