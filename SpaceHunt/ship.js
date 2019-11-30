@@ -309,7 +309,7 @@ function move(angle, distance, BadMax)
   else if(angle == 270)
     var i
     for (i=0; i<distance; ++i) {
-      ship.yPos += 8
+      ship.yPos += distance*8
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
     }
@@ -318,7 +318,7 @@ function move(angle, distance, BadMax)
   else if(angle == 180)
     var i
     for (i=0; i<distance; ++i) {
-      ship.xPos -= 8
+      ship.xPos -= distance*8
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
     }
@@ -327,7 +327,7 @@ function move(angle, distance, BadMax)
   else
     var i
     for (i=0; i<distance; ++i) {
-      ship.xPos += 8
+      ship.xPos += distance*8
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
     }
