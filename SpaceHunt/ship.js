@@ -334,17 +334,6 @@ function move(angle, distance, BadMax)
     }
   }
 
-    ship.yPos += distance*8;
-
-  // Left
-  else if(angle == 180)
-    ship.xPos -= distance*8;
-
-  // Right
-  else
-    ship.xPos += distance*8;
-
-
   // Update Energy and Supplies
   useSupplies(ship, 2);
   useEnergy(ship, distance * 10);
@@ -355,6 +344,7 @@ function move(angle, distance, BadMax)
   checkEnergy(ship);
   checkSupplies(ship);
   }
+}
 
   //This is the case where the user move out of bounds and activated the wormhole behavior
   if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
