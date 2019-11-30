@@ -2,6 +2,7 @@
     <meta charset="UTF-8">
 <head>
     <link rel="stylesheet" href="style.css">
+    <audio id="starwars" src="starwars.mp3" preload="auto" loop="true"></audio>
     <script src="Config.js"></script>
     <script src="space.js"></script>
     <script src="ship.js"></script>
@@ -36,6 +37,9 @@
                             window.mozRequestAnimationFrame || 
                             window.webkitRequestAnimationFrame || 
                             window.msRequestAnimationFrame;
+        
+        var theme = document.getElementById('starwars');
+        theme.volume = 0.1;
 
         // Create an Array for the 3 Save Game Slots
         var saveList = new Array(3)
@@ -114,8 +118,9 @@
                     <p> Map Size<input type="range" name="mapSize" value="128" min="0" max="128" oninput="mapSizeOut.value = mapSize.value">
                         <output name="mapSizeOut"> 128 </output>
                     </p>
+
+			        <button type='button' onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> Submit </button>
                 </form>
-			    <!--<button type='button' onclick="updateConfig(space, ship, artifactSet, visitedPoints); return false"> Submit </button>-->
             </div>
 
 
@@ -171,7 +176,7 @@
                         <input type="button" class="move" value="Land" size="8" id="landButton" disabled="true" onclick="landOnPlanet()">
                         <input type="button" class="move" value="Lift-off" size="8" id="liftOffButton" disabled="true" onclick="liftOffPlanet()">
                         <p></p>
-			<input type='button' class="move" value="Start"onclick="updateConfig(space, ship, artifactSet, visitedPoints); showSaveLoad(3); this.disabled=true"> 
+			<input type='button' class="move" value="Start"onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); showSaveLoad(3); this.disabled=true"> 
                     </div> 
                 </div>
             </div>
