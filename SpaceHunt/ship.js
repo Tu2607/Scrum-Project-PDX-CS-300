@@ -296,19 +296,42 @@ function move(angle, distance, BadMax)
 
   // Up
   if(angle == 90)
-    ship.yPos -= distance*8;
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.yPos -= 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)      
+      checkCollision(ship)
+    }
+ // if(angle == 90)
+ //   ship.yPos -= distance*8;
 
   // Down
   else if(angle == 270)
-    ship.yPos += distance*8;
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.yPos += distance*8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+    }
 
   // Left
   else if(angle == 180)
-    ship.xPos -= distance*8;
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.xPos -= distance*8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+    }
 
   // Right
   else
-    ship.xPos += distance*8;
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.xPos += distance*8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+    }
+
 
 
   // Update Energy and Supplies
