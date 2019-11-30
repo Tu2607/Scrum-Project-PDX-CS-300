@@ -290,6 +290,10 @@ function move(angle, distance, BadMax)
   var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
+  //Randomize BadMax Movement before each movement
+  //BadMax.xPos = getRandom(1,2)*8;
+  //BadMax.yPos = getRandom(1,2)*8;
+
   // Up
   if(angle == 90)
     ship.yPos -= distance*8;
@@ -348,6 +352,7 @@ function move(angle, distance, BadMax)
   checkEnergy(ship);
   checkSupplies(ship);
   }
+}
 
   //This is the case where the user move out of bounds and activated the wormhole behavior
   if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
@@ -362,21 +367,24 @@ function move(angle, distance, BadMax)
       ship.yPos = 50 * 8;
       ship.xPos = 50 * 8;
     }
-    //save the point just relocated to
-    addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)  
-
-    // check if an object has same CP as ship
-    // should be called on every CP move
-    checkCollision(ship);
-    // check if an object is within 1 CP
-    // shoud be called after a series of CP moves
-    checkOrbitRange(ship);
   }
 
-  //Called after every move
-  //checkBadMax(ship,BadMax);
   ship.nearBy = "";
   ship.onLand = "";
+
+  //save the point just relocated to
+  addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+  
+  // check if an object has same CP as ship
+  // should be called on every CP move
+  checkCollision(ship);
+  // check if an object is within 1 CP
+  // shoud be called after a series of CP moves
+  checkOrbitRange(ship);
+
+  //Check if the ship has the same CP as BadMax
+  //Called after every move
+  //checkBadMax(ship,BadMax);
 
   chanceEvent(ship);
 
@@ -386,6 +394,8 @@ function move(angle, distance, BadMax)
 
   //update the status fields with these changes
   updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+
+
 }
 
 // Use Energy
