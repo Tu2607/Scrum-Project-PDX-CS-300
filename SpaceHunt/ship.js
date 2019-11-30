@@ -300,6 +300,7 @@ function move(angle, distance, BadMax)
 
   // Down
 <<<<<<< HEAD
+<<<<<<< HEAD
   else if(angle == 270) {
     var i
     for (i=0; i<distance; ++i) {
@@ -342,6 +343,9 @@ function move(angle, distance, BadMax)
 
 >>>>>>> parent of 14b46a2... correcting movement
 
+=======
+  else if(angle == 270)
+>>>>>>> parent of 14b46a2... correcting movement
     ship.yPos += distance*8;
 
   // Left
