@@ -24,10 +24,10 @@ function buildArtifactSet(cheatMode, artifactSet)
 		artifactSet.push(new Artifact(768, 832, "pentium 5", "purple", true));
 		artifactSet.push(new Artifact(832, 896, "pentium 6", "purple", true));
 		artifactSet.push(new Artifact(832, 768, "pentium 7", "purple", true));
-		artifactSet.push(new Artifact(344, 344, "asteroid 1", "grey", true));
-		artifactSet.push(new Artifact(152, 448, "asteroid 2", "grey", true));
-		artifactSet.push(new Artifact(648, 648, "asteroid 3", "grey", true));
-		artifactSet.push(new Artifact(600, 72, "asteroid 4", "grey", true));
+		artifactSet.push(new Artifact(344, 344, "asteroid 1", "brown", true));
+		artifactSet.push(new Artifact(152, 448, "asteroid 2", "brown", true));
+		artifactSet.push(new Artifact(648, 648, "asteroid 3", "brown", true));
+		artifactSet.push(new Artifact(600, 72, "asteroid 4", "brown", true));
 	}
 	else
 	{
@@ -39,10 +39,10 @@ function buildArtifactSet(cheatMode, artifactSet)
 		artifactSet.push(new Artifact(832, 896, "pentium 6", "purple", false));
 		artifactSet.push(new Artifact(832, 896, "pentium 5", "purple", false));
 		artifactSet.push(new Artifact(832, 768, "pentium 7", "purple", false));
-		artifactSet.push(new Artifact(344, 344, "asteroid 1", "grey", false));
-		artifactSet.push(new Artifact(152, 448, "asteroid 2", "grey", false));
-		artifactSet.push(new Artifact(648, 648, "asteroid 3", "grey", false));
-		artifactSet.push(new Artifact(600, 72, "asteroid 4", "grey", false));
+		artifactSet.push(new Artifact(344, 344, "asteroid 1", "brown", false));
+		artifactSet.push(new Artifact(152, 448, "asteroid 2", "brown", false));
+		artifactSet.push(new Artifact(648, 648, "asteroid 3", "brown", false));
+		artifactSet.push(new Artifact(600, 72, "asteroid 4", "brown", false));
 	}
 }
 function buildArtifacts(artifactSet)
@@ -61,8 +61,8 @@ function buildArtifacts(artifactSet)
     artifactSet.push(new Artifact((admin.xpentium5.value*8), (admin.ypentium5.value*8), "pentium 5", "purple", false));
     artifactSet.push(new Artifact((admin.xpentium6.value*8), (admin.ypentium6.value*8), "pentium 6", "purple", false));
     artifactSet.push(new Artifact((admin.xpentium7.value*8), (admin.ypentium7.value*8), "pentium 7", "purple", false));
-    artifactSet.push(new Artifact((admin.xasteroid1.value*8), (admin.yasteroid1.value*8), "asteroid 1", "grey", false));
-    artifactSet.push(new Artifact((admin.xasteroid2.value*8), (admin.yasteroid2.value*8), "asteroid 2", "grey", false));
-    artifactSet.push(new Artifact((admin.xasteroid3.value*8), (admin.yasteroid3.value*8), "asteroid 3", "grey", false));
-    artifactSet.push(new Artifact((admin.xasteroid4.value*8), (admin.yasteroid4.value*8), "asteroid 4", "grey", false));
+    artifactSet.push(new Artifact((admin.xasteroid1.value*8), (admin.yasteroid1.value*8), "asteroid 1", "#8B4513", false));
+    artifactSet.push(new Artifact((admin.xasteroid2.value*8), (admin.yasteroid2.value*8), "asteroid 2", "#8B4513", false));
+    artifactSet.push(new Artifact((admin.xasteroid3.value*8), (admin.yasteroid3.value*8), "asteroid 3", "#8B4513", false));
+    artifactSet.push(new Artifact((admin.xasteroid4.value*8), (admin.yasteroid4.value*8), "asteroid 4", "#8B4513", false));
 }

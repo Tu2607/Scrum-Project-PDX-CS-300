@@ -32,23 +32,33 @@ function draw() {
 	}
 }
 
+/*
 function landPlay()
 {
 	console.log("doing land play");
-	/*
+
 	var ship = JSON.parse(sessionStorage.getItem("ship"));
 
 	var ctx = mouseCanvas.getContext("2d");
 	ctx.fillRect(0, 0, mouseCanvas.width, mouseCanvas.height); 
 
-	let fontSize = 20;
+	let fontSize = 15;
 	ctx.font = fontSize + "px Bungee";
-	ctx.fillStyle = "silver";
-	ctx.fillText("ENERGY", 10, 10);
+	ctx.fillStyle = "yellow";
+	ctx.fillText("Energy: 100 for 10 credit", 20, 20);
+	ctx.fillText("Supplies: 100% for 20 credit", 20, 40);
+
+	mouseCanvas.addEventListener('click', on_canvas_click, false);
+
+	function on_canvas_click(ev) {
+	    var x = ev.clientX - mouseCanvas.offsetLeft;
+	    var y = ev.clientY - mouseCanvas.offsetTop;
+
+		console.log(x, y);
 
 	sessionStorage.setItem("ship",JSON.stringify(ship));
-	*/
 }
+*/
 
 // start screen called by windows.onload and when game over
 function drawSplashScreen()
@@ -112,7 +122,7 @@ function drawSplashScreen()
 		return;
 	}
 
-	animateAngle += Math.PI/500;
+	animateAngle += Math.PI/700;
 	requestAnimationFrame(drawSplashScreen);
 }
 
@@ -143,6 +153,47 @@ function drawBadmax()
 		return;
 	}
 	requestAnimationFrame(drawBadmax);
+}
+
+function drawMeteorStorm()
+{
+	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+	var ctx = canvas.getContext("2d");
+
+	var img = new Image();
+	img.src = "./asteroid.png";
+
+	drawSpace();
+	drawArtifactSet();
+	drawShip();
+	drawStats();
+	let fontSize = 50;
+	ctx.font = fontSize + "px Bungee";
+	ctx.fillStyle = "white";
+	ctx.fillText("Meteors!, -10 health!", 10, 200);
+	ctx.drawImage(img, animateAngle*400, animateAngle*400, 40, 40);
+	ctx.drawImage(img, 32+animateAngle*400, 32+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 48+animateAngle*400, 24+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 16+animateAngle*400, 96+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 64+animateAngle*400, 64+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 96+animateAngle*400, 32+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 128+animateAngle*400, 16+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 32+animateAngle*400, 128+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 48+animateAngle*400, 32+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 16+animateAngle*400, 48+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 64+animateAngle*400, 96+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 96+animateAngle*400, 16+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 128+animateAngle*400, 24+animateAngle*400, 40, 40);
+
+	animateAngle += 1/50000000;
+	
+	if(animateAngle > 4){
+	    enableMoveButtons();
+		return;
+	}
+
+	requestAnimationFrame(drawMeteorStorm);
 }
 
 function drawStats()
@@ -292,7 +343,7 @@ function drawArtifact(artifact)
 		}
 		else if(artifact.name.startsWith("asteroid"))
 		{
-			var innerRadius = 8;
+			var innerRadius = 12;
 			var outerRadius = 24;
 			var radius = 8; 
 			var grd = ctx.createRadialGradient(artifact.xPos, artifact.yPos, innerRadius, artifact.xPos, artifact.yPos, outerRadius);
@@ -326,7 +377,7 @@ function drawArtifact(artifact)
 			ctx.stroke();
 			ctx.fillStyle = grd;
 			ctx.fill();
-			ctx.font = "15px Arial";
+			ctx.font = "13px Bungee";
 			ctx.fillStyle = "white";
 			ctx.fillText(artifact.name, artifact.xPos, artifact.yPos);
 		}

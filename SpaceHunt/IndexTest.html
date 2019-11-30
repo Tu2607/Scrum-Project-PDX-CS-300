@@ -345,9 +345,14 @@
 
         // listen for mouse position on main canvas
         canvas.addEventListener('mousemove', function(evt) {
+
+        	//only when the ship is not on land, so that the canvas can be used for land code
+			//var ship = JSON.parse(sessionStorage.getItem("ship"));
+
             var mousePos = getMousePos(canvas, evt);
             var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
-            writeMessage(mouseCanvas, message);}, false);
+        	//if(ship.onLand === "") {
+            writeMessage(mouseCanvas, message);}/*}*/, false);
 
 		// gets CP pointed at by mouse on main canvas 
 		function getMousePos(canvas, evt) {

@@ -207,7 +207,7 @@ function landOnPlanet()
 
   // TODO: land code (game play)
   sessionStorage.setItem("ship", JSON.stringify(ship));
-  landPlay()
+  //landPlay()
   ship = JSON.parse(sessionStorage.getItem("ship"));
 
 	//update the status fields with these changes
@@ -274,6 +274,11 @@ function chanceEvent(ship)
 
     drawBadmax();
     //alert("You just got robbed boi! Sincerely from the BadMax crew.");
+  }
+  else if(chance > 0.9){
+    disableMoveButtons();
+    animateAngle = 0;
+    drawMeteorStorm();
   }
 
   sessionStorage.setItem("ship",JSON.stringify(ship));
