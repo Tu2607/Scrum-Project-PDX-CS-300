@@ -299,57 +299,37 @@ function move(angle, distance, BadMax)
     ship.yPos -= distance*8;
 
   // Down
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  else if(angle == 270) {
-    var i
-    for (i=0; i<distance; ++i) {
-      ship.yPos += 8
-      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
-      checkCollision(ship)
-    }
-  }
+
+ // else if(angle == 270) {
+ //   var i
+ //   for (i=0; i<distance; ++i) {
+ //     ship.yPos += 8
+ //     addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+ //     checkCollision(ship)
+ //   }
+ // }
 
   // Left
-  else if(angle == 180) {
-    var i
-    for (i=0; i<distance; ++i) {
-      ship.xPos -= 8
-      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
-      checkCollision(ship)
-    }
-  }
+ // else if(angle == 180) {
+ //   var i
+ //   for (i=0; i<distance; ++i) {
+ //     ship.xPos -= 8
+ //     addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+ //    checkCollision(ship)
+ //   }
+ // }
 
   // Right
-  else {
-    var i
-    for (i=0; i<distance; ++i) {
-      ship.xPos += 8
-      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
-      checkCollision(ship)
-    }
-  }
-=======
+ // else {
+ //   var i
+ //   for (i=0; i<distance; ++i) {
+ //     ship.xPos += 8
+ //     addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+ //     checkCollision(ship)
+ //   }
+ // }
+
   else if(angle == 270)
-    ship.yPos += distance*8;
-
-  // Left
-  else if(angle == 180)
-    ship.xPos -= distance*8;
-
-  // Right
-  else
-    ship.xPos += distance*8;
-
->>>>>>> parent of 14b46a2... correcting movement
-
-=======
-  else if(angle == 270)
->>>>>>> parent of 14b46a2... correcting movement
-=======
-  else if(angle == 270)
->>>>>>> parent of 14b46a2... correcting movement
     ship.yPos += distance*8;
 
   // Left
