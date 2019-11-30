@@ -296,11 +296,17 @@ function move(angle, distance, BadMax)
 
   // Up
   if(angle == 90)
-    ship.yPos -= distance*8;
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.yPos -= 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)      
+      checkCollision(ship)
+    }
+ // if(angle == 90)
+ //   ship.yPos -= distance*8;
 
   // Down
   else if(angle == 270)
-<<<<<<< HEAD
     var i
     for (i=0; i<distance; ++i) {
       ship.yPos += 8
@@ -326,17 +332,6 @@ function move(angle, distance, BadMax)
       checkCollision(ship)
     }
 
-=======
-    ship.yPos += distance*8;
-
-  // Left
-  else if(angle == 180)
-    ship.xPos -= distance*8;
-
-  // Right
-  else
-    ship.xPos += distance*8;
->>>>>>> parent of de6d59c... move now checks every step
 
 
   // Update Energy and Supplies
