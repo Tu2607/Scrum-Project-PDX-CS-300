@@ -27,6 +27,13 @@ function checkEnergy(ship) {
   }
 }
 
+function checkHealth(ship){
+  if(ship.health == 0){
+    alert("The ship blew up! Game over.");
+    gameOver = true;
+  }
+}
+
 function getRandom(min,max){
   //return Math.floor(Math.random() * (max - min + 1) + min);
   return (Math.random() * (max - min + 1) + min);
@@ -357,6 +364,7 @@ function move(angle, distance, BadMax)
   // Check Energy and Supplies
   checkEnergy(ship);
   checkSupplies(ship);
+  checkHealth(ship);
   }
 
   //This is the case where the user move out of bounds and activated the wormhole behavior

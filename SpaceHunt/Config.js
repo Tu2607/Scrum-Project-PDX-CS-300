@@ -40,7 +40,7 @@ function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 	//the game is starting
 	gameOver = false;
 	enableMoveButtons();
-	draw();  //Tu's note: I'll add in the wormhole
+	draw();  
 }
 
 
