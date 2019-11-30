@@ -13,7 +13,7 @@ function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 	space = new Space(8*eval(config.mapSize.value), 8*eval(config.mapSize.value));
 
 	//the ship's starting coordinates and status 
-	ship = new Ship(8 * eval(config.xout.value), 8 * (eval(config.mapSize.value) - eval(config.yout.value)), eval(config.energy.value), eval(config.supplies.value), eval(config.credits.value), false, "", "");
+	ship = new Ship(8 * eval(config.xout.value), 8 * (eval(config.mapSize.value) - eval(config.yout.value)), eval(config.energy.value), eval(config.supplies.value), eval(config.credits.value), eval(config.health.value), false, "", "");
 
 	//set the visibility of artifacts (true for all if cheat mode checked)
 	buildArtifacts(artifactSet);
@@ -35,7 +35,7 @@ function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 	sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
 
 	//fill the status fields (UI on index)
-	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
 
 	//the game is starting
 	gameOver = false;
@@ -45,12 +45,13 @@ function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 
 
 //updates status fields (on index page) with game status
-function updateStatus(xPos, yPos, energy, supplies, credits) {
+function updateStatus(xPos, yPos, energy, supplies, credits, health) {
 	UI.xValue.value = xPos/8
 	UI.yValue.value = (eval(config.mapSize.value)*8 - yPos)/8;
 	UI.energy.value = energy;
 	UI.supplies.value = supplies;
 	UI.credits.value = credits;
+	UI.health.value = health;
 }
 
 //updates supplies in status

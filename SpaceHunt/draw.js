@@ -247,13 +247,14 @@ function drawStats()
 			ctx.fillText(" PLENTY", 622, 1000);
 		}
 	}
-	/*
+
 	if(UI.health.value > -1)
 	{
-		if(UI.health.value < 101)
+		if(UI.health.value <= 50)
 		{
 			ctx.fillStyle = "red";
-			ctx.fillRect(868, 985, 110, 10); 
+			ctx.fillText("DAMAGED", 868, 1000);
+			//ctx.fillRect(868, 985, 110, 10); 
 		}
 		else
 		{
@@ -261,7 +262,6 @@ function drawStats()
 			ctx.fillText("GOOD", 868, 1000);
 		}
 	}
-	*/
 	/*
 	ctx.fillRect(100, 985, 110, 10); 
 	ctx.fillRect(350, 985, 110, 10); 

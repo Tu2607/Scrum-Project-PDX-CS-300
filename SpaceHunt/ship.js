@@ -1,6 +1,6 @@
 
 class Ship { 
-  constructor(xPos, yPos, energy, supplies, credits, inOrbit, nearBy, onLand) {
+  constructor(xPos, yPos, energy, supplies, credits, health, inOrbit, nearBy, onLand) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.energy = energy;
@@ -9,6 +9,7 @@ class Ship {
     this.inOrbit = inOrbit;
     this.nearBy = nearBy;
     this.onLand = onLand;
+    this.health = health;
   }
 }
 
@@ -279,6 +280,7 @@ function chanceEvent(ship)
     disableMoveButtons();
     animateAngle = 0;
     drawMeteorStorm();
+    ship.health -= 50;
   }
 
   sessionStorage.setItem("ship",JSON.stringify(ship));
@@ -396,7 +398,7 @@ function move(angle, distance, BadMax)
   sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
 
   //update the status fields with these changes
-  updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+  updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
 
 
 }

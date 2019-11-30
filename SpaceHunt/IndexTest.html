@@ -19,6 +19,7 @@
         var cheat = false;
         var energy = 1000;
         var supplies = 100;
+        var health = 100;
         var credits = 100;
         var inOrbit = false;
         var nearBy = "";
@@ -26,7 +27,7 @@
         var artifactSet = [];
         var visitedPoints = [];
         var space = new Space(xSize, ySize);
-        var ship = new Ship(xStart, yStart, energy, supplies, credits, inOrbit, nearBy, onLand);
+        var ship = new Ship(xStart, yStart, energy, supplies, credits, health, inOrbit, nearBy, onLand);
         //var wormhole; //checking this with everyone
 
         var Badmax = new BadMax(xStart, yStart);
@@ -102,6 +103,8 @@
                     <break>
                     <p> Credits: <input type="text" name="credits" value="100"></p>
                     <break>
+                    <p> Health: <input type="text" name="health" value="100"></p>
+                    <break>
                     <p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
                     <break>
                     <p> Random Wormhole <input type="radio" name="wormhole" value="random" checked="checked"/></p>
@@ -119,7 +122,7 @@
                         <output name="mapSizeOut"> 128 </output>
                     </p>
 
-			        <button type='button' onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> Submit </button>
+			        <!-- <button type='button' onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> Submit </button> -->
                 </form>
             </div>
 
@@ -143,6 +146,7 @@
                             <p>Energy <input type=text name=energy size=4></p>
                             <p>Supplies <input type=text name=supplies size=4>%</p>
                             <p>Credits <input type=text name=credits size=4></p>
+                            <p>Health <input type=text name=health size=4></p>
                             
                             <hr>
 
