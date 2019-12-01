@@ -289,6 +289,13 @@ function chanceEvent(ship)
     drawMeteorStorm();
     ship.health -= 50;
   }
+  else if(chance > 0.85){
+    disableMoveButtons();
+    animateAngle = -4;
+    drawFreighter();
+    ship.credits += 100;
+    ship.energy += 100;
+  }
 
   sessionStorage.setItem("ship",JSON.stringify(ship));
 }

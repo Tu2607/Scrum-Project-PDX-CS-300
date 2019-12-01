@@ -155,6 +155,35 @@ function drawBadmax()
 	requestAnimationFrame(drawBadmax);
 }
 
+function drawFreighter() 
+{
+	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+	var ctx = canvas.getContext("2d");
+
+	var img = new Image();
+	img.src = "./freighter.png";
+
+	drawSpace();
+	ctx.drawImage(img, 20, 200, 1000, 600);
+	let fontSize = 50;
+	ctx.font = fontSize + "px Bungee";
+	ctx.fillStyle = "white"
+	ctx.fillText("Abandoned freighter found", 100, 200);
+	ctx.fillText("+100 credits!", 300, 800);
+	ctx.fillText("+100 energy!", 300, 875);
+	drawShip();
+	drawStats();
+
+	animateAngle += Math.PI/5000000;
+
+	if(Math.sin(animateAngle) > 0.999) {
+		enableMoveButtons();
+		return;
+	}
+	requestAnimationFrame(drawFreighter);
+}
+
 function drawMeteorStorm()
 {
 	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
