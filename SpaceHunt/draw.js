@@ -171,7 +171,7 @@ function drawMeteorStorm()
 	let fontSize = 50;
 	ctx.font = fontSize + "px Bungee";
 	ctx.fillStyle = "white";
-	ctx.fillText("Meteors!, -10 health!", 10, 200);
+	ctx.fillText("Meteors!, -50 health!", 10, 200);
 	ctx.drawImage(img, animateAngle*400, animateAngle*400, 40, 40);
 	ctx.drawImage(img, 38+animateAngle*200, 12+animateAngle*200, 40, 40);
 	ctx.drawImage(img, 44+animateAngle*200, 424+animateAngle*200, 40, 40);
