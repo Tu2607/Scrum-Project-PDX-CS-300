@@ -337,7 +337,7 @@ function drawArtifact(artifact)
 	{
 		var ctx = canvas.getContext("2d");
 
-		else if(artifact.name.startsWith("asteroid"))
+		if(artifact.name.startsWith("asteroid"))
 		{
 			var innerRadius = 12;
 			var outerRadius = 24;
