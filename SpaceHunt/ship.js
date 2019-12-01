@@ -304,56 +304,57 @@ function move(angle, distance, BadMax)
   var artifactSet = JSON.parse(sessionStorage.getItem("artifactSet"));
   var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
-  //Randomize BadMax Movement before each movement
-  //BadMax.xPos = getRandom(1,2)*8;
-  //BadMax.yPos = getRandom(1,2)*8;
-
   // Up
-  if(angle == 90)
-    ship.yPos -= distance*8;
+  if(angle == 90) {
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.yPos -= 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+      checkOrbitRange(ship)
+      chanceEvent(ship)
+      updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
+    }
+  }
 
   // Down
-
- // else if(angle == 270) {
- //   var i
- //   for (i=0; i<distance; ++i) {
- //     ship.yPos += 8
- //     addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
- //     checkCollision(ship)
- //   }
- // }
-
-  // Left
- // else if(angle == 180) {
- //   var i
- //   for (i=0; i<distance; ++i) {
- //     ship.xPos -= 8
- //     addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
- //    checkCollision(ship)
- //   }
- // }
-
-  // Right
- // else {
- //   var i
- //   for (i=0; i<distance; ++i) {
- //     ship.xPos += 8
- //     addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
- //     checkCollision(ship)
- //   }
- // }
-
-  else if(angle == 270)
-    ship.yPos += distance*8;
+  else if(angle == 270) {
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.yPos += 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+      checkOrbitRange(ship)
+      chanceEvent(ship)
+      updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
+    }
+  }
 
   // Left
-  else if(angle == 180)
-    ship.xPos -= distance*8;
+  else if(angle == 180) {
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.xPos -= 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+      checkOrbitRange(ship)
+      chanceEvent(ship)
+      updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
+    }
+  }
 
   // Right
-  else
-    ship.xPos += distance*8;
-
+  else {
+    var i
+    for (i=0; i<distance; ++i) {
+      ship.xPos += 8
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      checkCollision(ship)
+      checkOrbitRange(ship)
+      chanceEvent(ship)
+      updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
+    }
+  }
 
   // Update Energy and Supplies
   useSupplies(ship, 2);
@@ -385,29 +386,9 @@ function move(angle, distance, BadMax)
   ship.nearBy = "";
   ship.onLand = "";
 
-  //save the point just relocated to
-  addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
-  
-  // check if an object has same CP as ship
-  // should be called on every CP move
-  checkCollision(ship);
-  // check if an object is within 1 CP
-  // shoud be called after a series of CP moves
-  checkOrbitRange(ship);
-
-  //Check if the ship has the same CP as BadMax
-  //Called after every move
-  //checkBadMax(ship,BadMax);
-
-  chanceEvent(ship);
-
   //save state
   sessionStorage.setItem("ship", JSON.stringify(ship));
   sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
-
-  //update the status fields with these changes
-  updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
-
 
 }
 
