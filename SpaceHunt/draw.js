@@ -173,18 +173,18 @@ function drawMeteorStorm()
 	ctx.fillStyle = "white";
 	ctx.fillText("Meteors!, -10 health!", 10, 200);
 	ctx.drawImage(img, animateAngle*400, animateAngle*400, 40, 40);
-	ctx.drawImage(img, 32+animateAngle*400, 32+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 48+animateAngle*400, 24+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 38+animateAngle*200, 12+animateAngle*200, 40, 40);
+	ctx.drawImage(img, 44+animateAngle*200, 424+animateAngle*200, 40, 40);
 	ctx.drawImage(img, 16+animateAngle*400, 96+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 64+animateAngle*400, 64+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 96+animateAngle*400, 32+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 128+animateAngle*400, 16+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 32+animateAngle*400, 128+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 48+animateAngle*400, 32+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 16+animateAngle*400, 48+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 64+animateAngle*400, 96+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 96+animateAngle*400, 16+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 128+animateAngle*400, 24+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 64+animateAngle*400, 234+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 96+animateAngle*400, 992+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 12+animateAngle*400, 56+animateAngle*400, 40, 40);
+	ctx.drawImage(img, 35+animateAngle*600, 128+animateAngle*600, 40, 40);
+	ctx.drawImage(img, 28+animateAngle*600, 512+animateAngle*600, 40, 40);
+	ctx.drawImage(img, 96+animateAngle*700, 588+animateAngle*700, 40, 40);
+	ctx.drawImage(img, 84+animateAngle*800, 296+animateAngle*800, 40, 40);
+	ctx.drawImage(img, 16+animateAngle*800, 136+animateAngle*800, 40, 40);
+	ctx.drawImage(img, 128+animateAngle*800, 24+animateAngle*800, 40, 40);
 
 	animateAngle += 1/50000000;
 	
@@ -337,10 +337,6 @@ function drawArtifact(artifact)
 	{
 		var ctx = canvas.getContext("2d");
 
-		if(artifact.name == "meteor shower")
-		{
-
-		}
 		else if(artifact.name.startsWith("asteroid"))
 		{
 			var innerRadius = 12;
