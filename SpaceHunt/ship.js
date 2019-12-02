@@ -35,7 +35,11 @@ function checkHealth(ship){
 }
 
 function getRandom(min,max){
-  //return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+  //return Math.floor((Math.random() * (max - min + 1) + min);
+}
+
+function randomEvent(min,max){
   return (Math.random() * (max - min + 1) + min);
 }
 
@@ -57,7 +61,7 @@ function checkCollision(ship)
           ship.nearBy = artifact.name;
 
           ship.health -= 20;
-          updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+          updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
 
 		      alert("BOOM BANG CRASH!");
         }
@@ -110,13 +114,13 @@ function checkOrbitRange(ship)
           //only planets can be orbited and only if within 1 CP
           if(!artifact.name.startsWith("ast")){
 
-            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
             alert("You're close to " + artifact.name + ", you may enter orbit");
             //enable orbit button
             document.getElementById('orbitButton').disabled = false;
           }
           else {
-            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
             alert("You're close to " + artifact.name + ", you can mine it");
 
             // TODO: enable mine button
@@ -156,7 +160,7 @@ function enterOrbit()
     useSupplies(ship, 2);
 
   	//update the status fields with these changes
-  	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+  	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
 
   	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -188,7 +192,7 @@ function leaveOrbit()
   enableMoveButtons();
 
   //update the status fields with these changes
-  updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+  updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -222,7 +226,7 @@ function landOnPlanet()
   ship = JSON.parse(sessionStorage.getItem("ship"));
 
 	//update the status fields with these changes
-	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
 
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -252,7 +256,7 @@ function liftOffPlanet()
   // TODO: animation (maybe)
 
 	//update the status fields with these changes
-	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
   	
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
@@ -271,7 +275,7 @@ function checkBadMax(ship,BadMax)
 
 function chanceEvent(ship)
 {
-  var chance = (1/getRandom(1,10));
+  var chance = (1/randomEvent(1,10));
 
   if(chance > 0.95){
     ship.credits -= 10;
@@ -334,8 +338,8 @@ function move(angle, distance, BadMax)
           //ship.yPos = Math.floor(getRandom(0,15) * 8);    
           //ship.xPos = Math.floor(getRandom(0,15) * 8);
           
-          ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
-          ship.xPos = getRandom(1,2) * 8;
+          ship.yPos = getRandom(0,128) * 8;    //The value passed in getRandom is subject to change
+          ship.xPos = getRandom(0,128) * 8;
         } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
           ship.yPos = 50 * 8;
           ship.xPos = 50 * 8;
@@ -370,8 +374,8 @@ function move(angle, distance, BadMax)
           //ship.yPos = Math.floor(getRandom(0,15) * 8);    
           //ship.xPos = Math.floor(getRandom(0,15) * 8);
           
-          ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
-          ship.xPos = getRandom(1,2) * 8;
+          ship.yPos = getRandom(0,128) * 8;    //The value passed in getRandom is subject to change
+          ship.xPos = getRandom(0,128) * 8;
         } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
           ship.yPos = 50 * 8;
           ship.xPos = 50 * 8;
@@ -406,8 +410,8 @@ function move(angle, distance, BadMax)
           //ship.yPos = Math.floor(getRandom(0,15) * 8);    
           //ship.xPos = Math.floor(getRandom(0,15) * 8);
           
-          ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
-          ship.xPos = getRandom(1,2) * 8;
+          ship.yPos = getRandom(0,128) * 8;    //The value passed in getRandom is subject to change
+          ship.xPos = getRandom(0,128) * 8;
         } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
           ship.yPos = 50 * 8;
           ship.xPos = 50 * 8;
@@ -442,8 +446,8 @@ function move(angle, distance, BadMax)
           //ship.yPos = Math.floor(getRandom(0,15) * 8);    
           //ship.xPos = Math.floor(getRandom(0,15) * 8);
           
-          ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
-          ship.xPos = getRandom(1,2) * 8;
+          ship.yPos = getRandom(0,128) * 8;    //The value passed in getRandom is subject to change
+          ship.xPos = getRandom(0,128) * 8;
         } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
           ship.yPos = 50 * 8;
           ship.xPos = 50 * 8;
