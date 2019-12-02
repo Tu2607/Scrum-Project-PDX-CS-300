@@ -316,10 +316,33 @@ function move(angle, distance, BadMax)
     var i
     for (i=0; i<distance; ++i) {
       ship.yPos -= 8
+      useSupplies(ship, 2);
+      useEnergy(ship, 10);
+      if(config.cheatMode.checked == false) {
+        checkEnergy(ship);
+        checkSupplies(ship);
+      }
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
-      checkOrbitRange(ship)
       chanceEvent(ship)
+      if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
+        // Random Worm Hole Case
+        if(config.wormhole.value == "random"){
+          //ship.yPos = Math.floor(getRandom(0,15) * 8);    
+          //ship.xPos = Math.floor(getRandom(0,15) * 8);
+          
+          ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
+          ship.xPos = getRandom(1,2) * 8;
+        } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
+          ship.yPos = 50 * 8;
+          ship.xPos = 50 * 8;
+        }
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      }
+      ship.nearBy = "";
+      ship.onLand = "";
+      sessionStorage.setItem("ship", JSON.stringify(ship));
+      sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
       updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
     }
   }
@@ -329,10 +352,33 @@ function move(angle, distance, BadMax)
     var i
     for (i=0; i<distance; ++i) {
       ship.yPos += 8
+      useSupplies(ship, 2);
+      useEnergy(ship, 10);
+      if(config.cheatMode.checked == false) {
+        checkEnergy(ship);
+        checkSupplies(ship);
+      }
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
-      checkOrbitRange(ship)
       chanceEvent(ship)
+      if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
+        // Random Worm Hole Case
+        if(config.wormhole.value == "random"){
+          //ship.yPos = Math.floor(getRandom(0,15) * 8);    
+          //ship.xPos = Math.floor(getRandom(0,15) * 8);
+          
+          ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
+          ship.xPos = getRandom(1,2) * 8;
+        } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
+          ship.yPos = 50 * 8;
+          ship.xPos = 50 * 8;
+        }
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      }
+      ship.nearBy = "";
+      ship.onLand = "";
+      sessionStorage.setItem("ship", JSON.stringify(ship));
+      sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
       updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
     }
   }
@@ -342,10 +388,33 @@ function move(angle, distance, BadMax)
     var i
     for (i=0; i<distance; ++i) {
       ship.xPos -= 8
+      useSupplies(ship, 2);
+      useEnergy(ship, 10);
+      if(config.cheatMode.checked == false) {
+        checkEnergy(ship);
+        checkSupplies(ship);
+      }
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
-      checkOrbitRange(ship)
       chanceEvent(ship)
+      if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
+      // Random Worm Hole Case
+        if(config.wormhole.value == "random"){
+          //ship.yPos = Math.floor(getRandom(0,15) * 8);    
+          //ship.xPos = Math.floor(getRandom(0,15) * 8);
+          
+          ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
+          ship.xPos = getRandom(1,2) * 8;
+        } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
+          ship.yPos = 50 * 8;
+          ship.xPos = 50 * 8;
+        }
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      }
+      ship.nearBy = "";
+      ship.onLand = "";
+      sessionStorage.setItem("ship", JSON.stringify(ship));
+      sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
       updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
     }
   }
@@ -355,48 +424,42 @@ function move(angle, distance, BadMax)
     var i
     for (i=0; i<distance; ++i) {
       ship.xPos += 8
+      useSupplies(ship, 2);
+      useEnergy(ship, 10);
+      if(config.cheatMode.checked == false) {
+        checkEnergy(ship);
+        checkSupplies(ship);
+      }
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
-      checkOrbitRange(ship)
       chanceEvent(ship)
+      if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
+        // Random Worm Hole Case
+        if(config.wormhole.value == "random"){
+          //ship.yPos = Math.floor(getRandom(0,15) * 8);    
+          //ship.xPos = Math.floor(getRandom(0,15) * 8);
+          
+          ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
+          ship.xPos = getRandom(1,2) * 8;
+        } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
+          ship.yPos = 50 * 8;
+          ship.xPos = 50 * 8;
+        }
+      addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+      }
+      ship.nearBy = "";
+      ship.onLand = "";
+      sessionStorage.setItem("ship", JSON.stringify(ship));
+      sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
       updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
     }
   }
-
-  // Update Energy and Supplies
-  useSupplies(ship, 2);
-  useEnergy(ship, distance * 10);
-
-  //if cheat mode enabled, don't check so don't die
-  if(config.cheatMode.checked == false) {
-  // Check Energy and Supplies
-  checkEnergy(ship);
-  checkSupplies(ship);
-  checkHealth(ship);
-  }
-
-  //This is the case where the user move out of bounds and activated the wormhole behavior
-  if(ship.yPos > space.ySize || ship.yPos < 0 || ship.xPos > space.xSize || ship.xPos < 0){
-    // Random Worm Hole Case
-    if(config.wormhole.value == "random"){
-      //ship.yPos = Math.floor(getRandom(0,15) * 8);    
-      //ship.xPos = Math.floor(getRandom(0,15) * 8);
-      
-      ship.yPos = getRandom(1,2) * 8;    //The value passed in getRandom is subject to change
-      ship.xPos = getRandom(1,2) * 8;
-    } else if (config.wormhole.value == "fixed"){   //Fixed worm hole case
-      ship.yPos = 50 * 8;
-      ship.xPos = 50 * 8;
-    }
-  }
-
-  ship.nearBy = "";
-  ship.onLand = "";
-
+  checkOrbitRange(ship);
   //save state
-  sessionStorage.setItem("ship", JSON.stringify(ship));
-  sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
-
+  sessionstorage.setitem("ship", json.stringify(ship));
+  sessionstorage.setitem("visitedpoints", json.stringify(visitedpoints));
+  //update the status fields with these changes
+  updateStatus(ship.xpos, ship.ypos, ship.energy, ship.supplies, ship.credits);
 }
 
 // Use Energy
