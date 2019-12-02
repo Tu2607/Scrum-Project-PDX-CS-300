@@ -71,9 +71,6 @@
         <!--Log Screen-->
         <div class="display">
             <form name="output">
-                <textarea id="display" name="text-output" alight="left" readonly="true" rows="20">
-                Log:
-                </textarea>
                 <p></p>
                 <canvas id="mouseCanvas" width="300" height="200"></canvas>
             </form>
@@ -85,6 +82,7 @@
         <div class="menu">
             <div class="tab-menu">
                 <button class="tablinks" id="main" onclick="nextTab(event, 'Play')">Play</button>
+                <button class="tablinks" id="main" onclick="nextTab(event, 'Save')">Save/Load</button>
                 <button class="tablinks" onclick="nextTab(event, 'Config')">Config</button>
                 <button class="tablinks" onclick="nextTab(event, 'Admin')">Admin</button>
             </div>
@@ -180,46 +178,48 @@
                     </div> 
                 </div>
             </div>
+            <div id = "Save" class="tabcontent">
 
 
-	    <!--Game Save/Load-->
-            <div id="saveLoadMenu" class="action-grid" visibility="hidden">
-              <p align="center"> Save/Load Game</p>
-              <p align="left">
+            <!--Game Save/Load-->
+                <div id="saveLoadMenu" class="action-grid" visibility="hidden">
+                <p align="center"> Save/Load Game</p>
+                <p align="left">
 
-              <!--Save Slot 1-->
-              1.
-              <input id='saveSlot1' type='text' value='change me' readonly>
-              <br />
-              <input type ='button' class='move' value='save' onclick='saveList[0].saveGame(1)'>
+                <!--Save Slot 1-->
+                1.
+                <input id='saveSlot1' type='text' value='change me' readonly>
+                <br />
+                <input type ='button' class='move' value='save' onclick='saveList[0].saveGame(1)'>
 
-              <input type='button' class='move' value='load' onclick='saveList[0].loadGame(1)'>
-              
-              <input type='button' class='move' value='delete' onclick='saveList[0].clearGame(1)'>
-              <br />
-              
-              <!--Save Slot 2-->
-              2.
-              <input id='saveSlot2' type='text' value='change me' readonly>
-              <br />
-              <input type ='button' class='move' value='save' onclick='saveList[1].saveGame(2)'>
+                <input type='button' class='move' value='load' onclick='saveList[0].loadGame(1)'>
+                
+                <input type='button' class='move' value='delete' onclick='saveList[0].clearGame(1)'>
+                <br />
+                
+                <!--Save Slot 2-->
+                2.
+                <input id='saveSlot2' type='text' value='change me' readonly>
+                <br />
+                <input type ='button' class='move' value='save' onclick='saveList[1].saveGame(2)'>
 
-              <input type='button' class='move' value='load' onclick='saveList[1].loadGame(2)'>
-              
-              <input type='button' class='move' value='delete' onclick='saveList[1].clearGame(2)'>
-              <br />
-              
-             <!--Save Slot 3-->
-              3.
-              <input id='saveSlot3' type='text' value='change me' readonly>
-              <br />
-              <input type ='button' class='move' value='save' onclick='saveList[2].saveGame(3)'>
+                <input type='button' class='move' value='load' onclick='saveList[1].loadGame(2)'>
+                
+                <input type='button' class='move' value='delete' onclick='saveList[1].clearGame(2)'>
+                <br />
+                
+                <!--Save Slot 3-->
+                3.
+                <input id='saveSlot3' type='text' value='change me' readonly>
+                <br />
+                <input type ='button' class='move' value='save' onclick='saveList[2].saveGame(3)'>
 
-              <input type='button' class='move' value='load' onclick='saveList[2].loadGame(3)'>
-              
-              <input type='button' class='move' value='delete' onclick='saveList[2].clearGame(3)'>
-              <br />
-              </p>
+                <input type='button' class='move' value='load' onclick='saveList[2].loadGame(3)'>
+                
+                <input type='button' class='move' value='delete' onclick='saveList[2].clearGame(3)'>
+                <br />
+                </p>
+                </div>
             </div>
 
 
@@ -229,7 +229,7 @@
                     <div id="copanel">
                     <form id="artifactPanel">
                         <p> Celestial Object Positions: </p>
-                        <p>Eniac:     X <input type=text name="xeniac" value="64" size=4> Y <input type=text name="yeniac" value="4" size=4></p>
+                        <p>Eniac:     X <input type=text name="xeniac" value="64" size=4> Y <input type=text name="yeniac" value="120" size=4></p>
                         <p>Moon:      X <input type=text name="xmoon" value="0" size=4> Y <input type=text name="ymoon" value="0" size=4></p>
                         <p>Celeron:   X <input type=text name="xceleron" value="32" size=4> Y <input type=text name="yceleron" value="8" size=4></p>
                         <p>Ryzen:     X <input type=text name="xryzen" value="12" size=4> Y <input type=text name="yryzen" value="32" size=4></p>
