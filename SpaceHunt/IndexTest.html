@@ -42,14 +42,10 @@
         var theme = document.getElementById('starwars');
         theme.volume = 0.1;
 
-        // Create an Array for the 3 Save Game Slots
-        var saveList = new Array(3)
-        
-        for(var i=0; i<saveList.length;++i)
-        {
-          saveList[i] = new gameData
-        }
-
+        /**************************************************************
+        Initialize the Save/Load Menu
+        ***************************************************************/
+        saveList = saveLoadBegin()  
     </script>
 
 </head>
@@ -193,33 +189,33 @@
 
               <!--Save Slot 1-->
               1.
-              <input id='saveSlot1' type='text' value='change me'>
+              <input id='saveSlot1' type='text' value='change me' readonly>
               <br />
               <input type ='button' class='move' value='save' onclick='saveList[0].saveGame(1)'>
 
-              <input type='button' class='move' value='load' onclick='saveList[0].loadGame()'>
+              <input type='button' class='move' value='load' onclick='saveList[0].loadGame(1)'>
               
               <input type='button' class='move' value='delete' onclick='saveList[0].clearGame(1)'>
               <br />
               
               <!--Save Slot 2-->
               2.
-              <input id='saveSlot2' type='text' value='change me'>
+              <input id='saveSlot2' type='text' value='change me' readonly>
               <br />
               <input type ='button' class='move' value='save' onclick='saveList[1].saveGame(2)'>
 
-              <input type='button' class='move' value='load' onclick='saveList[1].loadGame()'>
+              <input type='button' class='move' value='load' onclick='saveList[1].loadGame(2)'>
               
               <input type='button' class='move' value='delete' onclick='saveList[1].clearGame(2)'>
               <br />
               
              <!--Save Slot 3-->
               3.
-              <input id='saveSlot3' type='text' value='change me'>
+              <input id='saveSlot3' type='text' value='change me' readonly>
               <br />
               <input type ='button' class='move' value='save' onclick='saveList[2].saveGame(3)'>
 
-              <input type='button' class='move' value='load' onclick='saveList[2].loadGame()'>
+              <input type='button' class='move' value='load' onclick='saveList[2].loadGame(3)'>
               
               <input type='button' class='move' value='delete' onclick='saveList[2].clearGame(3)'>
               <br />
@@ -422,8 +418,8 @@
             context.fillText(message, 50, 100);
 		}
 
-        // Hide the Save Game Button
-        document.getElementById("saveLoadMenu").style.visibility = "hidden"
+	    // Hide the Save Game Button
+            document.getElementById("saveLoadMenu").style.visibility = "hidden"
     </script>
 
 
