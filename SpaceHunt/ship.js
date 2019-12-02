@@ -17,6 +17,7 @@ function checkSupplies(ship) {
   if (ship.supplies < 1) {
     alert("You've run out of supplies! Game over.");
     gameOver = true;
+    return false;
   }
 }
 
@@ -24,13 +25,16 @@ function checkEnergy(ship) {
   if (ship.energy< 1) {
     alert("You've run out of energy! Game over.");
     gameOver = true;
+    return false;
   }
+  else return true;
 }
 
 function checkHealth(ship){
-  if(ship.health == 0){
+  if(ship.health < 1){
     alert("The ship blew up! Game over.");
     gameOver = true;
+    return false;
   }
 }
 
@@ -326,8 +330,13 @@ function move(angle, distance, BadMax)
       useSupplies(ship, 2);
       useEnergy(ship, 10);
       if(config.cheatMode.checked == false) {
-        checkEnergy(ship);
-        checkSupplies(ship);
+        if(checkEnergy(ship) == false || checkSupplies(ship) == false) {
+		    addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+	    	sessionStorage.setItem("ship", JSON.stringify(ship));
+	     	sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+	    	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
+        	return;
+        }
       }
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
@@ -362,8 +371,13 @@ function move(angle, distance, BadMax)
       useSupplies(ship, 2);
       useEnergy(ship, 10);
       if(config.cheatMode.checked == false) {
-        checkEnergy(ship);
-        checkSupplies(ship);
+        if(checkEnergy(ship) == false || checkSupplies(ship) == false) {
+		    addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+	    	sessionStorage.setItem("ship", JSON.stringify(ship));
+	     	sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+	    	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
+        	return;
+        }
       }
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
@@ -398,8 +412,13 @@ function move(angle, distance, BadMax)
       useSupplies(ship, 2);
       useEnergy(ship, 10);
       if(config.cheatMode.checked == false) {
-        checkEnergy(ship);
-        checkSupplies(ship);
+        if(checkEnergy(ship) == false || checkSupplies(ship) == false) {
+		    addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+	    	sessionStorage.setItem("ship", JSON.stringify(ship));
+	     	sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+	    	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
+        	return;
+        }
       }
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
@@ -434,8 +453,13 @@ function move(angle, distance, BadMax)
       useSupplies(ship, 2);
       useEnergy(ship, 10);
       if(config.cheatMode.checked == false) {
-        checkEnergy(ship);
-        checkSupplies(ship);
+        if(checkEnergy(ship) == false || checkSupplies(ship) == false) {
+		    addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
+	    	sessionStorage.setItem("ship", JSON.stringify(ship));
+	     	sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+	    	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
+        	return;
+        }
       }
       addVisitedPoint(visitedPoints, ship.xPos, ship.yPos)
       checkCollision(ship)
