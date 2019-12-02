@@ -1,7 +1,6 @@
-
 /***********************************************************************************
 CS300 Fall 2019
-Space HuntSave Ship Settings
+Space Hunt Save Ship Settings
 
 Main Functions
 saveLoadBegin() initializes the Save Game Objects.
@@ -15,6 +14,7 @@ gameData.printSessionStorage() displays Session Storage Data in the Console Log
 gameData.printLocalStorage() displays Local Storage Data in the Console Log
 ************************************************************************************/
 
+
 function saveLoadBegin()
 {
   // Create an Array for the 3 Save Game Slots
@@ -26,6 +26,7 @@ function saveLoadBegin()
   return array
 }
 
+
 function showSaveLoad(count)
 {
   // By default, the save load menu buttons are set to hidden.
@@ -36,7 +37,6 @@ function showSaveLoad(count)
   for(var i=1; i<=count; ++i)
   {
     // If there is data in the respective dictionary, then that save slot is not empty
-    
     // If the text field says 'change me', we can change it to empty
     if(document.getElementById('saveSlot'+i).value === 'change me')
     {
@@ -158,21 +158,24 @@ class gameData
       {
         console.log("Loading Your Game...\n\n")
 
-        // Copy Local Storage over to Session Storage        
+        // Copy Local Storage over to Session Storage    
+        console.log(localStorage)
+        console.log(localStorage.saveSlot1)    
         var file = JSON.parse(localStorage.getItem('saveSlot'+i))
-
+        
         sessionStorage.setItem('ship', file.ship)
         sessionStorage.setItem('space', file.space)
         sessionStorage.setItem('artifactSet', file.artifactSet)
         sessionStorage.setItem('visitedPoints', file.visitedPoints)
 
+        // Parse the Ship Data 
+        file.ship = JSON.parse(file.ship)
+
         //update the status fields with loaded game data
-        updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
+        updateStatus(file.ship.xPos, file.ship.yPos, file.ship.energy, file.ship.supplies, file.ship.credits, file.ship.health);
 
         alert("Game Loaded!\nHave Fun!")
         console.log("Your Game Was Successfully Loaded!\n\n")
-	this.printLocalStorage()
-	this.printSessionStorage()
       }
     }
   }
@@ -205,14 +208,12 @@ class gameData
       {
         localStorage.clear()
         alert("Save Data has been destroyed")
-	this.printLocalStorage()
-	this.printSessionStorage()
+	      this.printLocalStorage()
+	      this.printSessionStorage()
+
         // Reset Save Slot Value
         document.getElementById('saveSlot'+i).value = 'empty'
         this.title = document.getElementById('saveSlot'+i).value
-
-        // Erase Cookies
-        //eatCookie('saveSlot'+i)
       }
     }
   }
