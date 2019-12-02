@@ -1,6 +1,7 @@
+
 /***********************************************************************************
 CS300 Fall 2019
-Space Hunt Save Ship Settings
+Space HuntSave Ship Settings
 
 Main Functions
 saveLoadBegin() initializes the Save Game Objects.
@@ -70,59 +71,70 @@ function showSaveLoad(count)
 class gameData
 {
   title = "empty"
-  //file = {}
 
   saveGame(number) 
   {
-    
     // Check That Local Storage is Supported
     if (typeof (Storage) !== "undefined") 
     {
-      // Local Storage is Supported
-      console.log('Local Storage Supported\n\n')
-      
-      // Confirm that the Player wants to Save
-      var c = confirm("You're about to save your game.\nAny previously saved games will lost.\nAre you sure?")
-
-      if(c == false)
+      // Check that the Game is Active Before Saving
+      // If the start button wasn't disabled, then the game hasn't started
+      // So let's not save anything
+      if(!document.getElementById('startButton').disabled)
       {
-        return ;
+        alert("There is nothing to save!\nTry starting a new game or loading a game :)")
+
+        // Bye!
+        return 
       }
-
-      do
-      {
-        // Get the Save File Name
-        this.title = prompt('Give your Save Game a Name: ')
-
-        // Bug - If a player enters 'empty' as save name, they won't be able to load/delete save data
-        // The load/delete check that title isn't 'empty' before they do anything else
-        if (this.title === 'empty' || this.title ===' ') 
-        	alert('Are you trying to break our game?\nEnter a valid save name my guy!\n(Anything besides "empty")')
-      } while(this.title === 'empty')
       
-      // Update the Text Field with User Input
-      document.getElementById('saveSlot'+number).value = this.title
- 
-      // Copy Session Storage Data into Dictionary
-      var file = 
+      else
       {
-        ship: sessionStorage.getItem('ship') ,
-        space: sessionStorage.getItem("space") ,
-        artifactSet: sessionStorage.getItem("artifactSet") ,
-        visitedPoints: sessionStorage.getItem("visitedPoints") ,
-        slot: number ,
-        title: this.title
+        // Local Storage is Supported
+        console.log('Local Storage Supported\n\n')
+        
+        // Confirm that the Player wants to Save
+        var c = confirm("You're about to save your game.\nAny previously saved games will lost.\nAre you sure?")
+
+        if(c == false)
+        {
+          return ;
+        }
+
+        do
+        {
+          // Get the Save File Name
+          this.title = prompt('Give your Save Game a Name: ')
+
+          // Bug - If a player enters 'empty' as save name, they won't be able to load/delete save data
+          // The load/delete check that title isn't 'empty' before they do anything else
+          if (this.title === 'empty' || this.title ===' ') 
+            alert('Are you trying to break our game?\nEnter a valid save name my guy!\n(Anything besides "empty")')
+        } while(this.title === 'empty')
+        
+        // Update the Text Field with User Input
+        document.getElementById('saveSlot'+number).value = this.title
+  
+        // Copy Session Storage Data into Dictionary
+        var file = 
+        {
+          ship: sessionStorage.getItem('ship') ,
+          space: sessionStorage.getItem("space") ,
+          artifactSet: sessionStorage.getItem("artifactSet") ,
+          visitedPoints: sessionStorage.getItem("visitedPoints") ,
+          slot: number ,
+          title: this.title
+        }
+
+        // Copy Dictionary into Local Storage
+        localStorage.setItem('saveSlot'+number, JSON.stringify(file))
+
+        // Print Data in Console for Debugging
+        console.log("Your Game Was Successfully Saved\n\n")
+        this.printLocalStorage()
+        this.printSessionStorage()
       }
-
-      // Copy Dictionary into Local Storage
-      localStorage.setItem('saveSlot'+number, JSON.stringify(file))
-
-      // Print Data in Console for Debugging
-      console.log("Your Game Was Successfully Saved\n\n")
-      this.printLocalStorage()
-      this.printSessionStorage()
     }
-    
     else 
     {
       // No web storage Support.
@@ -173,6 +185,23 @@ class gameData
 
         //update the status fields with loaded game data
         updateStatus(file.ship.xPos, file.ship.yPos, file.ship.energy, file.ship.supplies, file.ship.credits, file.ship.health);
+
+        // If the game hasn't started do this
+        if(!document.getElementById('startButton').disabled)
+        {
+          document.getElementById('startButton').disabled = true 
+          gameOver = false ;
+          draw() ;
+          enableMoveButtons() ;
+        }
+
+        // If the game is over, do this
+        if(gameOver)
+        {
+          gameOver = false ;
+          draw() ;
+          enableMoveButtons() ;
+        } 
 
         alert("Game Loaded!\nHave Fun!")
         console.log("Your Game Was Successfully Loaded!\n\n")
