@@ -100,6 +100,7 @@ input[type="text"]{
         background: #43464B;
     background-color: slategrey;
     border-width: 5px;
+
 }
 .footer{
     grid-area: footer;
@@ -175,7 +176,7 @@ form input .text{
   border: 0px solid black;
   border-top: none;
   height: 400px;
-  width: auto;
+  width: 400px;
   
 }
 
