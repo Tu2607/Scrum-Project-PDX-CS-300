@@ -459,10 +459,10 @@ function move(angle, distance, BadMax)
   }
   checkOrbitRange(ship);
   //save state
-  sessionStorage.setItem("ship", JSON.stringify(ship));
-  sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
+  //sessionStorage.setItem("ship", JSON.stringify(ship));
+  //sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
   //update the status fields with these changes
-  updateStatus(ship.xpos, ship.ypos, ship.energy, ship.supplies, ship.credits);
+  //updateStatus(ship.xpos, ship.ypos, ship.energy, ship.supplies, ship.credits);
 }
 
 // Use Energy
