@@ -56,7 +56,8 @@ function checkCollision(ship)
 
           ship.nearBy = artifact.name;
 
-	        // TODO: lose health
+          ship.health -= 20;
+          updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
 
 		      alert("BOOM BANG CRASH!");
         }
@@ -109,11 +110,13 @@ function checkOrbitRange(ship)
           //only planets can be orbited and only if within 1 CP
           if(!artifact.name.startsWith("ast")){
 
+            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
             alert("You're close to " + artifact.name + ", you may enter orbit");
             //enable orbit button
             document.getElementById('orbitButton').disabled = false;
           }
           else {
+            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits);
             alert("You're close to " + artifact.name + ", you can mine it");
 
             // TODO: enable mine button
