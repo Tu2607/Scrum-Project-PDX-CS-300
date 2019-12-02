@@ -9,7 +9,8 @@ function draw() {
 
 	drawSpace();
 	drawArtifactSet();
-	drawTrail();
+	if(config.seeVisited.checked)
+		drawTrail();
 	drawStats();
 	drawShip();
 
@@ -200,19 +201,19 @@ function drawMeteorStorm()
 	let fontSize = 50;
 	ctx.font = fontSize + "px Bungee";
 	ctx.fillStyle = "white";
-	ctx.fillText("Meteors!, -50 health!", 10, 200);
-	ctx.drawImage(img, animateAngle*400, animateAngle*400, 40, 40);
-	ctx.drawImage(img, 38+animateAngle*200, 12+animateAngle*200, 40, 40);
-	ctx.drawImage(img, 44+animateAngle*200, 424+animateAngle*200, 40, 40);
-	ctx.drawImage(img, 16+animateAngle*400, 96+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 64+animateAngle*400, 234+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 96+animateAngle*400, 992+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 12+animateAngle*400, 56+animateAngle*400, 40, 40);
-	ctx.drawImage(img, 35+animateAngle*600, 128+animateAngle*600, 40, 40);
-	ctx.drawImage(img, 28+animateAngle*600, 512+animateAngle*600, 40, 40);
-	ctx.drawImage(img, 96+animateAngle*700, 588+animateAngle*700, 40, 40);
-	ctx.drawImage(img, 84+animateAngle*800, 296+animateAngle*800, 40, 40);
-	ctx.drawImage(img, 16+animateAngle*800, 136+animateAngle*800, 40, 40);
+	ctx.fillText("Meteors! -50 health!", 10, 200);
+	ctx.drawImage(img, animateAngle*400, animateAngle*400, 200, 200);
+	ctx.drawImage(img, 38+animateAngle*200, 12+animateAngle*200, 50, 50);
+	ctx.drawImage(img, 44+animateAngle*200, 424+animateAngle*200, 50, 50);
+	ctx.drawImage(img, 16+animateAngle*400, 96+animateAngle*400, 60, 60);
+	ctx.drawImage(img, 64+animateAngle*400, 234+animateAngle*400, 60, 60);
+	ctx.drawImage(img, 96+animateAngle*400, 992+animateAngle*400, 70, 70);
+	ctx.drawImage(img, 12+animateAngle*400, 56+animateAngle*400, 90, 90);
+	ctx.drawImage(img, 35+animateAngle*600, 128+animateAngle*600, 200, 200);
+	ctx.drawImage(img, 28+animateAngle*600, 512+animateAngle*600, 300, 300);
+	ctx.drawImage(img, 96+animateAngle*700, 588+animateAngle*700, 100, 100);
+	ctx.drawImage(img, 84+animateAngle*800, 296+animateAngle*800, 400, 400);
+	ctx.drawImage(img, 16+animateAngle*800, 136+animateAngle*800, 250, 250);
 	ctx.drawImage(img, 128+animateAngle*800, 24+animateAngle*800, 40, 40);
 
 	animateAngle += 1/50000000;
@@ -416,7 +417,8 @@ function drawTrail() {
 	var visitedPoints = JSON.parse(sessionStorage.getItem("visitedPoints"));
 
 	var ctx = canvas.getContext("2d");
-	ctx.strokeStyle = " #f9e79f";
+	ctx.strokeStyle = "yellow";
+	ctx.lineWidth = 0.5;
 
 	for(var i = 0; i < visitedPoints.length - 1; i++) {
 		ctx.beginPath();
