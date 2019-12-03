@@ -91,32 +91,31 @@
             <!--Config Tab-->
             <div id="Config" class="tabcontent">
                 <form name="config">
-                    <p> Energy: <input type="text" name="energy" value="100"> </p>
+                    <table class="tablecontent">
+                    <tr><td> Energy </td><td><input type="text" name="energy" value="100"> </td></tr>
                     <break>
-                    <p> Supplies: <input type="text" name="supplies" value="100"></p>
+                    <tr><td> Supplies </td><td><input type="text" name="supplies" value="100"></td></tr>
                     <break>
-                    <p> Credits: <input type="text" name="credits" value="100"></p>
+                    <tr><td> Credits </td><td><input type="text" name="credits" value="100"></td></tr>
                     <break>
-                    <p> Health: <input type="text" name="health" value="100"></p>
+                    <tr><td> Health </td><td><input type="text" name="health" value="100"></td></tr>
                     <break>
-                    <p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
+                    <tr><td> Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></<td></tr>
                     <break>
-                    <p> See Visited<input type="checkbox" name="seeVisited" checked="checked"></p>
+                    <tr><td> See Visited <input type="checkbox" name="seeVisited" checked="checked"></td></tr>
                     <break>
-                    <p> Random Wormhole <input type="radio" name="wormhole" value="random" checked="checked"/></p>
+                    <tr><td> Wormhole </td>
+                    <td> Random <input type="radio" name="wormhole" value="random" checked="checked"/> 
+                    Fixed <input type="radio" name="wormhole" value="fixed"/></td></tr>
                     <break>
-                    <p> Fixed Wormhole <input type="radio" name="wormhole" value="fixed"/></p>
+                    <tr><td> Starting X-Cord </td><td><input type="range" name="xCord" value="12" min="0" max="128" oninput="xout.value = xCord.value">
+                        <output name="xout"> 12 </output></td></tr>
                     <break>
-                    <p> Starting X-Cord <input type="range" name="xCord" value="12" min="0" max="128" oninput="xout.value = xCord.value">
-                        <output name="xout"> 12 </output>
-                    </p>
-                    <break>
-                    <p> Starting Y-Cord <input type="range" name="yCord" value="12" min="0" max="128" oninput="yout.value = yCord.value">
-                        <output name="yout"> 12 </output>
-                    </p>	
-                    <p> Map Size<input type="range" name="mapSize" value="128" min="0" max="128" oninput="mapSizeOut.value = mapSize.value">
-                        <output name="mapSizeOut"> 128 </output>
-                    </p>
+                    <tr><td> Starting Y-Cord </td><td><input type="range" name="yCord" value="12" min="0" max="128" oninput="yout.value = yCord.value">
+                        <output name="yout"> 12 </output></td></tr>
+                    <tr><td> Map Size </td><td><input type="range" name="mapSize" value="128" min="0" max="128" oninput="mapSizeOut.value = mapSize.value">
+                        <output name="mapSizeOut"> 128 </output></td></tr>
+                    </table>
 
 			        <!-- <button type='button' onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> Submit </button> -->
                 </form>
@@ -231,22 +230,24 @@
                     <div id="copanel">
                     <form id="artifactPanel">
                         <p> Celestial Object Positions: </p>
-                        <p>Eniac:     X <input type=text name="xeniac" value="64" size=4> Y <input type=text name="yeniac" value="120" size=4></p>
-                        <p>Moon:      X <input type=text name="xmoon" value="0" size=4> Y <input type=text name="ymoon" value="0" size=4></p>
-                        <p>Celeron:   X <input type=text name="xceleron" value="32" size=4> Y <input type=text name="yceleron" value="8" size=4></p>
-                        <p>Ryzen:     X <input type=text name="xryzen" value="12" size=4> Y <input type=text name="yryzen" value="32" size=4></p>
-                        <p>Xeon:      X <input type=text name="xxeon" value="76" size=4> Y <input type=text name="yxeon" value="60" size=4></p>
-                        <p>Pentium 1: X <input type=text name="xpentium1" value="04" size=4> Y <input type=text name="ypentium1" value="33" size=4></p>
-                        <p>Pentium 2: X <input type=text name="xpentium2" value="40" size=4> Y <input type=text name="ypentium2" value="10" size=4></p>
-                        <p>Pentium 3: X <input type=text name="xpentium3" value="40" size=4> Y <input type=text name="ypentium3" value="60" size=4></p>
-                        <p>Pentium 4: X <input type=text name="xpentium4" value="68" size=4> Y <input type=text name="ypentium4" value="10" size=4></p>
-                        <p>Pentium 5: X <input type=text name="xpentium5" value="68" size=4> Y <input type=text name="ypentium5" value="64" size=4></p>
-                        <p>Pentium 6: X <input type=text name="xpentium6" value="32" size=4> Y <input type=text name="ypentium6" value="110" size=4></p>
-                        <p>Pentium 7: X <input type=text name="xpentium7" value="32" size=4> Y <input type=text name="ypentium7" value="74" size=4></p>
-                        <p>Astriod 1: X <input type=text name="xasteroid1" value="34" size=4> Y <input type=text name="yasteroid1" value="34" size=4></p>
-                        <p>Astriod 2: X <input type=text name="xasteroid2" value="15" size=4> Y <input type=text name="yasteroid2" value="48" size=4></p>
-                        <p>Astriod 3: X <input type=text name="xasteroid3" value="64" size=4> Y <input type=text name="yasteroid3" value="64" size=4></p>
-                        <p>Astriod 4: X <input type=text name="xasteroid4" value="60" size=4> Y <input type=text name="yasteroid4" value="72" size=4></p>
+                    <table class="tablecontent">
+                    <tr><td>Eniac     </td><td>X <input type=text name="xeniac" value="64" size=4></td> <td>Y <input type=text name="yeniac" value="120" size=4></td></tr>
+                    <tr><td>Moon      </td><td>X <input type=text name="xmoon" value="0" size=4></td> <td>Y <input type=text name="ymoon" value="0" size=4></td></tr>
+                    <tr><td>Celeron   </td><td>X <input type=text name="xceleron" value="32" size=4></td> <td>Y <input type=text name="yceleron" value="8" size=4></td></tr>
+                    <tr><td>Ryzen     </td><td>X <input type=text name="xryzen" value="12" size=4></td> <td>Y <input type=text name="yryzen" value="32" size=4></td></tr>
+                    <tr><td>Xeon      </td><td>X <input type=text name="xxeon" value="76" size=4></td> <td>Y <input type=text name="yxeon" value="60" size=4></td></tr>
+                    <tr><td>Pentium 1 </td><td>X <input type=text name="xpentium1" value="04" size=4></td> <td>Y <input type=text name="ypentium1" value="33" size=4></td></tr>
+                    <tr><td>Pentium 2 </td><td>X <input type=text name="xpentium2" value="40" size=4></td> <td>Y <input type=text name="ypentium2" value="10" size=4></td></tr>
+                    <tr><td>Pentium 3 </td><td>X <input type=text name="xpentium3" value="40" size=4></td> <td>Y <input type=text name="ypentium3" value="60" size=4></td></tr>
+                    <tr><td>Pentium 4 </td><td>X <input type=text name="xpentium4" value="68" size=4></td> <td>Y <input type=text name="ypentium4" value="10" size=4></td></tr>
+                    <tr><td>Pentium 5 </td><td>X <input type=text name="xpentium5" value="68" size=4></td> <td>Y <input type=text name="ypentium5" value="64" size=4></td></tr>
+                    <tr><td>Pentium 6 </td><td>X <input type=text name="xpentium6" value="32" size=4></td> <td>Y <input type=text name="ypentium6" value="110" size=4></td></tr>
+                    <tr><td>Pentium 7 </td><td>X <input type=text name="xpentium7" value="32" size=4></td> <td>Y <input type=text name="ypentium7" value="74" size=4></td></tr>
+                    <tr><td>Astriod 1 </td><td>X <input type=text name="xasteroid1" value="34" size=4></td> <td>Y <input type=text name="yasteroid1" value="34" size=4></td></tr>
+                    <tr><td>Astriod 2 </td><td>X <input type=text name="xasteroid2" value="15" size=4></td> <td>Y <input type=text name="yasteroid2" value="48" size=4></td></tr>
+                    <tr><td>Astriod 3 </td><td>X <input type=text name="xasteroid3" value="64" size=4></td> <td>Y <input type=text name="yasteroid3" value="64" size=4></td></tr>
+                    <tr><td>Astriod 4 </td><td>X <input type=text name="xasteroid4" value="60" size=4></td> <td>Y <input type=text name="yasteroid4" value="72" size=4></td></tr>
+                    </table>
                     </form>
                     <!--<button type='button' onclick="updateartifacts(coconfig); return false"> Submit </button>-->        
 

@@ -46,6 +46,10 @@ input[type="text"]{
     font-family: 'Audiowide', sans-serif;
 }
 
+button[disabled]{
+  border: 1px solid #999999;
+  color: #666666;
+}
 
 .grid-container{
 
@@ -138,8 +142,6 @@ form input .text{
     border-color: black;
 }
 
-
-
 /* Style the tab */
 .tab-menu {
   border-left: 1px solid black;
@@ -178,6 +180,16 @@ form input .text{
   height: 400px;
   width: 400px;
   
+}
+
+/* Style the tables */
+.tablecontent {
+  padding: 6px 12px;
+  border: 0px solid black;
+  border-top: none;
+  height: 400px;
+  width: 400px;
+  font-size: 18px;
 }
 
 #admintabhidden {
