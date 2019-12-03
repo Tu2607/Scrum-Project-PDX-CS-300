@@ -130,12 +130,13 @@ function checkOrbitRange(ship)
             document.getElementById('orbitButton').disabled = false;
           }
           else {
-            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
             alert("You're close to " + artifact.name + ", you can mine it");
 
             // TODO: enable mine button
+            ship.supplies += 80;
 
             // TODO: disable movement buttons
+            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
           }
         }
     }

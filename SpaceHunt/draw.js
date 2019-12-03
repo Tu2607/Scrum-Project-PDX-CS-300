@@ -27,7 +27,7 @@ function draw() {
 	else
 	{
 		// do spash screen draw/animation
-		document.getElementById('outro').play();
+		//document.getElementById('outro').play();
 		theme.pause();
 		animateAngle = -1;
 		drawSplashScreen();
@@ -318,7 +318,7 @@ function drawSpace()
 	ctx.fillRect(0, 0, space.size, space.size); 
 
 	ctx.strokeStyle = "#572C23";
-	ctx.lineWidth = 0.2;
+	ctx.lineWidth = 0.15;
 
 	for(var i = 0; i < space.size; i+=space.step)
 	{
