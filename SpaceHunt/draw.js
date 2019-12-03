@@ -103,6 +103,7 @@ function drawSplashScreen()
 		//ctx.fillText("drifting ... into ... nothing", 50, 400);
 		//ctx.fillText("drifting ... into ... nothing", 50* Math.abs(Math.cos(animateAngle)), 400* Math.abs(Math.cos(animateAngle)));
 		disableMoveButtons();
+		disableCommandButtons();
 	}
 
 
@@ -418,7 +419,7 @@ function drawTrail() {
 
 	var ctx = canvas.getContext("2d");
 	ctx.strokeStyle = "yellow";
-	ctx.lineWidth = 0.5;
+	ctx.lineWidth = 0.3;
 
 	for(var i = 0; i < visitedPoints.length - 1; i++) {
 		ctx.beginPath();
