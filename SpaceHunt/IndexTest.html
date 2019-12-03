@@ -167,15 +167,20 @@
                     </div>
                     <div class="action-grid">
                         <p>COMMANDS</p>
-                        <input type="button" class="move" value="Sensor" size="4" onclick="sensor()">
-                        <p></p>
-                        <input type="button" class="move" value="Orbit" size="8" id="orbitButton" disabled="true" onclick="enterOrbit()">
-                        <input type="button" class="move" value="Deorbit" size="8" id="deorbitButton" disabled="true" onclick="leaveOrbit()">
-                        <p></p>
-                        <input type="button" class="move" value="Land" size="8" id="landButton" disabled="true" onclick="landOnPlanet()">
-                        <input type="button" class="move" value="Lift-off" size="8" id="liftOffButton" disabled="true" onclick="liftOffPlanet()">
-                        <p></p>
-			<input type='button' id="startButton" class="move" value="Start" onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> 
+                        <table>
+                        <tr><td></td><td><button type="button" class="move" value="Sensor" size="8" onclick="sensor()">Sensor</button></td><td><td></tr>
+                        <tr><td><button type="button" class="move" value="Orbit" size="8" disabled="true" id="orbitButton" onclick="enterOrbit(); return false">Orbit</button></td>
+                        	<td></td>
+                        <td><button type="button" class="move" value="Deorbit" size="8" disabled="true" id="deorbitButton" onclick="leaveOrbit(); return false;">De-orbit</button></td></tr>
+                        <tr><td><button type="button" class="move" value="Land" size="8" disabled="true" id="landButton" onclick="landOnPlanet(); return false">Land</button></td>
+                        	<td></td>
+                        <td><button type="button" class="move" value="Lift-off" size="8" disabled="true" id="liftOffButton" onclick="liftOffPlanet(); return false;">Lift-off</button></td></tr>
+                        <tr><td></td>
+                        	<td>
+			<button type="button" id="startButton" class="move" value="Start" size="8" onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true">Start</button>
+							</td>
+						</tr>
+                    	</table>
                     </div> 
                 </div>
             </div>
@@ -310,6 +315,7 @@
             //drawSpace();
             drawSplashScreen();
             buildArtifacts(artifactSet);
+            disableCommandButtons();
         }
 
          window.onload = initialize();
@@ -319,6 +325,7 @@
     <script>
 
 		// listen for keypress, call move function
+		/*
         window.addEventListener('keydown', doKeyDown, false);
         function doKeyDown(e){
 
@@ -349,40 +356,43 @@
         	}
             //e.preventDefault();
         }
-        /*
+        */
+        
         window.addEventListener('keydown', doKeyDown, false);
         window.addEventListener('keyup', doKeyUp, false);
 
         var keys = [];
 
         function doKeyDown(e){
+        	if(movementUI.up.disabled == true)
+        		return;
+
             // store an entry for every key pressed
             keys[e.keyCode] = true;
 
-            if(keys[68] || keys[39]){ // d or right arrow : 0
+            if(keys[68]){ // d for right: 0
                 move(0, eval(movementUI.distance.value), Badmax);
                 document.getElementById('aoow').play();
             }
-            else if(keys[87] || keys[38]){ // w or up arrow : 90
+            else if(keys[87]){ // w for up: 90
                 move(90, eval(movementUI.distance.value), Badmax);
                 document.getElementById('aoow').play();
             }
-            else if(keys[65] || keys[37]){ // a or left arrow : 180
+            else if(keys[65]){ // a for left: 180
                 move(180, eval(movementUI.distance.value), Badmax);
                 document.getElementById('aoow').play();
             }   
-            else if(keys[83] || keys[40]){ // s or up arrow : 270
+            else if(keys[83]){ // s for up: 270
                 move(270, eval(movementUI.distance.value), Badmax);
                 document.getElementById('aoow').play();
             }
-            e.preventDefault();
         }
 
         function doKeyUp(e){
             // mark keys that were released
             keys[e.keyCode] = false;
         }
-        */
+
 
         var mouseCanvas = document.getElementById('mouseCanvas');
 

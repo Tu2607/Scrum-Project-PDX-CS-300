@@ -89,7 +89,13 @@ function enableMoveButtons()
     document.getElementById('left').disabled = false;
     document.getElementById('right').disabled = false;
 }
-
+function disableCommandButtons()
+{
+    document.getElementById('orbitButton').disabled = true;
+    document.getElementById('deorbitButton').disabled = true;
+    document.getElementById('landButton').disabled = true;
+    document.getElementById('liftOffButton').disabled = true;
+}
 
 // to be called at the end of a series of moves
 function checkOrbitRange(ship)
