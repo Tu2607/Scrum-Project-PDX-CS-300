@@ -326,7 +326,7 @@
     <script>
 
 		// listen for keypress, call move function
-		/*
+		
         window.addEventListener('keydown', doKeyDown, false);
         function doKeyDown(e){
 
@@ -335,30 +335,29 @@
         	if(movementUI.up.disabled == true)
         		return;
             
-        	if(e.keyCode == 68 || e.keyCode == 39){ // d or right arrow : 0
+        	if(e.keyCode == 68){ // d for right: 0
 
         		move(0, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
+                //document.getElementById('aoow').play();
         	}
-        	else if(e.keyCode == 87 || e.keyCode == 38){ // w or up arrow : 90
+        	else if(e.keyCode == 87){ // w for up: 90
 
         		move(90, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
+                //document.getElementById('aoow').play();
         	}
-        	else if(e.keyCode == 65 || e.keyCode == 37){ // a or left arrow : 180
+        	else if(e.keyCode == 65){ // a for left: 180
 
         		move(180, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
+                //document.getElementById('aoow').play();
         	}	
-        	else if(e.keyCode == 83 || e.keyCode == 40){ // s or up arrow : 270
+        	else if(e.keyCode == 83){ // s for up: 270
 
         		move(270, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
+                //document.getElementById('aoow').play();
         	}
             //e.preventDefault();
         }
-        */
-        
+       /* 
         window.addEventListener('keydown', doKeyDown, false);
         window.addEventListener('keyup', doKeyUp, false);
 
@@ -393,6 +392,7 @@
             // mark keys that were released
             keys[e.keyCode] = false;
         }
+        */
 
 
         var mouseCanvas = document.getElementById('mouseCanvas');
