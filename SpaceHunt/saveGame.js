@@ -190,9 +190,10 @@ class gameData
         if(!document.getElementById('startButton').disabled)
         {
           document.getElementById('startButton').disabled = true 
-          gameOver = false ;
-          draw() ;
-          enableMoveButtons() ;
+          gameOver = false
+          draw()
+          enableMoveButtons()
+	  theme.play()
         }
 
         // If the game is over, do this
