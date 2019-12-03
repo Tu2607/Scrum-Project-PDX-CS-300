@@ -27,6 +27,8 @@ function draw() {
 	else
 	{
 		// do spash screen draw/animation
+		document.getElementById('outro').play();
+		theme.pause();
 		animateAngle = -1;
 		drawSplashScreen();
 		return;
@@ -111,7 +113,7 @@ function drawSplashScreen()
 	{
 		ctx.font = "25px Bungee";
 		ctx.fillStyle = "white";
-		ctx.fillText("Press the 'Start' button in the command panel to play!", 150, 500);
+		ctx.fillText("Press 'Start' to play! (w-a-s-d keys enabled)", 150, 500);
 		return;
 	}
 	else if(gameOver && Math.sin(animateAngle) > 0) // as soon as 'game over' screen is done - draw the game as it looked (not animated)
@@ -121,6 +123,7 @@ function drawSplashScreen()
 		drawTrail();
 		drawStats();
 		drawShip();
+		theme.play();
 		return;
 	}
 
@@ -234,22 +237,22 @@ function drawStats()
 	let fontSize = 20;
 	ctx.font = fontSize + "px Bungee";
 	ctx.fillStyle = "silver";
-	ctx.fillText("ENERGY", 10, 1000);
-	ctx.fillText("SUPPLIES", 266, 1000);
-	ctx.fillText("CREDITS", 522, 1000);
-	ctx.fillText("HEALTH", 778, 1000);
+	ctx.fillText("ENERGY", 10, 20);
+	ctx.fillText("SUPPLIES", 266, 20);
+	ctx.fillText("CREDITS", 522, 20);
+	ctx.fillText("HEALTH", 778, 20);
 
 	if(UI.energy.value > -1)
 	{
 		if(UI.energy.value < 101)
 		{
 			ctx.fillStyle = "red";
-			ctx.fillRect(100, 985, UI.energy.value, 10); 
+			ctx.fillRect(100, 5, UI.energy.value, 10); 
 		}
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText(" ENERGETIC", 100, 1000);
+			ctx.fillText(" ENERGETIC", 100, 20);
 		}
 	}
 	if(UI.supplies.value > -1)
@@ -257,12 +260,12 @@ function drawStats()
 		if(UI.supplies.value < 101)
 		{
 			ctx.fillStyle = "red";
-			ctx.fillRect(376, 985, UI.supplies.value, 10); 
+			ctx.fillRect(376, 5, UI.supplies.value, 10); 
 		}
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText(" ENOUGH", 376, 1000);
+			ctx.fillText(" ENOUGH", 376, 20);
 		}
 	}
 	if(UI.credits.value > -1)
@@ -270,12 +273,12 @@ function drawStats()
 		if(UI.credits.value < 101)
 		{
 			ctx.fillStyle = "red";
-			ctx.fillRect(622, 985, UI.credits.value, 10); 
+			ctx.fillRect(622, 5, UI.credits.value, 10); 
 		}
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText(" PLENTY", 622, 1000);
+			ctx.fillText(" PLENTY", 622, 20);
 		}
 	}
 
@@ -284,13 +287,13 @@ function drawStats()
 		if(UI.health.value <= 50)
 		{
 			ctx.fillStyle = "red";
-			ctx.fillText("DAMAGED", 868, 1000);
+			ctx.fillText("DAMAGED", 868, 20);
 			//ctx.fillRect(868, 985, 110, 10); 
 		}
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText("GOOD", 868, 1000);
+			ctx.fillText("GOOD", 868, 20);
 		}
 	}
 	/*
