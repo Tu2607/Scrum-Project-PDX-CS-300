@@ -28,7 +28,7 @@ function draw() {
 	{
 		// do spash screen draw/animation
 		//document.getElementById('outro').play();
-		theme.pause();
+		//theme.pause();
 		animateAngle = -1;
 		drawSplashScreen();
 		return;
@@ -123,7 +123,7 @@ function drawSplashScreen()
 		drawTrail();
 		drawStats();
 		drawShip();
-		theme.play();
+		//theme.play();
 		return;
 	}
 
