@@ -175,7 +175,7 @@
                         <input type="button" class="move" value="Land" size="8" id="landButton" disabled="true" onclick="landOnPlanet()">
                         <input type="button" class="move" value="Lift-off" size="8" id="liftOffButton" disabled="true" onclick="liftOffPlanet()">
                         <p></p>
-			<input type='button' class="move" value="Start"onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); showSaveLoad(3); this.disabled=true"> 
+			<input type='button' id="startButton" class="move" value="Start" onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> 
                     </div> 
                 </div>
             </div>
@@ -183,7 +183,7 @@
 
 
             <!--Game Save/Load-->
-                <div id="saveLoadMenu" class="action-grid" visibility="hidden">
+                <div id="saveLoadMenu" class="action-grid">
                 <p align="center"> Save/Load Game</p>
                 <p align="left">
 
@@ -420,9 +420,10 @@
             context.fillStyle = 'black';
             context.fillText(message, 50, 100);
 		}
-
-	    // Hide the Save Game Button
-            document.getElementById("saveLoadMenu").style.visibility = "hidden"
+          /**************************************************************
+          Update the Save Menu Text Fields for any previously saved games
+          ***************************************************************/	  
+	  showSaveLoad(3)
     </script>
 
 
