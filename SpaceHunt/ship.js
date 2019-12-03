@@ -81,6 +81,7 @@ function disableMoveButtons()
     document.getElementById('down').disabled = true;
     document.getElementById('left').disabled = true;
     document.getElementById('right').disabled = true;
+    document.getElementById('sensor').disabled = true;
 }
 function enableMoveButtons()
 {
@@ -88,6 +89,7 @@ function enableMoveButtons()
     document.getElementById('down').disabled = false;
     document.getElementById('left').disabled = false;
     document.getElementById('right').disabled = false;
+    document.getElementById('sensor').disabled = false;
 }
 function disableCommandButtons()
 {
