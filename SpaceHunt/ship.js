@@ -134,10 +134,8 @@ function checkOrbitRange(ship)
           else {
             alert("You're close to " + artifact.name + ", you can mine it");
 
-            // TODO: enable mine button
-            ship.supplies += 80;
+            ship.supplies = 100;
 
-            // TODO: disable movement buttons
             updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
           }
         }

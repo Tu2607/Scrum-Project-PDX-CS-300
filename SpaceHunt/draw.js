@@ -139,6 +139,7 @@ function drawBadmax()
 	var ctx = canvas.getContext("2d");
 
 	var img = new Image();
+	// image from: https://www.clipartmax.com/middle/m2i8b1m2N4i8i8i8_pirate-skull-clip-art-medium-size-greensburg-indiana-high-school-logo/
 	img.src = "./badmax.png";
 
 	drawSpace();
@@ -167,6 +168,7 @@ function drawFreighter()
 	var ctx = canvas.getContext("2d");
 
 	var img = new Image();
+	// image from: https://starwars.fandom.com/wiki/Freighter/Legends
 	img.src = "./freighter.png";
 
 	drawSpace();
@@ -196,6 +198,7 @@ function drawMeteorStorm()
 	var ctx = canvas.getContext("2d");
 
 	var img = new Image();
+	//image from: https://www.pngix.com/transpng/hbRTRR/
 	img.src = "./asteroid.png";
 
 	drawSpace();
@@ -460,9 +463,12 @@ function drawShip() {
 	}
 	else
 	{
+		//ctx.save();
+		//ctx.rotate(.01 * Math.sin(1.5*animateAngle));
 		x = ship.xPos + 12 * Math.cos(animateAngle);
 		y = ship.yPos + 12 * Math.sin(animateAngle);
 		ctx.drawImage(img, x-40, y-40, 100, 100)
+		//ctx.restore();
 	}
 }
 
