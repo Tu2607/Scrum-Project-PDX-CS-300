@@ -8,6 +8,91 @@ class Artifact {
   }
 }
 
+/*
+class planetCoords {
+	constructor(){
+		this.xPos = 0;
+		this.yPos = 0;
+	}
+	push(xPos,yPos){
+		this.xPos = xPos;
+		this.yPos = yPos;
+	}
+}
+
+function getRandom(min,max){
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function checkCoords(array){
+	for(var a = 0; i < array.length; ++a){
+		for(var b = 0; b <array.length; ++b){
+			if (b == a)
+				continue;
+			while(array[a].xPos == array[b].xPos && array[a].yPos == array[b].yPos){
+				array[b].xPos = getRandom(min,max) * 8;
+				array[b].yPos = getRandom(min,max) * 8;
+			}
+		}
+	}
+	return array;
+}
+
+//This function create an array of coordinates for planet
+function randomGenerator(min,max){
+	var Planets = new planetCoords();
+
+	for(var i = 0; i < 14; ++i){	//Push for 14 planets
+		var x = getRandom(min,max) * 8;
+		var y = getRandom(min,max) * 8;
+		
+		Planets.push(x,y);	//Update the coordinate
+	}	
+	var newPlanet = checkCoords(Planets); // A check for coordinate duplication
+	return newPlanet;
+}
+
+function buildArtifactSet(cheatMode, artifactSet)
+{
+	var coordsArray = randomGenerator(space.xSize, space.ySize);
+
+	artifactSet.push(new Artifact(admin.xeniac.value, admin.yeniac.value, "eniac", "orange", true));
+	artifactSet.push(new Artifact(coordsArray[0].xPos, coordsArray[0].yPos, "moon", "white", true));
+	artifactSet.push(new Artifact(coordsArray[1].xPos, coordsArray[1].yPos, 128, "celeron", "yellow", true));
+	artifactSet.push(new Artifact(coordsArray[2].xPos, coordsArray[2].yPos, "ryzen", "red", true));
+	artifactSet.push(new Artifact(coordsArray[3].xPos, coordsArray[3].yPos, "xeon", "blue", true));
+	if(cheatMode)
+	{
+		artifactSet.push(new Artifact(coordsArray[4].xPos, coordsArray[4].yPos, "pentium 1", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[5].xPos, coordsArray[5].yPos, "pentium 2", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[6].xPos, coordsArray[6].yPos, "pentium 3", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[7].xPos, coordsArray[7].yPos, "pentium 4", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[8].xPos, coordsArray[8].yPos, "pentium 5", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[9].xPos, coordsArray[9].yPos, "pentium 6", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[10].xPos, coordsArray[10].yPos, "pentium 7", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[11].xPos, coordsArray[11].yPos, "asteroid 1", "brown", true));
+		artifactSet.push(new Artifact(coordsArray[12].xPos, coordsArray[12].yPos, "asteroid 2", "brown", true));
+		artifactSet.push(new Artifact(coordsArray[13].xPos, coordsArray[13].yPos, "asteroid 3", "brown", true));
+		artifactSet.push(new Artifact(coordsArray[14].xPos, coordsArray[14].yPos, "asteroid 4", "brown", true));
+	}
+	else
+	{
+
+		artifactSet.push(new Artifact(coordsArray[4].xPos, coordsArray[4].yPos, "pentium 1", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[5].xPos, coordsArray[5].yPos, "pentium 2", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[6].xPos, coordsArray[6].yPos, "pentium 3", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[7].xPos, coordsArray[7].yPos, "pentium 4", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[8].xPos, coordsArray[8].yPos, "pentium 5", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[9].xPos, coordsArray[9].yPos, "pentium 6", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[10].xPos, coordsArray[10].yPos, "pentium 7", "purple", true));
+		artifactSet.push(new Artifact(coordsArray[11].xPos, coordsArray[11].yPos, "asteroid 1", "brown", true));
+		artifactSet.push(new Artifact(coordsArray[12].xPos, coordsArray[12].yPos, "asteroid 2", "brown", true));
+		artifactSet.push(new Artifact(coordsArray[13].xPos, coordsArray[13].yPos, "asteroid 3", "brown", true));
+		artifactSet.push(new Artifact(coordsArray[14].xPos, coordsArray[14].yPos, "asteroid 4", "brown", true));
+	}
+}
+*/
+
 function buildArtifactSet(cheatMode, artifactSet)
 {
 	artifactSet.push(new Artifact(admin.xeniac.value, admin.yeniac.value, "eniac", "orange", true));
@@ -45,6 +130,7 @@ function buildArtifactSet(cheatMode, artifactSet)
 		artifactSet.push(new Artifact(600, 72, "asteroid 4", "brown", false));
 	}
 }
+
 function buildArtifacts(artifactSet)
 {
     while(artifactSet.pop());   // THIS BECAUSE WE WANT THE OLD ONE OUTTA HERE!!
