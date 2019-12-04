@@ -59,3 +59,4 @@ function updateStatus(xPos, yPos, energy, supplies, credits, health) {
 function sensorStatus(supplies){
 	UI.supplies.value = supplies;
 }
+

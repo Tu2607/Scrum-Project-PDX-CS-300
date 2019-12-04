@@ -311,7 +311,7 @@ function chanceEvent(ship)
     disableMoveButtons();
     animateAngle = -4;
     drawFreighter();
-    ship.credits += 100;
+    ship.supplies += 100;
     ship.energy += 100;
   }
 
