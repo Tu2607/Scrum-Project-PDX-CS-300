@@ -11,7 +11,6 @@
     <script src="draw.js"></script>
     <script src="saveGame.js"></script>
     <audio id="aoow" src="michael_aaow.mp3" preload="auto"></audio>
-    <audio id="outro" src="outro.mp3" preload="auto"></audio>
     <script>
         var xSize = 1024;
         var ySize = 1024;
@@ -33,6 +32,7 @@
 
         var Badmax = new BadMax(xStart, yStart);
 
+        var recipe = 0;
         var gameOver = false;
         var animateAngle = 0;
         var requestAnimationFrame = window.requestAnimationFrame || 
@@ -236,15 +236,15 @@
                     <tr><td>Celeron   </td><td>X <input type=text name="xceleron" value="62" size=4></td> <td>Y <input type=text name="yceleron" value="8" size=4></td></tr>
                     <tr><td>Ryzen     </td><td>X <input type=text name="xryzen" value="12" size=4></td> <td>Y <input type=text name="yryzen" value="72" size=4></td></tr>
                     <tr><td>Xeon      </td><td>X <input type=text name="xxeon" value="76" size=4></td> <td>Y <input type=text name="yxeon" value="60" size=4></td></tr>
-                    <tr><td>Pentium 1 </td><td>X <input type=text name="xpentium1" value="109" size=4></td> <td>Y <input type=text name="ypentium1" value="65" size=4></td></tr>
+                    <tr><td>Pentium 1 </td><td>X <input type=text name="xpentium1" value="108" size=4></td> <td>Y <input type=text name="ypentium1" value="64" size=4></td></tr>
                     <tr><td>Pentium 2 </td><td>X <input type=text name="xpentium2" value="110" size=4></td> <td>Y <input type=text name="ypentium2" value="90" size=4></td></tr>
-                    <tr><td>Pentium 3 </td><td>X <input type=text name="xpentium3" value="94" size=4></td> <td>Y <input type=text name="ypentium3" value="115" size=4></td></tr>
-                    <tr><td>Pentium 4 </td><td>X <input type=text name="xpentium4" value="85" size=4></td> <td>Y <input type=text name="ypentium4" value="90" size=4></td></tr>
-                    <tr><td>Pentium 5 </td><td>X <input type=text name="xpentium5" value="115" size=4></td> <td>Y <input type=text name="ypentium5" value="110" size=4></td></tr>
-                    <tr><td>Pentium 6 </td><td>X <input type=text name="xpentium6" value="55" size=4></td> <td>Y <input type=text name="ypentium6" value="120" size=4></td></tr>
-                    <tr><td>Pentium 7 </td><td>X <input type=text name="xpentium7" value="70" size=4></td> <td>Y <input type=text name="ypentium7" value="99" size=4></td></tr>
+                    <tr><td>Pentium 3 </td><td>X <input type=text name="xpentium3" value="94" size=4></td> <td>Y <input type=text name="ypentium3" value="114" size=4></td></tr>
+                    <tr><td>Pentium 4 </td><td>X <input type=text name="xpentium4" value="84" size=4></td> <td>Y <input type=text name="ypentium4" value="90" size=4></td></tr>
+                    <tr><td>Pentium 5 </td><td>X <input type=text name="xpentium5" value="116" size=4></td> <td>Y <input type=text name="ypentium5" value="110" size=4></td></tr>
+                    <tr><td>Pentium 6 </td><td>X <input type=text name="xpentium6" value="56" size=4></td> <td>Y <input type=text name="ypentium6" value="120" size=4></td></tr>
+                    <tr><td>Pentium 7 </td><td>X <input type=text name="xpentium7" value="70" size=4></td> <td>Y <input type=text name="ypentium7" value="98" size=4></td></tr>
                     <tr><td>Astriod 1 </td><td>X <input type=text name="xasteroid1" value="68" size=4></td> <td>Y <input type=text name="yasteroid1" value="34" size=4></td></tr>
-                    <tr><td>Astriod 2 </td><td>X <input type=text name="xasteroid2" value="15" size=4></td> <td>Y <input type=text name="yasteroid2" value="48" size=4></td></tr>
+                    <tr><td>Astriod 2 </td><td>X <input type=text name="xasteroid2" value="16" size=4></td> <td>Y <input type=text name="yasteroid2" value="48" size=4></td></tr>
                     <tr><td>Astriod 3 </td><td>X <input type=text name="xasteroid3" value="64" size=4></td> <td>Y <input type=text name="yasteroid3" value="64" size=4></td></tr>
                     <tr><td>Astriod 4 </td><td>X <input type=text name="xasteroid4" value="48" size=4></td> <td>Y <input type=text name="yasteroid4" value="84" size=4></td></tr>
                     </table>
@@ -313,7 +313,6 @@
 
         function initialize()
         {
-            //drawSpace();
             drawSplashScreen();
             buildArtifacts(artifactSet);
             disableCommandButtons();
@@ -326,7 +325,6 @@
     <script>
         // Modified from https://www.kirupa.com/html5/keyboard_events_in_javascript.htm
 		// listen for keypress, call move function
-		
         window.addEventListener('keydown', doKeyDown, false);
         function doKeyDown(e){
 
@@ -338,64 +336,23 @@
         	if(e.keyCode == 68){ // d for right: 0
 
         		move(0, eval(movementUI.distance.value), Badmax);
-                //document.getElementById('aoow').play();
         	}
         	else if(e.keyCode == 87){ // w for up: 90
 
         		move(90, eval(movementUI.distance.value), Badmax);
-                //document.getElementById('aoow').play();
         	}
         	else if(e.keyCode == 65){ // a for left: 180
 
         		move(180, eval(movementUI.distance.value), Badmax);
-                //document.getElementById('aoow').play();
         	}	
         	else if(e.keyCode == 83){ // s for up: 270
 
         		move(270, eval(movementUI.distance.value), Badmax);
-                //document.getElementById('aoow').play();
         	}
-            //e.preventDefault();
         }
-       /* 
-        window.addEventListener('keydown', doKeyDown, false);
-        window.addEventListener('keyup', doKeyUp, false);
-
-        var keys = [];
-
-        function doKeyDown(e){
-        	if(movementUI.up.disabled == true)
-        		return;
-
-            // store an entry for every key pressed
-            keys[e.keyCode] = true;
-
-            if(keys[68]){ // d for right: 0
-                move(0, eval(movementUI.distance.value), Badmax);
-                //document.getElementById('aoow').play();
-            }
-            else if(keys[87]){ // w for up: 90
-                move(90, eval(movementUI.distance.value), Badmax);
-                //document.getElementById('aoow').play();
-            }
-            else if(keys[65]){ // a for left: 180
-                move(180, eval(movementUI.distance.value), Badmax);
-                //document.getElementById('aoow').play();
-            }   
-            else if(keys[83]){ // s for up: 270
-                move(270, eval(movementUI.distance.value), Badmax);
-                //document.getElementById('aoow').play();
-            }
-        }
-
-        function doKeyUp(e){
-            // mark keys that were released
-            keys[e.keyCode] = false;
-        }
-        */
-
 
         var mouseCanvas = document.getElementById('mouseCanvas');
+
         // modified from: https://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas
         // listen for mouse position on main canvas
         canvas.addEventListener('mousemove', function(evt) {
@@ -404,7 +361,7 @@
 			//var ship = JSON.parse(sessionStorage.getItem("ship"));
 
             var mousePos = getMousePos(canvas, evt);
-            var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
+            var message = Math.trunc(mousePos.x/8 + 1) + ', ' + Math.trunc(128 - mousePos.y/8);
         	//if(ship.onLand === "") {
             writeMessage(mouseCanvas, message);}/*}*/, false);
 

@@ -35,34 +35,6 @@ function draw() {
 	}
 }
 
-/*
-function landPlay()
-{
-	console.log("doing land play");
-
-	var ship = JSON.parse(sessionStorage.getItem("ship"));
-
-	var ctx = mouseCanvas.getContext("2d");
-	ctx.fillRect(0, 0, mouseCanvas.width, mouseCanvas.height); 
-
-	let fontSize = 15;
-	ctx.font = fontSize + "px Bungee";
-	ctx.fillStyle = "yellow";
-	ctx.fillText("Energy: 100 for 10 credit", 20, 20);
-	ctx.fillText("Supplies: 100% for 20 credit", 20, 40);
-
-	mouseCanvas.addEventListener('click', on_canvas_click, false);
-
-	function on_canvas_click(ev) {
-	    var x = ev.clientX - mouseCanvas.offsetLeft;
-	    var y = ev.clientY - mouseCanvas.offsetTop;
-
-		console.log(x, y);
-
-	sessionStorage.setItem("ship",JSON.stringify(ship));
-}
-*/
-
 // start screen called by windows.onload and when game over
 function drawSplashScreen()
 {
@@ -89,10 +61,6 @@ function drawSplashScreen()
 		ctx.font = fontSize + "px Bungee";
 		ctx.fillStyle = "pink";
 		ctx.fillText("SPACEHUNT", 50, 400);
-		//ctx.fillText("SPACE", 50, 400);
-		//ctx.fillText("HUNT", 550, 400);
-		//ctx.fillText("SPACE", 50* Math.sin(animateAngle), 400* Math.sin(animateAngle));
-		//ctx.fillText("HUNT", 550* Math.sin(animateAngle), 400* Math.sin(animateAngle));
 	}
 	else // game over screen
 	{
@@ -100,10 +68,6 @@ function drawSplashScreen()
 		ctx.font = fontSize + "px Bungee";
 		ctx.fillStyle = "pink";
 		ctx.fillText("GAME OVER!", 40, 200);
-		//fontSize = 20;
-		//ctx.font = fontSize + "px Bungee";
-		//ctx.fillText("drifting ... into ... nothing", 50, 400);
-		//ctx.fillText("drifting ... into ... nothing", 50* Math.abs(Math.cos(animateAngle)), 400* Math.abs(Math.cos(animateAngle)));
 		disableMoveButtons();
 		disableCommandButtons();
 	}
@@ -202,7 +166,6 @@ function drawMeteorStorm()
 	img.src = "./asteroid.png";
 
 	drawSpace();
-	drawArtifactSet();
 	drawShip();
 	drawStats();
 	let fontSize = 50;
@@ -231,6 +194,65 @@ function drawMeteorStorm()
 	}
 
 	requestAnimationFrame(drawMeteorStorm);
+}
+
+function drawRecipe() 
+{
+	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+	var ctx = canvas.getContext("2d");
+
+	var img = new Image();
+	// image from: https://www.cleanpng.com/png-pepsi-montana-expopark-fizzy-drinks-missoula-bottl-1573579/
+	img.src = "kola.png";
+
+	drawSpace();
+	ctx.drawImage(img, 20, 200, 400, 400);
+	let fontSize = 50;
+	ctx.font = fontSize + "px Bungee";
+	ctx.fillStyle = "white"
+	ctx.fillText("Koka-Kola recipe on-board!!", 100, 200);
+	ctx.fillText("Return it to Eniac!", 300, 800);
+	//drawShip();
+	drawStats();
+
+	animateAngle += 1/50000000;
+	
+	if(animateAngle > 4){
+		return;
+	}
+
+	requestAnimationFrame(drawRecipe);
+}
+
+function drawWin() 
+{
+	var ctx = canvas.getContext("2d");
+
+	// pink/black border zooms in
+	var grd = ctx.createRadialGradient(space.size/2, space.size/2, space.size, space.size/2, space.size/2, space.size/2 * Math.abs(Math.sin(animateAngle)));
+	grd.addColorStop(0, "pink");
+	grd.addColorStop(1, "black");
+
+	ctx.fillStyle = grd;
+	ctx.fillRect(0, 0, space.size, space.size); 
+	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+
+	let fontSize = 150;
+	ctx.font = fontSize + "px Bungee";
+	ctx.fillStyle = "purple";
+	ctx.fillText("SUCCESS!", 40, 200);
+	drawShip();
+	drawStats();
+
+	animateAngle += 1/50000000;
+	
+	if(animateAngle > 4){
+		return;
+	}
+
+	requestAnimationFrame(drawWin);
 }
 
 function drawStats()
@@ -299,12 +321,6 @@ function drawStats()
 			ctx.fillText("GOOD", 868, 20);
 		}
 	}
-	/*
-	ctx.fillRect(100, 985, 110, 10); 
-	ctx.fillRect(350, 985, 110, 10); 
-	ctx.fillRect(600, 985, 110, 10); 
-	ctx.fillRect(840, 985, 110, 10); 
-	*/
 }
 
 // loads space and draws black/grey gradient with grid
@@ -462,7 +478,7 @@ function drawShip() {
 		ctx.drawImage(img, x-40, y-40, 50, 50)
 	}
 	else
-	{
+	{	// if we want wobble action
 		//ctx.save();
 		//ctx.rotate(.01 * Math.sin(1.5*animateAngle));
 		x = ship.xPos + 12 * Math.cos(animateAngle);

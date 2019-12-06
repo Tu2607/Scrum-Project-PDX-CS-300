@@ -123,7 +123,8 @@ class gameData
           artifactSet: sessionStorage.getItem("artifactSet") ,
           visitedPoints: sessionStorage.getItem("visitedPoints") ,
           slot: number ,
-          title: this.title
+          title: this.title, 
+          recipe: recipe
         }
 
         // Copy Dictionary into Local Storage
@@ -179,12 +180,34 @@ class gameData
         sessionStorage.setItem('space', file.space)
         sessionStorage.setItem('artifactSet', file.artifactSet)
         sessionStorage.setItem('visitedPoints', file.visitedPoints)
+        recipe = file.recipe;
+        console.log(file.recipe);
 
         // Parse the Ship Data 
         file.ship = JSON.parse(file.ship)
 
         //update the status fields with loaded game data
         updateStatus(file.ship.xPos, file.ship.yPos, file.ship.energy, file.ship.supplies, file.ship.credits, file.ship.health);
+
+
+      if(file.ship.onLand)
+      {
+        disableMoveButtons();
+          document.getElementById('orbitButton').disabled = true;
+          document.getElementById('deorbitButton').disabled = true;
+          document.getElementById('landButton').disabled = true;
+          document.getElementById('liftOffButton').disabled = false;
+      }
+      else if(file.ship.inOrbit)
+      {
+        disableMoveButtons();
+          document.getElementById('orbitButton').disabled = true;
+          document.getElementById('deorbitButton').disabled = false;
+          document.getElementById('landButton').disabled = false;
+          document.getElementById('liftOffButton').disabled = true;
+      }
+
+
 
         // If the game hasn't started do this
         if(!document.getElementById('startButton').disabled)

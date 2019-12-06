@@ -38,6 +38,8 @@ function updateConfig(space, ship, cheat, artifactSet, visitedPoints) {
 	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
 
 	//the game is starting
+    recipe = Math.ceil(randomEvent(0,6));
+    console.log(recipe);
 	gameOver = false;
 	enableMoveButtons();
 	draw();  
