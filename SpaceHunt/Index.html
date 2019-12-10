@@ -1,0 +1,431 @@
+<html>
+    <meta charset="UTF-8">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <audio id="SpaceTheme" src="Space_Hunt.mp3" preload="auto" loop="true"></audio>
+    <script src="Config.js"></script>
+    <script src="space.js"></script>
+    <script src="ship.js"></script>
+    <script src="artifact.js"></script>
+    <script src="sensors.js"></script>
+    <script src="draw.js"></script>
+    <script src="saveGame.js"></script>
+    <audio id="aoow" src="michael_aaow.mp3" preload="auto"></audio>
+    <script>
+        var xSize = 1024;
+        var ySize = 1024;
+        var xStart = 0;
+        var yStart = 0;
+        var cheat = false;
+        var energy = 1000;
+        var supplies = 100;
+        var health = 100;
+        var credits = 100;
+        var inOrbit = false;
+        var nearBy = "";
+        var onLand = "";
+        var artifactSet = [];
+        var visitedPoints = [];
+        var space = new Space(xSize, ySize);
+        var ship = new Ship(xStart, yStart, energy, supplies, credits, health, inOrbit, nearBy, onLand);
+        //var wormhole; //checking this with everyone
+
+        var Badmax = new BadMax(xStart, yStart);
+
+        var gameOver = false;
+        var animateAngle = 0;
+        var requestAnimationFrame = window.requestAnimationFrame || 
+                            window.mozRequestAnimationFrame || 
+                            window.webkitRequestAnimationFrame || 
+                            window.msRequestAnimationFrame;
+        
+        var theme = document.getElementById('SpaceTheme');
+        theme.volume = 0.1;
+
+        /**************************************************************
+        Initialize the Save/Load Menu
+        ***************************************************************/
+        saveList = saveLoadBegin()  
+    </script>
+
+</head>
+    
+<body>
+
+    <p></p>
+
+    <div class="grid-container">
+        <!--<h1 class="title">SpaceHunt</h1>
+        <h6 class="title">Press the 'Start' button in the command panel to play!</h6>-->
+    
+
+
+        <!--Map--> 
+        <div class ="board">
+        	<canvas id="canvas" width="1024" height="1024"></canvas>
+            
+        </div>
+
+
+
+        <!--Log Screen-->
+        <div class="display">
+            <form name="output">
+                <p></p>
+                <canvas id="mouseCanvas" width="300" height="200"></canvas>
+            </form>
+        </div>
+
+
+
+        <!--Play/Config tab setup-->
+        <div class="menu">
+            <div class="tab-menu">
+                <button class="tablinks" id="main" onclick="nextTab(event, 'Play')">Play</button>
+                <button class="tablinks" id="main" onclick="nextTab(event, 'Save')">Save/Load</button>
+                <button class="tablinks" onclick="nextTab(event, 'Config')">Config</button>
+                <button class="tablinks" onclick="nextTab(event, 'Admin')">Admin</button>
+            </div>
+
+
+            <!--Config Tab-->
+            <div id="Config" class="tabcontent">
+                <form name="config">
+                    <p> Energy: <input type="text" name="energy" value="100"> </p>
+                    <break>
+                    <p> Supplies: <input type="text" name="supplies" value="100"></p>
+                    <break>
+                    <p> Credits: <input type="text" name="credits" value="100"></p>
+                    <break>
+                    <p> Health: <input type="text" name="health" value="100"></p>
+                    <break>
+                    <p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
+                    <break>
+                    <p> See Visited<input type="checkbox" name="seeVisited" checked="checked"></p>
+                    <break>
+                    <p> Random Wormhole <input type="radio" name="wormhole" value="random" checked="checked"/></p>
+                    <break>
+                    <p> Fixed Wormhole <input type="radio" name="wormhole" value="fixed"/></p>
+                    <break>
+                    <p> Starting X-Cord <input type="range" name="xCord" value="12" min="0" max="128" oninput="xout.value = xCord.value">
+                        <output name="xout"> 12 </output>
+                    </p>
+                    <break>
+                    <p> Starting Y-Cord <input type="range" name="yCord" value="12" min="0" max="128" oninput="yout.value = yCord.value">
+                        <output name="yout"> 12 </output>
+                    </p>	
+                    <p> Map Size<input type="range" name="mapSize" value="128" min="0" max="128" oninput="mapSizeOut.value = mapSize.value">
+                        <output name="mapSizeOut"> 128 </output>
+                    </p>
+
+			        <!-- <button type='button' onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> Submit </button> -->
+                </form>
+            </div>
+
+
+
+            <!--Play Tab-->
+            <div id="Play" class="tabcontent">
+                <div class="inner-grid-container">
+
+
+
+                    <!--Status Block-->
+                    <div class="status-grid">
+                        <form name="UI">
+                        STATUS
+
+                            <p>Location:
+                            X <input type=text name=xValue size=4>
+                            Y <input type=text name=yValue size=4>
+                            </p>
+                            <p>Energy <input type=text name=energy size=4></p>
+                            <p>Supplies <input type=text name=supplies size=4>%</p>
+                            <p>Credits <input type=text name=credits size=4></p>
+                            <p>Health <input type=text name=health size=4></p>
+                            
+                            <hr>
+
+                        </form>
+                    </div>
+                <br>
+
+
+
+
+                    <!--Movement and Command block-->
+                    <div class="moves-grid">
+                        <form name="movementUI">
+                        <p>MOVE</p>
+                        <p align="center"><button type="button" class="move" value="90" id="up" disabled="false" onclick="move(90, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">90</button>
+                        </p>
+                        <p align="center"><button type="button" class="move"  value="180" id="left" disabled="false" onclick="move(180, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">180</button>
+                                          <input type="text" name=distance value=1 maxlength="3" size="4" id="distance" style="text-align: center">
+                                          <button type="button" class="move" value="0" disabled="false" id="right" onclick="move(0, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">0</button>
+                        </p>
+                        <p align="center"><button type="button" class="move" value="270" disabled="false" id="down" onclick="move(270, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">270</button></p>
+                        </form>
+                    </div>
+                    <div class="action-grid">
+                        <p>COMMANDS</p>
+                        <input type="button" class="move" value="Sensor" size="4" onclick="sensor()">
+                        <p></p>
+                        <input type="button" class="move" value="Orbit" size="8" id="orbitButton" disabled="true" onclick="enterOrbit()">
+                        <input type="button" class="move" value="Deorbit" size="8" id="deorbitButton" disabled="true" onclick="leaveOrbit()">
+                        <p></p>
+                        <input type="button" class="move" value="Land" size="8" id="landButton" disabled="true" onclick="landOnPlanet()">
+                        <input type="button" class="move" value="Lift-off" size="8" id="liftOffButton" disabled="true" onclick="liftOffPlanet()">
+                        <p></p>
+			<input type='button' id="startButton" class="move" value="Start" onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> 
+                    </div> 
+                </div>
+            </div>
+            <div id = "Save" class="tabcontent">
+
+
+            <!--Game Save/Load-->
+                <div id="saveLoadMenu" class="action-grid">
+                <p align="center"> Save/Load Game</p>
+                <p align="left">
+
+                <!--Save Slot 1-->
+                1.
+                <input id='saveSlot1' type='text' value='change me' readonly>
+                <br />
+                <input type ='button' class='move' value='save' onclick='saveList[0].saveGame(1)'>
+
+                <input type='button' class='move' value='load' onclick='saveList[0].loadGame(1)'>
+                
+                <input type='button' class='move' value='delete' onclick='saveList[0].clearGame(1)'>
+                <br />
+                
+                <!--Save Slot 2-->
+                2.
+                <input id='saveSlot2' type='text' value='change me' readonly>
+                <br />
+                <input type ='button' class='move' value='save' onclick='saveList[1].saveGame(2)'>
+
+                <input type='button' class='move' value='load' onclick='saveList[1].loadGame(2)'>
+                
+                <input type='button' class='move' value='delete' onclick='saveList[1].clearGame(2)'>
+                <br />
+                
+                <!--Save Slot 3-->
+                3.
+                <input id='saveSlot3' type='text' value='change me' readonly>
+                <br />
+                <input type ='button' class='move' value='save' onclick='saveList[2].saveGame(3)'>
+
+                <input type='button' class='move' value='load' onclick='saveList[2].loadGame(3)'>
+                
+                <input type='button' class='move' value='delete' onclick='saveList[2].clearGame(3)'>
+                <br />
+                </p>
+                </div>
+            </div>
+
+
+            <!--Admin Panel-->
+            <div id="Admin" class="tabcontent">
+              <form name="admin">
+                    <div id="copanel">
+                    <form id="artifactPanel">
+                        <p> Celestial Object Positions: </p>
+                        <p>Eniac:     X <input type=text name="xeniac" value="64" size=4> Y <input type=text name="yeniac" value="120" size=4></p>
+                        <p>Moon:      X <input type=text name="xmoon" value="0" size=4> Y <input type=text name="ymoon" value="0" size=4></p>
+                        <p>Celeron:   X <input type=text name="xceleron" value="32" size=4> Y <input type=text name="yceleron" value="8" size=4></p>
+                        <p>Ryzen:     X <input type=text name="xryzen" value="12" size=4> Y <input type=text name="yryzen" value="32" size=4></p>
+                        <p>Xeon:      X <input type=text name="xxeon" value="76" size=4> Y <input type=text name="yxeon" value="60" size=4></p>
+                        <p>Pentium 1: X <input type=text name="xpentium1" value="04" size=4> Y <input type=text name="ypentium1" value="33" size=4></p>
+                        <p>Pentium 2: X <input type=text name="xpentium2" value="40" size=4> Y <input type=text name="ypentium2" value="10" size=4></p>
+                        <p>Pentium 3: X <input type=text name="xpentium3" value="40" size=4> Y <input type=text name="ypentium3" value="60" size=4></p>
+                        <p>Pentium 4: X <input type=text name="xpentium4" value="68" size=4> Y <input type=text name="ypentium4" value="10" size=4></p>
+                        <p>Pentium 5: X <input type=text name="xpentium5" value="68" size=4> Y <input type=text name="ypentium5" value="64" size=4></p>
+                        <p>Pentium 6: X <input type=text name="xpentium6" value="32" size=4> Y <input type=text name="ypentium6" value="110" size=4></p>
+                        <p>Pentium 7: X <input type=text name="xpentium7" value="32" size=4> Y <input type=text name="ypentium7" value="74" size=4></p>
+                        <p>Astriod 1: X <input type=text name="xasteroid1" value="34" size=4> Y <input type=text name="yasteroid1" value="34" size=4></p>
+                        <p>Astriod 2: X <input type=text name="xasteroid2" value="15" size=4> Y <input type=text name="yasteroid2" value="48" size=4></p>
+                        <p>Astriod 3: X <input type=text name="xasteroid3" value="64" size=4> Y <input type=text name="yasteroid3" value="64" size=4></p>
+                        <p>Astriod 4: X <input type=text name="xasteroid4" value="60" size=4> Y <input type=text name="yasteroid4" value="72" size=4></p>
+                    </form>
+                    <!--<button type='button' onclick="updateartifacts(coconfig); return false"> Submit </button>-->        
+
+                        <script>
+                        </script>
+
+                    </div>
+
+                </form>
+            </div>
+
+            <!--Script to lock admin panel-->
+            <script>
+                function login(){
+                    if(document.getElementById('password').value == "ADMIN"){
+                        document.getElementById('passwordEntry').setAttribute("id", "admintabhidden");
+                        document.getElementById('copanel').setAttribute("id", "admintabshown");
+                    }
+                    else{
+                        alert("WRONG!")
+                    }
+                }
+            </script>
+
+        </div>
+        <!--Password Entry Field-->
+        <div class="footer">
+        <div id="passwordEntry" align="right"> 
+            Enter Password: <input type="Password" id="password">
+            <button onclick="login()">Submit</button>
+        </div>
+        </div>
+
+
+    </div>
+
+
+
+    <!--Script to get play and config tabs to switch-->
+    <script>
+        document.getElementById("main").click();
+
+        function nextTab(evt, tab) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tab).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+    <script>
+        //creates a random integer between 0 and 128
+        function rNum(){
+            let num =Math.random()*128;
+            return Math.floor(num);
+        }
+
+        function initialize()
+        {
+            //drawSpace();
+            drawSplashScreen();
+            buildArtifacts(artifactSet);
+        }
+
+         window.onload = initialize();
+
+    </script>
+
+    <script>
+
+		// listen for keypress, call move function
+        window.addEventListener('keydown', doKeyDown, false);
+        function doKeyDown(e){
+
+            // check if movement is disabled due to gameplay
+            // only one needs to be checked out of the four
+        	if(movementUI.up.disabled == true)
+        		return;
+            
+        	if(e.keyCode == 68 || e.keyCode == 39){ // d or right arrow : 0
+
+        		move(0, eval(movementUI.distance.value), Badmax);
+                document.getElementById('aoow').play();
+        	}
+        	else if(e.keyCode == 87 || e.keyCode == 38){ // w or up arrow : 90
+
+        		move(90, eval(movementUI.distance.value), Badmax);
+                document.getElementById('aoow').play();
+        	}
+        	else if(e.keyCode == 65 || e.keyCode == 37){ // a or left arrow : 180
+
+        		move(180, eval(movementUI.distance.value), Badmax);
+                document.getElementById('aoow').play();
+        	}	
+        	else if(e.keyCode == 83 || e.keyCode == 40){ // s or up arrow : 270
+
+        		move(270, eval(movementUI.distance.value), Badmax);
+                document.getElementById('aoow').play();
+        	}
+            //e.preventDefault();
+        }
+        /*
+        window.addEventListener('keydown', doKeyDown, false);
+        window.addEventListener('keyup', doKeyUp, false);
+
+        var keys = [];
+
+        function doKeyDown(e){
+            // store an entry for every key pressed
+            keys[e.keyCode] = true;
+
+            if(keys[68] || keys[39]){ // d or right arrow : 0
+                move(0, eval(movementUI.distance.value), Badmax);
+                document.getElementById('aoow').play();
+            }
+            else if(keys[87] || keys[38]){ // w or up arrow : 90
+                move(90, eval(movementUI.distance.value), Badmax);
+                document.getElementById('aoow').play();
+            }
+            else if(keys[65] || keys[37]){ // a or left arrow : 180
+                move(180, eval(movementUI.distance.value), Badmax);
+                document.getElementById('aoow').play();
+            }   
+            else if(keys[83] || keys[40]){ // s or up arrow : 270
+                move(270, eval(movementUI.distance.value), Badmax);
+                document.getElementById('aoow').play();
+            }
+            e.preventDefault();
+        }
+
+        function doKeyUp(e){
+            // mark keys that were released
+            keys[e.keyCode] = false;
+        }
+        */
+
+        var mouseCanvas = document.getElementById('mouseCanvas');
+
+        // listen for mouse position on main canvas
+        canvas.addEventListener('mousemove', function(evt) {
+
+        	//only when the ship is not on land, so that the canvas can be used for land code
+			//var ship = JSON.parse(sessionStorage.getItem("ship"));
+
+            var mousePos = getMousePos(canvas, evt);
+            var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
+        	//if(ship.onLand === "") {
+            writeMessage(mouseCanvas, message);}/*}*/, false);
+
+		// gets CP pointed at by mouse on main canvas 
+		function getMousePos(canvas, evt) {
+			var rect = canvas.getBoundingClientRect();
+			return {
+				x: evt.clientX - rect.left,
+				y: evt.clientY - rect.top
+			};
+		}
+
+		// writes the coordinates pointed at by mouse on to mouseCanvas
+		function writeMessage(canvas, message) {
+            var context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.font = '40pt Audiowide';
+            context.fillStyle = 'black';
+            context.fillText(message, 50, 100);
+		}
+          /**************************************************************
+          Update the Save Menu Text Fields for any previously saved games
+          ***************************************************************/	  
+	  showSaveLoad(3)
+    </script>
+
+
+</body>
+
+</html>
