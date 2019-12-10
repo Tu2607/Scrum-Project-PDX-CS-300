@@ -1,6 +1,6 @@
 
 class Ship { 
-  constructor(xPos, yPos, energy, supplies, credits, health, inOrbit, nearBy, onLand) {
+  constructor(xPos, yPos, energy, supplies, credits, health, inOrbit, nearBy, onLand, hasRecipe) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.energy = energy;
@@ -10,6 +10,7 @@ class Ship {
     this.nearBy = nearBy;
     this.onLand = onLand;
     this.health = health;
+    this.hasRecipe = hasRecipe;
   }
 }
 
@@ -64,6 +65,7 @@ function checkCollision(ship)
 
           ship.nearBy = artifact.name;
 
+          document.getElementById('aoow').play();
           ship.health -= 20;
           updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
 
@@ -81,6 +83,7 @@ function disableMoveButtons()
     document.getElementById('down').disabled = true;
     document.getElementById('left').disabled = true;
     document.getElementById('right').disabled = true;
+    document.getElementById('sensor').disabled = true;
 }
 function enableMoveButtons()
 {
@@ -88,8 +91,15 @@ function enableMoveButtons()
     document.getElementById('down').disabled = false;
     document.getElementById('left').disabled = false;
     document.getElementById('right').disabled = false;
+    document.getElementById('sensor').disabled = false;
 }
-
+function disableCommandButtons()
+{
+    document.getElementById('orbitButton').disabled = true;
+    document.getElementById('deorbitButton').disabled = true;
+    document.getElementById('landButton').disabled = true;
+    document.getElementById('liftOffButton').disabled = true;
+}
 
 // to be called at the end of a series of moves
 function checkOrbitRange(ship)
@@ -124,12 +134,11 @@ function checkOrbitRange(ship)
             document.getElementById('orbitButton').disabled = false;
           }
           else {
-            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
             alert("You're close to " + artifact.name + ", you can mine it");
 
-            // TODO: enable mine button
+            ship.supplies = 100;
 
-            // TODO: disable movement buttons
+            updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
           }
         }
     }
@@ -220,14 +229,14 @@ function landOnPlanet()
 	}
 
 	ship.inOrbit = false;
-  ship.onLand = ship.nearBy;
+	ship.onLand = ship.nearBy;
 	useEnergy(ship, 10);
-  useSupplies(ship, 2);
+	useSupplies(ship, 2);
 
-  // TODO: land code (game play)
-  sessionStorage.setItem("ship", JSON.stringify(ship));
-  //landPlay()
-  ship = JSON.parse(sessionStorage.getItem("ship"));
+	// TODO: land code (game play)
+	sessionStorage.setItem("ship", JSON.stringify(ship));
+	landPlay()
+	ship = JSON.parse(sessionStorage.getItem("ship"));
 
 	//update the status fields with these changes
 	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
@@ -252,18 +261,42 @@ function liftOffPlanet()
 	    checkEnergy(ship) 
     }
 
-  ship.onLand = "";
+	ship.onLand = "";
 	ship.inOrbit = true;
 	useEnergy(ship, 10);
-  useSupplies(ship, 2);
+	useSupplies(ship, 2);
 
-  // TODO: animation (maybe)
+	// TODO: animation (maybe)
 
 	//update the status fields with these changes
 	updateStatus(ship.xPos, ship.yPos, ship.energy, ship.supplies, ship.credits, ship.health);
   	
 	sessionStorage.setItem("ship", JSON.stringify(ship));
 }
+
+function landPlay()
+{
+	var ship = JSON.parse(sessionStorage.getItem("ship"));
+	//console.log(ship.onLand.includes(String(recipe)));
+
+
+	if(ship.hasRecipe && ship.onLand == "eniac")
+	{
+		disableMoveButtons();
+		disableCommandButtons();
+	    animateAngle = 0;
+		drawWin();
+	}
+	else if(ship.onLand.includes(String(recipe)))
+	{
+		ship.hasRecipe = true;
+	    animateAngle = 0;
+		drawRecipe();
+	}
+
+	sessionStorage.setItem("ship", JSON.stringify(ship));
+}
+
 
 //Check if the ship's position is the same as the BadMax position
 function checkBadMax(ship,BadMax)
@@ -304,7 +337,7 @@ function chanceEvent(ship)
     disableMoveButtons();
     animateAngle = -4;
     drawFreighter();
-    ship.credits += 100;
+    ship.supplies = 100;
     ship.energy += 100;
   }
 
@@ -486,11 +519,6 @@ function move(angle, distance, BadMax)
     }
   }
   checkOrbitRange(ship);
-  //save state
-  //sessionStorage.setItem("ship", JSON.stringify(ship));
-  //sessionStorage.setItem("visitedPoints", JSON.stringify(visitedPoints));
-  //update the status fields with these changes
-  //updateStatus(ship.xpos, ship.ypos, ship.energy, ship.supplies, ship.credits);
 }
 
 // Use Energy

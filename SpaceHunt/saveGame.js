@@ -123,7 +123,8 @@ class gameData
           artifactSet: sessionStorage.getItem("artifactSet") ,
           visitedPoints: sessionStorage.getItem("visitedPoints") ,
           slot: number ,
-          title: this.title
+          title: this.title, 
+          recipe: recipe
         }
 
         // Copy Dictionary into Local Storage
@@ -179,6 +180,8 @@ class gameData
         sessionStorage.setItem('space', file.space)
         sessionStorage.setItem('artifactSet', file.artifactSet)
         sessionStorage.setItem('visitedPoints', file.visitedPoints)
+        recipe = file.recipe;
+        console.log(file.recipe);
 
         // Parse the Ship Data 
         file.ship = JSON.parse(file.ship)
@@ -186,13 +189,45 @@ class gameData
         //update the status fields with loaded game data
         updateStatus(file.ship.xPos, file.ship.yPos, file.ship.energy, file.ship.supplies, file.ship.credits, file.ship.health);
 
+
+      if(file.ship.onLand)
+      {
+        disableMoveButtons();
+          document.getElementById('orbitButton').disabled = true;
+          document.getElementById('deorbitButton').disabled = true;
+          document.getElementById('landButton').disabled = true;
+          document.getElementById('liftOffButton').disabled = false;
+          document.getElementById('sensorButton').disabled = true;
+      }
+      else if(file.ship.inOrbit)
+      {
+        disableMoveButtons();
+          document.getElementById('orbitButton').disabled = true;
+          document.getElementById('deorbitButton').disabled = false;
+          document.getElementById('landButton').disabled = false;
+          document.getElementById('liftOffButton').disabled = true;
+          document.getElementById('sensorButton').disabled = true;
+      }
+      else
+      {
+     	enableMoveButtons(); 	
+          document.getElementById('orbitButton').disabled = true;
+          document.getElementById('deorbitButton').disabled = true;
+          document.getElementById('landButton').disabled = true;
+          document.getElementById('liftOffButton').disabled = true;
+          document.getElementById('sensorButton').disabled = false;
+      }
+
+
+
         // If the game hasn't started do this
         if(!document.getElementById('startButton').disabled)
         {
           document.getElementById('startButton').disabled = true 
-          gameOver = false ;
-          draw() ;
-          enableMoveButtons() ;
+          gameOver = false
+          draw()
+          enableMoveButtons()
+	  theme.play()
         }
 
         // If the game is over, do this

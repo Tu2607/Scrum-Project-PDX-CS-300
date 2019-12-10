@@ -27,39 +27,13 @@ function draw() {
 	else
 	{
 		// do spash screen draw/animation
+		//document.getElementById('outro').play();
+		//theme.pause();
 		animateAngle = -1;
 		drawSplashScreen();
 		return;
 	}
 }
-
-/*
-function landPlay()
-{
-	console.log("doing land play");
-
-	var ship = JSON.parse(sessionStorage.getItem("ship"));
-
-	var ctx = mouseCanvas.getContext("2d");
-	ctx.fillRect(0, 0, mouseCanvas.width, mouseCanvas.height); 
-
-	let fontSize = 15;
-	ctx.font = fontSize + "px Bungee";
-	ctx.fillStyle = "yellow";
-	ctx.fillText("Energy: 100 for 10 credit", 20, 20);
-	ctx.fillText("Supplies: 100% for 20 credit", 20, 40);
-
-	mouseCanvas.addEventListener('click', on_canvas_click, false);
-
-	function on_canvas_click(ev) {
-	    var x = ev.clientX - mouseCanvas.offsetLeft;
-	    var y = ev.clientY - mouseCanvas.offsetTop;
-
-		console.log(x, y);
-
-	sessionStorage.setItem("ship",JSON.stringify(ship));
-}
-*/
 
 // start screen called by windows.onload and when game over
 function drawSplashScreen()
@@ -87,10 +61,6 @@ function drawSplashScreen()
 		ctx.font = fontSize + "px Bungee";
 		ctx.fillStyle = "pink";
 		ctx.fillText("SPACEHUNT", 50, 400);
-		//ctx.fillText("SPACE", 50, 400);
-		//ctx.fillText("HUNT", 550, 400);
-		//ctx.fillText("SPACE", 50* Math.sin(animateAngle), 400* Math.sin(animateAngle));
-		//ctx.fillText("HUNT", 550* Math.sin(animateAngle), 400* Math.sin(animateAngle));
 	}
 	else // game over screen
 	{
@@ -98,11 +68,8 @@ function drawSplashScreen()
 		ctx.font = fontSize + "px Bungee";
 		ctx.fillStyle = "pink";
 		ctx.fillText("GAME OVER!", 40, 200);
-		//fontSize = 20;
-		//ctx.font = fontSize + "px Bungee";
-		//ctx.fillText("drifting ... into ... nothing", 50, 400);
-		//ctx.fillText("drifting ... into ... nothing", 50* Math.abs(Math.cos(animateAngle)), 400* Math.abs(Math.cos(animateAngle)));
 		disableMoveButtons();
+		disableCommandButtons();
 	}
 
 
@@ -110,7 +77,7 @@ function drawSplashScreen()
 	{
 		ctx.font = "25px Bungee";
 		ctx.fillStyle = "white";
-		ctx.fillText("Press the 'Start' button in the command panel to play!", 150, 500);
+		ctx.fillText("Press 'Start' to play! (w-a-s-d keys enabled)", 150, 500);
 		return;
 	}
 	else if(gameOver && Math.sin(animateAngle) > 0) // as soon as 'game over' screen is done - draw the game as it looked (not animated)
@@ -120,6 +87,7 @@ function drawSplashScreen()
 		drawTrail();
 		drawStats();
 		drawShip();
+		//theme.play();
 		return;
 	}
 
@@ -135,6 +103,7 @@ function drawBadmax()
 	var ctx = canvas.getContext("2d");
 
 	var img = new Image();
+	// image from: https://www.clipartmax.com/middle/m2i8b1m2N4i8i8i8_pirate-skull-clip-art-medium-size-greensburg-indiana-high-school-logo/
 	img.src = "./badmax.png";
 
 	drawSpace();
@@ -163,6 +132,7 @@ function drawFreighter()
 	var ctx = canvas.getContext("2d");
 
 	var img = new Image();
+	// image from: https://starwars.fandom.com/wiki/Freighter/Legends
 	img.src = "./freighter.png";
 
 	drawSpace();
@@ -172,7 +142,7 @@ function drawFreighter()
 	ctx.fillStyle = "white"
 	ctx.fillText("Abandoned freighter found", 100, 200);
 	ctx.fillText("+100 credits!", 300, 800);
-	ctx.fillText("+100 energy!", 300, 875);
+	ctx.fillText("+100 supplies!", 300, 875);
 	drawShip();
 	drawStats();
 
@@ -192,10 +162,10 @@ function drawMeteorStorm()
 	var ctx = canvas.getContext("2d");
 
 	var img = new Image();
+	//image from: https://www.pngix.com/transpng/hbRTRR/
 	img.src = "./asteroid.png";
 
 	drawSpace();
-	drawArtifactSet();
 	drawShip();
 	drawStats();
 	let fontSize = 50;
@@ -226,6 +196,65 @@ function drawMeteorStorm()
 	requestAnimationFrame(drawMeteorStorm);
 }
 
+function drawRecipe() 
+{
+	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+	var ctx = canvas.getContext("2d");
+
+	var img = new Image();
+	// image from: https://www.cleanpng.com/png-pepsi-montana-expopark-fizzy-drinks-missoula-bottl-1573579/
+	img.src = "kola.png";
+
+	drawSpace();
+	ctx.drawImage(img, 20, 200, 400, 400);
+	let fontSize = 50;
+	ctx.font = fontSize + "px Bungee";
+	ctx.fillStyle = "white"
+	ctx.fillText("Koka-Kola recipe on-board!!", 100, 200);
+	ctx.fillText("Return it to Eniac!", 300, 800);
+	//drawShip();
+	drawStats();
+
+	animateAngle += 1/50000000;
+	
+	if(animateAngle > 4){
+		return;
+	}
+
+	requestAnimationFrame(drawRecipe);
+}
+
+function drawWin() 
+{
+	var ctx = canvas.getContext("2d");
+
+	// pink/black border zooms in
+	var grd = ctx.createRadialGradient(space.size/2, space.size/2, space.size, space.size/2, space.size/2, space.size/2 * Math.abs(Math.sin(animateAngle)));
+	grd.addColorStop(0, "pink");
+	grd.addColorStop(1, "black");
+
+	ctx.fillStyle = grd;
+	ctx.fillRect(0, 0, space.size, space.size); 
+	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+
+	let fontSize = 150;
+	ctx.font = fontSize + "px Bungee";
+	ctx.fillStyle = "purple";
+	ctx.fillText("SUCCESS!", 40, 200);
+	drawShip();
+	drawStats();
+
+	animateAngle += 1/50000000;
+	
+	if(animateAngle > 4){
+		return;
+	}
+
+	requestAnimationFrame(drawWin);
+}
+
 function drawStats()
 {
 	var ctx = canvas.getContext("2d");
@@ -233,48 +262,48 @@ function drawStats()
 	let fontSize = 20;
 	ctx.font = fontSize + "px Bungee";
 	ctx.fillStyle = "silver";
-	ctx.fillText("ENERGY", 10, 1000);
-	ctx.fillText("SUPPLIES", 266, 1000);
-	ctx.fillText("CREDITS", 522, 1000);
-	ctx.fillText("HEALTH", 778, 1000);
+	ctx.fillText("ENERGY", 10, 20);
+	ctx.fillText("SUPPLIES", 266, 20);
+	ctx.fillText("CREDITS", 522, 20);
+	ctx.fillText("HEALTH", 778, 20);
 
 	if(UI.energy.value > -1)
 	{
-		if(UI.energy.value < 101)
+		if(UI.energy.value < 100)
 		{
 			ctx.fillStyle = "red";
-			ctx.fillRect(100, 985, UI.energy.value, 10); 
+			ctx.fillRect(100, 5, UI.energy.value, 10); 
 		}
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText(" ENERGETIC", 100, 1000);
+			ctx.fillText(" ENERGETIC", 100, 20);
 		}
 	}
 	if(UI.supplies.value > -1)
 	{
-		if(UI.supplies.value < 101)
+		if(UI.supplies.value < 100)
 		{
 			ctx.fillStyle = "red";
-			ctx.fillRect(376, 985, UI.supplies.value, 10); 
+			ctx.fillRect(376, 5, UI.supplies.value, 10); 
 		}
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText(" ENOUGH", 376, 1000);
+			ctx.fillText(" ENOUGH", 376, 20);
 		}
 	}
 	if(UI.credits.value > -1)
 	{
-		if(UI.credits.value < 101)
+		if(UI.credits.value < 100)
 		{
 			ctx.fillStyle = "red";
-			ctx.fillRect(622, 985, UI.credits.value, 10); 
+			ctx.fillRect(622, 5, UI.credits.value, 10); 
 		}
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText(" PLENTY", 622, 1000);
+			ctx.fillText(" PLENTY", 622, 20);
 		}
 	}
 
@@ -283,21 +312,15 @@ function drawStats()
 		if(UI.health.value <= 50)
 		{
 			ctx.fillStyle = "red";
-			ctx.fillText("DAMAGED", 868, 1000);
+			ctx.fillText("DAMAGED", 868, 20);
 			//ctx.fillRect(868, 985, 110, 10); 
 		}
 		else
 		{
 			ctx.fillStyle = "green";
-			ctx.fillText("GOOD", 868, 1000);
+			ctx.fillText("GOOD", 868, 20);
 		}
 	}
-	/*
-	ctx.fillRect(100, 985, 110, 10); 
-	ctx.fillRect(350, 985, 110, 10); 
-	ctx.fillRect(600, 985, 110, 10); 
-	ctx.fillRect(840, 985, 110, 10); 
-	*/
 }
 
 // loads space and draws black/grey gradient with grid
@@ -314,7 +337,7 @@ function drawSpace()
 	ctx.fillRect(0, 0, space.size, space.size); 
 
 	ctx.strokeStyle = "#572C23";
-	ctx.lineWidth = 0.2;
+	ctx.lineWidth = 0.15;
 
 	for(var i = 0; i < space.size; i+=space.step)
 	{
@@ -418,7 +441,7 @@ function drawTrail() {
 
 	var ctx = canvas.getContext("2d");
 	ctx.strokeStyle = "yellow";
-	ctx.lineWidth = 0.5;
+	ctx.lineWidth = 0.3;
 
 	for(var i = 0; i < visitedPoints.length - 1; i++) {
 		ctx.beginPath();
@@ -455,10 +478,13 @@ function drawShip() {
 		ctx.drawImage(img, x-40, y-40, 50, 50)
 	}
 	else
-	{
+	{	// if we want wobble action
+		//ctx.save();
+		//ctx.rotate(.01 * Math.sin(1.5*animateAngle));
 		x = ship.xPos + 12 * Math.cos(animateAngle);
 		y = ship.yPos + 12 * Math.sin(animateAngle);
 		ctx.drawImage(img, x-40, y-40, 100, 100)
+		//ctx.restore();
 	}
 }
 
