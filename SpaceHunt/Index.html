@@ -32,6 +32,7 @@
 
         var Badmax = new BadMax(xStart, yStart);
 
+        var recipe = 0;
         var gameOver = false;
         var animateAngle = 0;
         var requestAnimationFrame = window.requestAnimationFrame || 
@@ -91,32 +92,31 @@
             <!--Config Tab-->
             <div id="Config" class="tabcontent">
                 <form name="config">
-                    <p> Energy: <input type="text" name="energy" value="100"> </p>
+                    <table class="tablecontent">
+                    <tr><td> Energy </td><td><input type="text" name="energy" value="1000"> </td></tr>
                     <break>
-                    <p> Supplies: <input type="text" name="supplies" value="100"></p>
+                    <tr><td> Supplies </td><td><input type="text" name="supplies" value="100"></td></tr>
                     <break>
-                    <p> Credits: <input type="text" name="credits" value="100"></p>
+                    <tr><td> Credits </td><td><input type="text" name="credits" value="200"></td></tr>
                     <break>
-                    <p> Health: <input type="text" name="health" value="100"></p>
+                    <tr><td> Health </td><td><input type="text" name="health" value="200"></td></tr>
                     <break>
-                    <p>	Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></p>
+                    <tr><td> Cheat mode <input type="checkbox" name="cheatMode" checked="checked"></<td></tr>
                     <break>
-                    <p> See Visited<input type="checkbox" name="seeVisited" checked="checked"></p>
+                    <tr><td> See Visited <input type="checkbox" name="seeVisited" ></td></tr>
                     <break>
-                    <p> Random Wormhole <input type="radio" name="wormhole" value="random" checked="checked"/></p>
+                    <tr><td> Wormhole </td>
+                    <td> Random <input type="radio" name="wormhole" value="random" checked="checked"/> 
+                    Fixed <input type="radio" name="wormhole" value="fixed"/></td></tr>
                     <break>
-                    <p> Fixed Wormhole <input type="radio" name="wormhole" value="fixed"/></p>
+                    <tr><td> Starting X-Cord </td><td><input type="range" name="xCord" value="12" min="0" max="128" oninput="xout.value = xCord.value">
+                        <output name="xout"> 12 </output></td></tr>
                     <break>
-                    <p> Starting X-Cord <input type="range" name="xCord" value="12" min="0" max="128" oninput="xout.value = xCord.value">
-                        <output name="xout"> 12 </output>
-                    </p>
-                    <break>
-                    <p> Starting Y-Cord <input type="range" name="yCord" value="12" min="0" max="128" oninput="yout.value = yCord.value">
-                        <output name="yout"> 12 </output>
-                    </p>	
-                    <p> Map Size<input type="range" name="mapSize" value="128" min="0" max="128" oninput="mapSizeOut.value = mapSize.value">
-                        <output name="mapSizeOut"> 128 </output>
-                    </p>
+                    <tr><td> Starting Y-Cord </td><td><input type="range" name="yCord" value="12" min="0" max="128" oninput="yout.value = yCord.value">
+                        <output name="yout"> 12 </output></td></tr>
+                    <tr><td> Map Size </td><td><input type="range" name="mapSize" value="128" min="0" max="128" oninput="mapSizeOut.value = mapSize.value">
+                        <output name="mapSizeOut"> 128 </output></td></tr>
+                    </table>
 
 			        <!-- <button type='button' onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> Submit </button> -->
                 </form>
@@ -157,72 +157,71 @@
                     <div class="moves-grid">
                         <form name="movementUI">
                         <p>MOVE</p>
-                        <p align="center"><button type="button" class="move" value="90" id="up" disabled="false" onclick="move(90, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">90</button>
+                        <p align="center"><button type="button" class="move" value="90" id="up" disabled="false" onclick="move(90, eval(movementUI.distance.value),Badmax); return false;">90</button>
                         </p>
-                        <p align="center"><button type="button" class="move"  value="180" id="left" disabled="false" onclick="move(180, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">180</button>
+                        <p align="center"><button type="button" class="move"  value="180" id="left" disabled="false" onclick="move(180, eval(movementUI.distance.value),Badmax); return false;">180</button>
                                           <input type="text" name=distance value=1 maxlength="3" size="4" id="distance" style="text-align: center">
-                                          <button type="button" class="move" value="0" disabled="false" id="right" onclick="move(0, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">0</button>
+                                          <button type="button" class="move" value="0" disabled="false" id="right" onclick="move(0, eval(movementUI.distance.value),Badmax); return false;">0</button>
                         </p>
-                        <p align="center"><button type="button" class="move" value="270" disabled="false" id="down" onclick="move(270, eval(movementUI.distance.value),Badmax); document.getElementById('aoow').play(); return false;">270</button></p>
+                        <p align="center"><button type="button" class="move" value="270" disabled="false" id="down" onclick="move(270, eval(movementUI.distance.value),Badmax); return false;">270</button></p>
                         </form>
                     </div>
                     <div class="action-grid">
                         <p>COMMANDS</p>
-                        <input type="button" class="move" value="Sensor" size="4" onclick="sensor()">
-                        <p></p>
-                        <input type="button" class="move" value="Orbit" size="8" id="orbitButton" disabled="true" onclick="enterOrbit()">
-                        <input type="button" class="move" value="Deorbit" size="8" id="deorbitButton" disabled="true" onclick="leaveOrbit()">
-                        <p></p>
-                        <input type="button" class="move" value="Land" size="8" id="landButton" disabled="true" onclick="landOnPlanet()">
-                        <input type="button" class="move" value="Lift-off" size="8" id="liftOffButton" disabled="true" onclick="liftOffPlanet()">
-                        <p></p>
-			<input type='button' id="startButton" class="move" value="Start" onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true"> 
+                        <table>
+                        <tr><td></td><td><button type="button" class="move" value="Sensor" size="8" disabled="true" id="sensor" onclick="sensor()">Sensor</button></td><td><td></tr>
+                        <tr><td><button type="button" class="move" value="Orbit" size="8" disabled="true" id="orbitButton" onclick="enterOrbit(); return false">Orbit</button></td>
+                        	<td></td>
+                        <td><button type="button" class="move" value="Deorbit" size="8" disabled="true" id="deorbitButton" onclick="leaveOrbit(); return false;">De-orbit</button></td></tr>
+                        <tr><td><button type="button" class="move" value="Land" size="8" disabled="true" id="landButton" onclick="landOnPlanet(); return false">Land</button></td>
+                        	<td></td>
+                        <td><button type="button" class="move" value="Lift-off" size="8" disabled="true" id="liftOffButton" onclick="liftOffPlanet(); return false;">Lift-off</button></td></tr>
+                        <tr><td></td>
+                        	<td>
+			<button type="button" id="startButton" class="move" value="Start" size="8" onclick="updateConfig(space, ship, artifactSet, visitedPoints); theme.play(); this.disabled=true">Start</button>
+							</td>
+						</tr>
+                    	</table>
                     </div> 
                 </div>
             </div>
+
+            <!--Game Save/Load-->            
             <div id = "Save" class="tabcontent">
+              <div id="saveLoadMenu" class="action-grid">
+                <p align="center"></br>Saved Games</br></br></p>
+                  <p>
+                    <table style="width:100%" >
+                      <tr>
+                        <!--Save Slot 1-->
+                        <td>1:</td>
+                        <td><input id='saveSlot1' type='text' size="25" maxlength="25" value='change me' readonly></td>
+                        <td><input type ='button' class='move' value='save' onclick='saveList[0].saveGame(1)'></td>
+                        <td><input type='button' class='move' value='load' onclick='saveList[0].loadGame(1)'></td>
+                        <!--<td><input type='button' class='move' value='delete' onclick='saveList[0].clearGame(1)'> </td>-->
+                      </tr>
 
+                      <tr>
+                        <!--Save Slot 2-->
+                        <td>2:</td>
+                        <td><input id='saveSlot2' type='text' size="25" maxlength="25" value='change me' readonly></td>
+                        <td><input type ='button' class='move' value='save' onclick='saveList[1].saveGame(2)'></td>
+                        <td><input type='button' class='move' value='load' onclick='saveList[1].loadGame(2)'></td>
+                        <!--<td><input type='button' class='move' value='delete' onclick='saveList[1].clearGame(2)'> </td>-->     
+                      </tr>
 
-            <!--Game Save/Load-->
-                <div id="saveLoadMenu" class="action-grid">
-                <p align="center"> Save/Load Game</p>
-                <p align="left">
-
-                <!--Save Slot 1-->
-                1.
-                <input id='saveSlot1' type='text' value='change me' readonly>
-                <br />
-                <input type ='button' class='move' value='save' onclick='saveList[0].saveGame(1)'>
-
-                <input type='button' class='move' value='load' onclick='saveList[0].loadGame(1)'>
-                
-                <input type='button' class='move' value='delete' onclick='saveList[0].clearGame(1)'>
-                <br />
-                
-                <!--Save Slot 2-->
-                2.
-                <input id='saveSlot2' type='text' value='change me' readonly>
-                <br />
-                <input type ='button' class='move' value='save' onclick='saveList[1].saveGame(2)'>
-
-                <input type='button' class='move' value='load' onclick='saveList[1].loadGame(2)'>
-                
-                <input type='button' class='move' value='delete' onclick='saveList[1].clearGame(2)'>
-                <br />
-                
-                <!--Save Slot 3-->
-                3.
-                <input id='saveSlot3' type='text' value='change me' readonly>
-                <br />
-                <input type ='button' class='move' value='save' onclick='saveList[2].saveGame(3)'>
-
-                <input type='button' class='move' value='load' onclick='saveList[2].loadGame(3)'>
-                
-                <input type='button' class='move' value='delete' onclick='saveList[2].clearGame(3)'>
-                <br />
-                </p>
+                      <tr>
+                        <!--Save Slot 3-->
+                        <td>3:</td>
+                        <td><input id='saveSlot3' type='text' size="25" maxlength="25" value='change me' readonly></td>
+                        <td><input type ='button' class='move' value='save' onclick='saveList[2].saveGame(3)'></td>
+                        <td><input type='button' class='move' value='load' onclick='saveList[2].loadGame(3)'></td>
+                        <!--<td><input type='button' class='move' value='delete' onclick='saveList[2].clearGame(3)'></td>-->
+                      </tr>
+                    </table>
+                  </p>
                 </div>
-            </div>
+              </div>
 
 
             <!--Admin Panel-->
@@ -231,22 +230,24 @@
                     <div id="copanel">
                     <form id="artifactPanel">
                         <p> Celestial Object Positions: </p>
-                        <p>Eniac:     X <input type=text name="xeniac" value="64" size=4> Y <input type=text name="yeniac" value="120" size=4></p>
-                        <p>Moon:      X <input type=text name="xmoon" value="0" size=4> Y <input type=text name="ymoon" value="0" size=4></p>
-                        <p>Celeron:   X <input type=text name="xceleron" value="32" size=4> Y <input type=text name="yceleron" value="8" size=4></p>
-                        <p>Ryzen:     X <input type=text name="xryzen" value="12" size=4> Y <input type=text name="yryzen" value="32" size=4></p>
-                        <p>Xeon:      X <input type=text name="xxeon" value="76" size=4> Y <input type=text name="yxeon" value="60" size=4></p>
-                        <p>Pentium 1: X <input type=text name="xpentium1" value="04" size=4> Y <input type=text name="ypentium1" value="33" size=4></p>
-                        <p>Pentium 2: X <input type=text name="xpentium2" value="40" size=4> Y <input type=text name="ypentium2" value="10" size=4></p>
-                        <p>Pentium 3: X <input type=text name="xpentium3" value="40" size=4> Y <input type=text name="ypentium3" value="60" size=4></p>
-                        <p>Pentium 4: X <input type=text name="xpentium4" value="68" size=4> Y <input type=text name="ypentium4" value="10" size=4></p>
-                        <p>Pentium 5: X <input type=text name="xpentium5" value="68" size=4> Y <input type=text name="ypentium5" value="64" size=4></p>
-                        <p>Pentium 6: X <input type=text name="xpentium6" value="32" size=4> Y <input type=text name="ypentium6" value="110" size=4></p>
-                        <p>Pentium 7: X <input type=text name="xpentium7" value="32" size=4> Y <input type=text name="ypentium7" value="74" size=4></p>
-                        <p>Astriod 1: X <input type=text name="xasteroid1" value="34" size=4> Y <input type=text name="yasteroid1" value="34" size=4></p>
-                        <p>Astriod 2: X <input type=text name="xasteroid2" value="15" size=4> Y <input type=text name="yasteroid2" value="48" size=4></p>
-                        <p>Astriod 3: X <input type=text name="xasteroid3" value="64" size=4> Y <input type=text name="yasteroid3" value="64" size=4></p>
-                        <p>Astriod 4: X <input type=text name="xasteroid4" value="60" size=4> Y <input type=text name="yasteroid4" value="72" size=4></p>
+                    <table class="tablecontent">
+                    <tr><td>Eniac     </td><td>X <input type=text name="xeniac" value="8" size=4></td> <td>Y <input type=text name="yeniac" value="8" size=4></td></tr>
+                    <tr><td>Moon      </td><td>X <input type=text name="xmoon" value="0" size=4></td> <td>Y <input type=text name="ymoon" value="0" size=4></td></tr>
+                    <tr><td>Celeron   </td><td>X <input type=text name="xceleron" value="62" size=4></td> <td>Y <input type=text name="yceleron" value="8" size=4></td></tr>
+                    <tr><td>Ryzen     </td><td>X <input type=text name="xryzen" value="12" size=4></td> <td>Y <input type=text name="yryzen" value="72" size=4></td></tr>
+                    <tr><td>Xeon      </td><td>X <input type=text name="xxeon" value="76" size=4></td> <td>Y <input type=text name="yxeon" value="60" size=4></td></tr>
+                    <tr><td>Pentium 1 </td><td>X <input type=text name="xpentium1" value="108" size=4></td> <td>Y <input type=text name="ypentium1" value="64" size=4></td></tr>
+                    <tr><td>Pentium 2 </td><td>X <input type=text name="xpentium2" value="110" size=4></td> <td>Y <input type=text name="ypentium2" value="90" size=4></td></tr>
+                    <tr><td>Pentium 3 </td><td>X <input type=text name="xpentium3" value="94" size=4></td> <td>Y <input type=text name="ypentium3" value="114" size=4></td></tr>
+                    <tr><td>Pentium 4 </td><td>X <input type=text name="xpentium4" value="84" size=4></td> <td>Y <input type=text name="ypentium4" value="90" size=4></td></tr>
+                    <tr><td>Pentium 5 </td><td>X <input type=text name="xpentium5" value="116" size=4></td> <td>Y <input type=text name="ypentium5" value="110" size=4></td></tr>
+                    <tr><td>Pentium 6 </td><td>X <input type=text name="xpentium6" value="56" size=4></td> <td>Y <input type=text name="ypentium6" value="120" size=4></td></tr>
+                    <tr><td>Pentium 7 </td><td>X <input type=text name="xpentium7" value="70" size=4></td> <td>Y <input type=text name="ypentium7" value="98" size=4></td></tr>
+                    <tr><td>Astriod 1 </td><td>X <input type=text name="xasteroid1" value="68" size=4></td> <td>Y <input type=text name="yasteroid1" value="34" size=4></td></tr>
+                    <tr><td>Astriod 2 </td><td>X <input type=text name="xasteroid2" value="16" size=4></td> <td>Y <input type=text name="yasteroid2" value="48" size=4></td></tr>
+                    <tr><td>Astriod 3 </td><td>X <input type=text name="xasteroid3" value="64" size=4></td> <td>Y <input type=text name="yasteroid3" value="64" size=4></td></tr>
+                    <tr><td>Astriod 4 </td><td>X <input type=text name="xasteroid4" value="48" size=4></td> <td>Y <input type=text name="yasteroid4" value="84" size=4></td></tr>
+                    </table>
                     </form>
                     <!--<button type='button' onclick="updateartifacts(coconfig); return false"> Submit </button>-->        
 
@@ -312,9 +313,9 @@
 
         function initialize()
         {
-            //drawSpace();
             drawSplashScreen();
             buildArtifacts(artifactSet);
+            disableCommandButtons();
         }
 
          window.onload = initialize();
@@ -322,7 +323,7 @@
     </script>
 
     <script>
-
+        // Modified from https://www.kirupa.com/html5/keyboard_events_in_javascript.htm
 		// listen for keypress, call move function
         window.addEventListener('keydown', doKeyDown, false);
         function doKeyDown(e){
@@ -332,65 +333,27 @@
         	if(movementUI.up.disabled == true)
         		return;
             
-        	if(e.keyCode == 68 || e.keyCode == 39){ // d or right arrow : 0
+        	if(e.keyCode == 68){ // d for right: 0
 
         		move(0, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
         	}
-        	else if(e.keyCode == 87 || e.keyCode == 38){ // w or up arrow : 90
+        	else if(e.keyCode == 87){ // w for up: 90
 
         		move(90, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
         	}
-        	else if(e.keyCode == 65 || e.keyCode == 37){ // a or left arrow : 180
+        	else if(e.keyCode == 65){ // a for left: 180
 
         		move(180, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
         	}	
-        	else if(e.keyCode == 83 || e.keyCode == 40){ // s or up arrow : 270
+        	else if(e.keyCode == 83){ // s for up: 270
 
         		move(270, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
         	}
-            //e.preventDefault();
         }
-        /*
-        window.addEventListener('keydown', doKeyDown, false);
-        window.addEventListener('keyup', doKeyUp, false);
-
-        var keys = [];
-
-        function doKeyDown(e){
-            // store an entry for every key pressed
-            keys[e.keyCode] = true;
-
-            if(keys[68] || keys[39]){ // d or right arrow : 0
-                move(0, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
-            }
-            else if(keys[87] || keys[38]){ // w or up arrow : 90
-                move(90, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
-            }
-            else if(keys[65] || keys[37]){ // a or left arrow : 180
-                move(180, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
-            }   
-            else if(keys[83] || keys[40]){ // s or up arrow : 270
-                move(270, eval(movementUI.distance.value), Badmax);
-                document.getElementById('aoow').play();
-            }
-            e.preventDefault();
-        }
-
-        function doKeyUp(e){
-            // mark keys that were released
-            keys[e.keyCode] = false;
-        }
-        */
 
         var mouseCanvas = document.getElementById('mouseCanvas');
 
+        // modified from: https://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas
         // listen for mouse position on main canvas
         canvas.addEventListener('mousemove', function(evt) {
 
@@ -398,7 +361,7 @@
 			//var ship = JSON.parse(sessionStorage.getItem("ship"));
 
             var mousePos = getMousePos(canvas, evt);
-            var message = Math.trunc(mousePos.x/8) + ', ' + Math.trunc(128 - mousePos.y/8);
+            var message = Math.trunc(mousePos.x/8 + 1) + ', ' + Math.trunc(128 - mousePos.y/8);
         	//if(ship.onLand === "") {
             writeMessage(mouseCanvas, message);}/*}*/, false);
 
