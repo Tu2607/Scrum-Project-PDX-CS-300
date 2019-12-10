@@ -142,7 +142,7 @@ function drawFreighter()
 	ctx.fillStyle = "white"
 	ctx.fillText("Abandoned freighter found", 100, 200);
 	ctx.fillText("+100 credits!", 300, 800);
-	ctx.fillText("+100 energy!", 300, 875);
+	ctx.fillText("+100 supplies!", 300, 875);
 	drawShip();
 	drawStats();
 
@@ -269,7 +269,7 @@ function drawStats()
 
 	if(UI.energy.value > -1)
 	{
-		if(UI.energy.value < 101)
+		if(UI.energy.value < 100)
 		{
 			ctx.fillStyle = "red";
 			ctx.fillRect(100, 5, UI.energy.value, 10); 
@@ -282,7 +282,7 @@ function drawStats()
 	}
 	if(UI.supplies.value > -1)
 	{
-		if(UI.supplies.value < 101)
+		if(UI.supplies.value < 100)
 		{
 			ctx.fillStyle = "red";
 			ctx.fillRect(376, 5, UI.supplies.value, 10); 
@@ -295,7 +295,7 @@ function drawStats()
 	}
 	if(UI.credits.value > -1)
 	{
-		if(UI.credits.value < 101)
+		if(UI.credits.value < 100)
 		{
 			ctx.fillStyle = "red";
 			ctx.fillRect(622, 5, UI.credits.value, 10); 

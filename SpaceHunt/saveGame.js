@@ -197,6 +197,7 @@ class gameData
           document.getElementById('deorbitButton').disabled = true;
           document.getElementById('landButton').disabled = true;
           document.getElementById('liftOffButton').disabled = false;
+          document.getElementById('sensorButton').disabled = true;
       }
       else if(file.ship.inOrbit)
       {
@@ -205,6 +206,16 @@ class gameData
           document.getElementById('deorbitButton').disabled = false;
           document.getElementById('landButton').disabled = false;
           document.getElementById('liftOffButton').disabled = true;
+          document.getElementById('sensorButton').disabled = true;
+      }
+      else
+      {
+     	enableMoveButtons(); 	
+          document.getElementById('orbitButton').disabled = true;
+          document.getElementById('deorbitButton').disabled = true;
+          document.getElementById('landButton').disabled = true;
+          document.getElementById('liftOffButton').disabled = true;
+          document.getElementById('sensorButton').disabled = false;
       }
 
 
