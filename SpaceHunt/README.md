@@ -1,8 +1,2 @@
 # SpaceHunt
- SpaceHunt Core
-
- Core html/javascript for the SpaceHunt game.
- This is intended to get students started.
-
- The core consists of a form that makes calls to functions that are included
- from .js files
+This is the source code for the web-based game Space Hunt. Enjoy!
